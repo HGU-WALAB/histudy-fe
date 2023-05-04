@@ -1,16 +1,16 @@
-import { BrowserRouter, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
 import Main from "../pages/Main/Main";
 import Post from "../pages/Post/Post";
 import Footer from "./Footer";
 import Header from "./Header";
 
-export default function Router() {
+export default function ARouter() {
   return (
     <BrowserRouter>
       <Header />
       <Routes>
-        <Router path="/" element={<Main />}></Router>
-        <Router path="/post" element={<Post />}></Router>
+        <Route path="/" element={<Main />}></Route>
+        <Route path="/post" element={<Post />}></Route>
       </Routes>
       <Footer />
     </BrowserRouter>
