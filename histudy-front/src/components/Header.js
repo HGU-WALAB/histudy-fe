@@ -1,10 +1,14 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, Paper, Switch, ToggleButton } from "@mui/material";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { darkModeState } from "../store/atom";
+import DarkModeToggle from "./DarkModeToggle";
 
 export default function Header() {
   return (
     <Box
       sx={{
         // border: 1,
+        backgroundColor: "",
         display: "flex",
         justifyContent: "space-between",
         paddingX: "25px",
@@ -20,14 +24,15 @@ export default function Header() {
         }}
       >
         <img src="./img/logo_histudy.png" width={130} />
-        <Button>My Group</Button>
+        <Button sx={{}}>My Group</Button>
         <Button>Report</Button>
         <Button>Rank</Button>
-        <Button sx={{ color: "gray" }}>Sign Up for HISTUDY</Button>
+        <Button sx={{}}>Sign Up for HISTUDY</Button>
       </Box>
       <Box>
-        <Button sx={{ color: "gray" }}>Log out</Button>
+        <Button sx={{}}>Log out</Button>
         <Button>My Account</Button>
+        <DarkModeToggle />
       </Box>
     </Box>
   );
