@@ -1,3 +1,6 @@
+import * as React from "react";
+import Button from "@mui/material/Button";
+
 export default function Main() {
-  <div>main</div>;
+  <Button>main</Button>;
 }
