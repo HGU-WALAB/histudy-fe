@@ -4,3 +4,13 @@ export const darkState = atom({
   key: "darkMode",
   default: false,
 });
+
+export const isLoginState = atom({
+  key: "isLogin",
+  default: true,
+});
+
+export const isRegisterModalState = atom({
+  key: "isRegisterModal",
+  default: true,
+});
