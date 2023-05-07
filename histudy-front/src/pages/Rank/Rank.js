@@ -1,5 +1,15 @@
 import { Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import CustomTable from "../../components/CustomTable";
+
+const data = [
+  [1, "Group 1", "7장", "1027시간", "6시간"],
+  [2, "Group 1", "7장", "1027시간", "6시간"],
+  [3, "Group 1", "7장", "1027시간", "6시간"],
+  [4, "Group 1", "7장", "1027시간", "6시간"],
+  [5, "Group 1", "7장", "1027시간", "6시간"],
+  [6, "Group 1", "7장", "1027시간", "6시간"],
+];
 
 const GroupRanking = [
   {
@@ -87,7 +97,7 @@ export default function Rank() {
       <Box sx={{ display: "flex", justifyContent: "end", py: "30px" }}>
         <Typography sx={{ fontWeight: "bold" }}>스터디 시작 D+35</Typography>
       </Box>
-      <Box
+      {/* <Box
         sx={{
           p: "50px",
           borderRadius: "30px",
@@ -171,7 +181,13 @@ export default function Rank() {
             </Box>
           </Box>
         ))}
-      </Box>
+      </Box> */}
+      <CustomTable
+        data={data}
+        accentColumnNum={1}
+        longWidthColumnNum={2}
+        type="rank"
+      />
 
       <Grid container spacing={2} sx={{ mt: "50px" }}>
         {Images.map((image, index) => (
