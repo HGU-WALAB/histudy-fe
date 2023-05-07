@@ -69,8 +69,8 @@ export default function Enroll() {
                   border: 2,
                   borderColor: "primary.main",
                   backgroundColor:
-                    pageNavNum === page ? "primary.main" : "white",
-                  color: pageNavNum === page ? "white" : "primary.main",
+                    pageNavNum <= page ? "primary.main" : "white",
+                  color: pageNavNum <= page ? "white" : "primary.main",
                 }}
               >
                 {pageNavNum}
@@ -95,7 +95,7 @@ export default function Enroll() {
           <Typography variant="body2">우선 순위 설정</Typography>
         </Box>
       </Box>
-      <Box sx={{ width: "800px", mx: "20px", height: "500px" }}>
+      <Box sx={{ width: "800px", mx: "20px" }}>
         <Typography variant="h4" sx={{ textAlign: "center", height: "50px" }}>
           Histudy 신청하기
         </Typography>

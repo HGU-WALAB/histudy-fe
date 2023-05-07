@@ -19,7 +19,7 @@ export default function Header() {
         backgroundColor: "",
         display: "flex",
         justifyContent: "space-between",
-        paddingX: "25px",
+        paddingX: "50px",
         paddingY: "15px",
       }}
     >

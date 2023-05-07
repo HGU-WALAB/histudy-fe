@@ -21,6 +21,7 @@ const PRIMARY = {
   main: "#007AFF",
   border: "#B2D7FF",
   light: "#E4F1FF",
+  // light: "#B8DFF8",
   lighter: "#F2F8FF",
   dark: "#1565c0",
   contrastText: "#fff",
@@ -110,6 +111,15 @@ export default function palette(themeMode) {
 
   const dark = {
     ...COMMON,
+    primary: {
+      main: "#1565c0",
+      border: "#B2D7FF",
+      light: "#E4F1FF",
+      lighter: "#007AFF",
+      dark: "#1565c0",
+      contrastText: "#fff",
+      // light: "#FFFFFF",
+    },
     mode: "dark",
     text: {
       primary: "#fff",
