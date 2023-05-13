@@ -86,7 +86,7 @@ export default function Rank() {
   return (
     <Box
       sx={{
-        px: "50px",
+        px: "150px",
         display: "flex",
         flexDirection: "column",
       }}

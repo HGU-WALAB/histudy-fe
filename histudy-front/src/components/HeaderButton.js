@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
-
+import { motion } from "framer-motion";
 export default function HeaderButton({ link, name, match, color }) {
   return (
     <Link to={link}>
@@ -13,6 +13,9 @@ export default function HeaderButton({ link, name, match, color }) {
         <Button sx={{ color: color }}>{name}</Button>
         {match && (
           <Box
+            component={motion.div}
+            layoutId="nav"
+            layout
             sx={{
               position: "absolute",
               left: 0,

@@ -4,8 +4,24 @@ import { useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import CustomTable from "../../components/CustomTable";
 import LongButton from "../../components/LongButton";
+import GrayBorderBox from "../../components/GrayBorderBox";
 
 export default function Enroll() {
+  const [studies, setStudies] = useState([
+    { name: "알고리즘 분석", professor: "이원형 교수님" },
+    { name: "데이타 베이스", professor: "홍참길 교수님" },
+  ]);
+  const [friends, setFriends] = useState([
+    {
+      name: "오인혁",
+      id: "21800446",
+    },
+    {
+      name: "한시온",
+      id: "21800888",
+    },
+  ]);
+
   const firstData = [
     ["오인혁", "21800446", "8156217@naver.com"],
     ["한시온", "21800446", "8156217@naver.com"],
@@ -25,7 +41,7 @@ export default function Enroll() {
     ["1", "알고리듬분석", "ECE40008", "용환기"],
     ["2", "RF회로 설계", "ECE30011", "김영식"],
   ];
-  const [page, setPage] = useState(3);
+  const [page, setPage] = useState(1);
 
   const [friendInput, setFriendInput] = useState("");
   const handleChange = (event) => {
@@ -41,11 +57,11 @@ export default function Enroll() {
   };
 
   return (
-    <Box sx={{ display: "flex", p: "50px", justifyContent: "center" }}>
+    <Box sx={{ display: "flex", py: "50px", px: "100px" }}>
       <Box
         sx={{
           //   border: 1,
-          width: "320px",
+          minWidth: "300px",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -69,8 +85,8 @@ export default function Enroll() {
                   border: 2,
                   borderColor: "primary.main",
                   backgroundColor:
-                    pageNavNum === page ? "primary.main" : "white",
-                  color: pageNavNum === page ? "white" : "primary.main",
+                    pageNavNum <= page ? "primary.main" : "white",
+                  color: pageNavNum <= page ? "white" : "primary.main",
                 }}
               >
                 {pageNavNum}
@@ -94,8 +110,10 @@ export default function Enroll() {
           </Typography>
           <Typography variant="body2">우선 순위 설정</Typography>
         </Box>
+
+        <GrayBorderBox studies={studies} friends={friends} />
       </Box>
-      <Box sx={{ width: "800px", mx: "20px", height: "500px" }}>
+      <Box sx={{ width: "100%", ml: "50px" }}>
         <Typography variant="h4" sx={{ textAlign: "center", height: "50px" }}>
           Histudy 신청하기
         </Typography>
@@ -133,7 +151,7 @@ export default function Enroll() {
             >
               서로 함께 하고 싶은 친구로 신청해야 매칭됩니다!
             </Typography>
-            <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
               <LongButton
                 name="다음"
                 onClick={handleClick}
@@ -175,6 +193,7 @@ export default function Enroll() {
             <Box sx={{ display: "flex", justifyContent: "center" }}>
               <Box
                 sx={{
+                  mt: 5,
                   display: "flex",
                   justifyContent: "space-between",
                   width: "300px",
@@ -211,6 +230,7 @@ export default function Enroll() {
             <Box sx={{ display: "flex", justifyContent: "center" }}>
               <Box
                 sx={{
+                  mt: 5,
                   display: "flex",
                   justifyContent: "space-between",
                   width: "300px",
@@ -232,34 +252,6 @@ export default function Enroll() {
             </Box>
           </>
         )}
-      </Box>
-      <Box
-        sx={{
-          p: "30px",
-          border: 2,
-          borderRadius: "20px",
-          width: "280px",
-          mt: "100px",
-          borderColor: "lightGray",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        <Typography variant="h6" sx={{ mb: "40px", textAlign: "center" }}>
-          신청 내역
-        </Typography>
-        <Typography variant="body1" sx={{ mb: 1 }}>
-          함께하고 싶은 친구
-        </Typography>
-        <Typography variant="body1" sx={{ color: "primary.main", mb: 1 }}>
-          {firstData[0][0]}, {firstData[0][1]}
-        </Typography>
-        <Typography variant="body1" sx={{ my: 1 }}>
-          스터디 희망 과목
-        </Typography>
-        <Typography variant="body1" sx={{ color: "primary.main", mb: 1 }}>
-          {thirdData[0][1]} {thirdData[0][3]}교수님
-        </Typography>
       </Box>
     </Box>
   );
