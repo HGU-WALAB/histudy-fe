@@ -67,14 +67,26 @@ export default function CustomTable({
     <>
       <Box
         sx={{
-          p: "50px",
-          borderRadius: "30px",
+          py: "5px",
+          // border: 1,
           backgroundColor: "primary.lighter",
           //   border: 2,
+
           borderColor: "primary.border",
+          borderRadius: "45px",
         }}
       >
-        <Box sx={{ display: "flex", pb: "10px" }}>
+        <Box
+          sx={{
+            color: "text.secondary",
+            display: "flex",
+            py: "20px",
+            borderBottom: 1,
+            borderColor: "primary.border",
+
+            px: "60px",
+          }}
+        >
           {TableHead[type].map((headElement, index) => (
             <Typography
               key={index}
@@ -115,10 +127,11 @@ export default function CustomTable({
           <Box
             key={index}
             sx={{
+              mx: "60px",
               display: "flex",
               // justifyContent: "space-between",
               //   mt: "20px",
-              borderTop: 1,
+              borderTop: index !== 0 && 1,
               py: "20px",
               borderColor: "primary.border",
             }}

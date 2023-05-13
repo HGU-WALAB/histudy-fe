@@ -27,7 +27,7 @@ export default function Group() {
         mt: "50px",
       }}
     >
-      <Typography variant="h4" sx={{ mb: "20px" }}>
+      <Typography variant="h4" sx={{ mb: "10px" }}>
         스터디 그룹 정보
       </Typography>
       <Typography>스터디 그룹이 아직 배정되지 않았어요😅</Typography>

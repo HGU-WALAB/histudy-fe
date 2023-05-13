@@ -8,13 +8,15 @@ export default function GrayBorderBox({ friends, studies, children }) {
         border: 2,
         borderRadius: "20px",
         width: "280px",
-        mt: "100px",
+        mt: "30px",
+        mb: "15px",
+
         borderColor: "lightGray",
         display: "flex",
         flexDirection: "column",
       }}
     >
-      <Typography variant="h6" sx={{ mb: "40px", textAlign: "center" }}>
+      <Typography variant="h6" sx={{ mb: "30px", textAlign: "center" }}>
         신청 내역
       </Typography>
       <Typography variant="body1" sx={{ mb: 1 }}>
@@ -30,7 +32,7 @@ export default function GrayBorderBox({ friends, studies, children }) {
             {friend.name}, {friend.id}
           </Typography>
         ))}
-      <Typography variant="body1" sx={{ my: 1 }}>
+      <Typography variant="body1" sx={{ mb: 1, mt: 3 }}>
         스터디 희망 과목
       </Typography>
       {studies.length !== 0 &&
