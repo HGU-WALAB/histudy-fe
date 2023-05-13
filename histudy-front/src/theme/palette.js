@@ -102,7 +102,12 @@ export default function palette(themeMode) {
       secondary: GREY[600],
       disabled: GREY[500],
     },
-    background: { default: "#F9FAFB", paper: "#fff", neutral: GREY[200] },
+    background: {
+      // default: "#F9FAFB"
+      default: "#FFFFFF",
+      paper: "#fff",
+      neutral: GREY[200],
+    },
     action: {
       ...COMMON.action,
       active: GREY[600],
@@ -114,8 +119,10 @@ export default function palette(themeMode) {
     primary: {
       main: "#1565c0",
       border: "#B2D7FF",
-      light: "#E4F1FF",
+      // light: "#E4F1FF",
+      light: "#F2F8FF",
       lighter: "#007AFF",
+      // lighter: "#F2F8FF",
       dark: "#1565c0",
       contrastText: "#fff",
       // light: "#FFFFFF",

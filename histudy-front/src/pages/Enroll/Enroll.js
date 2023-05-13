@@ -25,7 +25,7 @@ export default function Enroll() {
     ["1", "알고리듬분석", "ECE40008", "용환기"],
     ["2", "RF회로 설계", "ECE30011", "김영식"],
   ];
-  const [page, setPage] = useState(3);
+  const [page, setPage] = useState(1);
 
   const [friendInput, setFriendInput] = useState("");
   const handleChange = (event) => {
@@ -95,7 +95,7 @@ export default function Enroll() {
           <Typography variant="body2">우선 순위 설정</Typography>
         </Box>
       </Box>
-      <Box sx={{ width: "800px", mx: "20px" }}>
+      <Box sx={{ width: "750px", mx: "50px" }}>
         <Typography variant="h4" sx={{ textAlign: "center", height: "50px" }}>
           Histudy 신청하기
         </Typography>
@@ -133,7 +133,7 @@ export default function Enroll() {
             >
               서로 함께 하고 싶은 친구로 신청해야 매칭됩니다!
             </Typography>
-            <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
               <LongButton
                 name="다음"
                 onClick={handleClick}
@@ -175,6 +175,7 @@ export default function Enroll() {
             <Box sx={{ display: "flex", justifyContent: "center" }}>
               <Box
                 sx={{
+                  mt: 5,
                   display: "flex",
                   justifyContent: "space-between",
                   width: "300px",
@@ -211,6 +212,7 @@ export default function Enroll() {
             <Box sx={{ display: "flex", justifyContent: "center" }}>
               <Box
                 sx={{
+                  mt: 5,
                   display: "flex",
                   justifyContent: "space-between",
                   width: "300px",

@@ -6,8 +6,9 @@ import DarkModeToggle from "./DarkModeToggle";
 import HeaderButton from "./HeaderButton";
 
 export default function Header() {
-  // const myGroupMatch = useMatch("/match")
-  // const reporterMatch = useMatch("/report")
+  const homeMatch = useMatch("/");
+  const groupMatch = useMatch("/group");
+  const reportMatch = useMatch("/report");
   const rankMatch = useMatch("/rank");
   const enrollMatch = useMatch("/enroll");
   console.log(rankMatch);
@@ -31,9 +32,14 @@ export default function Header() {
           width: "650px",
         }}
       >
-        <img src="./img/logo_histudy.png" width={130} />
-        <Button sx={{}}>My Group</Button>
-        <Button>Report</Button>
+        <HeaderButton
+          link="/"
+          name={<img src="./img/logo_histudy.png" width={130} />}
+          match={homeMatch}
+        />
+        {/* <img src="./img/logo_histudy.png" width={130} /> */}
+        <HeaderButton link="/group" name="My Group" match={groupMatch} />
+        <HeaderButton link="/report" name="Report" match={reportMatch} />
         <HeaderButton link="/rank" name="Rank" match={rankMatch} />
         <HeaderButton
           link="/enroll"
