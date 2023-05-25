@@ -1,9 +1,11 @@
 import { Box, Button, Paper, Switch, ToggleButton } from "@mui/material";
 import { Link, useMatch } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from "recoil";
+import GoogleButton from "../auth/GoogleButton";
 import { darkModeState } from "../store/atom";
 import DarkModeToggle from "./DarkModeToggle";
 import HeaderButton from "./HeaderButton";
+import LoginButton from "./LoginButton";
 
 export default function Header() {
   const homeMatch = useMatch("/");
@@ -47,6 +49,9 @@ export default function Header() {
           color="text.secondary"
           match={enrollMatch}
         />
+      </Box>
+      <Box>
+        <GoogleButton />
       </Box>
       <Box>
         <Button sx={{ color: "text.secondary" }}>Log out</Button>
