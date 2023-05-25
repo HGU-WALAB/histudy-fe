@@ -8,7 +8,7 @@ import React from 'react';
 // const clientId = "425799046707-34ek2gt3b287jdl3knk9ib796l998trt.apps.googleusercontent.com";
 
 export default function GoogleButton(){
-    
+
     // const { loginWithCredential } = useAuthContext();
     const onSuccess = async(credentialResponse) => {
         console.log(jwtDecode(credentialResponse.credential));      
@@ -19,14 +19,14 @@ export default function GoogleButton(){
     }
 
     return(
-                <GoogleOAuthProvider clientId="425799046707-34ek2gt3b287jdl3knk9ib796l998trt.apps.googleusercontent.com">
-                    <GoogleLogin 
-                        onSuccess={credentialResponse => onSuccess(credentialResponse)}
-                        onFailure={onFailure}
-                        useOneTap
-                        
-                    />
-                </GoogleOAuthProvider>
+        <GoogleOAuthProvider clientId={process.env.REACT_APP_CLIENT_ID}>
+            <GoogleLogin 
+                onSuccess={credentialResponse => onSuccess(credentialResponse)}
+                onFailure={onFailure}
+                useOneTap
+                
+            />
+        </GoogleOAuthProvider>
                     
                 
     
