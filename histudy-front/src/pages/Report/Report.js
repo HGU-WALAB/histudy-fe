@@ -1,6 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import CustomTable from "../../components/CustomTable";
 import LongButton from "../../components/LongButton";
+import { Link } from "react-router-dom";
 
 const data = [
   ["1", "보고서 제목 1", "글쓴이 1", "2023-05-13"],
@@ -34,12 +35,13 @@ export default function Report() {
           />
         </Box>
         <Typography variant="h5">제출한 보고서 목록</Typography>
-        <LongButton
-          onClick=""
-          name="보고서 작성"
-          bgColor="primary.main"
-          fontColor="white"
-        />
+        <Link to="/add">
+          <LongButton
+            name="보고서 작성"
+            bgColor="primary.main"
+            fontColor="white"
+          />
+        </Link>
       </Box>
 
       <CustomTable

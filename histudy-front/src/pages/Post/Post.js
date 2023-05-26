@@ -20,9 +20,7 @@ export default function Post({ children }) {
   const [checkedValues, setCheckedValues] = useState([]);
   const [studyTime, setStudyTime] = useState(0);
 
-  const handleSubmit = () => {
-    console.log("제출");
-  };
+  const handleSubmit = () => {};
 
   return (
     <Box
@@ -96,7 +94,7 @@ export default function Post({ children }) {
       </PostBox>
       <LongButton
         name="제출"
-        bgcolor="primary.main"
+        bgColor="primary.main"
         fontColor="white"
         onClick={handleSubmit}
       />

@@ -19,7 +19,7 @@ export default function ARouter() {
         <Route path="/enroll" element={<Enroll />}></Route>
         <Route path="/group" element={<Group />}></Route>
         <Route path="/report" element={<Report />}></Route>
-        <Route path="/auth" element={<Group />} ></Route>
+        <Route path="/add" element={<Post />}></Route>
       </Routes>
       <Footer />
     </BrowserRouter>
