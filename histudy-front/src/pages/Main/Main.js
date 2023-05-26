@@ -4,7 +4,13 @@ import { Box } from "@mui/system";
 import LoginButton from "../../components/LoginButton";
 import { useRecoilValue } from "recoil";
 import { isLoginState, isRegisterModalState } from "../../store/atom";
-import { Input, TextField, Typography } from "@mui/material";
+import {
+  Input,
+  TextField,
+  Typography,
+  makeStyles,
+  withStyles,
+} from "@mui/material";
 import "./css/Textfield.css";
 // import Input from "../../theme/overrides/Input";
 
@@ -24,9 +30,9 @@ export default function Main() {
       {isRegisterModal && (
         <Box
           sx={{
-            border: 1,
-            borderColor: "primary.main",
-            backgroundColor: "primary.light",
+            // border: 1,
+            // borderColor: "primary.light",
+            backgroundColor: "primary.lighter",
             borderRadius: "20px",
             width: "430px",
             height: "450px",
@@ -36,7 +42,7 @@ export default function Main() {
             alignItems: " center",
           }}
         >
-          <Typography sx={{ fontSize: "20px", color: "black" }}>
+          <Typography sx={{ fontSize: "20px", color: "text.default" }}>
             정보 입력하기
           </Typography>
 
@@ -53,6 +59,7 @@ export default function Main() {
             variant="outlined"
           />
           <TextField
+            // inputProps={{ }}
             className="login-textInput"
             sx={{ mt: "15px", width: "300px" }}
             label="Contact Number"
