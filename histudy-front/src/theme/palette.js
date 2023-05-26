@@ -100,11 +100,13 @@ export default function palette(themeMode) {
     text: {
       primary: GREY[800],
       secondary: GREY[600],
+      header: GREY[600],
       disabled: GREY[500],
     },
     background: {
       // default: "#F9FAFB"
       default: "#FFFFFF",
+      sidebar: "#FCFCFD",
       paper: "#fff",
       neutral: GREY[200],
     },
@@ -118,10 +120,10 @@ export default function palette(themeMode) {
     ...COMMON,
     primary: {
       main: "#1565c0",
-      border: "#B2D7FF",
+      border: "#265D97",
       // light: "#E4F1FF",
       light: "#F2F8FF",
-      lighter: "#007AFF",
+      lighter: "#132F4C",
       // lighter: "#F2F8FF",
       dark: "#1565c0",
       contrastText: "#fff",
@@ -130,11 +132,14 @@ export default function palette(themeMode) {
     mode: "dark",
     text: {
       primary: "#fff",
-      secondary: GREY[500],
+      secondary: "white",
+      header: "#B2BAC2",
       disabled: GREY[600],
     },
     background: {
-      default: "#1F2937",
+      // default: "#1F2937",
+      default: "#0A1929",
+      sidebar: "#0A1929",
       paper: "#374251",
       neutral: alpha(GREY[500], 0.16),
     },

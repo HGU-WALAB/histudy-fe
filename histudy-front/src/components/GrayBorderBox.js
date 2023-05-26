@@ -10,7 +10,7 @@ export default function GrayBorderBox({ friends, studies, children }) {
         width: "280px",
         mt: "30px",
         mb: "15px",
-
+        backgroundColor: "background.sidebar",
         borderColor: "lightGray",
         display: "flex",
         flexDirection: "column",

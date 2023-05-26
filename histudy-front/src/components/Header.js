@@ -46,7 +46,7 @@ export default function Header() {
         <HeaderButton
           link="/enroll"
           name="Sign Up for HISTUDY"
-          color="text.secondary"
+          color="text.header"
           match={enrollMatch}
         />
       </Box>
@@ -54,7 +54,7 @@ export default function Header() {
         <GoogleButton />
       </Box>
       <Box>
-        <Button sx={{ color: "text.secondary" }}>Log out</Button>
+        <Button sx={{ color: "text.header" }}>Log out</Button>
         <Button>My Account</Button>
         <DarkModeToggle />
       </Box>
