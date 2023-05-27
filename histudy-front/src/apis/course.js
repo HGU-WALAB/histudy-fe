@@ -1,14 +1,14 @@
 import axios from "axios";
 
-export const importCourses = async (data) => {
+export const importCourses = async (formData) => {
   const response = await axios.post(
     `${process.env.REACT_APP_BACK_BASE_URL}/api/course`,
-    data,
+    formData,
     {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     }
   );
-  return response.data;
+  return response;
 };
