@@ -17,15 +17,15 @@ import {
 } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
+import compressedFile from "./compressFile";
+// import CompressedFile from "./compressFile";
+
 // interface IProps {
 //   imageURLList: string[] | [];
 //   setImageURLList: React.Dispatch<React.SetStateAction<string[] | []>>;
 // }
 
 export function ImageUpload({ setValue, getValues }) {
-  const [posterUploadList, setPosterUploadList] = useState([0, 1, 2]);
-  //   const [imageURL, setImageURL] = useState("");
-
   const inputRef = useRef(null);
   const onUploadImageButtonClick = useCallback(() => {
     if (!inputRef.current) {
@@ -35,13 +35,15 @@ export function ImageUpload({ setValue, getValues }) {
     inputRef.current.click();
   }, []);
 
-  const onImageChange = (e) => {
+  const onImageChange = async (e) => {
     e.preventDefault();
     const file = e.target.files;
     if (!file) return null;
 
+    const selectedFile = await compressedFile(file[0]);
+
     const storageRef = ref(storage, `files/${file[0].name}`);
-    const uploadTask = uploadBytesResumable(storageRef, file[0]);
+    const uploadTask = uploadBytesResumable(storageRef, selectedFile);
 
     uploadTask.on(
       "state_changed",
@@ -58,13 +60,12 @@ export function ImageUpload({ setValue, getValues }) {
         }
       },
       () => {
-        e.target.value = "";
         getDownloadURL(storageRef).then((downloadURL) => {
           console.log("File available at", downloadURL);
+
           //   setImageURL(downloadURL);
           const prev = getValues("images");
           setValue("images", [...prev, downloadURL]);
-          setPosterUploadList([...prev.slice(0, prev.length - 1)]);
         });
       }
     );
@@ -96,43 +97,32 @@ export function ImageUpload({ setValue, getValues }) {
       <Box sx={{ display: "flex" }}>
         <ImageList sx={{ width: "1000px" }} cols={5}>
           {getValues("images")?.map((imageUrl, index) => (
-            <>
-              <ImageListItem
-                sx={{ position: "relative", mt: "20px", mr: "20px" }}
-                key={index}
+            <ImageListItem
+              sx={{ position: "relative", mt: "20px", mr: "20px" }}
+              key={index}
+            >
+              <img src={imageUrl} loading="lazy" alt={imageUrl} />
+              <IconButton
+                onClick={() => {
+                  const prev = getValues("images");
+                  setValue("images", [
+                    ...prev.slice(0, index),
+                    ...prev.slice(index + 1),
+                  ]);
+                  // setPosterUploadList((prev) => [...prev, prev.length]);
+                }}
+                sx={{
+                  position: "absolute",
+                  right: "0",
+                  color: "black",
+                }}
+                aria-label={`star`}
               >
-                <img src={imageUrl} loading="lazy" alt={imageUrl} />
-                <IconButton
-                  onClick={() => {
-                    const prev = getValues("images");
-                    setValue("images", [
-                      ...prev.slice(0, index),
-                      ...prev.slice(index + 1),
-                    ]);
-                    setPosterUploadList((prev) => [...prev, prev.length]);
-                  }}
-                  sx={{
-                    position: "absolute",
-                    right: "0",
-                    color: "black",
-                  }}
-                  aria-label={`star`}
-                >
-                  <ClearIcon />
-                </IconButton>
-              </ImageListItem>
-            </>
+                <ClearIcon />
+              </IconButton>
+            </ImageListItem>
           ))}
         </ImageList>
-        {posterUploadList.map((posterUploadBox, index) => (
-          <div
-            key={index}
-            onClick={onUploadImageButtonClick}
-            className="mr-[30px] w-[100px] h-[100px] border border-black mt-[30px] flex justify-center items-center rounded-xl"
-          >
-            <i className="fa-solid fa-plus text-black text-[30px] "></i>
-          </div>
-        ))}
       </Box>
     </>
   );
