@@ -3,17 +3,16 @@ import PostBox from "../../components/PostBox";
 import LongButton from "../../components/LongButton";
 import RoundButton from "../../components/RoundButton";
 
-// import { TimePicker } from "@mui/x-date-pickers/TimePicker";
-
 import { useEffect, useState } from "react";
 
 import PostMember from "../../components/Post/PostMember";
 import { useForm, Controller } from "react-hook-form";
 import PostStudyTime from "../../components/Post/PostStudyTime";
 import { ImageUpload } from "../../components/Image/UploadImage";
+import { postReport } from "../../apis/report";
 
 export default function Post({ children }) {
-  const { handleSubmit, watch, setValue, getValues, reset, control } = useForm({
+  const { handleSubmit, watch, setValue, getValues, control } = useForm({
     defaultValues: {
       title: "",
       content: "",
@@ -38,7 +37,15 @@ export default function Post({ children }) {
   const [studyTime, setStudyTime] = useState(0);
 
   const onValid = (formData) => {
-    console.log(formData);
+    //보고서 생성 api 연결
+    // const newReport = {
+    //   title: formData.title,
+    //   content: formData.content,
+    //   totalMinutes: Number(formData.totalMinutes),
+    //   participants: formData.participants,
+    //   images: formData.images,
+    // };
+    // postReport(newReport);
   };
 
   return (
@@ -67,7 +74,6 @@ export default function Post({ children }) {
             fontColor="white"
           />
         </Box>
-
         <ImageUpload setValue={setValue} getValues={getValues} />
       </PostBox>
 
