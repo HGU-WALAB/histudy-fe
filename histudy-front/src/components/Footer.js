@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import ExportCSV from "./scv/ExportCSV";
 
 export default function Footer() {
   return (
@@ -31,6 +32,8 @@ export default function Footer() {
             />
           </a>
         </Box>
+
+        <ExportCSV />
       </Box>
     </Box>
   );

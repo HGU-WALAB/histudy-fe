@@ -6,6 +6,7 @@ import { darkModeState } from "../store/atom";
 import DarkModeToggle from "./DarkModeToggle";
 import HeaderButton from "./HeaderButton";
 import LoginButton from "./LoginButton";
+import ExportCSV from "./scv/ExportCSV";
 
 export default function Header() {
   const homeMatch = useMatch("/");
@@ -22,7 +23,7 @@ export default function Header() {
         backgroundColor: "",
         display: "flex",
         justifyContent: "space-between",
-        paddingX: "50px",
+        paddingX: "20px",
         paddingY: "15px",
       }}
     >
@@ -31,7 +32,7 @@ export default function Header() {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          width: "650px",
+          width: "520px",
         }}
       >
         <HeaderButton
@@ -50,9 +51,7 @@ export default function Header() {
           match={enrollMatch}
         />
       </Box>
-      <Box>
-        <GoogleButton />
-      </Box>
+      <GoogleButton />
       <Box>
         <Button sx={{ color: "text.header" }}>Log out</Button>
         <Button>My Account</Button>
