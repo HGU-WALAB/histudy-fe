@@ -1,13 +1,20 @@
 import { Button, InputAdornment, TextField, Typography } from "@mui/material";
 import { border, Box } from "@mui/system";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import CustomTable from "../../components/CustomTable";
 import LongButton from "../../components/LongButton";
 import GrayBorderBox from "../../components/GrayBorderBox";
 import ProgressBar from "../../components/ProgressBar";
+import { getCourses } from "../../apis/course";
 
 export default function Enroll() {
+  // useEffect(() => {
+  //   getCourses().then((data) => {
+  //     console.log(data);
+  //   });
+  // }, []);
+
   const [studies, setStudies] = useState([
     { name: "알고리즘 분석", professor: "이원형 교수님" },
     { name: "데이타 베이스", professor: "홍참길 교수님" },

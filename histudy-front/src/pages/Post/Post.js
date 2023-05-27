@@ -1,29 +1,55 @@
-import {
-  Box,
-  Button,
-  Checkbox,
-  FormControlLabel,
-  FormGroup,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, FormControl, TextField, Typography } from "@mui/material";
 import PostBox from "../../components/PostBox";
 import LongButton from "../../components/LongButton";
 import RoundButton from "../../components/RoundButton";
-import { CheckBox } from "@mui/icons-material";
-// import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 
 import { useEffect, useState } from "react";
-import PostStudy from "../../components/Post/PostStudy";
+
 import PostMember from "../../components/Post/PostMember";
+import { useForm, Controller } from "react-hook-form";
+import PostStudyTime from "../../components/Post/PostStudyTime";
+import { ImageUpload } from "../../components/Image/UploadImage";
+import { postReport } from "../../apis/report";
+
 export default function Post({ children }) {
-  const [checkedValues, setCheckedValues] = useState([]);
+  const { handleSubmit, watch, setValue, getValues, control } = useForm({
+    defaultValues: {
+      title: "",
+      content: "",
+      participants: [],
+      totalMinutes: "",
+      startTime: getCurrentTime(),
+      endTime: getCurrentTime(),
+      images: [],
+    },
+  });
+
+  function getCurrentTime() {
+    const date = new Date();
+    const hours = String(date.getHours()).padStart(2, "0");
+    const minutes = String(date.getMinutes()).padStart(2, "0");
+    return `${hours}:${minutes}`;
+  }
+
+  watch(["totalMinutes", "startTime", "endTime", "images"]);
+
+  // const [checkedValues, setCheckedValues] = useState([]);
   const [studyTime, setStudyTime] = useState(0);
 
-  const handleSubmit = () => {};
+  const onValid = (formData) => {
+    //보고서 생성 api 연결
+    // const newReport = {
+    //   title: formData.title,
+    //   content: formData.content,
+    //   totalMinutes: Number(formData.totalMinutes),
+    //   participants: formData.participants,
+    //   images: formData.images,
+    // };
+    // postReport(newReport);
+  };
 
   return (
-    <Box
+    <FormControl
       sx={{
         display: "flex",
         flexDirection: "column",
@@ -48,56 +74,66 @@ export default function Post({ children }) {
             fontColor="white"
           />
         </Box>
-        <Button
-          variant="outlined"
-          sx={{
-            backgroundColor: "background.default",
-            borderColor: "primary.main",
-            color: "primary.main",
-            fontWeight: "normal",
-            mt: "20px",
-          }}
-        >
-          인증샷 업로드
-        </Button>
+        <ImageUpload setValue={setValue} getValues={getValues} />
       </PostBox>
 
       <PostBox>
         <Typography variant="body2" sx={{ mb: "20px" }}>
           스터디에 참여한 맴버를 선택해주세요.
         </Typography>
-        <PostMember
-          checkedValues={checkedValues}
-          setCheckedValues={setCheckedValues}
-        />
+        <PostMember getValues={getValues} setValue={setValue} />
       </PostBox>
       <PostBox>
         <Typography variant="body2" sx={{ mb: "20px" }}>
           스터디 시간을 알려주세요.
         </Typography>
-        <PostStudy setStudyTime={setStudyTime} studyTime={studyTime} />
+        <PostStudyTime
+          setValue={setValue}
+          getValues={getValues}
+          control={control}
+        />
       </PostBox>
 
       <PostBox>
         <Typography variant="body2" sx={{ mb: "20px" }}>
           스터디 보고서를 작성해주세요.
         </Typography>
+
         <Box sx={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-          <TextField variant="outlined" placeholder="제목" />
-          <TextField
-            id="outlined-multiline-static"
-            multiline
-            rows={10}
-            placeholder="보고서 내용"
+          <Controller
+            name={"title"}
+            control={control}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                // value={value}
+                // onChange={onChange}
+                variant="outlined"
+                placeholder="제목"
+              />
+            )}
+          />
+          <Controller
+            name={"content"}
+            control={control}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                id="outlined-multiline-static"
+                multiline
+                rows={10}
+                placeholder="보고서 내용"
+              />
+            )}
           />
         </Box>
       </PostBox>
       <LongButton
+        onClick={handleSubmit(onValid)}
         name="제출"
         bgColor="primary.main"
         fontColor="white"
-        onClick={handleSubmit}
       />
-    </Box>
+    </FormControl>
   );
 }
