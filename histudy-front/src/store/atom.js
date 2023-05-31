@@ -12,7 +12,7 @@ export const isLoginState = atom({
 
 export const isRegisterModalState = atom({
   key: "isRegisterModal",
-  default: true,
+  default: false,
 });
 
 export const userLoginInfo = atom({
