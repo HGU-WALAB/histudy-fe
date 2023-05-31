@@ -17,6 +17,7 @@ import {
 } from "@mui/material";
 import "./css/Textfield.css";
 import { userSignup } from "../../apis/users";
+import GoogleButton from "../../auth/GoogleButton";
 
 // import Input from "../../theme/overrides/Input";
 
@@ -64,6 +65,8 @@ export default function Main() {
       window.location.reload();
     }
   };
+
+  console.log(isLogin);
   return (
     <Box
       sx={{
@@ -73,7 +76,7 @@ export default function Main() {
         alignItems: "center",
       }}
     >
-      {!isLogin && <LoginButton />}
+      {!isLogin && <GoogleButton />}
       {isRegisterModal && (
         <Box
           sx={{
