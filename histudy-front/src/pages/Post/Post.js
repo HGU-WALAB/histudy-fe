@@ -1,4 +1,13 @@
-import { Box, Button, FormControl, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+  Typography,
+} from "@mui/material";
 import PostBox from "../../components/PostBox";
 import LongButton from "../../components/LongButton";
 import RoundButton from "../../components/RoundButton";
@@ -6,10 +15,11 @@ import RoundButton from "../../components/RoundButton";
 import { useEffect, useState } from "react";
 
 import PostMember from "../../components/Post/PostMember";
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller, set } from "react-hook-form";
 import PostStudyTime from "../../components/Post/PostStudyTime";
 import { ImageUpload } from "../../components/Image/UploadImage";
 import { postReport } from "../../apis/report";
+import PostCourses from "../../components/Post/PostCourses";
 
 export default function Post({ children }) {
   const { handleSubmit, watch, setValue, getValues, control } = useForm({
@@ -21,6 +31,7 @@ export default function Post({ children }) {
       startTime: getCurrentTime(),
       endTime: getCurrentTime(),
       images: [],
+      courses: [],
     },
   });
 
@@ -33,7 +44,6 @@ export default function Post({ children }) {
 
   watch(["totalMinutes", "startTime", "endTime", "images"]);
 
-  // const [checkedValues, setCheckedValues] = useState([]);
   const [studyTime, setStudyTime] = useState(0);
 
   const onValid = (formData) => {
@@ -77,6 +87,14 @@ export default function Post({ children }) {
         <ImageUpload setValue={setValue} getValues={getValues} />
       </PostBox>
 
+      <PostBox>
+        <Typography variant="body2" sx={{ mb: "20px" }}>
+          스터디를 한 과목을 모두 골라주세요.
+        </Typography>
+        <FormControl fullWidth>
+          <PostCourses getValues={getValues} setValue={setValue} />
+        </FormControl>
+      </PostBox>
       <PostBox>
         <Typography variant="body2" sx={{ mb: "20px" }}>
           스터디에 참여한 맴버를 선택해주세요.

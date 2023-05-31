@@ -1,23 +1,18 @@
 import * as React from "react";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
-import LoginButton from "../../components/LoginButton";
-import { useRecoilState, useRecoilValue } from "recoil";
+
+import { useRecoilState } from "recoil";
 import {
   isLoginState,
   isRegisterModalState,
   userLoginInfo,
 } from "../../store/atom";
-import {
-  Input,
-  TextField,
-  Typography,
-  makeStyles,
-  withStyles,
-} from "@mui/material";
+import { TextField, Typography } from "@mui/material";
 import "./css/Textfield.css";
 import { userSignup } from "../../apis/users";
 import GoogleButton from "../../auth/GoogleButton";
+import ImportCSV from "../../components/scv/ImportCSV";
 
 // import Input from "../../theme/overrides/Input";
 
@@ -66,7 +61,7 @@ export default function Main() {
     }
   };
 
-  console.log(isLogin);
+  // console.log(isLogin);
   return (
     <Box
       sx={{
@@ -128,6 +123,8 @@ export default function Main() {
           </Button>
         </Box>
       )}
+
+      <ImportCSV />
     </Box>
   );
 }

@@ -24,10 +24,7 @@ export default function GoogleButton() {
   // const { loginWithCredential } = useAuthContext();
   const googleLoginRef = useRef(null);
   const onSuccess = async (credentialResponse) => {
-    // console.log(credentialResponse);
     const decodedToken = jwtDecode(credentialResponse.credential);
-    // console.log(decodedToken);
-    // const goToMainRouteusingWindow = () => {
 
     userLogin(decodedToken.sub)
       .then((response) => {
@@ -49,31 +46,6 @@ export default function GoogleButton() {
           setUserLoginInfo(decodedToken);
         }
       });
-    //   const data = {
-    //     sub: decodedToken.sub,
-    //     email: decodedToken.email,
-    //     name: decodedToken.name,
-    //     // sid:
-    //   };
-
-    //   userSignup(decodedToken.sub);
-
-    // const data = {
-    //   sub: decodedToken.sub,
-    //   email: decodedToken.email,
-    //   name: decodedToken.name,
-    //   sid: decodedToken.sid,
-    // };
-    // console.log(data);
-
-    // const loginResponse = await userLogin();
-    // if (loginResponse.isRegistered) {
-    //   localStorage.setItem("accessToken", loginResponse.tokens.accessToken);
-    //   localStorage.setItem("refreshToken", loginResponse.tokens.refreshToken);
-    // } else {
-    // }
-
-    // userLogin
   };
 
   const onFailure = (error) => {
@@ -100,7 +72,6 @@ export default function GoogleButton() {
           googleLoginRef.current = renderProps;
         }}
       />
-      {/* <Button onClick={handleClick}>Log In</Button> */}
     </GoogleOAuthProvider>
   );
 }

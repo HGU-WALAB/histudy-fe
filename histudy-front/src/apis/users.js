@@ -8,11 +8,6 @@ export const postReport = async (data) => {
   return response;
 };
 
-// {
-//     headers: { Authorization: `Bearer ${TOKEN}` },
-//     withCredentials: true,
-//   }
-
 export const userLogin = async (sub) => {
   const response = await axios.get(
     `${process.env.REACT_APP_BACK_BASE_URL}/api/auth/login?sub=${sub}`

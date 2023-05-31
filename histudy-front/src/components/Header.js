@@ -68,6 +68,7 @@ export default function Header() {
             Log out
           </Button>
         )}
+        
         <Button>My Account</Button>
         <DarkModeToggle />
       </Box>
