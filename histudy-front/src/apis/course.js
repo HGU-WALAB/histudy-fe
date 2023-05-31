@@ -12,3 +12,33 @@ export const importCourses = async (formData) => {
   });
   return response;
 };
+
+export const teamCourses = async () => {
+  const TOKEN = localStorage.getItem("accessToken");
+
+  const response = await axios.get(
+    `${process.env.REACT_APP_BACK_BASE_URL}/api/course/team`,
+    {
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+      },
+      withCredentials: true,
+    }
+  );
+  return response.data;
+};
+
+export const autoCourses = async () => {
+  const TOKEN = localStorage.getItem("accessToken");
+
+  const response = await axios.get(
+    `${process.env.REACT_APP_BACK_BASE_URL}/api/course`,
+    {
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+      },
+      withCredentials: true,
+    }
+  );
+  return response.data;
+};

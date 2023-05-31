@@ -27,7 +27,8 @@ export default function Main() {
   console.log(userLoginInfoState);
 
   const nameConverter = (name) => {
-    if (name.slice(-3) === "학부생") console.log(name.slice(0, -3));
+    if (name.slice(-3) === "학부생") return name.slice(0, -3);
+    return name;
   };
 
   const handleClick = async (e) => {

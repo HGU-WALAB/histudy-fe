@@ -47,15 +47,16 @@ export default function Post({ children }) {
   const [studyTime, setStudyTime] = useState(0);
 
   const onValid = (formData) => {
-    //보고서 생성 api 연결
-    // const newReport = {
-    //   title: formData.title,
-    //   content: formData.content,
-    //   totalMinutes: Number(formData.totalMinutes),
-    //   participants: formData.participants,
-    //   images: formData.images,
-    // };
-    // postReport(newReport);
+    // 보고서 생성 api 연결
+    const newReport = {
+      title: formData.title,
+      content: formData.content,
+      totalMinutes: Number(formData.totalMinutes),
+      participants: formData.participants,
+      images: formData.images,
+      courses: formData.courses,
+    };
+    postReport(newReport);
   };
 
   return (
@@ -76,9 +77,6 @@ export default function Post({ children }) {
             코드를 생성해서 참여한 멤버들과 사진을 찍고 인증샷을 올려주세요.
           </Typography>
           <RoundButton
-            onClick={() => {
-              console.log("인증 코드 생성");
-            }}
             name="인증 코드 생성"
             bgColor="primary.main"
             fontColor="white"
