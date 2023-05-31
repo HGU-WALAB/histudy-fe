@@ -9,11 +9,7 @@ import ProgressBar from "../../components/ProgressBar";
 import { getCourses } from "../../apis/course";
 
 export default function Enroll() {
-  // useEffect(() => {
-  //   getCourses().then((data) => {
-  //     console.log(data);
-  //   });
-  // }, []);
+ 
 
   const [studies, setStudies] = useState([
     { name: "알고리즘 분석", professor: "이원형 교수님" },

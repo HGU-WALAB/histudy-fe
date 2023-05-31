@@ -14,3 +14,8 @@ export const isRegisterModalState = atom({
   key: "isRegisterModal",
   default: true,
 });
+
+export const userLoginInfo = atom({
+  key: "userLoginInfo",
+  default: null,
+});

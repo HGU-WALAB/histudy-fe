@@ -3,6 +3,8 @@ import CustomTable from "../../components/CustomTable";
 import LongButton from "../../components/LongButton";
 import { Link } from "react-router-dom";
 
+
+
 const data = [
   ["1", "보고서 제목 1", "글쓴이 1", "2023-05-13"],
   ["2", "보고서 제목 2", "글쓴이 2", "2024-05-13"],

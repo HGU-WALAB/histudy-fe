@@ -2,8 +2,12 @@ import * as React from "react";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
 import LoginButton from "../../components/LoginButton";
-import { useRecoilValue } from "recoil";
-import { isLoginState, isRegisterModalState } from "../../store/atom";
+import { useRecoilState, useRecoilValue } from "recoil";
+import {
+  isLoginState,
+  isRegisterModalState,
+  userLoginInfo,
+} from "../../store/atom";
 import {
   Input,
   TextField,
@@ -12,11 +16,54 @@ import {
   withStyles,
 } from "@mui/material";
 import "./css/Textfield.css";
+import { userSignup } from "../../apis/users";
+
 // import Input from "../../theme/overrides/Input";
 
 export default function Main() {
-  const isLogin = useRecoilValue(isLoginState);
-  const isRegisterModal = useRecoilValue(isRegisterModalState);
+  const [sid, setSid] = React.useState("");
+
+  const [isLogin, setIsLogin] = useRecoilState(isLoginState);
+  const [isRegisterModal, setIsRegisterModal] =
+    useRecoilState(isRegisterModalState);
+  const [userLoginInfoState, setUserLoginInfoState] =
+    useRecoilState(userLoginInfo);
+  console.log(userLoginInfoState);
+
+  const nameConverter = (name) => {
+    if (name.slice(-3) === "학부생") console.log(name.slice(0, -3));
+  };
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+
+    const newUser = {
+      sub: userLoginInfoState.sub,
+      email: userLoginInfoState.email,
+      name: nameConverter(userLoginInfoState.name),
+      sid: sid,
+    };
+    if (sid.length === 0) {
+      alert("학번을 입력해주세요");
+      return;
+    }
+    if (sid.length !== 8) {
+      alert("학번을 정확히 입력해주세요.");
+      return;
+    }
+    const response = await userSignup(newUser);
+    console.log(response);
+
+    if (response.status === 201) {
+      alert("회원가입이 완료되었습니다.");
+      localStorage.setItem("accessToken", response.data.tokens.accessToken);
+      localStorage.setItem("refreshToken", response.data.tokens.refreshToken);
+      setIsRegisterModal(false);
+      setUserLoginInfoState(null);
+      setIsLogin(true);
+      window.location.reload();
+    }
+  };
   return (
     <Box
       sx={{
@@ -51,21 +98,29 @@ export default function Main() {
             sx={{ mt: "40px", width: "300px", zIndex: 1300 }}
             label="Name"
             variant="outlined"
+            value={userLoginInfoState?.name}
           />
           <TextField
             className="login-textInput"
             sx={{ mt: "15px", width: "300px" }}
             label="Student Number"
             variant="outlined"
+            value={sid}
+            onChange={(e) => setSid(e.target.value)}
           />
           <TextField
             // inputProps={{ }}
             className="login-textInput"
             sx={{ mt: "15px", width: "300px" }}
-            label="Contact Number"
+            label="Email"
             variant="outlined"
+            value={userLoginInfoState?.email}
           />
-          <Button variant="contained" sx={{ mt: "40px", width: "100px" }}>
+          <Button
+            variant="contained"
+            sx={{ mt: "40px", width: "100px" }}
+            onClick={handleClick}
+          >
             가입완료
           </Button>
         </Box>
