@@ -6,15 +6,9 @@ import CustomTable from "../../components/CustomTable";
 import LongButton from "../../components/LongButton";
 import GrayBorderBox from "../../components/GrayBorderBox";
 import ProgressBar from "../../components/ProgressBar";
-import { getCourses } from "../../apis/course";
+import { autoCourses, getCourses } from "../../apis/course";
 
 export default function Enroll() {
-  // useEffect(() => {
-  //   getCourses().then((data) => {
-  //     console.log(data);
-  //   });
-  // }, []);
-
   const [studies, setStudies] = useState([
     { name: "알고리즘 분석", professor: "이원형 교수님" },
     { name: "데이타 베이스", professor: "홍참길 교수님" },
@@ -55,6 +49,12 @@ export default function Enroll() {
   const handleChange = (event) => {
     setFriendInput(event.target.value);
   };
+
+  useEffect(() => {
+    autoCourses(friendInput).then((res) => {
+      console.log(res);
+    });
+  }, [friendInput]);
 
   const handleClick = (event) => {
     const ID = event.target.id;
