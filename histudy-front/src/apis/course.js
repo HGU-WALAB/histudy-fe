@@ -3,13 +3,17 @@ import axios from "axios";
 export const importCourses = async (formData) => {
   const TOKEN = localStorage.getItem("accessToken");
 
-  const response = await axios.post(`/api/course`, formData, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-      Authorization: `Bearer ${TOKEN}`,
-    },
-    withCredentials: true,
-  });
+  const response = await axios.post(
+    `${process.env.REACT_APP_BACK_BASE_URL}/api/courses`,
+    formData,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${TOKEN}`,
+      },
+      withCredentials: true,
+    }
+  );
   return response;
 };
 
@@ -17,7 +21,7 @@ export const teamCourses = async () => {
   const TOKEN = localStorage.getItem("accessToken");
 
   const response = await axios.get(
-    `${process.env.REACT_APP_BACK_BASE_URL}/api/course/team`,
+    `${process.env.REACT_APP_BACK_BASE_URL}/api/courses/team`,
     {
       headers: {
         Authorization: `Bearer ${TOKEN}`,
@@ -32,7 +36,7 @@ export const autoCourses = async () => {
   const TOKEN = localStorage.getItem("accessToken");
 
   const response = await axios.get(
-    `${process.env.REACT_APP_BACK_BASE_URL}/api/course`,
+    `${process.env.REACT_APP_BACK_BASE_URL}/api/courses`,
     {
       headers: {
         Authorization: `Bearer ${TOKEN}`,

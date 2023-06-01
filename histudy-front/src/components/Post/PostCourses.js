@@ -4,6 +4,7 @@ import { teamCourses } from "../../apis/course";
 
 export default function PostCourses({ setValue, getValues }) {
   useEffect(() => {
+    // teamCourses().then((res) => console.log(res));
     console.log(teamCourses());
     // setTeamMemberCourses(teamCourses());
   }, []);

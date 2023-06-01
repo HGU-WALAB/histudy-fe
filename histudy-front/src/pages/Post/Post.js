@@ -20,6 +20,7 @@ import PostStudyTime from "../../components/Post/PostStudyTime";
 import { ImageUpload } from "../../components/Image/UploadImage";
 import { postReport } from "../../apis/report";
 import PostCourses from "../../components/Post/PostCourses";
+import { teamCourses } from "../../apis/course";
 
 export default function Post({ children }) {
   const { handleSubmit, watch, setValue, getValues, control } = useForm({
@@ -45,6 +46,12 @@ export default function Post({ children }) {
   watch(["totalMinutes", "startTime", "endTime", "images"]);
 
   const [studyTime, setStudyTime] = useState(0);
+
+  // useEffect(() => {
+  //   teamCourses().then((res) => {
+  //     console.log("debug", res);
+  //   });
+  // }, []);
 
   const onValid = (formData) => {
     // 보고서 생성 api 연결
