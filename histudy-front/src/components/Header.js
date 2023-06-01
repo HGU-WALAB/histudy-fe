@@ -13,6 +13,7 @@ export default function Header() {
   const reportMatch = useMatch("/report");
   const rankMatch = useMatch("/rank");
   const enrollMatch = useMatch("/enroll");
+  const managerMatch = useMatch("/manageClass");
   console.log(rankMatch);
 
   return (
@@ -49,6 +50,7 @@ export default function Header() {
           color="text.header"
           match={enrollMatch}
         />
+        <HeaderButton link="/manageClass" name="MANAGER" match={managerMatch} />
       </Box>
       <Box>
         <GoogleButton />
