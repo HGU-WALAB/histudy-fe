@@ -7,6 +7,13 @@ import Rank from "../pages/Rank/Rank";
 import Report from "../pages/Report/Report";
 import Footer from "./Footer";
 import Header from "./Header";
+import ManageGroup from "../pages/Manager/ManageGroup";
+import ManageClass from "../pages/Manager/ManageClass";
+import StudyGroup from "../pages/Manager/StudyGroup";
+import ManageStudent from "../pages/Manager/ManageStudent";
+import ManageReport from "../pages/Manager/ManageReport";
+import ReportDetail from "../pages/Manager/ReportDetail";
+import CreateGroup from "../pages/Manager/CreateGroup";
 
 export default function ARouter() {
   return (
@@ -20,6 +27,13 @@ export default function ARouter() {
         <Route path="/group" element={<Group />}></Route>
         <Route path="/report" element={<Report />}></Route>
         <Route path="/add" element={<Post />}></Route>
+        <Route path="/manageClass" element={<ManageClass />}></Route>
+        <Route path="/manageGroup" element={<ManageGroup />}></Route>
+        <Route path="/studyGroup" element={<StudyGroup />}></Route>
+        <Route path="/createGroup" element={<CreateGroup />}></Route>
+        <Route path="/manageStudent" element={<ManageStudent />}></Route>
+        <Route path="/manageReport" element={<ManageReport />}></Route>
+        <Route path="/reportDetail" element={<ReportDetail />}></Route>
       </Routes>
       <Footer />
     </BrowserRouter>

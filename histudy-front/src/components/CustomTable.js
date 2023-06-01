@@ -71,7 +71,6 @@ export default function CustomTable({
           // border: 1,
           backgroundColor: "primary.lighter",
           //   border: 2,
-
           borderColor: "primary.border",
           borderRadius: "45px",
         }}
@@ -83,7 +82,6 @@ export default function CustomTable({
             py: "20px",
             borderBottom: 1,
             borderColor: "primary.border",
-
             px: "60px",
           }}
         >
