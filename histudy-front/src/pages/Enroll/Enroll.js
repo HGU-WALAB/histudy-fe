@@ -151,6 +151,7 @@ export default function Enroll() {
 
             <CustomTable
               data={rankConverter(sideCourses)}
+              addData={setSideCourses}
               accentColumnNum={1}
               longWidthColumnNum={2}
               type="third"

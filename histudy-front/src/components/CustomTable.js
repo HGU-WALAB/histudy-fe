@@ -1,7 +1,8 @@
 import { Box, Button, Typography } from "@mui/material";
 import LongButton from "./LongButton";
 import RoundButton from "./RoundButton";
-
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 const GroupRanking = [
   {
     rank: 1,
@@ -112,6 +113,11 @@ export default function CustomTable({
               {headElement}
             </Typography>
           ))}
+          <Typography
+            sx={{
+              minWidth: "150px",
+            }}
+          ></Typography>
         </Box>
         {data.map((row, index) => (
           <Box
@@ -125,6 +131,18 @@ export default function CustomTable({
               borderColor: "primary.border",
             }}
           >
+            {type === "third" && (
+              <Typography
+                sx={{
+                  width: longWidthColumnNum === index + 1 && "50%",
+                  minWidth: longWidthColumnNum !== index + 1 && "150px",
+                  color: accentColumnNum === index + 1 && "primary.main",
+                  fontWeight: accentColumnNum === index + 1 && "bold",
+                }}
+              >
+                {index + 1}
+              </Typography>
+            )}
             {row.map((elem, idx) => (
               <Typography
                 key={idx}
@@ -139,47 +157,80 @@ export default function CustomTable({
               </Typography>
             ))}
             <Box sx={{ position: "relative" }}>
-              {checkInclude(row[1]) ? (
-                <Button
-                  key={index}
-                  onClick={() => {
-                    addData((prev) => [
-                      ...prev.slice(0, index),
-                      ...prev.slice(index + 1),
-                    ]);
-                  }}
-                  sx={{
-                    borderRadius: "15px",
-                    color: "white",
-                    backgroundColor: "error.main",
-                    position: "absolute",
-                    // right: "0px"
-                    left: type === "first" ? "80px" : "-60px",
-                    bottom: "-15px",
-                    paddingY: "3px",
-                  }}
-                >
-                  제거
-                </Button>
+              {type === "first" || type === "second" ? (
+                checkInclude(row[1]) ? (
+                  <Button
+                    key={index}
+                    onClick={() => {
+                      addData((prev) => [
+                        ...prev.slice(0, index),
+                        ...prev.slice(index + 1),
+                      ]);
+                    }}
+                    sx={{
+                      borderRadius: "15px",
+                      color: "white",
+                      backgroundColor: "error.main",
+                      // position: "absolute",
+                      // right: "0px"
+                      left: type === "first" ? "80px" : "-60px",
+
+                      paddingY: "3px",
+                    }}
+                  >
+                    제거
+                  </Button>
+                ) : (
+                  <Button
+                    key={index}
+                    onClick={() => {
+                      addData((prev) => [...prev, row]);
+                    }}
+                    sx={{
+                      borderRadius: "15px",
+                      color: "white",
+                      backgroundColor: "primary.main",
+
+                      // right: "0px"
+                      left: type === "first" ? "80px" : "-60px",
+
+                      paddingY: "3px",
+                    }}
+                  >
+                    추가
+                  </Button>
+                )
               ) : (
-                <Button
-                  key={index}
-                  onClick={() => {
-                    addData((prev) => [...prev, row]);
-                  }}
-                  sx={{
-                    borderRadius: "15px",
-                    color: "white",
-                    backgroundColor: "primary.main",
-                    position: "absolute",
-                    // right: "0px"
-                    left: type === "first" ? "80px" : "-60px",
-                    bottom: "-15px",
-                    paddingY: "3px",
-                  }}
-                >
-                  추가
-                </Button>
+                type === "third" && (
+                  <Box sx={{ display: "flex", flexDirection: "column" }}>
+                    <KeyboardArrowUpIcon
+                      onClick={() => {
+                        if (0 >= index) return;
+                        const temp = data[index];
+                        console.log(temp);
+                        addData((prev) => [
+                          ...prev.slice(0, index - 1),
+                          temp,
+                          prev[index - 1],
+                          ...prev.slice(index + 1),
+                        ]);
+                      }}
+                    />
+                    <KeyboardArrowDownIcon
+                      onClick={() => {
+                        if (data.length - 1 <= index) return;
+                        const temp = data[index];
+                        console.log(temp);
+                        addData((prev) => [
+                          ...prev.slice(0, index),
+                          prev[index + 1],
+                          temp,
+                          ...prev.slice(index + 2),
+                        ]);
+                      }}
+                    />
+                  </Box>
+                )
               )}
             </Box>
           </Box>
