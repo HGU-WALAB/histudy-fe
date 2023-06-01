@@ -33,18 +33,6 @@ export default function StudentListTable({
     alert("저장되었습니다!");
   };
 
-  // const handleEdit = (index, groupId) => {
-  //   const newGroupEdit = [...edit];
-  //   newGroupEdit[groupId] = !newGroupEdit[groupId];
-  //   setEdit(newGroupEdit);
-
-  //   console.log(index);
-  //   const newEdit = [...studentEdit];
-
-  //   newEdit[index] = !newEdit[index];
-  //   setStudentEdit(newEdit);
-  // };
-
   return (
     <>
       <Box
@@ -164,25 +152,13 @@ export default function StudentListTable({
                       marginRight: "2rem",
                     }}
                   >
-                    {row.subjects.map((subject) => (
-                      <Typography>{subject.name},</Typography>
+                    {row.subjects.map((subject, index) => (
+                      <Typography>
+                        {index > 0 && ", "}
+                        {subject.name}
+                      </Typography>
                     ))}
                   </Box>
-
-                  {/* <Typography
-                    key={index}
-                    sx={{
-                      marginLeft: "1.5rem",
-                      width: longWidthColumnNum === index + 1 && "50%",
-                      minWidth: longWidthColumnNum !== index + 1 && "100px",
-                      color: accentColumnNum === index + 1 && "primary.main",
-                      fontWeight: accentColumnNum === index + 1 && "bold",
-                    }}
-                  >
-                    {row.subjects.map((subject) => (
-                      <>{subject.name},</>
-                    ))}
-                  </Typography> */}
                 </Box>
 
                 <Box
@@ -198,8 +174,8 @@ export default function StudentListTable({
                       color: "text.secondary",
                       display: "flex",
                       flexGrow: 1,
-                      alignItems: "center", // Align items vertically
-                      justifyContent: "space-between", // Distribute items evenly
+                      alignItems: "center",
+                      justifyContent: "space-between",
                     }}
                   >
                     <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -330,25 +306,13 @@ export default function StudentListTable({
                       marginRight: "2rem",
                     }}
                   >
-                    {row.subjects.map((subject) => (
-                      <Typography>{subject.name},</Typography>
+                    {row.subjects.map((subject, index) => (
+                      <Typography>
+                        {index > 0 && ", "}
+                        {subject.name},
+                      </Typography>
                     ))}
                   </Box>
-
-                  {/* <Typography
-                  key={index}
-                  sx={{
-                    marginLeft: "1.5rem",
-                    width: longWidthColumnNum === index + 1 && "50%",
-                    minWidth: longWidthColumnNum !== index + 1 && "100px",
-                    color: accentColumnNum === index + 1 && "primary.main",
-                    fontWeight: accentColumnNum === index + 1 && "bold",
-                  }}
-                >
-                  {row.subjects.map((subject) => (
-                    <>{subject.name},</>
-                  ))}
-                </Typography> */}
                 </Box>
 
                 <Box
@@ -364,8 +328,8 @@ export default function StudentListTable({
                       color: "text.secondary",
                       display: "flex",
                       flexGrow: 1,
-                      alignItems: "center", // Align items vertically
-                      justifyContent: "space-between", // Distribute items evenly
+                      alignItems: "center",
+                      justifyContent: "space-between",
                     }}
                   >
                     <Box
@@ -374,16 +338,7 @@ export default function StudentListTable({
                         flexGrow: 1,
                         alignItems: "center",
                       }}
-                    >
-                      {/* <Chip
-                        label="보고서 열람"
-                        sx={{
-                          backgroundColor: "primary.light",
-                          color: "primary.main",
-                        }}
-                        onClick={handleClick}
-                      /> */}
-                    </Box>
+                    ></Box>
                     <Box sx={{ display: "flex", py: "10px" }}>
                       <Chip
                         sx={{

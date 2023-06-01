@@ -137,22 +137,7 @@ export default function ReportTable({
               >
                 {row.title}
               </Box>
-              {/* <Box
-                sx={{
-                  color: "text.secondary",
-                  display: "flex",
-                  flexGrow: 1,
-                  width: "50px",
-                  textOverflow: "ellipsis",
-                  overflowX: "auto",
-                  whiteSpace: "nowrap",
 
-                  py: "20px",
-                  borderColor: "primary.border",
-                }}
-              >
-                {row.writer}
-              </Box> */}
               <Box
                 sx={{
                   color: "text.secondary",

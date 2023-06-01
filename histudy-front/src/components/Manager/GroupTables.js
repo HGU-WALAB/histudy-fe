@@ -104,7 +104,7 @@ export default function GroupTables({
                 flexGrow: 4,
               }}
             >
-              {row.members.map((student, s_index) => (
+              {row.members.map((student, index) => (
                 <>
                   {!studentEdit[student.id] ? (
                     <>
@@ -140,6 +140,7 @@ export default function GroupTables({
                             borderColor: "primary.border",
                           }}
                         >
+                          {index > 0 && ", "}
                           <Typography>{student.name},</Typography>
                           <Typography>{student.number}</Typography>
                         </Box>
@@ -157,8 +158,11 @@ export default function GroupTables({
                             borderColor: "primary.border",
                           }}
                         >
-                          {student.subjects.map((sub) => (
-                            <Typography>{sub.name},</Typography>
+                          {student.subjects.map((sub, index) => (
+                            <Typography>
+                              {index > 0 && ", "}
+                              {sub.name}
+                            </Typography>
                           ))}
                         </Box>
                         <Box
@@ -176,8 +180,9 @@ export default function GroupTables({
                             whiteSpace: "nowrap",
                           }}
                         >
-                          {student.friends.map((friend) => (
+                          {student.friends.map((friend, index) => (
                             <>
+                              {index > 0 && ", "}
                               <Typography>{friend.name},</Typography>
                               <Typography>{friend.number}</Typography>
                             </>
@@ -265,7 +270,10 @@ export default function GroupTables({
                           }}
                         >
                           {student.subjects.map((sub) => (
-                            <Typography>{sub.name},</Typography>
+                            <Typography>
+                              {index > 0 && ", "}
+                              {sub.name}
+                            </Typography>
                           ))}
                         </Box>
                         <Box

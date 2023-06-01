@@ -83,17 +83,7 @@ export default function ReportDetail() {
             padding: "40px 20px",
           }}
         >
-          {/* <Box sx={{ display: "flex", mb: "3rem" }}>
-          <IconButton onClick={() => moveToBefore()}>
-            <ArrowBackIcon />
-          </IconButton>
-        </Box> */}
           <>
-            {/* <Box sx={{ display: "flex", mb: "3rem" }}>
-            <YearSelectButton />
-            <SemesterSelectButton />
-          </Box> */}
-
             <Box
               sx={{
                 mb: "1rem",
@@ -102,7 +92,7 @@ export default function ReportDetail() {
               <Box
                 sx={{
                   display: "flex",
-                  // justifyContent: "spaceㅁㄱ",
+
                   width: "100%",
                   height: "40px",
                   mb: "1rem",
