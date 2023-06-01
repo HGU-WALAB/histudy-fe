@@ -1,4 +1,6 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
+import LongButton from "./LongButton";
+import RoundButton from "./RoundButton";
 
 const GroupRanking = [
   {
@@ -41,10 +43,12 @@ const GroupRanking = [
 //type에 따라 버튼 다르게 생기게
 
 export default function CustomTable({
+  sidebarValues = [],
   type,
   accentColumnNum,
   longWidthColumnNum,
   data,
+  addData,
 }) {
   const TableHead = {
     rank: [
@@ -62,6 +66,16 @@ export default function CustomTable({
 
   const COLUMN_NUM = TableHead[type].length;
   const ROW_NUM = data.length;
+  console.log("data", data);
+  const pkList = [
+    ...sidebarValues.map((row, index) => {
+      return row[1];
+    }),
+  ];
+
+  const checkInclude = (pk) => {
+    return pkList.includes(pk);
+  };
 
   return (
     <>
@@ -98,47 +112,22 @@ export default function CustomTable({
               {headElement}
             </Typography>
           ))}
-
-          {/* <Box
-          sx={{
-            width: "120px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        > */}
-
-          {/* <Typography sx={{ width: "60px" }}>{TableHead[type][1]}</Typography>
-        </Box>
-        <Box
-          sx={{
-            width: "500px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <Typography sx={{ width: "100px" }}>{TableHead[type][2]}</Typography>
-          <Typography sx={{ width: "200px" }}>{TableHead[type][3]}</Typography>
-          <Typography sx={{ width: "200px" }}>하루 평균 스터디 시간</Typography>
-        </Box> */}
         </Box>
         {data.map((row, index) => (
           <Box
             key={index}
             sx={{
+              alignItems: "center",
               mx: "60px",
               display: "flex",
-              // justifyContent: "space-between",
-              //   mt: "20px",
               borderTop: index !== 0 && 1,
               py: "20px",
               borderColor: "primary.border",
             }}
           >
-            {row.map((elem, index) => (
+            {row.map((elem, idx) => (
               <Typography
-                key={index}
+                key={idx}
                 sx={{
                   width: longWidthColumnNum === index + 1 && "50%",
                   minWidth: longWidthColumnNum !== index + 1 && "150px",
@@ -149,6 +138,50 @@ export default function CustomTable({
                 {elem}
               </Typography>
             ))}
+            <Box sx={{ position: "relative" }}>
+              {checkInclude(row[1]) ? (
+                <Button
+                  key={index}
+                  onClick={() => {
+                    addData((prev) => [
+                      ...prev.slice(0, index),
+                      ...prev.slice(index + 1),
+                    ]);
+                  }}
+                  sx={{
+                    borderRadius: "15px",
+                    color: "white",
+                    backgroundColor: "error.main",
+                    position: "absolute",
+                    // right: "0px"
+                    left: type === "first" ? "80px" : "-60px",
+                    bottom: "-15px",
+                    paddingY: "3px",
+                  }}
+                >
+                  제거
+                </Button>
+              ) : (
+                <Button
+                  key={index}
+                  onClick={() => {
+                    addData((prev) => [...prev, row]);
+                  }}
+                  sx={{
+                    borderRadius: "15px",
+                    color: "white",
+                    backgroundColor: "primary.main",
+                    position: "absolute",
+                    // right: "0px"
+                    left: type === "first" ? "80px" : "-60px",
+                    bottom: "-15px",
+                    paddingY: "3px",
+                  }}
+                >
+                  추가
+                </Button>
+              )}
+            </Box>
           </Box>
         ))}
       </Box>

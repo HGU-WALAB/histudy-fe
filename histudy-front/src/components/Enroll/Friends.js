@@ -4,11 +4,12 @@ import { useEffect, useState } from "react";
 import { autoUser } from "../../apis/users";
 import SearchIcon from "@mui/icons-material/Search";
 
-export default function Friends({ friends, setFriends }) {
+export default function Friends({ sideFriends, setSideFriends }) {
+  const [friends, setFriends] = useState([]);
   const friendConverter = (allFriends) => {
     const result = [];
     allFriends.map((elem) => {
-      result.push([elem.name, elem.sid, elem.email]);
+      result.push([elem.name, elem.sid, elem.email, elem.id]);
     });
     return result;
   };
@@ -16,10 +17,6 @@ export default function Friends({ friends, setFriends }) {
   const [friendInput, setFriendInput] = useState("");
   const handleChange = (event) => {
     if (event.target.id === "friend") setFriendInput(event.target.value);
-    // else {
-    //   // courseInput onChange
-    //   setCourseInput(event.target.value);
-    // }
   };
 
   useEffect(() => {
@@ -48,6 +45,8 @@ export default function Friends({ friends, setFriends }) {
         placeholder="친구 이름 검색"
       />
       <CustomTable
+        sidebarValues={sideFriends}
+        addData={setSideFriends}
         data={friends}
         accentColumnNum={-1}
         longWidthColumnNum={-1}

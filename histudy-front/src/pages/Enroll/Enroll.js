@@ -16,12 +16,13 @@ import { autoCourses, getCourses, teamCourses } from "../../apis/course";
 import { autoUser } from "../../apis/users";
 import Friends from "../../components/Enroll/Friends";
 import Courses from "../../components/Enroll/Courses";
+import { studyEnroll } from "../../apis/form";
 
 export default function Enroll() {
-  const [studies, setStudies] = useState([
-    { name: "알고리즘 분석", professor: "이원형 교수님" },
-    { name: "데이타 베이스", professor: "홍참길 교수님" },
-  ]);
+  // const [friendsIds, setFriendsIds] = useState([]);
+  // const [courseIds, setCourseIds] = useState([]);
+
+  // const [studies, setStudies] = useState([]);
 
   const firstData = [
     ["오인혁", "21800446", "8156217@naver.com"],
@@ -44,21 +45,38 @@ export default function Enroll() {
   ];
   const [page, setPage] = useState(1);
 
-  const [friends, setFriends] = useState([]);
+  const [sideFriends, setSideFriends] = useState([]);
 
   const handleClick = (event) => {
     const ID = event.target.id;
     console.log(ID);
     if (ID === "다음") setPage((prev) => prev + 1);
     else if (ID === "이전") setPage((prev) => prev - 1);
-    else if (ID === "제출") alert("제출되었습니다.");
+    else if (ID === "제출") {
+      const data = {
+        friendIds: sideFriends.map((elem) => elem[1]),
+        courseIds: sideCourses.map((elem) => elem[3]),
+      };
+      console.log(data);
+      studyEnroll(data);
+    }
+  };
+  const [sideCourses, setSideCourses] = useState([]);
+
+  const rankConverter = (sideCourses) => {
+    // let i = 1;
+    const result = [];
+    sideCourses.map((elem) => {
+      result.push([elem[0], elem[1], elem[2]]);
+    });
+    return result;
   };
 
   return (
     <Box sx={{ display: "flex", py: "50px", px: "300px" }}>
       <Box sx={{ position: "fixed", left: "30px", top: "50px" }}>
         <ProgressBar page={page} />
-        <GrayBorderBox studies={studies} friends={friends} />
+        <GrayBorderBox courses={sideCourses} friends={sideFriends} />
       </Box>
       <Box sx={{ width: "100%", ml: "50px" }}>
         <Typography variant="h4" sx={{ textAlign: "center" }}>
@@ -70,7 +88,10 @@ export default function Enroll() {
             <Typography sx={{ textAlign: "center", height: "50px" }}>
               스터디를 함께하고 싶은 친구를 등록하세요!
             </Typography>
-            <Friends friends={friends} setFriends={setFriends} />
+            <Friends
+              sideFriends={sideFriends}
+              setSideFriends={setSideFriends}
+            />
             <Typography
               sx={{ color: "primary.main", textAlign: "center", mt: 4 }}
             >
@@ -93,7 +114,10 @@ export default function Enroll() {
               스터디를 하고 싶은 희망 과목들을 담아주세요!
             </Typography>
 
-            <Courses />
+            <Courses
+              sideCourses={sideCourses}
+              setSideCourses={setSideCourses}
+            />
             <Box sx={{ display: "flex", justifyContent: "center" }}>
               <Box
                 sx={{
@@ -126,7 +150,7 @@ export default function Enroll() {
             </Typography>
 
             <CustomTable
-              data={thirdData}
+              data={rankConverter(sideCourses)}
               accentColumnNum={1}
               longWidthColumnNum={2}
               type="third"
@@ -146,6 +170,7 @@ export default function Enroll() {
                   bgColor="primary.border"
                   fontColor="primary.main"
                 />
+
                 <LongButton
                   name="제출"
                   onClick={handleClick}

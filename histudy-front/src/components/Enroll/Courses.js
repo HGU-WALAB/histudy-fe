@@ -4,12 +4,11 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useEffect, useState } from "react";
 import { autoCourses } from "../../apis/course";
 
-export default function Courses() {
+export default function Courses({ sideCourses, setSideCourses }) {
+  const [courses, setCourses] = useState([]);
   const [allCourses, setAllCourses] = useState([]);
 
   const [courseInput, setCourseInput] = useState("");
-
-  const [courses, setCourses] = useState([]);
 
   const courseConverter = (allCourses) => {
     const result = [];
@@ -18,7 +17,7 @@ export default function Courses() {
       course.name.includes(courseInput)
     );
     newArr.map((elem) => {
-      result.push([elem.name, elem.code, elem.prof]);
+      result.push([elem.name, elem.code, elem.prof, elem.id]);
       // console.log([elem.name, elem.code, elem.prof]);
     });
 
@@ -62,6 +61,8 @@ export default function Courses() {
       />
 
       <CustomTable
+        sidebarValues={sideCourses}
+        addData={setSideCourses}
         data={courses}
         accentColumnNum={-1}
         longWidthColumnNum={1}
