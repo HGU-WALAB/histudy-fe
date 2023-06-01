@@ -13,47 +13,14 @@ import LongButton from "../../components/LongButton";
 import GrayBorderBox from "../../components/GrayBorderBox";
 import ProgressBar from "../../components/ProgressBar";
 import { autoCourses, getCourses, teamCourses } from "../../apis/course";
+import { autoUser } from "../../apis/users";
+import Friends from "../../components/Enroll/Friends";
+import Courses from "../../components/Enroll/Courses";
 
 export default function Enroll() {
-  const [allCourses, setAllCourses] = useState([]);
-  // const []
-
-  const [courses, setCourses] = useState([]);
-
-  const courseConverter = (allCourses) => {
-    const result = [];
-
-    const newArr = allCourses.filter((course) =>
-      course.name.includes(courseInput)
-    );
-    newArr.map((elem) => {
-      result.push([elem.name, elem.code, elem.prof]);
-      // console.log([elem.name, elem.code, elem.prof]);
-    });
-
-    return result;
-  };
-
-  const [courseInput, setCourseInput] = useState("");
-  // useEffect(() => {
-  //   // setCourses(courseConverter(allCourses));
-  //   // console.log(courseConverter(allCourses));
-  // }, []);
-
   const [studies, setStudies] = useState([
     { name: "알고리즘 분석", professor: "이원형 교수님" },
     { name: "데이타 베이스", professor: "홍참길 교수님" },
-  ]);
-
-  const [friends, setFriends] = useState([
-    {
-      name: "오인혁",
-      id: "21800446",
-    },
-    {
-      name: "한시온",
-      id: "21800888",
-    },
   ]);
 
   const firstData = [
@@ -77,31 +44,7 @@ export default function Enroll() {
   ];
   const [page, setPage] = useState(1);
 
-  const [friendInput, setFriendInput] = useState("");
-  const handleChange = (event) => {
-    if (event.target.id === "friend") setFriendInput(event.target.value);
-    else {
-      // courseInput onChange
-      setCourseInput(event.target.value);
-    }
-  };
-
-  //  courseInput의 변화 감지
-  useEffect(() => {
-    setCourses(courseConverter(allCourses));
-  }, [courseInput]);
-
-  // useEffect(() => {
-  //   autoCourses().then((res) => {
-  //     setAllCourses([...res.courses.map((course) => course.name)]);
-  //   });
-  // }, [friendInput]);
-
-  useEffect(() => {
-    autoCourses().then((res) => {
-      setAllCourses(res.courses);
-    });
-  }, []);
+  const [friends, setFriends] = useState([]);
 
   const handleClick = (event) => {
     const ID = event.target.id;
@@ -127,29 +70,7 @@ export default function Enroll() {
             <Typography sx={{ textAlign: "center", height: "50px" }}>
               스터디를 함께하고 싶은 친구를 등록하세요!
             </Typography>
-
-            <TextField
-              id="friend"
-              type="search"
-              label="Search"
-              value={friendInput}
-              onChange={handleChange}
-              sx={{ width: "100%", borderRadius: "30px", mb: 4 }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchIcon />
-                  </InputAdornment>
-                ),
-              }}
-              placeholder="친구 이름 검색"
-            />
-            <CustomTable
-              data={firstData}
-              accentColumnNum={-1}
-              longWidthColumnNum={-1}
-              type="first"
-            />
+            <Friends friends={friends} setFriends={setFriends} />
             <Typography
               sx={{ color: "primary.main", textAlign: "center", mt: 4 }}
             >
@@ -172,35 +93,7 @@ export default function Enroll() {
               스터디를 하고 싶은 희망 과목들을 담아주세요!
             </Typography>
 
-            <TextField
-              id="study"
-              type="search"
-              label="Search"
-              value={courseInput}
-              onChange={handleChange}
-              sx={{ width: "100%", borderRadius: "30px", mb: 4 }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchIcon />
-                  </InputAdornment>
-                ),
-              }}
-              placeholder="과목명 검색"
-            />
-            {/* <Autocomplete
-              disablePortal
-              id="combo-box-demo"
-              options={allCourses}
-              sx={{ width: 300 }}
-              renderInput={(params) => <TextField {...params} label="Movie" />}
-            /> */}
-            <CustomTable
-              data={courses}
-              accentColumnNum={-1}
-              longWidthColumnNum={1}
-              type="second"
-            />
+            <Courses />
             <Box sx={{ display: "flex", justifyContent: "center" }}>
               <Box
                 sx={{
