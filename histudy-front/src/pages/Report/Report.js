@@ -28,7 +28,7 @@ export default function Report() {
       >
         <Box sx={{ visibility: "hidden" }}>
           <LongButton
-            onClick=""
+            // onClick=""
             name="보고서 작성"
             bgColor="primary.main"
             fontColor="white"

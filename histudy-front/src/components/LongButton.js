@@ -7,8 +7,8 @@ export default function LongButton({ onClick, name, bgColor, fontColor }) {
       onClick={onClick}
       sx={{
         fontSize: "17px",
-        py: "5px",
-        px: 7,
+        py: "3px",
+        px: 6,
         mt: 2,
         backgroundColor: bgColor,
         color: fontColor,

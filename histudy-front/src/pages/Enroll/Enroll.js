@@ -1,11 +1,12 @@
 import { Button, InputAdornment, TextField, Typography } from "@mui/material";
 import { border, Box } from "@mui/system";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import CustomTable from "../../components/CustomTable";
 import LongButton from "../../components/LongButton";
 import GrayBorderBox from "../../components/GrayBorderBox";
 import ProgressBar from "../../components/ProgressBar";
+import { autoCourses, getCourses } from "../../apis/course";
 
 export default function Enroll() {
   const [studies, setStudies] = useState([
@@ -48,6 +49,12 @@ export default function Enroll() {
   const handleChange = (event) => {
     setFriendInput(event.target.value);
   };
+
+  useEffect(() => {
+    autoCourses(friendInput).then((res) => {
+      console.log(res);
+    });
+  }, [friendInput]);
 
   const handleClick = (event) => {
     const ID = event.target.id;

@@ -2,10 +2,12 @@ import { Box, Button, Paper, Switch, ToggleButton } from "@mui/material";
 import { Link, useMatch } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import GoogleButton from "../auth/GoogleButton";
-import { darkModeState } from "../store/atom";
+import { darkModeState, isLoginState } from "../store/atom";
 import DarkModeToggle from "./DarkModeToggle";
 import HeaderButton from "./HeaderButton";
 import LoginButton from "./LoginButton";
+import ExportCSV from "./scv/ExportCSV";
+import { useRef } from "react";
 
 export default function Header() {
   const homeMatch = useMatch("/");
@@ -16,6 +18,15 @@ export default function Header() {
   const managerMatch = useMatch("/manageClass");
   console.log(rankMatch);
 
+  const [isLogin, setIsLogin] = useRecoilState(isLoginState);
+
+  const handleLogOut = () => {
+    alert("로그아웃 되었습니다.");
+    setIsLogin(false);
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+  };
+
   return (
     <Box
       sx={{
@@ -23,7 +34,7 @@ export default function Header() {
         backgroundColor: "",
         display: "flex",
         justifyContent: "space-between",
-        paddingX: "50px",
+        paddingX: "20px",
         paddingY: "15px",
       }}
     >
@@ -32,7 +43,7 @@ export default function Header() {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          width: "650px",
+          width: "520px",
         }}
       >
         <HeaderButton
@@ -52,11 +63,14 @@ export default function Header() {
         />
         <HeaderButton link="/manageClass" name="MANAGER" match={managerMatch} />
       </Box>
+
       <Box>
-        <GoogleButton />
-      </Box>
-      <Box>
-        <Button sx={{ color: "text.header" }}>Log out</Button>
+        {isLogin && (
+          <Button sx={{ color: "text.header" }} onClick={handleLogOut}>
+            Log out
+          </Button>
+        )}
+        
         <Button>My Account</Button>
         <DarkModeToggle />
       </Box>
