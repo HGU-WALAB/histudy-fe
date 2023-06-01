@@ -32,7 +32,7 @@ export default function Group() {
       </Typography>
       <Typography>스터디 그룹이 아직 배정되지 않았어요😅</Typography>
 
-      <GrayBorderBox studies={studies} friends={friends} />
+      <GrayBorderBox courses={studies} friends={friends} />
       <LongButton
         name="다시 제출하기"
         bgColor="primary.main"

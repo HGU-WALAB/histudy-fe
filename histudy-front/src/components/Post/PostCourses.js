@@ -5,8 +5,8 @@ import { teamCourses } from "../../apis/course";
 export default function PostCourses({ setValue, getValues }) {
   useEffect(() => {
     // teamCourses().then((res) => console.log(res));
-    console.log(teamCourses());
-    // setTeamMemberCourses(teamCourses());
+    // console.log(teamCourses());
+    teamCourses().then((res) => setTeamMemberCourses(res.courses));
   }, []);
 
   const [teamMemberCourses, setTeamMemberCourses] = useState([]);
@@ -34,14 +34,14 @@ export default function PostCourses({ setValue, getValues }) {
           key={index}
           control={
             <Checkbox
-              value={teamMemberCourse.code}
+              value={teamMemberCourse.id}
               onChange={handleCheckboxChange}
             />
           }
           label={teamMemberCourse.name}
         />
       ))}
-      <FormControlLabel
+      {/* <FormControlLabel
         control={<Checkbox value="1" onChange={handleCheckboxChange} />}
         label="알고리즘 분석"
       />
@@ -54,7 +54,7 @@ export default function PostCourses({ setValue, getValues }) {
           <Checkbox value="데이터 분석" onChange={handleCheckboxChange} />
         }
         label="데이터 분석"
-      />
+      /> */}
     </FormGroup>
   );
 }
