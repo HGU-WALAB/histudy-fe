@@ -63,18 +63,6 @@ export default function CreateGroupTable({
                 flexGrow: 1,
               }}
             >
-              {/* <Typography
-                key={index}
-                sx={{
-                  marginLeft: "1.5rem",
-                  width: longWidthColumnNum === index + 1 && "50%",
-                  minWidth: longWidthColumnNum !== index + 1 && "150px",
-                  color: accentColumnNum === index + 1 && "primary.main",
-                  fontWeight: accentColumnNum === index + 1 && "bold",
-                }}
-              >
-                {row.name}
-              </Typography> */}
               <Box
                 sx={{
                   color: "text.secondary",
@@ -91,18 +79,7 @@ export default function CreateGroupTable({
               >
                 {row.name}
               </Box>
-              {/* <Typography
-                key={index}
-                sx={{
-                  marginLeft: "1.5rem",
-                  width: longWidthColumnNum === index + 1 && "50%",
-                  minWidth: longWidthColumnNum !== index + 1 && "150px",
-                  color: accentColumnNum === index + 1 && "primary.main",
-                  fontWeight: accentColumnNum === index + 1 && "bold",
-                }}
-              >
-                {row.number}
-              </Typography> */}
+
               <Box
                 sx={{
                   color: "text.secondary",
@@ -133,24 +110,13 @@ export default function CreateGroupTable({
                 }}
               >
                 {row.subjects.map((subject, index) => (
-                  <Typography>{subject.name},</Typography>
+                  <Typography>
+                    {index > 0 && ", "}
+                    {subject.name}
+                  </Typography>
                 ))}
               </Box>
-              {/* <Typography
-                key={index}
-                sx={{
-                  marginLeft: "1.5rem",
-                  width: longWidthColumnNum === index + 1 && "50%",
-                  minWidth: longWidthColumnNum !== index + 1 && "150px",
-                  color: accentColumnNum === index + 1 && "primary.main",
-                  fontWeight: accentColumnNum === index + 1 && "bold",
-                  overflowX: "auto",
-                }}
-              >
-                {row.subjects.map((subject, index) => (
-                  <Typography>{subject.name}</Typography>
-                ))}
-              </Typography> */}
+
               <Box
                 sx={{
                   color: "text.secondary",
@@ -168,28 +134,12 @@ export default function CreateGroupTable({
               >
                 {row.friends.map((friend, index) => (
                   <>
+                    {index > 0 && ", "}
                     <Typography>{friend.name},</Typography>
                     <Typography>{friend.number}</Typography>
                   </>
                 ))}
               </Box>
-              {/* <Typography
-                key={index}
-                sx={{
-                  marginLeft: "1.5rem",
-                  width: longWidthColumnNum === index + 1 && "50%",
-                  minWidth: longWidthColumnNum !== index + 1 && "150px",
-                  color: accentColumnNum === index + 1 && "primary.main",
-                  fontWeight: accentColumnNum === index + 1 && "bold",
-                }}
-              >
-                {row.friends.map((friend, index) => (
-                  <>
-                    <Typography>{friend.name},</Typography>
-                    <Typography>{friend.number}</Typography>
-                  </>
-                ))}
-              </Typography> */}
             </Box>
             <IconButton
               onClick={() => handleDeleteRow(index)}

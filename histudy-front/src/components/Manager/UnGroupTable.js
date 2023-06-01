@@ -96,18 +96,6 @@ export default function ManagerTable({
                   >
                     미배정
                   </Box>
-                  {/* <Typography
-                    key={index}
-                    sx={{
-                      marginLeft: "1.5rem",
-                      width: longWidthColumnNum === index + 1 && "50%",
-                      minWidth: longWidthColumnNum !== index + 1 && "150px",
-                      color: accentColumnNum === index + 1 && "primary.main",
-                      fontWeight: accentColumnNum === index + 1 && "bold",
-                    }}
-                  >
-                    미배정
-                  </Typography> */}
 
                   <Box
                     sx={{
@@ -124,27 +112,7 @@ export default function ManagerTable({
                   >
                     {row.name},{row.number}
                   </Box>
-                  {/* <Typography
-                    key={index}
-                    sx={{
-                      marginLeft: "1.5rem",
-                      width: longWidthColumnNum === index + 1 && "50%",
-                      minWidth: longWidthColumnNum !== index + 1 && "150px",
-                      color: accentColumnNum === index + 1 && "primary.main",
-                      fontWeight: accentColumnNum === index + 1 && "bold",
-                    }}
-                  >
-                    {row.name},{row.number}
-                  </Typography> */}
-                  {/* <Typography
-                    key={index}
-                    sx={{
-                      width: longWidthColumnNum === index + 1 && "50%",
-                      minWidth: longWidthColumnNum !== index + 1 && "150px",
-                      color: accentColumnNum === index + 1 && "primary.main",
-                      fontWeight: accentColumnNum === index + 1 && "bold",
-                    }}
-                  > */}
+
                   <Box
                     sx={{
                       color: "text.secondary",
@@ -159,21 +127,14 @@ export default function ManagerTable({
                       borderColor: "primary.border",
                     }}
                   >
-                    {row.subjects.map((sub) => (
-                      <Typography>{sub.name}</Typography>
+                    {row.subjects.map((sub, index) => (
+                      <Typography>
+                        {index > 0 && ", "}
+                        {sub.name}
+                      </Typography>
                     ))}
                   </Box>
-                  {/* </Typography> */}
-                  {/* <Typography
-                    key={index}
-                    sx={{
-                      marginLeft: "1.5rem",
-                      width: longWidthColumnNum === index + 1 && "50%",
-                      minWidth: longWidthColumnNum !== index + 1 && "150px",
-                      color: accentColumnNum === index + 1 && "primary.main",
-                      fontWeight: accentColumnNum  === index + 1 && "bold",
-                    }}
-                  > */}
+
                   <Box
                     sx={{
                       color: "text.secondary",
@@ -188,8 +149,9 @@ export default function ManagerTable({
                       borderColor: "primary.border",
                     }}
                   >
-                    {row.friends.map((friend) => (
+                    {row.friends.map((friend, index) => (
                       <>
+                        {index > 0 && ", "}
                         <Typography>{friend.name},</Typography>
                         <Typography>{friend.number}</Typography>
                       </>
@@ -242,18 +204,6 @@ export default function ManagerTable({
                   >
                     <GroupSelector></GroupSelector>
                   </Box>
-                  {/* <Typography
-                    key={index}
-                    sx={{
-                      marginLeft: "1.5rem",
-                      width: longWidthColumnNum === index + 1 && "50%",
-                      minWidth: longWidthColumnNum !== index + 1 && "150px",
-                      color: accentColumnNum === index + 1 && "primary.main",
-                      fontWeight: accentColumnNum === index + 1 && "bold",
-                    }}
-                  >
-                    미배정
-                  </Typography> */}
 
                   <Box
                     sx={{
@@ -280,27 +230,6 @@ export default function ManagerTable({
                     ></TextField>
                   </Box>
 
-                  {/* <Typography
-                    key={index}
-                    sx={{
-                      marginLeft: "1.5rem",
-                      width: longWidthColumnNum === index + 1 && "50%",
-                      minWidth: longWidthColumnNum !== index + 1 && "150px",
-                      color: accentColumnNum === index + 1 && "primary.main",
-                      fontWeight: accentColumnNum === index + 1 && "bold",
-                    }}
-                  >
-                    {row.name},{row.number}
-                  </Typography> */}
-                  {/* <Typography
-                    key={index}
-                    sx={{
-                      width: longWidthColumnNum === index + 1 && "50%",
-                      minWidth: longWidthColumnNum !== index + 1 && "150px",
-                      color: accentColumnNum === index + 1 && "primary.main",
-                      fontWeight: accentColumnNum === index + 1 && "bold",
-                    }}
-                  > */}
                   <Box
                     sx={{
                       color: "text.secondary",
@@ -315,21 +244,14 @@ export default function ManagerTable({
                       borderColor: "primary.border",
                     }}
                   >
-                    {row.subjects.map((sub) => (
-                      <Typography>{sub.name}</Typography>
+                    {row.subjects.map((sub, index) => (
+                      <Typography>
+                        {index > 0 && ", "}
+                        {sub.name}
+                      </Typography>
                     ))}
                   </Box>
-                  {/* </Typography> */}
-                  {/* <Typography
-                    key={index}
-                    sx={{
-                      marginLeft: "1.5rem",
-                      width: longWidthColumnNum === index + 1 && "50%",
-                      minWidth: longWidthColumnNum !== index + 1 && "150px",
-                      color: accentColumnNum === index + 1 && "primary.main",
-                      fontWeight: accentColumnNum  === index + 1 && "bold",
-                    }}
-                  > */}
+
                   <Box
                     sx={{
                       color: "text.secondary",
@@ -344,15 +266,14 @@ export default function ManagerTable({
                       borderColor: "primary.border",
                     }}
                   >
-                    {row.friends.map((friend) => (
+                    {row.friends.map((friend, index) => (
                       <>
+                        {index > 0 && ", "}
                         <Typography>{friend.name},</Typography>
                         <Typography>{friend.number}</Typography>
                       </>
                     ))}
                   </Box>
-                  {/* </Typography> */}
-                  {/* ))} */}
                 </Box>
 
                 <Box sx={{ display: "flex", py: "10px", marginRight: "50px" }}>

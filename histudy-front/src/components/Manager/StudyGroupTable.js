@@ -97,18 +97,6 @@ export default function StudyGroupTable({
               >
                 {row.group}
               </Box>
-              {/* <Typography
-                key={index}
-                sx={{
-                  marginLeft: "1.5rem",
-                  width: longWidthColumnNum === index + 1 && "50%",
-                  minWidth: longWidthColumnNum !== index + 1 && "100px",
-                  color: accentColumnNum === index + 1 && "primary.main",
-                  fontWeight: accentColumnNum === index + 1 && "bold",
-                }}
-              >
-                
-              </Typography> */}
 
               <Box
                 sx={{
@@ -124,24 +112,14 @@ export default function StudyGroupTable({
                   borderColor: "primary.border",
                 }}
               >
-                {row.members.map((member) => (
-                  <Typography>{member.name},</Typography>
+                {row.members.map((member, index) => (
+                  <Typography>
+                    {index > 0 && ","}
+                    {member.name}
+                  </Typography>
                 ))}
               </Box>
-              {/* <Typography
-                key={index}
-                sx={{
-                  marginLeft: "1.5rem",
-                  width: longWidthColumnNum === index + 1 && "50%",
-                  minWidth: longWidthColumnNum !== index + 1 && "150px",
-                  color: accentColumnNum === index + 1 && "primary.main",
-                  fontWeight: accentColumnNum === index + 1 && "bold",
-                }}
-              >
-                {row.members.map((member) => (
-                  <>{member.name},</>
-                ))}
-              </Typography> */}
+
               <Box
                 sx={{
                   color: "text.secondary",
@@ -158,18 +136,6 @@ export default function StudyGroupTable({
               >
                 {row.reports}
               </Box>
-              {/* <Typography
-                key={index}
-                sx={{
-                  marginLeft: "1.5rem",
-                  width: longWidthColumnNum === index + 1 && "50%",
-                  minWidth: longWidthColumnNum !== index + 1 && "100px",
-                  color: accentColumnNum === index + 1 && "primary.main",
-                  fontWeight: accentColumnNum === index + 1 && "bold",
-                }}
-              >
-                
-              </Typography> */}
 
               <Box
                 sx={{
