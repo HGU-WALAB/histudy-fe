@@ -98,7 +98,7 @@ export default function Enroll() {
         <GrayBorderBox courses={sideCourses} friends={sideFriends} />
       </Box>
       <Box sx={{ width: "100%", ml: "50px" }}>
-        <Typography variant="h4" sx={{ textAlign: "center" }}>
+        <Typography variant="h4" sx={{ textAlign: "center", mb: "10px" }}>
           Histudy 신청하기
         </Typography>
 

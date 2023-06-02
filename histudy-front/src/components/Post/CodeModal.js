@@ -1,5 +1,6 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 const LayoutVariant = {
   hidden: {
@@ -13,7 +14,32 @@ const LayoutVariant = {
   },
 };
 
+function updateCurrentTime() {
+  const currentDate = new Date();
+  const year = currentDate.getFullYear();
+  const month = String(currentDate.getMonth() + 1).padStart(2, "0");
+  const day = String(currentDate.getDate()).padStart(2, "0");
+  const hours = String(currentDate.getHours()).padStart(2, "0");
+  const minutes = String(currentDate.getMinutes()).padStart(2, "0");
+  const seconds = String(currentDate.getSeconds()).padStart(2, "0");
+
+  const formattedTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+
+  // 결과를 화면에 표시하는 코드
+  return formattedTime;
+}
+
+// 매 초마다 updateCurrentTime 함수를 실행
+setInterval(updateCurrentTime, 1000);
+
 export function CodeModal({ onClick }) {
+  const [nowTime, setNowTime] = useState(updateCurrentTime());
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setNowTime(updateCurrentTime());
+    }, 1000);
+    return () => clearInterval(interval);
+  });
   return (
     <Box
       sx={{
@@ -52,9 +78,22 @@ export function CodeModal({ onClick }) {
             width: "50%",
             height: "500px",
             backgroundColor: "white",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
           }}
-          alt="bigPoster"
-        />
+        >
+          <Box
+            component={motion.img}
+            src={"/img/logo_histudy.png"}
+            width={300}
+            alt="histudy_logo"
+          />
+          <Typography variant="h4" sx={{ mt: 10 }}>
+            {nowTime}
+          </Typography>
+        </Box>
       </Box>
     </Box>
   );
