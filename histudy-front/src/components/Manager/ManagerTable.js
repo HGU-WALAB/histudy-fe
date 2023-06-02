@@ -1,5 +1,6 @@
 import { Cancel } from "@mui/icons-material";
 import { Box, IconButton, Typography } from "@mui/material";
+import { deleteCourse } from "../../apis/manager";
 
 export default function ManagerTable({
   type,
@@ -12,7 +13,11 @@ export default function ManagerTable({
     group: ["그룹", "멤버", "희망과목", "함께하고 싶은 친구"],
   };
 
-  const handleDeleteRow = (index) => {};
+  const handleDeleteRow = (index) => {
+    console.log("index");
+    console.log(index);
+    console.log(deleteCourse());
+  };
   return (
     <>
       <Box
@@ -20,7 +25,6 @@ export default function ManagerTable({
           py: "5px",
           border: 1,
           backgroundColor: "primary.default",
-
           borderColor: "primary.main",
           borderRadius: "45px",
         }}
@@ -39,6 +43,7 @@ export default function ManagerTable({
             <Typography
               key={index}
               sx={{
+                flexGrow: 1,
                 width: longWidthColumnNum === index + 1 && "50%",
                 minWidth: longWidthColumnNum !== index + 1 && "150px",
               }}
@@ -65,23 +70,57 @@ export default function ManagerTable({
                 color: "text.secondary",
               }}
             >
-              {row.map((elem, index) => (
-                <Typography
-                  key={index}
-                  sx={{
-                    marginLeft: "1.5rem",
-                    width: longWidthColumnNum === index + 1 && "50%",
-                    minWidth: longWidthColumnNum !== index + 1 && "150px",
-                    color: accentColumnNum === index + 1 && "primary.main",
-                    fontWeight: accentColumnNum === index + 1 && "bold",
-                  }}
-                >
-                  {elem}
-                </Typography>
-              ))}
+              <Box
+                sx={{
+                  color: "text.secondary",
+                  display: "flex",
+                  flexGrow: 1,
+                  width: "50px",
+                  textOverflow: "ellipsis",
+                  overflowX: "auto",
+                  whiteSpace: "nowrap",
+                  marginLeft: "2rem",
+                  py: "20px",
+                  borderColor: "primary.border",
+                }}
+              >
+                {row.name}
+              </Box>
+              <Box
+                sx={{
+                  color: "text.secondary",
+                  display: "flex",
+                  flexGrow: 1,
+                  width: "50px",
+                  textOverflow: "ellipsis",
+                  overflowX: "auto",
+                  whiteSpace: "nowrap",
+                  marginLeft: "2rem",
+                  py: "20px",
+                  borderColor: "primary.border",
+                }}
+              >
+                {row.code}
+              </Box>
+              <Box
+                sx={{
+                  color: "text.secondary",
+                  display: "flex",
+                  flexGrow: 1,
+                  width: "50px",
+                  textOverflow: "ellipsis",
+                  overflowX: "auto",
+                  whiteSpace: "nowrap",
+                  marginLeft: "2rem",
+                  py: "20px",
+                  borderColor: "primary.border",
+                }}
+              >
+                {row.prof}
+              </Box>
             </Box>
             <IconButton
-              onClick={() => handleDeleteRow(index)}
+              onClick={() => handleDeleteRow(row.id)}
               sx={{
                 marginRight: "1rem",
               }}

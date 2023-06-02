@@ -152,7 +152,7 @@ export default function StudentListTable({
                       marginRight: "2rem",
                     }}
                   >
-                    {row.subjects.map((subject, index) => (
+                    {row.courses.map((subject, index) => (
                       <Typography>
                         {index > 0 && ", "}
                         {subject.name}
@@ -179,14 +179,14 @@ export default function StudentListTable({
                     }}
                   >
                     <Box sx={{ display: "flex", alignItems: "center" }}>
-                      <Chip
+                      {/* <Chip
                         label="보고서 열람"
                         sx={{
                           backgroundColor: "primary.light",
                           color: "primary.main",
                         }}
                         onClick={handleClick}
-                      />
+                      /> */}
                       <Box sx={{ display: "flex" }}>
                         <IconButton onClick={() => handleEdit(index)}>
                           <Edit />
@@ -306,7 +306,7 @@ export default function StudentListTable({
                       marginRight: "2rem",
                     }}
                   >
-                    {row.subjects.map((subject, index) => (
+                    {row.courses.map((subject, index) => (
                       <Typography>
                         {index > 0 && ", "}
                         {subject.name},

@@ -25,9 +25,10 @@ export default function StudyGroupTable({
   const handleDeleteRow = (index) => {};
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const handleClick = (id) => {
     console.info("You clicked the Chip.");
-    navigate("/manageReport");
+    console.log("id: " + id);
+    navigate("/manageReport", { state: id });
   };
 
   return (
@@ -170,7 +171,7 @@ export default function StudyGroupTable({
                     backgroundColor: "primary.light",
                     color: "primary.main",
                   }}
-                  onClick={handleClick}
+                  onClick={() => handleClick(row.group)}
                 />
               </Box>
             </Box>

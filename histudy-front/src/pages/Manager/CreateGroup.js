@@ -1,6 +1,6 @@
 import { Button, InputAdornment, TextField, Typography } from "@mui/material";
 import { border, Box } from "@mui/system";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import CustomTable from "../../components/CustomTable";
 import LongButton from "../../components/LongButton";
@@ -16,8 +16,15 @@ import UnGroupTable from "../../components/Manager/UnGroupTable";
 import GroupTables from "../../components/Manager/GroupTables";
 import CreateGroupTable from "../../components/Manager/CreateGroupTable";
 import MatchStartButton from "../../components/Manager/MatchStartButton";
+import { readApplicants } from "../../apis/manager";
 
 export default function CreateGroup() {
+  // const [allData, setAllData] = useState();
+  // useEffect(() => {
+  //   readApplicants().then((data) => {
+  //     setAllData(data);
+  //   });
+  // }, []);
   const allData = [
     {
       id: 1,
@@ -108,13 +115,14 @@ export default function CreateGroup() {
             <Typography variant="h7">신청자 리스트</Typography>
             <MatchStartButton sx={{ ml: "auto" }} />
           </Box>
-
-          <CreateGroupTable
-            data={allData}
-            accentColumnNum={-1}
-            longWidthColumnNum={-1}
-            type="all"
-          />
+          {allData && (
+            <CreateGroupTable
+              data={allData}
+              accentColumnNum={-1}
+              longWidthColumnNum={-1}
+              type="all"
+            />
+          )}
         </>
       </Box>
     </Box>
