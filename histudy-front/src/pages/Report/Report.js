@@ -2,6 +2,8 @@ import { Box, Typography } from "@mui/material";
 import CustomTable from "../../components/CustomTable";
 import LongButton from "../../components/LongButton";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getmyTeamReport } from "../../apis/report";
 
 const data = [
   ["1", "보고서 제목 1", "글쓴이 1", "2023-05-13"],
@@ -13,6 +15,24 @@ const data = [
 ];
 
 export default function Report() {
+  // const [data, setData] = useState([]);
+
+  const [reports, setReports] = useState([]);
+  const [convertedReports, setConvertedReports] = useState([]);
+
+  useEffect(() => {
+    getmyTeamReport().then((res) => {
+      setReports(res.reports);
+      setConvertedReports(
+        res.reports.map((report) => [
+          report.title,
+          report.totalMinutes,
+          report.regData,
+        ])
+      );
+    });
+  }, []);
+
   return (
     <Box
       sx={{ display: " flex", flexDirection: "column", alignItems: "center" }}
@@ -45,7 +65,7 @@ export default function Report() {
       </Box>
 
       <CustomTable
-        data={data}
+        data={reports}
         accentColumnNum={1}
         longWidthColumnNum={-1}
         type="report"

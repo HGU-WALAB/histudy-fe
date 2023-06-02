@@ -62,7 +62,7 @@ export default function CustomTable({
     first: ["이름", "학번", "이메일"],
     second: ["과목명", "과목코드", "담당 교수"],
     third: ["우선순위", "과목명", "과목코드", "담당 교수"],
-    report: ["No.", "제목", "글쓴이", "날짜"],
+    report: ["No.", "제목", "스터디 시간(분)", "작성일"],
   };
 
   const COLUMN_NUM = TableHead[type].length;
@@ -131,7 +131,7 @@ export default function CustomTable({
               borderColor: "primary.border",
             }}
           >
-            {type === "third" && (
+            {(type === "third" || type === "report") && (
               <Typography
                 sx={{
                   width: longWidthColumnNum === index + 1 && "50%",

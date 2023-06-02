@@ -60,8 +60,8 @@ export default function Post({ children }) {
       content: formData.content,
       totalMinutes: Number(formData.totalMinutes),
       participants: formData.participants,
-      images: ["111"],
-      courses: [0],
+      images: formData.images,
+      courses: formData.courses,
     };
     console.log(newReport);
     postReport(newReport);
