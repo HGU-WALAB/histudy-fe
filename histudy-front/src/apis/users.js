@@ -37,3 +37,18 @@ export const autoUser = async (search) => {
   );
   return response.data;
 };
+
+export const getMyTeamUsers = async () => {
+  const TOKEN = localStorage.getItem("accessToken");
+
+  const response = await axios.get(
+    `${process.env.REACT_APP_BACK_BASE_URL}/api/team/users`,
+    {
+      headers: {
+        Authorization: `Bearer ${TOKEN}}`,
+      },
+      withCredentials: true,
+    }
+  );
+  return response.data;
+};

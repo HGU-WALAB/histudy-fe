@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import GrayBorderBox from "../../components/GrayBorderBox";
 import LongButton from "../../components/LongButton";
 import { getMyGroup } from "../../apis/study";
+import { Link } from "react-router-dom";
 
 export default function Group() {
   const [courses, setCourses] = useState([
@@ -52,11 +53,20 @@ export default function Group() {
       <Typography>스터디 그룹이 아직 배정되지 않았어요😅</Typography>
 
       <GrayBorderBox courses={convertedCourses} friends={convertedFriends} />
-      <LongButton
-        name="다시 제출하기"
-        bgColor="primary.main"
-        fontColor="white"
-      />
+
+      <Link
+        to="/enroll"
+        state={{
+          courses,
+          friends,
+        }}
+      >
+        <LongButton
+          name="다시 제출하기"
+          bgColor="primary.main"
+          fontColor="white"
+        />
+      </Link>
     </Box>
   );
 }

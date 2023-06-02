@@ -19,3 +19,8 @@ export const userLoginInfo = atom({
   key: "userLoginInfo",
   default: null,
 });
+
+export const isCodeModalState = atom({
+  key: "codeModal",
+  default: false,
+});

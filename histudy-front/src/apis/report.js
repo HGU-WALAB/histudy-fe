@@ -16,7 +16,7 @@ export const postReport = async (data) => {
   return response.data;
 };
 
-export const getmyTeamReport = async () => {
+export const getMyTeamReport = async () => {
   const TOKEN = localStorage.getItem("accessToken");
 
   const response = await axios.get(

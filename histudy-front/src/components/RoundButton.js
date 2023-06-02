@@ -6,7 +6,6 @@ export default function RoundButton({ onClick, name, bgColor, fontColor }) {
       id={name}
       onClick={onClick}
       sx={{
-        width: "100px",
         fontSize: "14px",
         py: "3px",
         px: 3,

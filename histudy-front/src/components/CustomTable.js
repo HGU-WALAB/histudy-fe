@@ -65,6 +65,13 @@ export default function CustomTable({
     report: ["No.", "제목", "스터디 시간(분)", "작성일"],
   };
 
+  const idxConverter = (idx) => {
+    if (type === "third" || type === "report") {
+      return idx + 1;
+    }
+    return idx;
+  };
+
   const COLUMN_NUM = TableHead[type].length;
   const ROW_NUM = data.length;
   console.log("data", data);
@@ -96,9 +103,8 @@ export default function CustomTable({
             color: "text.secondary",
             display: "flex",
             py: "20px",
-            borderBottom: 1,
+            borderBottom: data.length !== 0 && 1,
             borderColor: "primary.border",
-
             px: "60px",
           }}
         >
@@ -113,11 +119,11 @@ export default function CustomTable({
               {headElement}
             </Typography>
           ))}
-          <Typography
+          {/* <Typography
             sx={{
               minWidth: "150px",
             }}
-          ></Typography>
+          ></Typography> */}
         </Box>
         {data.map((row, index) => (
           <Box
@@ -143,19 +149,27 @@ export default function CustomTable({
                 {index + 1}
               </Typography>
             )}
-            {row.map((elem, idx) => (
-              <Typography
-                key={idx}
-                sx={{
-                  width: longWidthColumnNum === index + 1 && "50%",
-                  minWidth: longWidthColumnNum !== index + 1 && "150px",
-                  color: accentColumnNum === index + 1 && "primary.main",
-                  fontWeight: accentColumnNum === index + 1 && "bold",
-                }}
-              >
-                {elem}
-              </Typography>
-            ))}
+            {row.map(
+              (elem, idx) =>
+                idx < 3 && (
+                  <Typography
+                    key={idx}
+                    sx={{
+                      width:
+                        longWidthColumnNum === idxConverter(idx + 1) && "50%",
+                      minWidth:
+                        longWidthColumnNum !== idxConverter(idx + 1) && "150px",
+                      color:
+                        accentColumnNum === idxConverter(idx + 1) &&
+                        "primary.main",
+                      fontWeight:
+                        accentColumnNum === idxConverter(idx + 1) && "bold",
+                    }}
+                  >
+                    {elem}
+                  </Typography>
+                )
+            )}
             <Box sx={{ position: "relative" }}>
               {type === "first" || type === "second" ? (
                 checkInclude(row[1]) ? (
@@ -174,7 +188,6 @@ export default function CustomTable({
                       // position: "absolute",
                       // right: "0px"
                       left: type === "first" ? "80px" : "-60px",
-
                       paddingY: "3px",
                     }}
                   >

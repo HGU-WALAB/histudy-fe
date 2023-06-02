@@ -3,7 +3,7 @@ import CustomTable from "../../components/CustomTable";
 import LongButton from "../../components/LongButton";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getmyTeamReport } from "../../apis/report";
+import { getMyTeamReport, getmyTeamReport } from "../../apis/report";
 
 const data = [
   ["1", "보고서 제목 1", "글쓴이 1", "2023-05-13"],
@@ -20,14 +20,25 @@ export default function Report() {
   const [reports, setReports] = useState([]);
   const [convertedReports, setConvertedReports] = useState([]);
 
+  const dateConverter = (regDate) => {
+    const date = new Date(regDate);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    const formattedDate = `${year}-${month}-${day}`;
+    return formattedDate;
+  };
+
   useEffect(() => {
-    getmyTeamReport().then((res) => {
+    getMyTeamReport().then((res) => {
       setReports(res.reports);
+
       setConvertedReports(
         res.reports.map((report) => [
           report.title,
           report.totalMinutes,
-          report.regData,
+          dateConverter(report.regDate),
+          // new Date(report.regDate).toLocaleDateString("en-US"),
         ])
       );
     });
@@ -35,26 +46,34 @@ export default function Report() {
 
   return (
     <Box
-      sx={{ display: " flex", flexDirection: "column", alignItems: "center" }}
+      sx={{
+        display: " flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
     >
       <Box
         sx={{
-          width: "700px",
+          width: "900px",
+
           alignItems: "end",
           my: "50px",
           display: "flex",
-          justifyContent: "space-between",
+          justifyContent: "center",
         }}
       >
-        <Box sx={{ visibility: "hidden" }}>
-          <LongButton
-            // onClick=""
-            name="보고서 작성"
-            bgColor="primary.main"
-            fontColor="white"
-          />
-        </Box>
         <Typography variant="h5">제출한 보고서 목록</Typography>
+      </Box>
+
+      <Box
+        sx={{
+          width: "900px",
+          display: "flex",
+          justifyContent: "end",
+
+          mb: "50px",
+        }}
+      >
         <Link to="/add">
           <LongButton
             name="보고서 작성"
@@ -63,13 +82,14 @@ export default function Report() {
           />
         </Link>
       </Box>
-
-      <CustomTable
-        data={reports}
-        accentColumnNum={1}
-        longWidthColumnNum={-1}
-        type="report"
-      />
+      <Box sx={{ width: "900px" }}>
+        <CustomTable
+          data={convertedReports}
+          accentColumnNum={1}
+          longWidthColumnNum={-1}
+          type="report"
+        />
+      </Box>
     </Box>
   );
 }

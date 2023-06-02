@@ -18,7 +18,6 @@ export default function Courses({ sideCourses, setSideCourses }) {
     );
     newArr.map((elem) => {
       result.push([elem.name, elem.code, elem.prof, elem.id]);
-      // console.log([elem.name, elem.code, elem.prof]);
     });
 
     return result;

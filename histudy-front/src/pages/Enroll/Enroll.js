@@ -17,8 +17,26 @@ import { autoUser } from "../../apis/users";
 import Friends from "../../components/Enroll/Friends";
 import Courses from "../../components/Enroll/Courses";
 import { studyEnroll } from "../../apis/study";
+import { useLocation } from "react-router-dom";
 
 export default function Enroll() {
+  const location = useLocation();
+  useEffect(() => {
+    if (location.state) {
+      setSideCourses(
+        location.state.courses.map((course) => [
+          course.name,
+          course.code,
+          course.prof,
+          course.id,
+        ])
+      );
+      setSideFriends(
+        location.state.friends.map((friend) => [friend.name, friend.sid])
+      );
+    }
+  }, []);
+
   // const [friendsIds, setFriendsIds] = useState([]);
   // const [courseIds, setCourseIds] = useState([]);
 
@@ -43,6 +61,7 @@ export default function Enroll() {
     ["1", "알고리듬분석", "ECE40008", "용환기"],
     ["2", "RF회로 설계", "ECE30011", "김영식"],
   ];
+
   const [page, setPage] = useState(1);
 
   const [sideFriends, setSideFriends] = useState([]);
@@ -57,7 +76,7 @@ export default function Enroll() {
         friendIds: sideFriends.map((elem) => elem[1]),
         courseIds: sideCourses.map((elem) => elem[3]),
       };
-      console.log(data);
+      console.log("제출", data);
       studyEnroll(data);
     }
   };
@@ -73,8 +92,8 @@ export default function Enroll() {
   };
 
   return (
-    <Box sx={{ display: "flex", py: "50px", px: "300px" }}>
-      <Box sx={{ position: "fixed", left: "30px", top: "50px" }}>
+    <Box sx={{ display: "flex", py: "80px", px: "300px" }}>
+      <Box sx={{ position: "absolute", left: "30px", top: "30px" }}>
         <ProgressBar page={page} />
         <GrayBorderBox courses={sideCourses} friends={sideFriends} />
       </Box>
