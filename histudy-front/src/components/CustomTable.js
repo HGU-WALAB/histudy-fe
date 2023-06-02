@@ -93,7 +93,6 @@ export default function CustomTable({
           // border: 1,
           backgroundColor: "primary.lighter",
           //   border: 2,
-
           borderColor: "primary.border",
           borderRadius: "45px",
         }}
