@@ -1,6 +1,6 @@
 import { Button, InputAdornment, TextField, Typography } from "@mui/material";
 import { border, Box } from "@mui/system";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import CustomTable from "../../components/CustomTable";
 import LongButton from "../../components/LongButton";
@@ -14,8 +14,15 @@ import ManagerTable from "../../components/Manager/ManagerTable";
 import GroupTable from "../../components/Manager/GroupTable";
 import UnGroupTable from "../../components/Manager/UnGroupTable";
 import GroupTables from "../../components/Manager/GroupTables";
+import { readAllGroups } from "../../apis/manager";
 
 export default function ManageGroup() {
+  // const [groupData, setGroupData] = useState();
+
+  // useEffect(() => {
+  //   readAllGroups().then((data) => setGroupData(data));
+  //   console.log(groupData);
+  // }, []);
   const groupData = [
     {
       group: 1,
@@ -31,7 +38,7 @@ export default function ManageGroup() {
               number: "21800394",
             },
           ],
-          subjects: [
+          courses: [
             {
               id: 1,
               name: "Software Engineering",
@@ -47,7 +54,7 @@ export default function ManageGroup() {
           name: "배주영",
           number: "21800111",
           friends: [],
-          subjects: [
+          courses: [
             {
               id: 1,
               name: "Software Engineering",
@@ -63,7 +70,7 @@ export default function ManageGroup() {
           name: "한시온",
           number: "21800112",
           friends: [],
-          subjects: [
+          courses: [
             {
               id: 1,
               name: "Software Engineering",
@@ -79,7 +86,7 @@ export default function ManageGroup() {
           name: "이인혁",
           number: "21800239",
           friends: [],
-          subjects: [
+          courses: [
             {
               id: 1,
               name: "Software Engineering",
@@ -103,7 +110,7 @@ export default function ManageGroup() {
           name: "장유진",
           number: "21800459",
           friends: [],
-          subjects: [
+          courses: [
             {
               id: 1,
               name: "Software Engineering",
@@ -119,7 +126,7 @@ export default function ManageGroup() {
           name: "최혜림",
           number: "21800333",
           friends: [],
-          subjects: [
+          courses: [
             {
               id: 1,
               name: "Software Engineering",
@@ -135,7 +142,7 @@ export default function ManageGroup() {
           name: "정석민",
           number: "21800123",
           friends: [],
-          subjects: [
+          courses: [
             {
               id: 1,
               name: "Software Engineering",
@@ -151,7 +158,7 @@ export default function ManageGroup() {
           name: "송다빈",
           number: "21800233",
           friends: [],
-          subjects: [
+          courses: [
             {
               id: 1,
               name: "Software Engineering",
@@ -181,7 +188,7 @@ export default function ManageGroup() {
           number: "21600493",
         },
       ],
-      subjects: [
+      courses: [
         {
           id: 1,
           name: "Software Engineering",
@@ -203,7 +210,7 @@ export default function ManageGroup() {
           number: "21800093",
         },
       ],
-      subjects: [
+      courses: [
         {
           id: 1,
           name: "Software Engineering",
@@ -233,12 +240,14 @@ export default function ManageGroup() {
             <Typography variant="h7">매칭된 그룹 목록</Typography>
           </Box>
 
-          <GroupTables
-            data={groupData}
-            accentColumnNum={-1}
-            longWidthColumnNum={-1}
-            type="group"
-          />
+          {groupData && (
+            <GroupTables
+              data={groupData}
+              accentColumnNum={-1}
+              longWidthColumnNum={-1}
+              type="group"
+            />
+          )}
           <Box sx={{ marginTop: "70px" }}>
             <Typography variant="h7">그룹 미배정 학생 목록</Typography>
           </Box>

@@ -158,7 +158,7 @@ export default function GroupTables({
                             borderColor: "primary.border",
                           }}
                         >
-                          {student.subjects.map((sub, index) => (
+                          {student.courses.map((sub, index) => (
                             <Typography>
                               {index > 0 && ", "}
                               {sub.name}
@@ -269,7 +269,7 @@ export default function GroupTables({
                             borderColor: "primary.border",
                           }}
                         >
-                          {student.subjects.map((sub) => (
+                          {student.courses.map((sub) => (
                             <Typography>
                               {index > 0 && ", "}
                               {sub.name}
