@@ -15,3 +15,18 @@ export const studyEnroll = async (data) => {
   );
   return response;
 };
+
+export const getMyGroup = async () => {
+  const TOKEN = localStorage.getItem("accessToken");
+
+  const response = await axios.get(
+    `${process.env.REACT_APP_BACK_BASE_URL}/api/users/me/forms`,
+    {
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+      },
+      withCredentials: true,
+    }
+  );
+  return response.data;
+};

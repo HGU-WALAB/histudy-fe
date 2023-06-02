@@ -16,7 +16,7 @@ import { autoCourses, getCourses, teamCourses } from "../../apis/course";
 import { autoUser } from "../../apis/users";
 import Friends from "../../components/Enroll/Friends";
 import Courses from "../../components/Enroll/Courses";
-import { studyEnroll } from "../../apis/form";
+import { studyEnroll } from "../../apis/study";
 
 export default function Enroll() {
   // const [friendsIds, setFriendsIds] = useState([]);
