@@ -21,7 +21,7 @@ export const teamCourses = async () => {
   const TOKEN = localStorage.getItem("accessToken");
 
   const response = await axios.get(
-    `${process.env.REACT_APP_BACK_BASE_URL}/api/course/team`,
+    `${process.env.REACT_APP_BACK_BASE_URL}/api/team/courses`,
     {
       headers: {
         Authorization: `Bearer ${TOKEN}`,

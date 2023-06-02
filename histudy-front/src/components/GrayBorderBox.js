@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 
-export default function GrayBorderBox({ friends, studies, children }) {
+export default function GrayBorderBox({ friends, courses, children }) {
   return (
     <Box
       sx={{
@@ -29,20 +29,20 @@ export default function GrayBorderBox({ friends, studies, children }) {
             variant="body1"
             sx={{ color: "primary.main", mb: 1 }}
           >
-            {friend.name}, {friend.id}
+            {friend[0]}, {friend[1]}
           </Typography>
         ))}
       <Typography variant="body1" sx={{ mb: 1, mt: 3 }}>
         스터디 희망 과목
       </Typography>
-      {studies.length !== 0 &&
-        studies.map((study, index) => (
+      {courses.length !== 0 &&
+        courses.map((course, index) => (
           <Typography
             key={index}
             variant="body1"
             sx={{ color: "primary.main", mb: 1 }}
           >
-            {study.name} , {study.professor}
+            {course[0]} , {course[1]}
           </Typography>
         ))}{" "}
       {children}

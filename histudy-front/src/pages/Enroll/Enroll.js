@@ -1,4 +1,10 @@
-import { Button, InputAdornment, TextField, Typography } from "@mui/material";
+import {
+  Autocomplete,
+  Button,
+  InputAdornment,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { border, Box } from "@mui/system";
 import { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
@@ -6,23 +12,35 @@ import CustomTable from "../../components/CustomTable";
 import LongButton from "../../components/LongButton";
 import GrayBorderBox from "../../components/GrayBorderBox";
 import ProgressBar from "../../components/ProgressBar";
-import { autoCourses, getCourses } from "../../apis/course";
+import { autoCourses, getCourses, teamCourses } from "../../apis/course";
+import { autoUser } from "../../apis/users";
+import Friends from "../../components/Enroll/Friends";
+import Courses from "../../components/Enroll/Courses";
+import { studyEnroll } from "../../apis/study";
+import { useLocation } from "react-router-dom";
 
 export default function Enroll() {
-  const [studies, setStudies] = useState([
-    { name: "알고리즘 분석", professor: "이원형 교수님" },
-    { name: "데이타 베이스", professor: "홍참길 교수님" },
-  ]);
-  const [friends, setFriends] = useState([
-    {
-      name: "오인혁",
-      id: "21800446",
-    },
-    {
-      name: "한시온",
-      id: "21800888",
-    },
-  ]);
+  const location = useLocation();
+  useEffect(() => {
+    if (location.state) {
+      setSideCourses(
+        location.state.courses.map((course) => [
+          course.name,
+          course.code,
+          course.prof,
+          course.id,
+        ])
+      );
+      setSideFriends(
+        location.state.friends.map((friend) => [friend.name, friend.sid])
+      );
+    }
+  }, []);
+
+  // const [friendsIds, setFriendsIds] = useState([]);
+  // const [courseIds, setCourseIds] = useState([]);
+
+  // const [studies, setStudies] = useState([]);
 
   const firstData = [
     ["오인혁", "21800446", "8156217@naver.com"],
@@ -43,35 +61,44 @@ export default function Enroll() {
     ["1", "알고리듬분석", "ECE40008", "용환기"],
     ["2", "RF회로 설계", "ECE30011", "김영식"],
   ];
+
   const [page, setPage] = useState(1);
 
-  const [friendInput, setFriendInput] = useState("");
-  const handleChange = (event) => {
-    setFriendInput(event.target.value);
-  };
-
-  useEffect(() => {
-    autoCourses(friendInput).then((res) => {
-      console.log(res);
-    });
-  }, [friendInput]);
+  const [sideFriends, setSideFriends] = useState([]);
 
   const handleClick = (event) => {
     const ID = event.target.id;
     console.log(ID);
     if (ID === "다음") setPage((prev) => prev + 1);
     else if (ID === "이전") setPage((prev) => prev - 1);
-    else if (ID === "제출") alert("제출되었습니다.");
+    else if (ID === "제출") {
+      const data = {
+        friendIds: sideFriends.map((elem) => elem[1]),
+        courseIds: sideCourses.map((elem) => elem[3]),
+      };
+      console.log("제출", data);
+      studyEnroll(data);
+    }
+  };
+  const [sideCourses, setSideCourses] = useState([]);
+
+  const rankConverter = (sideCourses) => {
+    // let i = 1;
+    const result = [];
+    sideCourses.map((elem) => {
+      result.push([elem[0], elem[1], elem[2]]);
+    });
+    return result;
   };
 
   return (
-    <Box sx={{ display: "flex", py: "50px", px: "300px" }}>
-      <Box sx={{ position: "fixed", left: "30px", top: "50px" }}>
+    <Box sx={{ display: "flex", py: "80px", px: "300px" }}>
+      <Box sx={{ position: "absolute", left: "30px", top: "30px" }}>
         <ProgressBar page={page} />
-        <GrayBorderBox studies={studies} friends={friends} />
+        <GrayBorderBox courses={sideCourses} friends={sideFriends} />
       </Box>
       <Box sx={{ width: "100%", ml: "50px" }}>
-        <Typography variant="h4" sx={{ textAlign: "center" }}>
+        <Typography variant="h4" sx={{ textAlign: "center", mb: "10px" }}>
           Histudy 신청하기
         </Typography>
 
@@ -80,28 +107,9 @@ export default function Enroll() {
             <Typography sx={{ textAlign: "center", height: "50px" }}>
               스터디를 함께하고 싶은 친구를 등록하세요!
             </Typography>
-
-            <TextField
-              id="search"
-              type="search"
-              label="Search"
-              value={friendInput}
-              onChange={handleChange}
-              sx={{ width: "100%", borderRadius: "30px", mb: 4 }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchIcon />
-                  </InputAdornment>
-                ),
-              }}
-              placeholder="친구 이름 검색"
-            />
-            <CustomTable
-              data={firstData}
-              accentColumnNum={-1}
-              longWidthColumnNum={-1}
-              type="first"
+            <Friends
+              sideFriends={sideFriends}
+              setSideFriends={setSideFriends}
             />
             <Typography
               sx={{ color: "primary.main", textAlign: "center", mt: 4 }}
@@ -125,27 +133,9 @@ export default function Enroll() {
               스터디를 하고 싶은 희망 과목들을 담아주세요!
             </Typography>
 
-            <TextField
-              id="search"
-              type="search"
-              label="Search"
-              value={friendInput}
-              onChange={handleChange}
-              sx={{ width: "100%", borderRadius: "30px", mb: 4 }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchIcon />
-                  </InputAdornment>
-                ),
-              }}
-              placeholder="과목명 검색"
-            />
-            <CustomTable
-              data={secondDate}
-              accentColumnNum={-1}
-              longWidthColumnNum={1}
-              type="second"
+            <Courses
+              sideCourses={sideCourses}
+              setSideCourses={setSideCourses}
             />
             <Box sx={{ display: "flex", justifyContent: "center" }}>
               <Box
@@ -179,7 +169,8 @@ export default function Enroll() {
             </Typography>
 
             <CustomTable
-              data={thirdData}
+              data={rankConverter(sideCourses)}
+              addData={setSideCourses}
               accentColumnNum={1}
               longWidthColumnNum={2}
               type="third"
@@ -199,6 +190,7 @@ export default function Enroll() {
                   bgColor="primary.border"
                   fontColor="primary.main"
                 />
+
                 <LongButton
                   name="제출"
                   onClick={handleClick}
