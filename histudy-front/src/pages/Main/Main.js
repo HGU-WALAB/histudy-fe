@@ -74,58 +74,62 @@ export default function Main() {
     >
       {!isLogin && <GoogleButton />}
       {isRegisterModal && (
-        <Box
-          sx={{
-            // border: 1,
-            // borderColor: "primary.light",
-            backgroundColor: "primary.lighter",
-            borderRadius: "20px",
-            width: "430px",
-            height: "450px",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: " center",
-          }}
-        >
-          <Typography sx={{ fontSize: "20px", color: "text.default" }}>
-            정보 입력하기
-          </Typography>
+        <Box sx={{ display: "absolute" }}>
+          <Box
+            sx={{
+              position: "absolute",
 
-          <TextField
-            className="login-textInput"
-            sx={{ mt: "40px", width: "300px", zIndex: 1300 }}
-            label="Name"
-            variant="outlined"
-            value={userLoginInfoState?.name}
-          />
-          <TextField
-            className="login-textInput"
-            sx={{ mt: "15px", width: "300px" }}
-            label="Student Number"
-            variant="outlined"
-            value={sid}
-            onChange={(e) => setSid(e.target.value)}
-          />
-          <TextField
-            // inputProps={{ }}
-            className="login-textInput"
-            sx={{ mt: "15px", width: "300px" }}
-            label="Email"
-            variant="outlined"
-            value={userLoginInfoState?.email}
-          />
-          <Button
-            variant="contained"
-            sx={{ mt: "40px", width: "100px" }}
-            onClick={handleClick}
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              // border: 1,
+              // borderColor: "primary.light",
+              backgroundColor: "primary.lighter",
+              borderRadius: "20px",
+              width: "430px",
+              height: "450px",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: " center",
+            }}
           >
-            가입완료
-          </Button>
+            <Typography sx={{ fontSize: "20px", color: "text.default" }}>
+              정보 입력하기
+            </Typography>
+
+            <TextField
+              className="login-textInput"
+              sx={{ mt: "40px", width: "300px", zIndex: 1300 }}
+              label="Name"
+              variant="outlined"
+              value={userLoginInfoState?.name}
+            />
+            <TextField
+              className="login-textInput"
+              sx={{ mt: "15px", width: "300px" }}
+              label="Student Number"
+              variant="outlined"
+              value={sid}
+              onChange={(e) => setSid(e.target.value)}
+            />
+            <TextField
+              className="login-textInput"
+              sx={{ mt: "15px", width: "300px" }}
+              label="Email"
+              variant="outlined"
+              value={userLoginInfoState?.email}
+            />
+            <Button
+              variant="contained"
+              sx={{ mt: "40px", width: "100px" }}
+              onClick={handleClick}
+            >
+              가입완료
+            </Button>
+          </Box>
         </Box>
       )}
-
-      <ImportCSV />
     </Box>
   );
 }

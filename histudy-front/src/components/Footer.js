@@ -33,7 +33,7 @@ export default function Footer() {
           </a>
         </Box>
 
-        <ExportCSV />
+        {/* <ExportCSV /> */}
       </Box>
     </Box>
   );

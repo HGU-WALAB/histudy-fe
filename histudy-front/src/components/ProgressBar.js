@@ -6,6 +6,7 @@ export default function ProgressBar({ page }) {
       sx={{
         //   border: 1,
         mt: "80px",
+        mb: "65px",
         minWidth: "300px",
         display: "flex",
         flexDirection: "column",

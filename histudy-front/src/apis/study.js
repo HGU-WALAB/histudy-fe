@@ -1,10 +1,10 @@
 import axios from "axios";
 
-export const postReport = async (data) => {
+export const studyEnroll = async (data) => {
   const TOKEN = localStorage.getItem("accessToken");
 
   const response = await axios.post(
-    `${process.env.REACT_APP_BACK_BASE_URL}/api/team/reports`,
+    `${process.env.REACT_APP_BACK_BASE_URL}/api/forms`,
     data,
     {
       headers: {
@@ -13,14 +13,14 @@ export const postReport = async (data) => {
       withCredentials: true,
     }
   );
-  return response.data;
+  return response;
 };
 
-export const getMyTeamReport = async () => {
+export const getMyGroup = async () => {
   const TOKEN = localStorage.getItem("accessToken");
 
   const response = await axios.get(
-    `${process.env.REACT_APP_BACK_BASE_URL}/api/team/reports`,
+    `${process.env.REACT_APP_BACK_BASE_URL}/api/users/me/forms`,
     {
       headers: {
         Authorization: `Bearer ${TOKEN}`,
