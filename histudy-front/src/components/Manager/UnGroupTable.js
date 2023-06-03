@@ -3,7 +3,7 @@ import { Box, Chip, IconButton, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import GroupSelector from "./GroupSelector";
 
-export default function ManagerTable({
+export default function UnGroupTable({
   type,
   accentColumnNum,
   longWidthColumnNum,
@@ -127,7 +127,7 @@ export default function ManagerTable({
                       borderColor: "primary.border",
                     }}
                   >
-                    {row.subjects.map((sub, index) => (
+                    {row.courses.map((sub, index) => (
                       <Typography>
                         {index > 0 && ", "}
                         {sub.name}
@@ -244,7 +244,7 @@ export default function ManagerTable({
                       borderColor: "primary.border",
                     }}
                   >
-                    {row.subjects.map((sub, index) => (
+                    {row.courses.map((sub, index) => (
                       <Typography>
                         {index > 0 && ", "}
                         {sub.name}
