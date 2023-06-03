@@ -43,7 +43,7 @@ export default function Header() {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          width: "520px",
+          width: "600px",
         }}
       >
         <HeaderButton
@@ -70,7 +70,7 @@ export default function Header() {
             Log out
           </Button>
         )}
-        
+
         <Button>My Account</Button>
         <DarkModeToggle />
       </Box>
