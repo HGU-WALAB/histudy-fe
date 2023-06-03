@@ -17,7 +17,7 @@ export default function ReportTable({
   const clickReport = (index) => {
     console.log(index);
 
-    navigate("/reportDetail", { state: { reportId: index } });
+    navigate("/reportDetail", { state: index });
   };
   const handleDeleteRow = (index) => {};
   return (
@@ -95,7 +95,7 @@ export default function ReportTable({
               borderColor: "primary.border",
             }}
             onClick={() => {
-              clickReport(index);
+              clickReport(row.id);
             }}
           >
             <Box
