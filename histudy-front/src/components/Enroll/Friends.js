@@ -3,6 +3,7 @@ import CustomTable from "../CustomTable";
 import { useEffect, useState } from "react";
 import { autoUser } from "../../apis/users";
 import SearchIcon from "@mui/icons-material/Search";
+import { TextFieldWrapper } from "./TextFieldWrapper";
 
 export default function Friends({ sideFriends, setSideFriends }) {
   const [friends, setFriends] = useState([]);
@@ -28,13 +29,16 @@ export default function Friends({ sideFriends, setSideFriends }) {
 
   return (
     <>
-      <TextField
+      <TextFieldWrapper
         id="friend"
         type="search"
-        label="Search"
         value={friendInput}
         onChange={handleChange}
-        sx={{ width: "100%", borderRadius: "30px", mb: 4 }}
+        sx={{
+          width: "100%",
+          borderRadius: "30px",
+          mb: 4,
+        }}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">

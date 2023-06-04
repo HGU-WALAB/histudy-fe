@@ -1,124 +1,127 @@
-import { Grid, Typography } from "@mui/material";
+import {
+  Avatar,
+  Chip,
+  Grid,
+  IconButton,
+  ImageList,
+  ImageListItem,
+  ImageListItemBar,
+  ListSubheader,
+  Typography,
+} from "@mui/material";
+import GroupsIcon from "@mui/icons-material/Groups";
 import { Box } from "@mui/system";
 import CustomTable from "../../components/CustomTable";
+import { InfoIcon } from "../../theme/overrides/CustomIcons";
+import { useEffect, useState } from "react";
+import { getAllTeamsForRank } from "../../apis/rank";
 
-const data = [
-  [1, "Group 1", "7장", "1027시간", "6시간"],
-  [2, "Group 1", "7장", "1027시간", "6시간"],
-  [3, "Group 1", "7장", "1027시간", "6시간"],
-  [4, "Group 1", "7장", "1027시간", "6시간"],
-  [5, "Group 1", "7장", "1027시간", "6시간"],
-  [6, "Group 1", "7장", "1027시간", "6시간"],
-];
-
-const GroupRanking = [
-  {
-    rank: 1,
-    group: "Group 1",
-    reporter: "7장",
-    studyTime: "1027시간",
-    studyTimePerADay: "6시간",
-  },
-  {
-    rank: 2,
-    group: "Group 1",
-    reporter: "7장",
-    studyTime: "1027시간",
-    studyTimePerADay: "6시간",
-  },
-  {
-    rank: 3,
-    group: "Group 1",
-    reporter: "7장",
-    studyTime: "1027시간",
-    studyTimePerADay: "6시간",
-  },
-  {
-    rank: 4,
-    group: "Group 1",
-    reporter: "7장",
-    studyTime: "1027시간",
-    studyTimePerADay: "6시간",
-  },
-  {
-    rank: 5,
-    group: "Group 1",
-    reporter: "7장",
-    studyTime: "1027시간",
-    studyTimePerADay: "6시간",
-  },
-];
-
-const Images = [
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-];
+import LooksOneIcon from "@mui/icons-material/LooksOne";
+import HoverBox from "../../components/Rank/HoverBox";
+import { AnimatePresence, motion } from "framer-motion";
+import { Image } from "@mui/icons-material";
 
 export default function Rank() {
+  const [teams, setTeams] = useState([]);
+
+  const [itemsHover, setItemsHover] = useState([]);
+
+  useEffect(() => {
+    getAllTeamsForRank().then((res) => {
+      setTeams(res.teams);
+      console.log(res.teams);
+      setItemsHover(new Array(res.teams.length).fill(false));
+    });
+  }, []);
+
   return (
     <Box
       sx={{
+        minHeight: "100vh",
         px: "150px",
         display: "flex",
         flexDirection: "column",
       }}
     >
-      <Box sx={{ display: "flex", justifyContent: "center", pt: "50px" }}>
-        <Typography variant="h4">스터디 랭킹</Typography>
-      </Box>
-      <Box sx={{ display: "flex", justifyContent: "end", py: "30px" }}>
-        <Typography sx={{ fontWeight: "bold" }}>스터디 시작 D+35</Typography>
+      <Box sx={{ display: "flex", justifyContent: "center", py: "100px" }}>
+        <Typography sx={{ fontSize: "30px", fontWeight: "300" }}>
+          스터디 그룹 랭킹
+        </Typography>
       </Box>
 
-      <CustomTable
-        data={data}
-        accentColumnNum={1}
-        longWidthColumnNum={2}
-        type="rank"
-      />
-
-      <Grid container spacing={2} sx={{ mt: "50px" }}>
-        {Images.map((image, index) => (
-          <Grid key={index} item xs={2}>
-            <Box
-              sx={{
-                backgroundColor: "#EFF0F1",
-                height: "200px",
-                borderRadius: "15px",
+      <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
+        <ImageList
+          component={motion.div}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          sx={{
+            width: "100%",
+          }}
+        >
+          {teams.map((item, index) => (
+            <div
+              style={{
+                position: "relative",
+                width: "300px",
+                // border: "1px solid black",
+                height: "300px",
               }}
+              onMouseOver={() =>
+                setItemsHover((prev) => [
+                  ...prev.slice(0, index),
+                  true,
+                  ...prev.slice(index + 1),
+                ])
+              }
+              onMouseOut={() =>
+                setItemsHover((prev) => [
+                  ...prev.slice(0, index),
+                  false,
+                  ...prev.slice(index + 1),
+                ])
+              }
             >
-              {image}
-            </Box>
-          </Grid>
-        ))}
+              <AnimatePresence>
+                {itemsHover[index] && (
+                  <HoverBox
+                    members={item.members}
+                    reports={item.reports}
+                    totalMinutes={item.totalMinutes}
+                  />
+                )}
+              </AnimatePresence>
+              <ImageListItem key={item.img} sx={{ position: "relative" }}>
+                {!itemsHover[index] && (
+                  <motion.img
+                    key={index}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    src={`${item.thumbnail}`}
+                    alt={item.title}
+                    loading="lazy"
+                  />
+                )}
+                <ImageListItemBar
+                  sx={{
+                    position: "absolute",
+                    top: !itemsHover[index] ? 250 : 30,
+                  }}
+                  title={` ${
+                    itemsHover[index] ? `Group ${item.id}` : `Rank ${index + 1}`
+                  }`}
+                  actionIcon={
+                    <IconButton
+                      sx={{ color: "rgba(255, 255, 255, 0.8)" }}
+                      aria-label={`info about ${item.title}`}
+                    >
+                      <GroupsIcon />
+                    </IconButton>
+                  }
+                />
+              </ImageListItem>
+            </div>
+          ))}
+        </ImageList>
       </Grid>
     </Box>
   );

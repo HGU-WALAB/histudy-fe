@@ -24,6 +24,7 @@ import { teamCourses } from "../../apis/course";
 import { CodeModal } from "../../components/Post/CodeModal";
 import { useRecoilState } from "recoil";
 import { isCodeModalState } from "../../store/atom";
+import { useNavigate } from "react-router-dom";
 
 export default function Post({ children }) {
   const [isCodeModal, setIsCodeModal] = useState(false);
@@ -52,11 +53,7 @@ export default function Post({ children }) {
 
   const [studyTime, setStudyTime] = useState(0);
 
-  // useEffect(() => {
-  //   teamCourses().then((res) => {
-  //     console.log("debug", res);
-  //   });
-  // }, []);
+  const navigate = useNavigate();
 
   const onValid = (formData) => {
     // 보고서 생성 api 연결
@@ -70,6 +67,9 @@ export default function Post({ children }) {
     };
     console.log(newReport);
     postReport(newReport);
+
+    alert("보고서 제출이 완료되었습니다.");
+    navigate("/");
   };
 
   return (
@@ -161,12 +161,14 @@ export default function Post({ children }) {
             />
           </Box>
         </PostBox>
-        <LongButton
-          onClick={handleSubmit(onValid)}
-          name="제출"
-          bgColor="primary.main"
-          fontColor="white"
-        />
+        <Box sx={{ width: "150px", mx: "auto" }}>
+          <LongButton
+            onClick={handleSubmit(onValid)}
+            name="제출"
+            bgColor="primary.main"
+            fontColor="white"
+          />
+        </Box>
       </FormControl>
     </>
   );
