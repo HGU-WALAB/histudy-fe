@@ -22,7 +22,7 @@ export default function GoogleButton() {
   const setUserLoginInfo = useSetRecoilState(userLoginInfo);
   const setIsLogin = useRecoilValue(isLoginState);
   // const { loginWithCredential } = useAuthContext();
-  const googleLoginRef = useRef(null);
+
   const onSuccess = async (credentialResponse) => {
     const decodedToken = jwtDecode(credentialResponse.credential);
 
@@ -52,26 +52,13 @@ export default function GoogleButton() {
     console.log(error);
   };
 
-  const handleClick = () => {
-    console.log(googleLoginRef.current);
-    console.log(document.getElementById("google-login"));
-    // document.getElementById("google-login").click();
-    // if (googleLoginRef.current) {
-    //   googleLoginRef.current.click();
-    //   console.log("!");
-    // }
-  };
-
   return (
-    <GoogleOAuthProvider clientId={process.env.REACT_APP_CLIENT_ID}>
+    <>
       <GoogleLogin
         onSuccess={(credentialResponse) => onSuccess(credentialResponse)}
         onFailure={onFailure}
         useOneTap
-        render={(renderProps) => {
-          googleLoginRef.current = renderProps;
-        }}
       />
-    </GoogleOAuthProvider>
+    </>
   );
 }

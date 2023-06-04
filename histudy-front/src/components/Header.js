@@ -34,8 +34,8 @@ export default function Header() {
         backgroundColor: "",
         display: "flex",
         justifyContent: "space-between",
-        paddingX: "20px",
-        paddingY: "15px",
+        paddingX: "40px",
+        paddingY: "20px",
       }}
     >
       <Box
@@ -43,7 +43,7 @@ export default function Header() {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          width: "600px",
+          width: "620px",
         }}
       >
         <HeaderButton

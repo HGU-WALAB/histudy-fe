@@ -3,6 +3,8 @@ import CustomTable from "../CustomTable";
 import SearchIcon from "@mui/icons-material/Search";
 import { useEffect, useState } from "react";
 import { autoCourses } from "../../apis/course";
+import styled from "styled-components";
+import { TextFieldWrapper } from "./TextFieldWrapper";
 
 export default function Courses({ sideCourses, setSideCourses }) {
   const [courses, setCourses] = useState([]);
@@ -42,10 +44,9 @@ export default function Courses({ sideCourses, setSideCourses }) {
 
   return (
     <>
-      <TextField
+      <TextFieldWrapper
         id="study"
         type="search"
-        label="Search"
         value={courseInput}
         onChange={handleChange}
         sx={{ width: "100%", borderRadius: "30px", mb: 4 }}

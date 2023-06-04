@@ -1,6 +1,16 @@
-import { Box, Typography } from "@mui/material";
+import { Box, IconButton, Typography } from "@mui/material";
+import { useMatch } from "react-router-dom";
+import DeleteDataIcon from "./Enroll/DeleteDataIcon";
+import { AnimatePresence, motion } from "framer-motion";
+export default function GrayBorderBox({
+  setSideFriends,
+  setSideCourses,
+  friends,
+  courses,
+  children,
+}) {
+  const enrollMatch = useMatch("/enroll");
 
-export default function GrayBorderBox({ friends, courses, children }) {
   return (
     <Box
       sx={{
@@ -22,29 +32,65 @@ export default function GrayBorderBox({ friends, courses, children }) {
       <Typography variant="body1" sx={{ mb: 1 }}>
         함께하고 싶은 친구
       </Typography>
-      {friends.length !== 0 &&
-        friends.map((friend, index) => (
-          <Typography
-            key={index}
-            variant="body1"
-            sx={{ color: "primary.main", mb: 1 }}
-          >
-            {friend[0]}, {friend[1]}
-          </Typography>
-        ))}
+      <AnimatePresence>
+        {friends.length !== 0 &&
+          friends.map((friend, index) => (
+            <Box
+              component={motion.div}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              sx={{
+                mb: 1,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <Typography
+                key={index}
+                variant="body1"
+                sx={{ color: "primary.main" }}
+              >
+                {friend[0]}, {friend[1]}
+              </Typography>
+              {enrollMatch && (
+                <DeleteDataIcon setData={setSideFriends} compData={friend[1]} />
+              )}
+            </Box>
+          ))}
+      </AnimatePresence>
       <Typography variant="body1" sx={{ mb: 1, mt: 3 }}>
         스터디 희망 과목
       </Typography>
-      {courses.length !== 0 &&
-        courses.map((course, index) => (
-          <Typography
-            key={index}
-            variant="body1"
-            sx={{ color: "primary.main", mb: 1 }}
-          >
-            {course[0]} , {course[1]}
-          </Typography>
-        ))}{" "}
+      <AnimatePresence>
+        {courses.length !== 0 &&
+          courses.map((course, index) => (
+            <Box
+              component={motion.div}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              sx={{
+                mb: 1,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <Typography
+                key={index}
+                variant="body1"
+                sx={{ color: "primary.main" }}
+              >
+                {course[0]} , {course[1]}
+              </Typography>
+              {enrollMatch && (
+                <DeleteDataIcon setData={setSideCourses} compData={course[1]} />
+              )}
+            </Box>
+          ))}
+      </AnimatePresence>
       {children}
     </Box>
   );
