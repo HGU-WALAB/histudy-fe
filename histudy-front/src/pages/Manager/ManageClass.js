@@ -27,7 +27,7 @@ export default function ManageClass() {
     autoCourses().then((info) => {
       setClassData(info.courses);
     });
-  }, [classData]);
+  }, []);
 
   return (
     <Box sx={{ display: "flex", py: "50px", px: "300px" }}>

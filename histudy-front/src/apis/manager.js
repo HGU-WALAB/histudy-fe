@@ -89,3 +89,18 @@ export const deleteCourse = async () => {
   );
   return response.data;
 };
+
+export const readReportDetail = async (reportId) => {
+  const TOKEN = localStorage.getItem("accessToken");
+
+  const response = await axios.get(
+    `${process.env.REACT_APP_BACK_BASE_URL}/api/team/reports/${reportId}`,
+    {
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+      },
+      withCredentials: true,
+    }
+  );
+  return response.data;
+};
