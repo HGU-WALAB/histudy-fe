@@ -3,6 +3,7 @@ import LongButton from "./LongButton";
 import RoundButton from "./RoundButton";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { Link } from "react-router-dom";
 const GroupRanking = [
   {
     rank: 1,
@@ -44,6 +45,7 @@ const GroupRanking = [
 //type에 따라 버튼 다르게 생기게
 
 export default function CustomTable({
+  reportData,
   sidebarValues = [],
   type,
   accentColumnNum,
@@ -85,6 +87,8 @@ export default function CustomTable({
   const checkInclude = (pk) => {
     return pkList.includes(pk);
   };
+
+  console.log("data!" + data);
 
   return (
     <>
@@ -169,6 +173,17 @@ export default function CustomTable({
                     {elem}
                   </Typography>
                 )
+            )}
+            {/* 상세보기 */}
+            {type === "report" && (
+              <Link
+                to={`/report/${reportData[index].id}`}
+                state={reportData[index]}
+              >
+                <Button variant="outlined" sx={{ py: "3px" }}>
+                  상세보기
+                </Button>
+              </Link>
             )}
             <Box sx={{ position: "relative" }}>
               {type === "first" || type === "second" ? (
