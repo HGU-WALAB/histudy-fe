@@ -37,7 +37,7 @@ export default function CreateGroup() {
           number: "21800394",
         },
       ],
-      subjects: [
+      courses: [
         {
           id: 1,
           name: "Software Engineering",
@@ -53,7 +53,7 @@ export default function CreateGroup() {
       name: "배주영",
       number: "21800111",
       friends: [],
-      subjects: [
+      courses: [
         {
           id: 1,
           name: "Software Engineering",
@@ -69,7 +69,7 @@ export default function CreateGroup() {
       name: "한시온",
       number: "21800112",
       friends: [],
-      subjects: [
+      courses: [
         {
           id: 1,
           name: "Software Engineering",
@@ -85,7 +85,7 @@ export default function CreateGroup() {
       name: "이인혁",
       number: "21800239",
       friends: [],
-      subjects: [
+      courses: [
         {
           id: 1,
           name: "Software Engineering",

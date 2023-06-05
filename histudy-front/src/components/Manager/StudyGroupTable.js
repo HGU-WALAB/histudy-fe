@@ -1,5 +1,12 @@
 import { Cancel, Edit } from "@mui/icons-material";
-import { Box, Chip, IconButton, Typography } from "@mui/material";
+import {
+  Box,
+  Chip,
+  IconButton,
+  MenuItem,
+  Select,
+  Typography,
+} from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -71,7 +78,7 @@ export default function StudyGroupTable({
             sx={{
               display: "flex",
               borderTop: index !== 0 && 1,
-              py: "20px",
+              // py: "20px",
               borderColor: "primary.border",
             }}
           >
@@ -92,7 +99,7 @@ export default function StudyGroupTable({
                   overflowX: "auto",
                   whiteSpace: "nowrap",
                   marginLeft: "5rem",
-                  py: "20px",
+                  // py: "20px",
                   borderColor: "primary.border",
                 }}
               >
@@ -103,22 +110,24 @@ export default function StudyGroupTable({
                 sx={{
                   color: "text.secondary",
                   display: "flex",
-                  flexGrow: 3,
+                  flexGrow: 1,
 
-                  width: "50px",
-                  textOverflow: "ellipsis",
-                  overflowX: "auto",
-                  whiteSpace: "nowrap",
                   py: "20px",
                   borderColor: "primary.border",
                 }}
               >
-                {row.members.map((member, index) => (
-                  <Typography>
-                    {index > 0 && ","}
-                    {member.name}
-                  </Typography>
-                ))}
+                <Select
+                  sx={{ color: "text.secondary" }}
+                  value={row.members.length > 0 ? row.members[0].name : ""}
+                >
+                  {row.members.map((student, index) => (
+                    <MenuItem key={index} value={student.name}>
+                      <Typography>
+                        {student.name}, {student.number}
+                      </Typography>
+                    </MenuItem>
+                  ))}
+                </Select>
               </Box>
 
               <Box
@@ -126,12 +135,12 @@ export default function StudyGroupTable({
                   color: "text.secondary",
                   display: "flex",
 
-                  flexGrow: 2,
+                  flexGrow: 1.5,
                   width: "50px",
                   textOverflow: "ellipsis",
                   overflowX: "auto",
                   whiteSpace: "nowrap",
-                  py: "20px",
+                  // py: "20px",
                   borderColor: "primary.border",
                 }}
               >
@@ -142,7 +151,7 @@ export default function StudyGroupTable({
                 sx={{
                   color: "text.secondary",
                   display: "flex",
-                  flexGrow: 1,
+                  flexGrow: 0.5,
                   width: "50px",
 
                   textOverflow: "ellipsis",
