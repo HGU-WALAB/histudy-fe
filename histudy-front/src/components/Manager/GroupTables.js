@@ -3,6 +3,8 @@ import {
   Box,
   Chip,
   IconButton,
+  MenuItem,
+  Select,
   TextField,
   ThemeProvider,
   Toolbar,
@@ -123,6 +125,7 @@ export default function GroupTables({
                             flexGrow: 1,
                             width: "100px",
                             borderBottom: 1,
+                            marginTop: "20px",
                             py: "20px",
                             borderColor: "primary.border",
                           }}
@@ -136,6 +139,7 @@ export default function GroupTables({
                             flexGrow: 1,
                             borderBottom: 1,
                             py: "20px",
+                            marginTop: "20px",
                             // width: "10px",
                             borderColor: "primary.border",
                           }}
@@ -148,51 +152,59 @@ export default function GroupTables({
                           sx={{
                             color: "text.secondary",
                             display: "flex",
-                            flexGrow: 2,
-                            width: "150px",
-                            textOverflow: "ellipsis",
-                            overflowX: "auto",
-                            whiteSpace: "nowrap",
-                            borderBottom: 1,
+                            flexGrow: 1,
                             py: "20px",
+                            borderBottom: 1,
                             borderColor: "primary.border",
                           }}
                         >
-                          {student.courses.map((sub, index) => (
-                            <Typography>
-                              {index > 0 && ", "}
-                              {sub.name}
-                            </Typography>
-                          ))}
+                          <Select
+                            sx={{ color: "text.secondary" }}
+                            value={
+                              student.courses.length > 0
+                                ? student.courses[0].name
+                                : ""
+                            }
+                          >
+                            {student.courses.map((subject, index) => (
+                              <MenuItem key={index} value={subject.name}>
+                                <Typography>{subject.name}</Typography>
+                              </MenuItem>
+                            ))}
+                          </Select>
                         </Box>
                         <Box
                           sx={{
                             color: "text.secondary",
                             display: "flex",
                             flexGrow: 1,
-                            borderBottom: 1,
-                            width: "150px",
                             py: "20px",
-                            px: "30px",
+                            borderBottom: 1,
                             borderColor: "primary.border",
-                            textOverflow: "ellipsis",
-                            overflow: "hidden",
-                            whiteSpace: "nowrap",
                           }}
                         >
-                          {student.friends.map((friend, index) => (
-                            <>
-                              {index > 0 && ", "}
-                              <Typography>{friend.name},</Typography>
-                              <Typography>{friend.number}</Typography>
-                            </>
-                          ))}
+                          <Select
+                            sx={{ width: "170px", color: "text.secondary" }}
+                            value={
+                              student.friends.length > 0
+                                ? student.friends[0].name
+                                : ""
+                            }
+                          >
+                            {student.friends.map((friend, index) => (
+                              <MenuItem key={index} value={friend.name}>
+                                <Typography>
+                                  {friend.name}, {friend.number}
+                                </Typography>
+                              </MenuItem>
+                            ))}
+                          </Select>
                         </Box>
                         <Box
                           sx={{
                             color: "text.secondary",
                             display: "flex",
-                            flexGrow: 1,
+                            // flexGrow: 1,
                             borderBottom: 1,
                             borderColor: "primary.border",
                           }}
@@ -201,10 +213,6 @@ export default function GroupTables({
                             onClick={() => handleEdit(student.id, index)}
                           >
                             <Edit />
-                          </IconButton>
-
-                          <IconButton onClick={() => handleDeleteRow(index)}>
-                            <Cancel />
                           </IconButton>
                         </Box>
                       </Box>
@@ -219,15 +227,13 @@ export default function GroupTables({
                         }}
                       >
                         <Box
-                          key="Group"
                           sx={{
                             color: "text.secondary",
                             display: "flex",
                             flexGrow: 1,
                             borderBottom: 1,
-                            py: "20px",
-                            // width: "10px",
                             borderColor: "primary.border",
+                            marginTop: "20px",
                           }}
                         >
                           <GroupSelector groupNum={row.group}></GroupSelector>
@@ -238,18 +244,22 @@ export default function GroupTables({
                             display: "flex",
                             flexGrow: 1,
                             borderBottom: 1,
-                            py: "20px",
+                            // py: "20px",
                             // width: "10px",
                             borderColor: "primary.border",
+                            marginTop: "20px",
                           }}
                         >
-                          <Typography>{student.name},</Typography>
+                          <Typography sx={{ marginTop: "20px" }}>
+                            {student.name},
+                          </Typography>
                           <TextField
                             sx={{
                               width: "50px",
                               "& input": {
                                 height: "10px",
                               },
+                              marginTop: "10px",
                             }}
                             value={student.number}
                           ></TextField>
@@ -259,56 +269,65 @@ export default function GroupTables({
                           sx={{
                             color: "text.secondary",
                             display: "flex",
-                            flexGrow: 2,
-                            width: "150px",
-                            textOverflow: "ellipsis",
-                            overflowX: "auto",
-                            whiteSpace: "nowrap",
-                            borderBottom: 1,
+                            flexGrow: 1,
                             py: "20px",
+                            borderBottom: 1,
                             borderColor: "primary.border",
                           }}
                         >
-                          {student.courses.map((sub) => (
-                            <Typography>
-                              {index > 0 && ", "}
-                              {sub.name}
-                            </Typography>
-                          ))}
+                          <Select
+                            sx={{ color: "text.secondary" }}
+                            value={
+                              student.courses.length > 0
+                                ? student.courses[0].name
+                                : ""
+                            }
+                          >
+                            {student.courses.map((subject, index) => (
+                              <MenuItem key={index} value={subject.name}>
+                                <Typography>{subject.name}</Typography>
+                              </MenuItem>
+                            ))}
+                          </Select>
                         </Box>
                         <Box
                           sx={{
                             color: "text.secondary",
                             display: "flex",
                             flexGrow: 1,
-                            borderBottom: 1,
-                            width: "150px",
                             py: "20px",
-                            px: "30px",
+                            borderBottom: 1,
                             borderColor: "primary.border",
-
-                            textOverflow: "ellipsis",
-                            overflow: "hidden",
-                            whiteSpace: "nowrap",
                           }}
                         >
-                          {student.friends.map((friend) => (
-                            <>
-                              <Typography>{friend.name},</Typography>
-                              <Typography>{friend.number}</Typography>
-                            </>
-                          ))}
+                          <Select
+                            sx={{ width: "170px", color: "text.secondary" }}
+                            value={
+                              student.friends.length > 0
+                                ? student.friends[0].name
+                                : ""
+                            }
+                          >
+                            {student.friends.map((friend, index) => (
+                              <MenuItem key={index} value={friend.name}>
+                                <Typography>
+                                  {friend.name}, {friend.number}
+                                </Typography>
+                              </MenuItem>
+                            ))}
+                          </Select>
                         </Box>
                         <Box
                           sx={{
                             color: "text.secondary",
                             display: "flex",
-                            flexGrow: 1,
+                            // flexGrow: 1,
                             borderBottom: 1,
                             borderColor: "primary.border",
+                            // py: "20px",
                           }}
                         >
-                          <Box sx={{ display: "flex", py: "10px" }}>
+                          <Box sx={{ display: "flex", py: "30px" }}>
                             <Chip
                               sx={{
                                 color: "white",

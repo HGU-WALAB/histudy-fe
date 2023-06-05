@@ -1,5 +1,13 @@
 import { Cancel, Edit } from "@mui/icons-material";
-import { Box, Chip, IconButton, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Chip,
+  IconButton,
+  MenuItem,
+  Select,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useState } from "react";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import { useNavigate } from "react-router-dom";
@@ -74,9 +82,8 @@ export default function StudentListTable({
                 key={index}
                 sx={{
                   display: "flex",
-
                   borderTop: index !== 0 && 1,
-                  py: "20px",
+                  // py: "20px",
                   borderColor: "primary.border",
                 }}
               >
@@ -97,7 +104,7 @@ export default function StudentListTable({
                       overflowX: "auto",
                       whiteSpace: "nowrap",
                       marginLeft: "3rem",
-                      py: "20px",
+                      // py: "20px",
                       borderColor: "primary.border",
                     }}
                   >
@@ -114,7 +121,7 @@ export default function StudentListTable({
                       overflowX: "auto",
                       whiteSpace: "nowrap",
                       marginLeft: "5rem",
-                      py: "20px",
+                      // py: "20px",
                       borderColor: "primary.border",
                     }}
                   >
@@ -130,8 +137,8 @@ export default function StudentListTable({
                       textOverflow: "ellipsis",
                       overflowX: "auto",
                       whiteSpace: "nowrap",
-                      marginLeft: "8rem",
-                      py: "20px",
+                      marginLeft: "4rem",
+                      // py: "20px",
                       borderColor: "primary.border",
                     }}
                   >
@@ -142,22 +149,21 @@ export default function StudentListTable({
                       color: "text.secondary",
                       display: "flex",
                       flexGrow: 1,
-                      width: "50px",
-                      textOverflow: "ellipsis",
-                      overflowX: "auto",
-                      whiteSpace: "nowrap",
-                      marginLeft: "5rem",
+                      marginLeft: "20px",
                       py: "20px",
                       borderColor: "primary.border",
-                      marginRight: "2rem",
                     }}
                   >
-                    {row.courses.map((subject, index) => (
-                      <Typography>
-                        {index > 0 && ", "}
-                        {subject.name}
-                      </Typography>
-                    ))}
+                    <Select
+                      sx={{ color: "text.secondary" }}
+                      value={row.courses.length > 0 ? row.courses[0].name : ""}
+                    >
+                      {row.courses.map((subject, index) => (
+                        <MenuItem key={index} value={subject.name}>
+                          <Typography>{subject.name}</Typography>
+                        </MenuItem>
+                      ))}
+                    </Select>
                   </Box>
                 </Box>
 
@@ -178,22 +184,16 @@ export default function StudentListTable({
                       justifyContent: "space-between",
                     }}
                   >
-                    <Box sx={{ display: "flex", alignItems: "center" }}>
-                      {/* <Chip
-                        label="보고서 열람"
-                        sx={{
-                          backgroundColor: "primary.light",
-                          color: "primary.main",
-                        }}
-                        onClick={handleClick}
-                      /> */}
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        marginRight: "20px",
+                      }}
+                    >
                       <Box sx={{ display: "flex" }}>
                         <IconButton onClick={() => handleEdit(index)}>
                           <Edit />
-                        </IconButton>
-
-                        <IconButton onClick={() => handleDeleteRow(index)}>
-                          <Cancel />
                         </IconButton>
                       </Box>
                     </Box>
@@ -202,6 +202,178 @@ export default function StudentListTable({
               </Box>
             ) : (
               <Box
+                key={index}
+                sx={{
+                  display: "flex",
+                  borderTop: index !== 0 && 1,
+                  // py: "20px",
+                  borderColor: "primary.border",
+                }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    flexGrow: 1,
+                  }}
+                >
+                  <Box
+                    sx={{
+                      color: "text.secondary",
+                      display: "flex",
+                      flexGrow: 1,
+                      width: "50px",
+                      textOverflow: "ellipsis",
+                      overflowX: "auto",
+                      whiteSpace: "nowrap",
+                      marginLeft: "3rem",
+                      // py: "20px",
+                      borderColor: "primary.border",
+                    }}
+                  >
+                    <TextField
+                      sx={{
+                        "& input": {
+                          height: "10px",
+                        },
+                      }}
+                      value={row.name}
+                    ></TextField>
+                  </Box>
+
+                  <Box
+                    sx={{
+                      color: "text.secondary",
+                      display: "flex",
+                      flexGrow: 1,
+                      width: "50px",
+                      textOverflow: "ellipsis",
+                      overflowX: "auto",
+                      whiteSpace: "nowrap",
+                      marginLeft: "5rem",
+                      // py: "20px",
+                      borderColor: "primary.border",
+                    }}
+                  >
+                    <TextField
+                      sx={{
+                        "& input": {
+                          height: "10px",
+                        },
+                      }}
+                      value={row.number}
+                    ></TextField>
+                  </Box>
+
+                  <Box
+                    sx={{
+                      color: "text.secondary",
+                      display: "flex",
+                      flexGrow: 1,
+                      width: "50px",
+                      textOverflow: "ellipsis",
+                      overflowX: "auto",
+                      whiteSpace: "nowrap",
+                      marginLeft: "4rem",
+                      // py: "20px",
+                      borderColor: "primary.border",
+                    }}
+                  >
+                    <TextField
+                      sx={{
+                        "& input": {
+                          height: "10px",
+                        },
+                      }}
+                      value={row.group}
+                    ></TextField>
+                  </Box>
+                  <Box
+                    sx={{
+                      color: "text.secondary",
+                      display: "flex",
+                      flexGrow: 0.5,
+                      marginLeft: "20px",
+                      py: "20px",
+                      borderColor: "primary.border",
+                    }}
+                  >
+                    <Select
+                      sx={{ color: "text.secondary" }}
+                      value={row.courses.length > 0 ? row.courses[0].name : ""}
+                    >
+                      {row.courses.map((subject, index) => (
+                        <MenuItem key={index} value={subject.name}>
+                          <Typography>{subject.name}</Typography>
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </Box>
+                </Box>
+
+                <Box
+                  sx={{
+                    color: "text.secondary",
+                    display: "flex",
+
+                    borderColor: "primary.border",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      color: "text.secondary",
+                      display: "flex",
+                      flexGrow: 1,
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        marginRight: "20px",
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          display: "flex",
+                          py: "20px",
+                        }}
+                      >
+                        <Chip
+                          sx={{
+                            color: "white",
+                            backgroundColor: "primary.main",
+                          }}
+                          onClick={() => handleSave(index)}
+                          label="저장"
+                        />{" "}
+                        <Chip
+                          sx={{
+                            marginLeft: "0.5rem",
+                            marginRight: "0.5rem",
+                            color: "#FF0000",
+                            backgroundColor: "#FFE4E4",
+                          }}
+                          onClick={() => handleEdit(index)}
+                          label="취소"
+                        />
+                      </Box>
+                    </Box>
+                  </Box>
+                </Box>
+              </Box>
+            )}
+          </>
+        ))}
+      </Box>
+    </>
+  );
+}
+
+{
+  /* <Box
                 key={index}
                 sx={{
                   display: "flex",
@@ -333,13 +505,8 @@ export default function StudentListTable({
                     }}
                   >
                     <Box
-                      sx={{
-                        display: "flex",
-                        flexGrow: 1,
-                        alignItems: "center",
-                      }}
-                    ></Box>
-                    <Box sx={{ display: "flex", py: "10px" }}>
+                      sx={{ display: "flex", py: "20px", marginRight: "20px" }}
+                    >
                       <Chip
                         sx={{
                           color: "white",
@@ -361,11 +528,5 @@ export default function StudentListTable({
                     </Box>
                   </Box>
                 </Box>
-              </Box>
-            )}
-          </>
-        ))}
-      </Box>
-    </>
-  );
+              </Box> */
 }

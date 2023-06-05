@@ -248,7 +248,7 @@ export default function ManageGroup() {
               type="group"
             />
           )}
-          <Box sx={{ marginTop: "70px" }}>
+          <Box sx={{ marginTop: "70px", mb: "1rem" }}>
             <Typography variant="h7">그룹 미배정 학생 목록</Typography>
           </Box>
           <UnGroupTable

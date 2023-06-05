@@ -1,5 +1,5 @@
 import { Cancel } from "@mui/icons-material";
-import { Box, IconButton, Typography } from "@mui/material";
+import { Box, Chip, IconButton, Typography } from "@mui/material";
 import { Fragment } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -91,11 +91,8 @@ export default function ReportTable({
               display: "flex",
 
               borderTop: index !== 0 && 1,
-              py: "20px",
+              // py: "20px",
               borderColor: "primary.border",
-            }}
-            onClick={() => {
-              clickReport(row.id);
             }}
           >
             <Box
@@ -163,12 +160,31 @@ export default function ReportTable({
                   textOverflow: "ellipsis",
                   overflowX: "auto",
                   whiteSpace: "nowrap",
-
+                  flexGrow: 0.7,
                   py: "20px",
                   borderColor: "primary.border",
                 }}
               >
                 {row.time}분
+              </Box>
+
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  marginRight: "20px",
+                }}
+              >
+                <Chip
+                  label="상세 보기"
+                  sx={{
+                    backgroundColor: "primary.light",
+                    color: "primary.main",
+                  }}
+                  onClick={() => {
+                    clickReport(row.id);
+                  }}
+                />
               </Box>
             </Box>
           </Box>

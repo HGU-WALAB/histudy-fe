@@ -58,7 +58,7 @@ export default function ManagerTable({
             sx={{
               display: "flex",
               borderTop: index !== 0 && 1,
-              py: "20px",
+              // py: "20px",
               borderColor: "primary.border",
             }}
           >
