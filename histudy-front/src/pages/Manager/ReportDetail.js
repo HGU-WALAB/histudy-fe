@@ -22,9 +22,12 @@ import ManagerTable from "../../components/Manager/ManagerTable";
 import GroupTable from "../../components/Manager/GroupTable";
 import UnGroupTable from "../../components/Manager/UnGroupTable";
 import { Image } from "@mui/icons-material";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useMatch, useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { readReportDetail } from "../../apis/manager";
+import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { deleteReport, modifyReport } from "../../apis/report";
 
 export default function ReportDetail() {
   // const [reportData, setReportData] = useState();
@@ -34,6 +37,9 @@ export default function ReportDetail() {
   //     setReportData(info);
   //   });
   // }, []);
+  console.log(state);
+
+  const useUserReportDeatilMatch = useMatch("/report/:id");
 
   const reportData = {
     title: "알고리듬 분석 스터디1",
@@ -65,15 +71,23 @@ export default function ReportDetail() {
   const navigate = useNavigate();
 
   const moveToBefore = () => {
-    navigate("/manageReport");
+    navigate(-1);
+  };
+
+  const handleClick = (buttonId) => {
+    if (buttonId === "modify") {
+      navigate(`/report/modify/${state.id}`, { state: state });
+    } else if (buttonId === "delete") {
+      deleteReport(state.id);
+    }
   };
 
   return (
     <>
-      {reportData && (
+      {state && (
         <Box sx={{ display: "flex", py: "50px", px: "300px" }}>
           <Box sx={{ position: "fixed", left: "30px", top: "50px" }}>
-            <SideBar />
+            {!useUserReportDeatilMatch && <SideBar />}
           </Box>
           <Box sx={{ display: "flex", flexDirection: "column" }}>
             <Box sx={{ display: "flex", marginLeft: "3rem", mb: "3rem" }}>
@@ -89,33 +103,49 @@ export default function ReportDetail() {
                 width: "100%",
                 marginLeft: "40px",
                 borderColor: "primary.main",
-                borderRadius: "45px",
+                borderRadius: "40px",
                 marginBottom: "20px",
 
-                padding: "40px 20px",
+                padding: "40px 40px",
               }}
             >
               <>
                 <Box
-                  sx={{
-                    mb: "1rem",
-                  }}
+                  sx={
+                    {
+                      // mb: "1rem",
+                    }
+                  }
                 >
                   <Box
                     sx={{
                       display: "flex",
-
                       width: "100%",
                       height: "40px",
                       mb: "1rem",
+                      position: "relative",
+                      alignItems: "center",
                     }}
                   >
                     <Box sx={{ width: "100px", color: "text.secondary" }}>
                       제목
                     </Box>
                     <Typography sx={{ flex: "10 1 auto", marginLeft: "10px" }}>
-                      {reportData.title}
+                      {state.title}
                     </Typography>
+                    <IconButton>
+                      <DriveFileRenameOutlineIcon
+                        onClick={() => handleClick("modify")}
+                        color="primary"
+                      />
+                    </IconButton>
+
+                    <IconButton>
+                      <DeleteIcon
+                        onClick={handleClick("delete")}
+                        color="error"
+                      />
+                    </IconButton>
                   </Box>
                   <Box
                     sx={{
@@ -129,7 +159,7 @@ export default function ReportDetail() {
                       참여 멤버
                     </Box>
                     <Typography sx={{ flex: "10 1 auto", marginLeft: "10px" }}>
-                      {reportData.participants.map((member, index) => (
+                      {state?.participants?.map((member, index) => (
                         <Fragment key={index}>
                           {index > 0 && ", "}
                           {member.name}
@@ -149,7 +179,7 @@ export default function ReportDetail() {
                       스터디 시간
                     </Box>
                     <Typography sx={{ flex: "10 1 auto", marginLeft: "10px" }}>
-                      {reportData.totalMinutes}분
+                      {state.totalMinutes}분
                     </Typography>
                   </Box>
                   <Box
@@ -164,7 +194,7 @@ export default function ReportDetail() {
                       보고서 내용
                     </Box>
                     <Typography sx={{ flex: "10 1 auto", marginLeft: "10px" }}>
-                      {reportData.content}
+                      {state.content}
                     </Typography>
                   </Box>
                   <Box
@@ -176,7 +206,7 @@ export default function ReportDetail() {
                     }}
                   >
                     <ImageList>
-                      {reportData.images.map((item) => (
+                      {state.images.map((item) => (
                         <ImageListItem key={item.id}>
                           <img src={item.url} alt="보고서 사진" />
                         </ImageListItem>

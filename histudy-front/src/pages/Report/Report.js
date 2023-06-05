@@ -47,6 +47,7 @@ export default function Report() {
   return (
     <Box
       sx={{
+        minHeight: "100vh",
         display: " flex",
         flexDirection: "column",
         alignItems: "center",
@@ -85,6 +86,7 @@ export default function Report() {
       <Box sx={{ width: "900px" }}>
         <CustomTable
           data={convertedReports}
+          reportData={reports}
           accentColumnNum={1}
           longWidthColumnNum={-1}
           type="report"

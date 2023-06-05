@@ -24,20 +24,24 @@ import { teamCourses } from "../../apis/course";
 import { CodeModal } from "../../components/Post/CodeModal";
 import { useRecoilState } from "recoil";
 import { isCodeModalState } from "../../store/atom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function Post({ children }) {
+  const { state } = useLocation();
+
+  console.log(state);
   const [isCodeModal, setIsCodeModal] = useState(false);
 
   const { handleSubmit, watch, setValue, getValues, control } = useForm({
     defaultValues: {
-      title: "",
-      content: "",
+      title: state ? state.title : "",
+      content: state ? state.content : "",
       participants: [],
-      totalMinutes: "",
+      totalMinutes: state ? state.totalMinutes : "",
       startTime: getCurrentTime(),
       endTime: getCurrentTime(),
-      images: [],
-      courses: [],
+      images: state ? [...state.images.map((image) => image.url)] : [],
+      courses: state ? state.courses : [],
     },
   });
 
@@ -52,11 +56,7 @@ export default function Post({ children }) {
 
   const [studyTime, setStudyTime] = useState(0);
 
-  // useEffect(() => {
-  //   teamCourses().then((res) => {
-  //     console.log("debug", res);
-  //   });
-  // }, []);
+  const navigate = useNavigate();
 
   const onValid = (formData) => {
     // 보고서 생성 api 연결
@@ -70,6 +70,9 @@ export default function Post({ children }) {
     };
     console.log(newReport);
     postReport(newReport);
+
+    alert("보고서 제출이 완료되었습니다.");
+    navigate("/");
   };
 
   return (
@@ -161,12 +164,27 @@ export default function Post({ children }) {
             />
           </Box>
         </PostBox>
-        <LongButton
-          onClick={handleSubmit(onValid)}
-          name="제출"
-          bgColor="primary.main"
-          fontColor="white"
-        />
+        <Box
+          sx={{
+            width: "280px",
+            mx: "auto",
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
+          <LongButton
+            onClick={handleSubmit(onValid)}
+            name="제출"
+            bgColor="primary.main"
+            fontColor="white"
+          />
+          <LongButton
+            bgColor="error.main"
+            fontColor="white"
+            onClick={() => navigate(-1)}
+            name="취소"
+          />
+        </Box>
       </FormControl>
     </>
   );

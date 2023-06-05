@@ -86,11 +86,13 @@ export function CodeModal({ onClick }) {
         >
           <Box
             component={motion.img}
-            src={"/img/logo_histudy.png"}
+            src={"/img/authImg.jpg"}
             width={300}
+            height={300}
+            // sx={{ borderRadius: "30px" }}
             alt="histudy_logo"
           />
-          <Typography variant="h4" sx={{ mt: 10 }}>
+          <Typography variant="h4" sx={{ mt: 5 }}>
             {nowTime}
           </Typography>
         </Box>

@@ -3,6 +3,7 @@ import LongButton from "./LongButton";
 import RoundButton from "./RoundButton";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { Link } from "react-router-dom";
 const GroupRanking = [
   {
     rank: 1,
@@ -44,6 +45,7 @@ const GroupRanking = [
 //type에 따라 버튼 다르게 생기게
 
 export default function CustomTable({
+  reportData,
   sidebarValues = [],
   type,
   accentColumnNum,
@@ -74,9 +76,10 @@ export default function CustomTable({
 
   const COLUMN_NUM = TableHead[type].length;
   const ROW_NUM = data.length;
-  console.log("data", data);
+  console.log("side", sidebarValues);
   const pkList = [
     ...sidebarValues.map((row, index) => {
+      console.log("checkt", row[1], row);
       return row[1];
     }),
   ];
@@ -84,6 +87,8 @@ export default function CustomTable({
   const checkInclude = (pk) => {
     return pkList.includes(pk);
   };
+
+  console.log("data!" + data);
 
   return (
     <>
@@ -169,6 +174,17 @@ export default function CustomTable({
                   </Typography>
                 )
             )}
+            {/* 상세보기 */}
+            {type === "report" && (
+              <Link
+                to={`/report/${reportData[index].id}`}
+                state={reportData[index]}
+              >
+                <Button variant="outlined" sx={{ py: "3px" }}>
+                  상세보기
+                </Button>
+              </Link>
+            )}
             <Box sx={{ position: "relative" }}>
               {type === "first" || type === "second" ? (
                 checkInclude(row[1]) ? (
@@ -176,8 +192,7 @@ export default function CustomTable({
                     key={index}
                     onClick={() => {
                       addData((prev) => [
-                        ...prev.slice(0, index),
-                        ...prev.slice(index + 1),
+                        ...prev.filter((elem) => elem[1] !== row[1]),
                       ]);
                     }}
                     sx={{

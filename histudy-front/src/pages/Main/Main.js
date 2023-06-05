@@ -1,7 +1,6 @@
-import * as React from "react";
 import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
-
+import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import {
   isLoginState,
@@ -13,11 +12,12 @@ import "./css/Textfield.css";
 import { userSignup } from "../../apis/users";
 import GoogleButton from "../../auth/GoogleButton";
 import ImportCSV from "../../components/scv/ImportCSV";
-
-// import Input from "../../theme/overrides/Input";
+import NavGrid from "../../components/Main/NavGrid";
+import MainTest from "../../components/Main/MainTest";
+import RegisterModal from "../../components/Main/RegisterModal";
 
 export default function Main() {
-  const [sid, setSid] = React.useState("");
+  const [sid, setSid] = useState("");
 
   const [isLogin, setIsLogin] = useRecoilState(isLoginState);
   const [isRegisterModal, setIsRegisterModal] =
@@ -51,84 +51,26 @@ export default function Main() {
     const response = await userSignup(newUser);
     console.log(response);
 
-    if (response.status === 201) {
-      alert("회원가입이 완료되었습니다.");
-      localStorage.setItem("accessToken", response.data.tokens.accessToken);
-      localStorage.setItem("refreshToken", response.data.tokens.refreshToken);
-      setIsRegisterModal(false);
-      setUserLoginInfoState(null);
-      setIsLogin(true);
-      window.location.reload();
-    }
+    alert("회원가입이 완료되었습니다.");
+    localStorage.setItem("accessToken", response.tokens.accessToken);
+    localStorage.setItem("refreshToken", response.tokens.refreshToken);
+    setIsRegisterModal(false);
+    setUserLoginInfoState(null);
+    setIsLogin(true);
+    // window.location.reload();
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 80);
+  }, []);
   // console.log(isLogin);
   return (
-    <Box
-      sx={{
-        height: "600px",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <Box>
+      {/* <NavGrid /> */}
+      <MainTest />
       {!isLogin && <GoogleButton />}
       {isRegisterModal && (
-        <Box sx={{ display: "absolute" }}>
-          <Box
-            sx={{
-              position: "absolute",
-
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              // border: 1,
-              // borderColor: "primary.light",
-              backgroundColor: "primary.lighter",
-              borderRadius: "20px",
-              width: "430px",
-              height: "450px",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: " center",
-            }}
-          >
-            <Typography sx={{ fontSize: "20px", color: "text.default" }}>
-              정보 입력하기
-            </Typography>
-
-            <TextField
-              className="login-textInput"
-              sx={{ mt: "40px", width: "300px", zIndex: 1300 }}
-              label="Name"
-              variant="outlined"
-              value={userLoginInfoState?.name}
-            />
-            <TextField
-              className="login-textInput"
-              sx={{ mt: "15px", width: "300px" }}
-              label="Student Number"
-              variant="outlined"
-              value={sid}
-              onChange={(e) => setSid(e.target.value)}
-            />
-            <TextField
-              className="login-textInput"
-              sx={{ mt: "15px", width: "300px" }}
-              label="Email"
-              variant="outlined"
-              value={userLoginInfoState?.email}
-            />
-            <Button
-              variant="contained"
-              sx={{ mt: "40px", width: "100px" }}
-              onClick={handleClick}
-            >
-              가입완료
-            </Button>
-          </Box>
-        </Box>
+        <RegisterModal handleClick={handleClick} sid={sid} setSid={setSid} />
       )}
     </Box>
   );

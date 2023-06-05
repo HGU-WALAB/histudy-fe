@@ -4,6 +4,7 @@ import {
   InputAdornment,
   TextField,
   Typography,
+  withStyles,
 } from "@mui/material";
 import { border, Box } from "@mui/system";
 import { useEffect, useState } from "react";
@@ -17,7 +18,7 @@ import { autoUser } from "../../apis/users";
 import Friends from "../../components/Enroll/Friends";
 import Courses from "../../components/Enroll/Courses";
 import { studyEnroll } from "../../apis/study";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function Enroll() {
   const location = useLocation();
@@ -36,11 +37,6 @@ export default function Enroll() {
       );
     }
   }, []);
-
-  // const [friendsIds, setFriendsIds] = useState([]);
-  // const [courseIds, setCourseIds] = useState([]);
-
-  // const [studies, setStudies] = useState([]);
 
   const firstData = [
     ["오인혁", "21800446", "8156217@naver.com"],
@@ -66,6 +62,7 @@ export default function Enroll() {
 
   const [sideFriends, setSideFriends] = useState([]);
 
+  const navigate = useNavigate();
   const handleClick = (event) => {
     const ID = event.target.id;
     console.log(ID);
@@ -76,8 +73,9 @@ export default function Enroll() {
         friendIds: sideFriends.map((elem) => elem[1]),
         courseIds: sideCourses.map((elem) => elem[3]),
       };
-      console.log("제출", data);
+      alert("스터디 신청이 완료되었습니다.");
       studyEnroll(data);
+      navigate("/");
     }
   };
   const [sideCourses, setSideCourses] = useState([]);
@@ -92,19 +90,29 @@ export default function Enroll() {
   };
 
   return (
-    <Box sx={{ display: "flex", py: "80px", px: "300px" }}>
+    <Box sx={{ display: "flex", py: "80px", px: "300px", minHeight: "100vh" }}>
       <Box sx={{ position: "absolute", left: "30px", top: "30px" }}>
         <ProgressBar page={page} />
-        <GrayBorderBox courses={sideCourses} friends={sideFriends} />
+        <GrayBorderBox
+          courses={sideCourses}
+          friends={sideFriends}
+          setSideCourses={setSideCourses}
+          setSideFriends={setSideFriends}
+        />
       </Box>
-      <Box sx={{ width: "100%", ml: "50px" }}>
-        <Typography variant="h4" sx={{ textAlign: "center", mb: "10px" }}>
+      <Box sx={{ width: "100%", ml: "70px" }}>
+        <Typography
+          variant="h4"
+          sx={{ textAlign: "center", mb: "10px", fontWeight: "500" }}
+        >
           Histudy 신청하기
         </Typography>
 
         {page === 1 && (
           <>
-            <Typography sx={{ textAlign: "center", height: "50px" }}>
+            <Typography
+              sx={{ textAlign: "center", height: "50px", fontWeight: "400" }}
+            >
               스터디를 함께하고 싶은 친구를 등록하세요!
             </Typography>
             <Friends
