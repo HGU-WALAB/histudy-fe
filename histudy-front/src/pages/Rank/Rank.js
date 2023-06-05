@@ -43,7 +43,14 @@ export default function Rank() {
         flexDirection: "column",
       }}
     >
-      <Box sx={{ display: "flex", justifyContent: "center", py: "100px" }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          pt: "50px",
+          pb: "100px",
+        }}
+      >
         <Typography sx={{ fontSize: "30px", fontWeight: "300" }}>
           스터디 그룹 랭킹
         </Typography>

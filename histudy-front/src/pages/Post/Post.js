@@ -24,21 +24,24 @@ import { teamCourses } from "../../apis/course";
 import { CodeModal } from "../../components/Post/CodeModal";
 import { useRecoilState } from "recoil";
 import { isCodeModalState } from "../../store/atom";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function Post({ children }) {
+  const { state } = useLocation();
+
+  console.log(state);
   const [isCodeModal, setIsCodeModal] = useState(false);
 
   const { handleSubmit, watch, setValue, getValues, control } = useForm({
     defaultValues: {
-      title: "",
-      content: "",
+      title: state ? state.title : "",
+      content: state ? state.content : "",
       participants: [],
-      totalMinutes: "",
+      totalMinutes: state ? state.totalMinutes : "",
       startTime: getCurrentTime(),
       endTime: getCurrentTime(),
-      images: [],
-      courses: [],
+      images: state ? [...state.images.map((image) => image.url)] : [],
+      courses: state ? state.courses : [],
     },
   });
 
@@ -161,12 +164,25 @@ export default function Post({ children }) {
             />
           </Box>
         </PostBox>
-        <Box sx={{ width: "150px", mx: "auto" }}>
+        <Box
+          sx={{
+            width: "280px",
+            mx: "auto",
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
           <LongButton
             onClick={handleSubmit(onValid)}
             name="제출"
             bgColor="primary.main"
             fontColor="white"
+          />
+          <LongButton
+            bgColor="error.main"
+            fontColor="white"
+            onClick={() => navigate(-1)}
+            name="취소"
           />
         </Box>
       </FormControl>

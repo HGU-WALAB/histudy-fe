@@ -27,6 +27,8 @@ export default function ARouter() {
         <Route path="/enroll" element={<Enroll />}></Route>
         <Route path="/group" element={<Group />}></Route>
         <Route path="/report" element={<Report />}></Route>
+        <Route path="/report/:id" element={<ReportDetail />}></Route>
+        <Route path="/report/modify/:id" element={<Post />}></Route>
         <Route path="/add" element={<Post />}></Route>
         <Route path="/manageClass" element={<ManageClass />}></Route>
         <Route path="/manageGroup" element={<ManageGroup />}></Route>
