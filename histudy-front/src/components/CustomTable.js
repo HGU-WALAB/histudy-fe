@@ -100,6 +100,8 @@ export default function CustomTable({
           //   border: 2,
           borderColor: "primary.border",
           borderRadius: "45px",
+          maxHeight: "400px",
+          overflow: "scroll",
         }}
       >
         <Box

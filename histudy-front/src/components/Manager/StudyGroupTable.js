@@ -114,7 +114,7 @@ export default function StudyGroupTable({
                 }}
               >
                 {row.members.map((member, index) => (
-                  <Typography>
+                  <Typography key={index}>
                     {index > 0 && ","}
                     {member.name}
                   </Typography>
