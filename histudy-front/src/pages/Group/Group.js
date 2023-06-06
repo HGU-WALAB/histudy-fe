@@ -6,16 +6,37 @@ import { getMyGroup } from "../../apis/study";
 import { Link } from "react-router-dom";
 import NoDataLottie from "../../components/NoDataLottie";
 import { getMyTeamUsers } from "../../apis/users";
+import CustomTable from "../../components/CustomTable";
 
 export default function Group() {
-  const [teamMembers, setTeamMembers] = useState();
+  const [teamMembers, setTeamMembers] = useState([]);
+  const [convertedTeamMembers, setConvertedTeamMembers] = useState([]);
+
+  const teamMembersConverter = (teamMembers) => {
+    return [
+      ...teamMembers?.map((teamMember) => {
+        const memberRow = [teamMember.name, teamMember.sid, teamMember.email];
+
+        return memberRow;
+      }),
+    ];
+  };
+
+  const [hasTeam, setHasTeam] = useState(false);
 
   // team 유저 정보
   useEffect(() => {
-    getMyTeamUsers.then((res) => {
-      console.log(res);
-      setTeamMembers(res);
-    });
+    getMyTeamUsers()
+      .then((res) => {
+        setTeamMembers(res);
+        setHasTeam(true);
+        // console.log(res);
+        // console.log("!!" + typeof teamMembersConverter(res));
+        setConvertedTeamMembers(teamMembersConverter(res));
+      })
+      .catch((err) => {
+        setHasTeam(false);
+      });
   }, []);
 
   const [courses, setCourses] = useState([
@@ -63,7 +84,17 @@ export default function Group() {
       <Typography variant="h4" sx={{ mb: "10px" }}>
         스터디 그룹 정보
       </Typography>
-      {convertedCourses.length === 0 && convertedFriends.length === 0 ? (
+      {hasTeam ? (
+        <Box sx={{ mt: 5 }}>
+          <CustomTable
+            // reportData={convertedTeamMembers}
+            data={convertedTeamMembers}
+            accentColumnNum={-1}
+            longWidthColumnNum={-1}
+            type="group"
+          />
+        </Box>
+      ) : convertedCourses.length === 0 && convertedFriends.length === 0 ? (
         <Box sx={{ mt: 10 }}>
           <NoDataLottie />
         </Box>

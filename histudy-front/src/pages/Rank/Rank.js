@@ -63,7 +63,7 @@ export default function Rank() {
       ) : (
         <ImageList
           cols={4}
-          gap="10px"
+          gap="15px"
           component={motion.div}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

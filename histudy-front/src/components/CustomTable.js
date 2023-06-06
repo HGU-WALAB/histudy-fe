@@ -65,6 +65,7 @@ export default function CustomTable({
     second: ["과목명", "과목코드", "담당 교수"],
     third: ["우선순위", "과목명", "과목코드", "담당 교수"],
     report: ["No.", "제목", "스터디 시간(분)", "작성일"],
+    group: ["이름", "학번", "이메일"],
   };
 
   const idxConverter = (idx) => {
