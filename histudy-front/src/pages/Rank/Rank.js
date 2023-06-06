@@ -103,13 +103,16 @@ export default function Rank() {
                     key={index}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    src={`${item.thumbnail}`}
+                    src={`${
+                      !item.thumbnail ? "/img/mainImg2.png" : item.thumbnail
+                    }`}
                     alt={item.title}
                     loading="lazy"
                   />
                 )}
                 <ImageListItemBar
                   sx={{
+                    color: "white",
                     position: "absolute",
                     top: !itemsHover[index] ? 250 : 30,
                   }}
@@ -118,7 +121,7 @@ export default function Rank() {
                   }`}
                   actionIcon={
                     <IconButton
-                      sx={{ color: "rgba(255, 255, 255, 0.8)" }}
+                      sx={{ color: "rgba(255, 255, 255, 1)" }}
                       aria-label={`info about ${item.title}`}
                     >
                       <GroupsIcon />
