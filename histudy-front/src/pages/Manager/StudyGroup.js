@@ -15,165 +15,165 @@ import StudyGroupTable from "../../components/Manager/StudyGroupTable";
 import { readAllGroups } from "../../apis/manager";
 
 export default function StudyGroup() {
-  // const [groupData, setGroupData] = useState();
+  const [groupData, setGroupData] = useState();
 
-  // useEffect(() => {
-  //   readAllGroups().then((data) => {
-  //     setGroupData(data);
-  //   });
-  // }, []);
-  const groupData = [
-    {
-      group: 1,
-      members: [
-        {
-          id: 1,
-          name: "오인혁",
-          number: "21800339",
-          friends: [
-            {
-              id: 5,
-              name: "김진수",
-              number: "21800394",
-            },
-          ],
-          subjects: [
-            {
-              id: 1,
-              name: "Software Engineering",
-            },
-            {
-              id: 2,
-              name: "Open-source Software Laboratories",
-            },
-          ],
-        },
-        {
-          id: 2,
-          name: "배주영",
-          number: "21800111",
-          friends: [],
-          subjects: [
-            {
-              id: 1,
-              name: "Software Engineering",
-            },
-            {
-              id: 2,
-              name: "Open-source Software Laboratories",
-            },
-          ],
-        },
-        {
-          id: 3,
-          name: "한시온",
-          number: "21800112",
-          friends: [],
-          subjects: [
-            {
-              id: 1,
-              name: "Software Engineering",
-            },
-            {
-              id: 2,
-              name: "Open-source Software Laboratories",
-            },
-          ],
-        },
-        {
-          id: 4,
-          name: "이인혁",
-          number: "21800239",
-          friends: [],
-          subjects: [
-            {
-              id: 1,
-              name: "Software Engineering",
-            },
-            {
-              id: 2,
-              name: "Open-source Software Laboratories",
-            },
-          ],
-        },
-      ],
+  useEffect(() => {
+    readAllGroups().then((data) => {
+      setGroupData(data);
+    });
+  }, []);
+  // const groupData = [
+  //   {
+  //     group: 1,
+  //     members: [
+  //       {
+  //         id: 1,
+  //         name: "오인혁",
+  //         number: "21800339",
+  //         friends: [
+  //           {
+  //             id: 5,
+  //             name: "김진수",
+  //             number: "21800394",
+  //           },
+  //         ],
+  //         subjects: [
+  //           {
+  //             id: 1,
+  //             name: "Software Engineering",
+  //           },
+  //           {
+  //             id: 2,
+  //             name: "Open-source Software Laboratories",
+  //           },
+  //         ],
+  //       },
+  //       {
+  //         id: 2,
+  //         name: "배주영",
+  //         number: "21800111",
+  //         friends: [],
+  //         subjects: [
+  //           {
+  //             id: 1,
+  //             name: "Software Engineering",
+  //           },
+  //           {
+  //             id: 2,
+  //             name: "Open-source Software Laboratories",
+  //           },
+  //         ],
+  //       },
+  //       {
+  //         id: 3,
+  //         name: "한시온",
+  //         number: "21800112",
+  //         friends: [],
+  //         subjects: [
+  //           {
+  //             id: 1,
+  //             name: "Software Engineering",
+  //           },
+  //           {
+  //             id: 2,
+  //             name: "Open-source Software Laboratories",
+  //           },
+  //         ],
+  //       },
+  //       {
+  //         id: 4,
+  //         name: "이인혁",
+  //         number: "21800239",
+  //         friends: [],
+  //         subjects: [
+  //           {
+  //             id: 1,
+  //             name: "Software Engineering",
+  //           },
+  //           {
+  //             id: 2,
+  //             name: "Open-source Software Laboratories",
+  //           },
+  //         ],
+  //       },
+  //     ],
 
-      reports: 3,
-      times: 120,
-    },
-    {
-      group: 2,
-      members: [
-        {
-          id: 5,
-          name: "장유진",
-          number: "21800459",
-          friends: [],
-          subjects: [
-            {
-              id: 1,
-              name: "Software Engineering",
-            },
-            {
-              id: 2,
-              name: "Open-source Software Laboratories",
-            },
-          ],
-        },
-        {
-          id: 6,
-          name: "최혜림",
-          number: "21800333",
-          friends: [],
-          subjects: [
-            {
-              id: 1,
-              name: "Software Engineering",
-            },
-            {
-              id: 2,
-              name: "Open-source Software Laboratories",
-            },
-          ],
-        },
-        {
-          id: 7,
-          name: "정석민",
-          number: "21800123",
-          friends: [],
-          subjects: [
-            {
-              id: 1,
-              name: "Software Engineering",
-            },
-            {
-              id: 2,
-              name: "Open-source Software Laboratories",
-            },
-          ],
-        },
-        {
-          id: 8,
-          name: "송다빈",
-          number: "21800233",
-          friends: [],
-          subjects: [
-            {
-              id: 1,
-              name: "Software Engineering",
-            },
-            {
-              id: 2,
-              name: "Open-source Software Laboratories",
-            },
-          ],
-        },
-      ],
+  //     reports: 3,
+  //     times: 120,
+  //   },
+  //   {
+  //     group: 2,
+  //     members: [
+  //       {
+  //         id: 5,
+  //         name: "장유진",
+  //         number: "21800459",
+  //         friends: [],
+  //         subjects: [
+  //           {
+  //             id: 1,
+  //             name: "Software Engineering",
+  //           },
+  //           {
+  //             id: 2,
+  //             name: "Open-source Software Laboratories",
+  //           },
+  //         ],
+  //       },
+  //       {
+  //         id: 6,
+  //         name: "최혜림",
+  //         number: "21800333",
+  //         friends: [],
+  //         subjects: [
+  //           {
+  //             id: 1,
+  //             name: "Software Engineering",
+  //           },
+  //           {
+  //             id: 2,
+  //             name: "Open-source Software Laboratories",
+  //           },
+  //         ],
+  //       },
+  //       {
+  //         id: 7,
+  //         name: "정석민",
+  //         number: "21800123",
+  //         friends: [],
+  //         subjects: [
+  //           {
+  //             id: 1,
+  //             name: "Software Engineering",
+  //           },
+  //           {
+  //             id: 2,
+  //             name: "Open-source Software Laboratories",
+  //           },
+  //         ],
+  //       },
+  //       {
+  //         id: 8,
+  //         name: "송다빈",
+  //         number: "21800233",
+  //         friends: [],
+  //         subjects: [
+  //           {
+  //             id: 1,
+  //             name: "Software Engineering",
+  //           },
+  //           {
+  //             id: 2,
+  //             name: "Open-source Software Laboratories",
+  //           },
+  //         ],
+  //       },
+  //     ],
 
-      reports: 4,
-      times: 120,
-    },
-  ];
+  //     reports: 4,
+  //     times: 120,
+  //   },
+  // ];
 
   const [page, setPage] = useState(1);
 
@@ -215,28 +215,28 @@ export default function StudyGroup() {
 
   //   { A: "응급의학과", B: "응급실간호사", C: "선우희수", D: "26" },
   // ];
-  const sheetData = groupData.flatMap((group) =>
-    group.members.map((member) => ({
-      Group: group.group,
-      MemberID: member.id,
-      MemberName: member.name,
-      MemberNumber: member.number,
-      Friends: member.friends.map((friend) => friend.name).join(", "),
-      Subjects: member.subjects.map((subject) => subject.name).join(", "),
-      Reports: group.reports,
-      Times: group.times,
-    }))
-  );
+  // const sheetData = groupData.flatMap((group) =>
+  //   group.members.map((member) => ({
+  //     Group: group.group,
+  //     MemberID: member.id,
+  //     MemberName: member.name,
+  //     MemberNumber: member.number,
+  //     Friends: member.friends.map((friend) => friend.name).join(", "),
+  //     Subjects: member.subjects.map((subject) => subject.name).join(", "),
+  //     Reports: group.reports,
+  //     Times: group.times,
+  //   }))
+  // );
 
-  const xlsx = require("xlsx");
+  // const xlsx = require("xlsx");
 
-  const excelDownload = () => {
-    const ws = xlsx.utils.json_to_sheet([...sheetData]);
-    const wb = xlsx.utils.book_new(); // 가상의 엑셀파일 생성
-    xlsx.utils.book_append_sheet(wb, ws, "Sheet1");
+  // const excelDownload = () => {
+  //   const ws = xlsx.utils.json_to_sheet([...sheetData]);
+  //   const wb = xlsx.utils.book_new(); // 가상의 엑셀파일 생성
+  //   xlsx.utils.book_append_sheet(wb, ws, "Sheet1");
 
-    xlsx.writeFile(wb, "dramatis_personae.xlsx"); // 엑셀파일 생성 후 저장 형식
-  };
+  //   xlsx.writeFile(wb, "dramatis_personae.xlsx"); // 엑셀파일 생성 후 저장 형식
+  // };
 
   return (
     <Box sx={{ display: "flex", py: "50px", px: "300px" }}>
@@ -289,7 +289,7 @@ export default function StudyGroup() {
           <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
             <LongButton
               name="목록 받기"
-              onClick={excelDownload}
+              // onClick={excelDownload}
               bgColor="primary.main"
               fontColor="white"
             />
