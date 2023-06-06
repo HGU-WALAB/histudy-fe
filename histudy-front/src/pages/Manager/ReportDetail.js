@@ -30,44 +30,50 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { deleteReport, modifyReport } from "../../apis/report";
 
 export default function ReportDetail() {
-  // const [reportData, setReportData] = useState();
+  const [reportData, setReportData] = useState();
   const { state } = useLocation();
-  // useEffect(() => {
-  //   readReportDetail(state).then((info) => {
-  //     setReportData(info);
-  //   });
-  // }, []);
-  console.log(state);
 
   const useUserReportDeatilMatch = useMatch("/report/:id");
 
-  const reportData = {
-    title: "알고리듬 분석 스터디1",
-    participants: [
-      {
-        id: 1,
-        name: "한시온",
-        number: "21800333",
-      },
-      {
-        id: 2,
-        name: "오인혁",
-        number: "21800123",
-      },
-    ],
-    totalMinutes: 90,
-    content: "contents will be placed here",
-    images: [
-      {
-        id: 1,
-        url: "/img/puppy.jpeg",
-      },
-      {
-        id: 2,
-        url: "/img/puppy2.jpeg",
-      },
-    ],
-  };
+  useEffect(() => {
+    if (useUserReportDeatilMatch) {
+      setReportData(state);
+    } else {
+      readReportDetail(state).then((info) => {
+        setReportData(info);
+      });
+    }
+  }, []);
+
+  console.log(state);
+
+  // const reportData = {
+  //   title: "알고리듬 분석 스터디1",
+  //   participants: [
+  //     {
+  //       id: 1,
+  //       name: "한시온",
+  //       number: "21800333",
+  //     },
+  //     {
+  //       id: 2,
+  //       name: "오인혁",
+  //       number: "21800123",
+  //     },
+  //   ],
+  //   totalMinutes: 90,
+  //   content: "contents will be placed here",
+  //   images: [
+  //     {
+  //       id: 1,
+  //       url: "/img/puppy.jpeg",
+  //     },
+  //     {
+  //       id: 2,
+  //       url: "/img/puppy2.jpeg",
+  //     },
+  //   ],
+  // };
   const navigate = useNavigate();
 
   const moveToBefore = () => {
@@ -78,13 +84,14 @@ export default function ReportDetail() {
     if (buttonId === "modify") {
       navigate(`/report/modify/${state.id}`, { state: state });
     } else if (buttonId === "delete") {
-      deleteReport(state.id);
+      if (useUserReportDeatilMatch) deleteReport(state.id);
+      else deleteReport(state);
     }
   };
 
   return (
     <>
-      {state && (
+      {reportData && (
         <Box sx={{ display: "flex", py: "50px", px: "300px" }}>
           <Box sx={{ position: "fixed", left: "30px", top: "50px" }}>
             {!useUserReportDeatilMatch && <SideBar />}
@@ -131,14 +138,16 @@ export default function ReportDetail() {
                       제목
                     </Box>
                     <Typography sx={{ flex: "10 1 auto", marginLeft: "10px" }}>
-                      {state.title}
+                      {reportData.title}
                     </Typography>
-                    <IconButton>
-                      <DriveFileRenameOutlineIcon
-                        onClick={() => handleClick("modify")}
-                        color="primary"
-                      />
-                    </IconButton>
+                    {useUserReportDeatilMatch && (
+                      <IconButton>
+                        <DriveFileRenameOutlineIcon
+                          onClick={() => handleClick("modify")}
+                          color="primary"
+                        />
+                      </IconButton>
+                    )}
 
                     <IconButton>
                       <DeleteIcon
@@ -159,7 +168,7 @@ export default function ReportDetail() {
                       참여 멤버
                     </Box>
                     <Typography sx={{ flex: "10 1 auto", marginLeft: "10px" }}>
-                      {state?.participants?.map((member, index) => (
+                      {reportData?.participants?.map((member, index) => (
                         <Fragment key={index}>
                           {index > 0 && ", "}
                           {member.name}
@@ -179,7 +188,7 @@ export default function ReportDetail() {
                       스터디 시간
                     </Box>
                     <Typography sx={{ flex: "10 1 auto", marginLeft: "10px" }}>
-                      {state.totalMinutes}분
+                      {reportData.totalMinutes}분
                     </Typography>
                   </Box>
                   <Box
@@ -194,19 +203,18 @@ export default function ReportDetail() {
                       보고서 내용
                     </Box>
                     <Typography sx={{ flex: "10 1 auto", marginLeft: "10px" }}>
-                      {state.content}
+                      {reportData.content}
                     </Typography>
                   </Box>
                   <Box
                     sx={{
                       display: "flex",
                       width: "100%",
-
                       mb: "1rem",
                     }}
                   >
                     <ImageList>
-                      {state.images.map((item) => (
+                      {reportData.images?.map((item) => (
                         <ImageListItem key={item.id}>
                           <img src={item.url} alt="보고서 사진" />
                         </ImageListItem>
