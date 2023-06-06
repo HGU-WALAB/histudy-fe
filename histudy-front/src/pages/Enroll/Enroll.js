@@ -82,6 +82,10 @@ export default function Enroll() {
         friendIds: sideFriends.map((elem) => elem[1]),
         courseIds: expandCourses(sideCourses.map((elem) => elem[3])),
       };
+      if (data.courseIds.length === 0) {
+        alert("과목을 최소 1개는 선택해야 합니다.");
+        return;
+      }
       alert("스터디 신청이 완료되었습니다.");
       studyEnroll(data);
       navigate("/");
@@ -132,7 +136,7 @@ export default function Enroll() {
                 fontWeight: "600",
               }}
             >
-              서로 함께 하고 싶은 친구로 신청해야 매칭됩니다!
+              서로 함께 하고 싶은 친구로 신청해야 매칭됩니다! (최대 4명)
             </Typography>
             <Friends
               sideFriends={sideFriends}

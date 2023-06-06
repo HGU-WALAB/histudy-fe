@@ -211,7 +211,11 @@ export default function CustomTable({
                   <Button
                     key={index}
                     onClick={() => {
-                      addData((prev) => [...prev, row]);
+                      if (type === "second" && sidebarValues.length >= 3)
+                        alert("최대 3명까지만 선택 가능합니다.");
+                      else if (type === "first" && sidebarValues.length >= 4)
+                        alert("최대 4개까지만 선택 가능합니다.");
+                      else addData((prev) => [...prev, row]);
                     }}
                     sx={{
                       borderRadius: "15px",

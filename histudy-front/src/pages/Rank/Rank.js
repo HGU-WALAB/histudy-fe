@@ -39,9 +39,10 @@ export default function Rank() {
     <Box
       sx={{
         minHeight: "100vh",
-        px: "150px",
+        px: "50px",
         display: "flex",
         flexDirection: "column",
+        alignItems: "center",
       }}
     >
       <Box
@@ -52,7 +53,7 @@ export default function Rank() {
           pb: "100px",
         }}
       >
-        <Typography sx={{ fontSize: "20px", fontWeight: "500" }}>
+        <Typography sx={{ fontSize: "30px", fontWeight: "300" }}>
           스터디 그룹 랭킹
         </Typography>
       </Box>
@@ -61,9 +62,8 @@ export default function Rank() {
         <NoDataLottie />
       ) : (
         <ImageList
-          sx={{ maxWidth: "1230px" }}
           cols={4}
-          gap={10}
+          gap="10px"
           component={motion.div}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

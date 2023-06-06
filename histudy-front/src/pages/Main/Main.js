@@ -18,7 +18,6 @@ import RegisterModal from "../../components/Main/RegisterModal";
 
 export default function Main() {
   const [sid, setSid] = useState("");
-
   const [isLogin, setIsLogin] = useRecoilState(isLoginState);
   const [isRegisterModal, setIsRegisterModal] =
     useRecoilState(isRegisterModalState);

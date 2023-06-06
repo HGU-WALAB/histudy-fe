@@ -5,8 +5,19 @@ import LongButton from "../../components/LongButton";
 import { getMyGroup } from "../../apis/study";
 import { Link } from "react-router-dom";
 import NoDataLottie from "../../components/NoDataLottie";
+import { getMyTeamUsers } from "../../apis/users";
 
 export default function Group() {
+  const [teamMembers, setTeamMembers] = useState();
+
+  // team 유저 정보
+  useEffect(() => {
+    getMyTeamUsers.then((res) => {
+      console.log(res);
+      setTeamMembers(res);
+    });
+  }, []);
+
   const [courses, setCourses] = useState([
     // { name: "알고리즘 분석", professor: "이원형 교수님" },
     // { name: "데이타 베이스", professor: "홍참길 교수님" },
