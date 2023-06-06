@@ -24,24 +24,26 @@ export default function HoverBox({ members, reports, totalMinutes }) {
         width: "100%",
         height: "100%",
         position: "absolute",
-        justifyContent: "center",
+        justifyContent: "space-between",
         left: 0,
         top: 0,
+        paddingX: "15px",
+        paddingTop: "70px",
+        paddingBottom: "30px",
         backgroundColor: "rgba(0, 0, 0, 0.6)",
       }}
     >
       <Box
         sx={{
           display: "flex",
-          padding: "20px",
-          display: "flex",
           gap: "10px",
+          flexWrap: "wrap",
         }}
       >
         {members.map((member) => (
           <StyledChip
             icon={<FaceIcon sx={{ fill: "white" }} />}
-            label={`${member}`}
+            label={`${member.slice(0, 5)}`}
             variant="outlined"
           />
         ))}
@@ -50,7 +52,7 @@ export default function HoverBox({ members, reports, totalMinutes }) {
       <Box
         sx={{
           display: "flex",
-          padding: "20px",
+
           gap: "10px",
         }}
       >
@@ -60,7 +62,7 @@ export default function HoverBox({ members, reports, totalMinutes }) {
       <Box
         sx={{
           display: "flex",
-          padding: "20px",
+
           gap: "10px",
         }}
       >
