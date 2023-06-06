@@ -101,8 +101,8 @@ export default function Enroll() {
 
   return (
     <Box sx={{ display: "flex", py: "80px", px: "300px", minHeight: "100vh" }}>
-      <Box sx={{ position: "absolute", left: "30px", top: "30px" }}>
-        <ProgressBar page={page} />
+      <Box sx={{ position: "absolute", left: "40px", top: "30px" }}>
+        <ProgressBar page={page} setPage={setPage} />
         <GrayBorderBox
           courses={sideCourses}
           friends={sideFriends}
@@ -113,27 +113,36 @@ export default function Enroll() {
       <Box sx={{ width: "100%", ml: "70px" }}>
         <Typography
           variant="h4"
-          sx={{ textAlign: "center", mb: "10px", fontWeight: "500" }}
+          sx={{ textAlign: "center", mb: "20px", fontWeight: "500" }}
         >
           Histudy 신청하기
         </Typography>
 
         {page === 1 && (
           <>
+            <Typography sx={{ textAlign: "center", fontWeight: "400" }}>
+              스터디를 함께하고 싶은 친구가 있다면 추가하세요!
+            </Typography>
             <Typography
-              sx={{ textAlign: "center", height: "50px", fontWeight: "400" }}
+              sx={{
+                color: "primary.main",
+                textAlign: "center",
+                mt: "5px",
+                mb: "30px",
+                fontWeight: "600",
+              }}
             >
-              스터디를 함께하고 싶은 친구를 등록하세요!
+              서로 함께 하고 싶은 친구로 신청해야 매칭됩니다!
             </Typography>
             <Friends
               sideFriends={sideFriends}
               setSideFriends={setSideFriends}
             />
-            <Typography
+            {/* <Typography
               sx={{ color: "primary.main", textAlign: "center", mt: 4 }}
             >
               서로 함께 하고 싶은 친구로 신청해야 매칭됩니다!
-            </Typography>
+            </Typography> */}
             <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
               <LongButton
                 name="다음"

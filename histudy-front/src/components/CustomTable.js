@@ -135,6 +135,7 @@ export default function CustomTable({
           <Box
             key={index}
             sx={{
+              position: "relative",
               alignItems: "center",
               mx: "60px",
               display: "flex",
@@ -187,7 +188,7 @@ export default function CustomTable({
                 </Button>
               </Link>
             )}
-            <Box sx={{ position: "relative" }}>
+            <Box sx={{ position: "absolute", right: 0 }}>
               {type === "first" || type === "second" ? (
                 checkInclude(row[1]) ? (
                   <Button
@@ -201,9 +202,6 @@ export default function CustomTable({
                       borderRadius: "15px",
                       color: "white",
                       backgroundColor: "error.main",
-                      // position: "absolute",
-                      // right: "0px"
-                      left: type === "first" ? "80px" : "-60px",
                       paddingY: "3px",
                     }}
                   >
@@ -219,10 +217,6 @@ export default function CustomTable({
                       borderRadius: "15px",
                       color: "white",
                       backgroundColor: "primary.main",
-
-                      // right: "0px"
-                      left: type === "first" ? "80px" : "-60px",
-
                       paddingY: "3px",
                     }}
                   >
