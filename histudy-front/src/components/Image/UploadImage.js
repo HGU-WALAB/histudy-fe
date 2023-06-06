@@ -7,6 +7,7 @@ import {
 } from "firebase/storage";
 import { getValue } from "@testing-library/user-event/dist/utils";
 import { storage } from "../../Firebase/firebase";
+
 import {
   Box,
   Button,
@@ -17,9 +18,10 @@ import {
 } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
-import compressedFile from "./compressFile";
 import { importCourses } from "../../apis/course";
-import heic2any from "heic2any";
+import Heic2Jpg from "./Heic2Jpg";
+import compressedFile from "./compressFile";
+
 // import CompressedFile from "./compressFile";
 // import convert from "heic-convert";
 
@@ -43,53 +45,12 @@ export function ImageUpload({ setValue, getValues }) {
     const file = e.target.files;
     if (!file) return null;
 
-    // console.log(file[0]);
-    // console.log(Heic2Jpg(file[0]));
-    // const selectedFile = await Heic2Jpg(file[0], setValue, getValues);
-    // console.log(selectedFile);
+    const convertedFile = await Heic2Jpg(file[0]);
 
-    // const selectedFile = file[0];
-
-    // if (file[0]) {
-    //   try {
-    //     // const { promisify } = require("util");
-    //     // const fs = require("fs");
-    //     // const convert = require("heic-convert");
-
-    //     // const inputBuffer = await promisify(fs.readFile)(file[0].path);
-    //     // // await file[0].arrayBuffer();
-    //     // const outputBuffer = await convert({
-    //     //   buffer: Buffer.from(inputBuffer),
-    //     //   format: "JPEG",
-    //     //   quality: 0.5,
-    //     // });
-
-    //     // const convertedFile = await promisify(fs.writeFile)(
-    //     //   "result.jpg",
-    //     //   outputBuffer
-    //     // );
-    //     // const convertedFile = new File([outputBuffer], "result.jpg", {
-    //     //   type: "image/jpeg",
-    //     // });
-
-    //     console.log(convertedFile);
-    //     console.log(file[0]);
-    //   } catch (error) {
-    //     console.error("Error converting HEIC file:", error);
-    //   }
-    // }
-    const convertedFile = await heic2any({
-      blob: file[0],
-      toType: "image/jpeg",
-      quality: 0.5,
-    });
-
-    console.log(convertedFile);
-    const selectedFile = await compressedFile(convertedFile);
-    console.log(selectedFile);
+    const lowCapacityFile = await compressedFile(convertedFile);
 
     const storageRef = ref(storage, `files/${file[0].name}`);
-    const uploadTask = uploadBytesResumable(storageRef, selectedFile);
+    const uploadTask = uploadBytesResumable(storageRef, lowCapacityFile);
 
     uploadTask.on(
       "state_changed",
