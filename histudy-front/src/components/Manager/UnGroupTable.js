@@ -1,5 +1,13 @@
 import { Cancel, Edit } from "@mui/icons-material";
-import { Box, Chip, IconButton, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Chip,
+  IconButton,
+  MenuItem,
+  Select,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useState } from "react";
 import GroupSelector from "./GroupSelector";
 
@@ -69,7 +77,7 @@ export default function UnGroupTable({
                 sx={{
                   display: "flex",
                   borderTop: index !== 0 && 1,
-                  py: "20px",
+                  // py: "20px",
                   borderColor: "primary.border",
                 }}
               >
@@ -90,7 +98,7 @@ export default function UnGroupTable({
                       textOverflow: "ellipsis",
                       overflowX: "auto",
                       whiteSpace: "nowrap",
-                      py: "20px",
+                      // py: "20px",
                       borderColor: "primary.border",
                     }}
                   >
@@ -118,21 +126,21 @@ export default function UnGroupTable({
                       color: "text.secondary",
                       display: "flex",
                       flexGrow: 1,
-                      width: "150px",
-                      textOverflow: "ellipsis",
-                      overflowX: "auto",
-                      whiteSpace: "nowrap",
-
+                      marginLeft: "20px",
                       py: "20px",
                       borderColor: "primary.border",
                     }}
                   >
-                    {row.courses.map((sub, index) => (
-                      <Typography>
-                        {index > 0 && ", "}
-                        {sub.name}
-                      </Typography>
-                    ))}
+                    <Select
+                      sx={{ color: "text.secondary" }}
+                      value={row.courses.length > 0 ? row.courses[0].name : ""}
+                    >
+                      {row.courses.map((subject, index) => (
+                        <MenuItem key={index} value={subject.name}>
+                          <Typography>{subject.name}</Typography>
+                        </MenuItem>
+                      ))}
+                    </Select>
                   </Box>
 
                   <Box
@@ -140,35 +148,33 @@ export default function UnGroupTable({
                       color: "text.secondary",
                       display: "flex",
                       flexGrow: 1,
-                      width: "150px",
-                      textOverflow: "ellipsis",
-                      overflowX: "auto",
-                      whiteSpace: "nowrap",
-                      marginLeft: "30px",
                       py: "20px",
                       borderColor: "primary.border",
                     }}
                   >
-                    {row.friends.map((friend, index) => (
-                      <>
-                        {index > 0 && ", "}
-                        <Typography>{friend.name},</Typography>
-                        <Typography>{friend.number}</Typography>
-                      </>
-                    ))}
+                    <Select
+                      sx={{ width: "170px", color: "text.secondary" }}
+                      value={row.friends.length > 0 ? row.friends[0].name : ""}
+                    >
+                      {row.friends.map((friend, index) => (
+                        <MenuItem key={index} value={friend.name}>
+                          <Typography>
+                            {friend.name}, {friend.number}
+                          </Typography>
+                        </MenuItem>
+                      ))}
+                    </Select>
                   </Box>
-                  {/* </Typography> */}
-                  {/* ))} */}
                 </Box>
 
-                <Box sx={{ marginRight: "50px" }}>
+                <Box sx={{ marginRight: "20px", py: "25px" }}>
                   <IconButton onClick={() => handleEdit(index)}>
                     <Edit />
                   </IconButton>
 
-                  <IconButton onClick={() => handleDeleteRow(index)}>
+                  {/* <IconButton onClick={() => handleDeleteRow(index)}>
                     <Cancel />
-                  </IconButton>
+                  </IconButton> */}
                 </Box>
               </Box>
             ) : (
@@ -177,7 +183,7 @@ export default function UnGroupTable({
                 sx={{
                   display: "flex",
                   borderTop: index !== 0 && 1,
-                  py: "20px",
+                  // py: "20px",
                   borderColor: "primary.border",
                 }}
               >
@@ -198,7 +204,7 @@ export default function UnGroupTable({
                       textOverflow: "ellipsis",
                       overflowX: "auto",
                       whiteSpace: "nowrap",
-                      py: "20px",
+                      // py: "20px",
                       borderColor: "primary.border",
                     }}
                   >
@@ -214,7 +220,7 @@ export default function UnGroupTable({
                       textOverflow: "ellipsis",
                       overflowX: "auto",
                       whiteSpace: "nowrap",
-                      py: "20px",
+                      // py: "20px",
                       borderColor: "primary.border",
                     }}
                   >
@@ -235,21 +241,21 @@ export default function UnGroupTable({
                       color: "text.secondary",
                       display: "flex",
                       flexGrow: 1,
-                      width: "150px",
-                      textOverflow: "ellipsis",
-                      overflowX: "auto",
-                      whiteSpace: "nowrap",
-
+                      marginLeft: "20px",
                       py: "20px",
                       borderColor: "primary.border",
                     }}
                   >
-                    {row.courses.map((sub, index) => (
-                      <Typography>
-                        {index > 0 && ", "}
-                        {sub.name}
-                      </Typography>
-                    ))}
+                    <Select
+                      sx={{ color: "text.secondary" }}
+                      value={row.courses.length > 0 ? row.courses[0].name : ""}
+                    >
+                      {row.courses.map((subject, index) => (
+                        <MenuItem key={index} value={subject.name}>
+                          <Typography>{subject.name}</Typography>
+                        </MenuItem>
+                      ))}
+                    </Select>
                   </Box>
 
                   <Box
@@ -257,26 +263,26 @@ export default function UnGroupTable({
                       color: "text.secondary",
                       display: "flex",
                       flexGrow: 1,
-                      width: "150px",
-                      textOverflow: "ellipsis",
-                      overflowX: "auto",
-                      whiteSpace: "nowrap",
-                      marginLeft: "30px",
                       py: "20px",
                       borderColor: "primary.border",
                     }}
                   >
-                    {row.friends.map((friend, index) => (
-                      <>
-                        {index > 0 && ", "}
-                        <Typography>{friend.name},</Typography>
-                        <Typography>{friend.number}</Typography>
-                      </>
-                    ))}
+                    <Select
+                      sx={{ width: "170px", color: "text.secondary" }}
+                      value={row.friends.length > 0 ? row.friends[0].name : ""}
+                    >
+                      {row.friends.map((friend, index) => (
+                        <MenuItem key={index} value={friend.name}>
+                          <Typography>
+                            {friend.name}, {friend.number}
+                          </Typography>
+                        </MenuItem>
+                      ))}
+                    </Select>
                   </Box>
                 </Box>
 
-                <Box sx={{ display: "flex", py: "10px", marginRight: "50px" }}>
+                <Box sx={{ display: "flex", py: "30px", marginRight: "20px" }}>
                   <Chip
                     sx={{
                       color: "white",

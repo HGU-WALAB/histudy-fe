@@ -1,5 +1,5 @@
 import { Cancel } from "@mui/icons-material";
-import { Box, IconButton, Typography } from "@mui/material";
+import { Box, IconButton, MenuItem, Select, Typography } from "@mui/material";
 
 export default function CreateGroupTable({
   type,
@@ -12,6 +12,7 @@ export default function CreateGroupTable({
   };
 
   const handleDeleteRow = (index) => {};
+
   return (
     <>
       <Box
@@ -52,7 +53,7 @@ export default function CreateGroupTable({
             sx={{
               display: "flex",
               borderTop: index !== 0 && 1,
-              py: "20px",
+              // py: "20px",
               borderColor: "primary.border",
             }}
           >
@@ -74,7 +75,7 @@ export default function CreateGroupTable({
                   whiteSpace: "nowrap",
                   py: "20px",
                   borderColor: "primary.border",
-                  marginLeft: "30px",
+                  marginLeft: "55px",
                 }}
               >
                 {row.name}
@@ -85,7 +86,8 @@ export default function CreateGroupTable({
                   color: "text.secondary",
                   display: "flex",
                   flexGrow: 1,
-                  width: "50px",
+                  // width: "50px",
+                  marginLeft: "70px",
                   textOverflow: "ellipsis",
                   overflowX: "auto",
                   whiteSpace: "nowrap",
@@ -95,26 +97,27 @@ export default function CreateGroupTable({
               >
                 {row.number}
               </Box>
+
               <Box
                 sx={{
                   color: "text.secondary",
                   display: "flex",
-                  flexGrow: 2,
-                  width: "50px",
-                  textOverflow: "ellipsis",
-                  overflowX: "auto",
-                  whiteSpace: "nowrap",
-
+                  flexGrow: 1,
+                  marginLeft: "20px",
                   py: "20px",
                   borderColor: "primary.border",
                 }}
               >
-                {row.subjects.map((subject, index) => (
-                  <Typography>
-                    {index > 0 && ", "}
-                    {subject.name}
-                  </Typography>
-                ))}
+                <Select
+                  sx={{ color: "text.secondary" }}
+                  value={row.courses.length > 0 ? row.courses[0].name : ""}
+                >
+                  {row.courses.map((subject, index) => (
+                    <MenuItem key={index} value={subject.name}>
+                      <Typography>{subject.name}</Typography>
+                    </MenuItem>
+                  ))}
+                </Select>
               </Box>
 
               <Box
@@ -122,23 +125,22 @@ export default function CreateGroupTable({
                   color: "text.secondary",
                   display: "flex",
                   flexGrow: 1,
-                  width: "50px",
-                  marginLeft: "30px",
-                  textOverflow: "ellipsis",
-                  overflowX: "auto",
-                  whiteSpace: "nowrap",
-
                   py: "20px",
                   borderColor: "primary.border",
                 }}
               >
-                {row.friends.map((friend, index) => (
-                  <>
-                    {index > 0 && ", "}
-                    <Typography>{friend.name},</Typography>
-                    <Typography>{friend.number}</Typography>
-                  </>
-                ))}
+                <Select
+                  sx={{ width: "170px", color: "text.secondary" }}
+                  value={row.friends.length > 0 ? row.friends[0].name : ""}
+                >
+                  {row.friends.map((friend, index) => (
+                    <MenuItem key={index} value={friend.name}>
+                      <Typography>
+                        {friend.name}, {friend.number}
+                      </Typography>
+                    </MenuItem>
+                  ))}
+                </Select>
               </Box>
             </Box>
             <IconButton
