@@ -20,6 +20,7 @@ import LooksOneIcon from "@mui/icons-material/LooksOne";
 import HoverBox from "../../components/Rank/HoverBox";
 import { AnimatePresence, motion } from "framer-motion";
 import { Image } from "@mui/icons-material";
+import NoDataLottie from "../../components/NoDataLottie";
 
 export default function Rank() {
   const [teams, setTeams] = useState([]);
@@ -51,88 +52,96 @@ export default function Rank() {
           pb: "100px",
         }}
       >
-        <Typography sx={{ fontSize: "30px", fontWeight: "300" }}>
+        <Typography sx={{ fontSize: "20px", fontWeight: "500" }}>
           스터디 그룹 랭킹
         </Typography>
       </Box>
 
-      <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
+      {teams.length === 0 ? (
+        <NoDataLottie />
+      ) : (
         <ImageList
+          sx={{ maxWidth: "1230px" }}
+          cols={4}
+          gap={10}
           component={motion.div}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          sx={{
-            width: "100%",
-          }}
         >
           {teams.map((item, index) => (
-            <div
-              style={{
-                position: "relative",
-                width: "300px",
-                // border: "1px solid black",
-                height: "300px",
-              }}
-              onMouseOver={() =>
-                setItemsHover((prev) => [
-                  ...prev.slice(0, index),
-                  true,
-                  ...prev.slice(index + 1),
-                ])
-              }
-              onMouseOut={() =>
-                setItemsHover((prev) => [
-                  ...prev.slice(0, index),
-                  false,
-                  ...prev.slice(index + 1),
-                ])
-              }
-            >
-              <AnimatePresence>
-                {itemsHover[index] && (
-                  <HoverBox
-                    members={item.members}
-                    reports={item.reports}
-                    totalMinutes={item.totalMinutes}
-                  />
-                )}
-              </AnimatePresence>
-              <ImageListItem key={item.img} sx={{ position: "relative" }}>
-                {!itemsHover[index] && (
-                  <motion.img
-                    key={index}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    src={`${
-                      !item.thumbnail ? "/img/mainImg2.png" : item.thumbnail
+            <Grid item key={index}>
+              <div
+                style={{
+                  position: "relative",
+                  width: "300px",
+                  // border: "1px solid black",
+                  height: "300px",
+                }}
+                onMouseOver={() =>
+                  setItemsHover((prev) => [
+                    ...prev.slice(0, index),
+                    true,
+                    ...prev.slice(index + 1),
+                  ])
+                }
+                onMouseOut={() =>
+                  setItemsHover((prev) => [
+                    ...prev.slice(0, index),
+                    false,
+                    ...prev.slice(index + 1),
+                  ])
+                }
+              >
+                <AnimatePresence>
+                  {itemsHover[index] && (
+                    <HoverBox
+                      members={item.members}
+                      reports={item.reports}
+                      totalMinutes={item.totalMinutes}
+                    />
+                  )}
+                </AnimatePresence>
+                <ImageListItem key={item.img} sx={{ position: "relative" }}>
+                  {!itemsHover[index] && (
+                    <motion.img
+                      key={index}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      src={`${
+                        !item.thumbnail ? "/img/mainImg2.png" : item.thumbnail
+                      }`}
+                      alt={item.title}
+                      loading="lazy"
+                    />
+                  )}
+                  <ImageListItemBar
+                    sx={{
+                      color: "white",
+                      position: "absolute",
+                      top: !itemsHover[index] ? 250 : 30,
+                    }}
+                    title={` ${
+                      itemsHover[index]
+                        ? `Group ${item.id}`
+                        : `Rank ${index + 1}`
                     }`}
-                    alt={item.title}
-                    loading="lazy"
+                    actionIcon={
+                      <IconButton
+                        sx={{ color: "rgba(255, 255, 255, 1)" }}
+                        aria-label={`info about ${item.title}`}
+                      >
+                        <GroupsIcon />
+                      </IconButton>
+                    }
                   />
-                )}
-                <ImageListItemBar
-                  sx={{
-                    color: "white",
-                    position: "absolute",
-                    top: !itemsHover[index] ? 250 : 30,
-                  }}
-                  title={` ${
-                    itemsHover[index] ? `Group ${item.id}` : `Rank ${index + 1}`
-                  }`}
-                  actionIcon={
-                    <IconButton
-                      sx={{ color: "rgba(255, 255, 255, 1)" }}
-                      aria-label={`info about ${item.title}`}
-                    >
-                      <GroupsIcon />
-                    </IconButton>
-                  }
-                />
-              </ImageListItem>
-            </div>
+                </ImageListItem>
+              </div>
+            </Grid>
           ))}
         </ImageList>
-      </Grid>
+      )}
+
+      {/* </Grid> */}
     </Box>
   );
 }

@@ -147,10 +147,10 @@ export default function CustomTable({
             {(type === "third" || type === "report") && (
               <Typography
                 sx={{
-                  width: longWidthColumnNum === index + 1 && "50%",
-                  minWidth: longWidthColumnNum !== index + 1 && "150px",
-                  color: accentColumnNum === index + 1 && "primary.main",
-                  fontWeight: accentColumnNum === index + 1 && "bold",
+                  minWidth: "150px",
+                  // minWidth: longWidthColumnNum !== index + 1 && "150px",
+                  // color: accentColumnNum === index + 1 && "primary.main",
+                  // fontWeight: accentColumnNum === index + 1 && "bold",
                 }}
               >
                 {index + 1}
@@ -217,6 +217,10 @@ export default function CustomTable({
                       borderRadius: "15px",
                       color: "white",
                       backgroundColor: "primary.main",
+
+                      // right: "0px"
+                      // left: type === "first" ? "80px" : "-60px",
+
                       paddingY: "3px",
                     }}
                   >
