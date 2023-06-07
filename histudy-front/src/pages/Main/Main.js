@@ -18,13 +18,11 @@ import RegisterModal from "../../components/Main/RegisterModal";
 
 export default function Main() {
   const [sid, setSid] = useState("");
-
   const [isLogin, setIsLogin] = useRecoilState(isLoginState);
   const [isRegisterModal, setIsRegisterModal] =
     useRecoilState(isRegisterModalState);
   const [userLoginInfoState, setUserLoginInfoState] =
     useRecoilState(userLoginInfo);
-  console.log(userLoginInfoState);
 
   const nameConverter = (name) => {
     if (name.slice(-3) === "학부생") return name.slice(0, -3);
@@ -49,7 +47,6 @@ export default function Main() {
       return;
     }
     const response = await userSignup(newUser);
-    console.log(response);
 
     alert("회원가입이 완료되었습니다.");
     localStorage.setItem("accessToken", response.tokens.accessToken);
@@ -63,7 +60,7 @@ export default function Main() {
   useEffect(() => {
     window.scrollTo(0, 80);
   }, []);
-  // console.log(isLogin);
+
   return (
     <Box>
       {/* <NavGrid /> */}

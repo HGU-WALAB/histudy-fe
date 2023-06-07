@@ -16,7 +16,7 @@ export default function Header() {
   const rankMatch = useMatch("/rank");
   const enrollMatch = useMatch("/enroll");
   const managerMatch = useMatch("/manageClass");
-  console.log(rankMatch);
+  const profileMatch = useMatch("/profile");
 
   const [isLogin, setIsLogin] = useRecoilState(isLoginState);
 
@@ -64,14 +64,14 @@ export default function Header() {
         <HeaderButton link="/manageClass" name="MANAGER" match={managerMatch} />
       </Box>
 
-      <Box>
+      <Box sx={{ display: "flex" }}>
         {isLogin && (
           <Button sx={{ color: "text.header" }} onClick={handleLogOut}>
             Log out
           </Button>
         )}
 
-        <Button>My Account</Button>
+        <HeaderButton link="/profile" name="My Account" match={profileMatch} />
         <DarkModeToggle />
       </Box>
     </Box>

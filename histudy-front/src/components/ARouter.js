@@ -18,6 +18,9 @@ import MainTest from "./Main/MainTest";
 import Snackbars from "../pages/Manager/Snackbars";
 import { useRecoilState } from "recoil";
 import { isDelete } from "../store/atom";
+import Profile from "../pages/Profile/Profile";
+import { motion } from "framer-motion";
+import { Box } from "@mui/material";
 
 export default function ARouter() {
   const [open, setOpen] = useRecoilState(isDelete);
@@ -45,6 +48,7 @@ export default function ARouter() {
           <Route path="/manageReport" element={<ManageReport />}></Route>
           <Route path="/reportDetail" element={<ReportDetail />}></Route>
           <Route path="/test" element={<MainTest />}></Route>
+          <Route path="/profile" element={<Profile />}></Route>
         </Routes>
         <Footer />
       </BrowserRouter>

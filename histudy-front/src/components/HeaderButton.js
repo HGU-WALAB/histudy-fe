@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 export default function HeaderButton({ link, name, match, color }) {
   return (
-    <Link to={link}>
+    <Link to={link} style={{ textDecoration: "none" }}>
       <Box
         sx={{
           position: "relative",

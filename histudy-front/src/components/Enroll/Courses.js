@@ -1,4 +1,4 @@
-import { InputAdornment, TextField } from "@mui/material";
+import { InputAdornment, TextField, useTheme } from "@mui/material";
 import CustomTable from "../CustomTable";
 import SearchIcon from "@mui/icons-material/Search";
 import { useEffect, useState } from "react";
@@ -24,6 +24,7 @@ export default function Courses({ sideCourses, setSideCourses }) {
 
     return result;
   };
+  const theme = useTheme();
 
   useEffect(() => {
     setCourses(courseConverter(allCourses));
@@ -51,6 +52,7 @@ export default function Courses({ sideCourses, setSideCourses }) {
         onChange={handleChange}
         sx={{ width: "100%", borderRadius: "30px", mb: 4 }}
         InputProps={{
+          style: { backgroundColor: theme.palette.background.default },
           startAdornment: (
             <InputAdornment position="start">
               <SearchIcon />

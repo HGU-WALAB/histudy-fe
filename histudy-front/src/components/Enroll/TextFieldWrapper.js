@@ -5,7 +5,4 @@ export const TextFieldWrapper = styled(TextField)`
   fieldset {
     border-radius: 50px;
   }
-  input {
-    color: black;
-  }
 `;

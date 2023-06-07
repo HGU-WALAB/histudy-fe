@@ -19,6 +19,7 @@ import Friends from "../../components/Enroll/Friends";
 import Courses from "../../components/Enroll/Courses";
 import { studyEnroll } from "../../apis/study";
 import { useLocation, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export default function Enroll() {
   const location = useLocation();
@@ -62,17 +63,30 @@ export default function Enroll() {
 
   const [sideFriends, setSideFriends] = useState([]);
 
+  const expandCourses = (courses) => {
+    if (courses.length === 1) {
+      return [courses[0], courses[0], courses[0]];
+    } else if (courses.length === 2) {
+      return [courses[0], courses[1], courses[1]];
+    }
+    return courses;
+  };
+
   const navigate = useNavigate();
   const handleClick = (event) => {
     const ID = event.target.id;
-    console.log(ID);
+
     if (ID === "다음") setPage((prev) => prev + 1);
     else if (ID === "이전") setPage((prev) => prev - 1);
     else if (ID === "제출") {
       const data = {
         friendIds: sideFriends.map((elem) => elem[1]),
-        courseIds: sideCourses.map((elem) => elem[3]),
+        courseIds: expandCourses(sideCourses.map((elem) => elem[3])),
       };
+      if (data.courseIds.length === 0) {
+        alert("과목을 최소 1개는 선택해야 합니다.");
+        return;
+      }
       alert("스터디 신청이 완료되었습니다.");
       studyEnroll(data);
       navigate("/");
@@ -90,9 +104,14 @@ export default function Enroll() {
   };
 
   return (
-    <Box sx={{ display: "flex", py: "80px", px: "300px", minHeight: "100vh" }}>
-      <Box sx={{ position: "absolute", left: "30px", top: "30px" }}>
-        <ProgressBar page={page} />
+    <Box
+      component={motion.div}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      sx={{ display: "flex", py: "80px", px: "300px", minHeight: "100vh" }}
+    >
+      <Box sx={{ position: "absolute", left: "45px", top: "30px" }}>
+        <ProgressBar page={page} setPage={setPage} />
         <GrayBorderBox
           courses={sideCourses}
           friends={sideFriends}
@@ -102,28 +121,45 @@ export default function Enroll() {
       </Box>
       <Box sx={{ width: "100%", ml: "70px" }}>
         <Typography
-          variant="h4"
-          sx={{ textAlign: "center", mb: "10px", fontWeight: "500" }}
+          sx={{
+            textAlign: "center",
+            mb: "20px",
+            fontSize: "25px",
+            fontWeight: "400",
+          }}
         >
           Histudy 신청하기
         </Typography>
 
         {page === 1 && (
-          <>
+          <Box
+            component={motion.div}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+          >
+            <Typography sx={{ textAlign: "center", fontWeight: "400" }}>
+              스터디를 함께하고 싶은 친구가 있다면 추가하세요!
+            </Typography>
             <Typography
-              sx={{ textAlign: "center", height: "50px", fontWeight: "400" }}
+              sx={{
+                color: "primary.main",
+                textAlign: "center",
+                mt: "5px",
+                mb: "30px",
+                fontWeight: "600",
+              }}
             >
-              스터디를 함께하고 싶은 친구를 등록하세요!
+              서로 함께 하고 싶은 친구로 신청해야 매칭됩니다! (최대 4명)
             </Typography>
             <Friends
               sideFriends={sideFriends}
               setSideFriends={setSideFriends}
             />
-            <Typography
+            {/* <Typography
               sx={{ color: "primary.main", textAlign: "center", mt: 4 }}
             >
               서로 함께 하고 싶은 친구로 신청해야 매칭됩니다!
-            </Typography>
+            </Typography> */}
             <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
               <LongButton
                 name="다음"
@@ -132,13 +168,28 @@ export default function Enroll() {
                 fontColor="white"
               />
             </Box>
-          </>
+          </Box>
         )}
 
         {page === 2 && (
-          <>
-            <Typography sx={{ textAlign: "center", height: "50px" }}>
+          <Box
+            component={motion.div}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+          >
+            <Typography sx={{ textAlign: "center" }}>
               스터디를 하고 싶은 희망 과목들을 담아주세요!
+            </Typography>
+            <Typography
+              sx={{
+                color: "primary.main",
+                textAlign: "center",
+                mt: "5px",
+                mb: "30px",
+                fontWeight: "600",
+              }}
+            >
+              최소 1과목, 최대 3과목
             </Typography>
 
             <Courses
@@ -157,7 +208,7 @@ export default function Enroll() {
                 <LongButton
                   name="이전"
                   onClick={handleClick}
-                  bgColor="primary.border"
+                  bgColor="primary.lighter"
                   fontColor="primary.main"
                 />
                 <LongButton
@@ -168,10 +219,14 @@ export default function Enroll() {
                 />
               </Box>
             </Box>
-          </>
+          </Box>
         )}
         {page === 3 && (
-          <>
+          <Box
+            component={motion.div}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+          >
             <Typography sx={{ textAlign: "center", height: "50px" }}>
               스터디 희망 과목의 우선 순위를 정해주세요!
             </Typography>
@@ -179,7 +234,7 @@ export default function Enroll() {
             <CustomTable
               data={rankConverter(sideCourses)}
               addData={setSideCourses}
-              accentColumnNum={1}
+              accentColumnNum={-1}
               longWidthColumnNum={2}
               type="third"
             />
@@ -195,7 +250,7 @@ export default function Enroll() {
                 <LongButton
                   name="이전"
                   onClick={handleClick}
-                  bgColor="primary.border"
+                  bgColor="primary.lighter"
                   fontColor="primary.main"
                 />
 
@@ -207,7 +262,7 @@ export default function Enroll() {
                 />
               </Box>
             </Box>
-          </>
+          </Box>
         )}
       </Box>
     </Box>
