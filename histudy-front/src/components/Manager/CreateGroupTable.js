@@ -95,7 +95,7 @@ export default function CreateGroupTable({
                   borderColor: "primary.border",
                 }}
               >
-                {row.number}
+                {row.sid}
               </Box>
 
               <Box
@@ -109,7 +109,7 @@ export default function CreateGroupTable({
                 }}
               >
                 <Select
-                  sx={{ color: "text.secondary" }}
+                  sx={{ width: "170px", color: "text.secondary" }}
                   value={row.courses.length > 0 ? row.courses[0].name : ""}
                 >
                   {row.courses.map((subject, index) => (
@@ -136,7 +136,7 @@ export default function CreateGroupTable({
                   {row.friends.map((friend, index) => (
                     <MenuItem key={index} value={friend.name}>
                       <Typography>
-                        {friend.name}, {friend.number}
+                        {friend.name}, {friend.sid}
                       </Typography>
                     </MenuItem>
                   ))}

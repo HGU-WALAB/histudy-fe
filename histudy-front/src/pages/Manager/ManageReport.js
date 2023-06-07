@@ -21,14 +21,19 @@ import ReportTable from "../../components/Manager/ReportTable";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useLocation, useNavigate } from "react-router-dom";
 import { readGroupReport } from "../../apis/manager";
+import { reportDeleteState } from "../../store/atom";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 export default function ManageReport() {
   const { state } = useLocation();
-  // console.log( "+ state)
+
   const [reportData, setReportData] = useState();
+
   useEffect(() => {
     if (state) {
       readGroupReport(state).then((data) => {
+        console.log("data");
+        console.log(data);
         setReportData(data);
       });
     }
@@ -90,7 +95,11 @@ export default function ManageReport() {
   const moveToBefore = () => {
     navigate(-1);
   };
+  const clickReport = (index) => {
+    console.log(index);
 
+    navigate("/reportDetail", { state: index });
+  };
   return (
     <Box sx={{ display: "flex", py: "50px", px: "300px" }}>
       <Box sx={{ position: "fixed", left: "30px", top: "50px" }}>

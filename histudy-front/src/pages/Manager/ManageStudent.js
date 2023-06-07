@@ -16,60 +16,82 @@ import StudentListTable from "../../components/Manager/StudentListTable";
 import { readAllUsers } from "../../apis/manager";
 
 export default function ManageStudent() {
-  // const [studentData, setStudentData] = useState();
+  const [studentData, setStudentData] = useState();
+  const [searchResult, setSearchResult] = useState();
+  const [searchValue, setSearchValue] = useState("");
 
-  // useEffect(() => {
-  //   readAllUsers().then((data) => setStudentData(data));
-  // }, []);
-  const studentData = [
-    {
-      id: 1,
-      name: "오인혁",
-      number: "21800339",
-      group: 1,
-      courses: [
-        {
-          id: 1,
-          name: "Software Engineering",
-        },
-        {
-          id: 2,
-          name: "Open-source Software Laboratories",
-        },
-      ],
-    },
-    {
-      id: 2,
-      name: "한시온",
-      number: "21800311",
-      group: 1,
-      courses: [
-        {
-          id: 1,
-          name: "Software Engineering",
-        },
-        {
-          id: 2,
-          name: "Open-source Software Laboratories",
-        },
-      ],
-    },
-  ];
-
-  const sheetData = studentData.map((student) => ({
-    ID: student.id,
-    Name: student.name,
-    Number: student.number,
-    Group: student.group,
-    Courses: student.courses.map((subject) => subject.name).join(", "),
-  }));
-
+  useEffect(() => {
+    readAllUsers().then((data) => {
+      console.log("data");
+      console.log(data);
+      setSearchResult(data);
+      setStudentData(data);
+    });
+  }, []);
+  //   const studentData = [
+  //     {
+  //       id: 1,
+  //       name: "오인혁",
+  //       sid: "21800339",
+  //       group: 1,
+  //       courses: [
+  //         {
+  //           id: 1,
+  //           name: "Software Engineering",
+  //         },
+  //         {
+  //           id: 2,
+  //           name: "Open-source Software Laboratories",
+  //         },
+  //       ],
+  //       friends: [
+  //          {id: 1,
+  // name:  "hi"
+  //  sid: 1
+  // }
+  //       ]
+  //     },
+  //   {
+  //     id: 2,
+  //     name: "한시온",
+  //     number: "21800311",
+  //     group: 1,
+  //     courses: [
+  //       {
+  //         id: 1,
+  //         name: "Software Engineering",
+  //       },
+  //       {
+  //         id: 2,
+  //         name: "Open-source Software Laboratories",
+  //       },
+  //     ],
+  //   },
+  // ];
+  let sheetData;
+  if (studentData) {
+    sheetData = studentData.map((student) => ({
+      ID: student.id,
+      Name: student.name,
+      Number: student.sid,
+      Group: student.group,
+      Courses: student.courses.map((subject) => subject.name).join(", "),
+      Friends: student.friends.map((friend) => friend.name).join(", "),
+    }));
+  }
   const [page, setPage] = useState(1);
 
   const [friendInput, setFriendInput] = useState("");
   const handleChange = (event) => {
-    setFriendInput(event.target.value);
+    setSearchValue(event.target.value);
   };
+  // useEffect(() => {
+  //   if (studentData) {
+  //     setStudentData(studentData.filter((student) => student.group !== 0));
+  //     // setStudentData(filteredData);
+  //   }
+  //   console.log(studentData);
+  // }, [studentData]);
 
   const handleClick = (event) => {
     const ID = event.target.id;
@@ -82,14 +104,30 @@ export default function ManageStudent() {
   const xlsx = require("xlsx");
   const excelDownload = () => {
     const ws = xlsx.utils.json_to_sheet([...sheetData]);
-    const wb = xlsx.utils.book_new(); // 가상의 엑셀파일 생성
+    const wb = xlsx.utils.book_new();
     xlsx.utils.book_append_sheet(wb, ws, "Sheet1");
 
-    xlsx.writeFile(wb, "dramatis_personae.xlsx"); // 엑셀파일 생성 후 저장 형식
+    xlsx.writeFile(wb, "dramatis_personae.xlsx");
   };
+
+  useEffect(() => {
+    if (searchValue) {
+      let result;
+      if (!isNaN(searchValue)) {
+        result = studentData.filter(
+          (data) => data.group === Number(searchValue)
+        );
+      } else {
+        result = studentData.filter((data) => data.name.includes(searchValue));
+      }
+      setSearchResult(result);
+    } else if (searchValue === "") {
+      setSearchResult(studentData);
+    }
+  }, [searchValue]);
   return (
     <Box sx={{ display: "flex", py: "50px", px: "300px" }}>
-      <Box sx={{ position: "fixed", left: "30px", top: "50px" }}>
+      <Box sx={{ position: "fixed", left: "30px", top: "13rem" }}>
         <SideBar />
       </Box>
       <Box sx={{ width: "100%", ml: "50px" }}>
@@ -101,12 +139,12 @@ export default function ManageStudent() {
               mb: "1rem",
             }}
           >
-            <Typography variant="h7">학생 목록</Typography>
+            <Typography variant="h7">매칭된 학생 목록</Typography>
             <TextField
               id="search"
               type="search"
               label="Search"
-              value={friendInput}
+              value={searchValue}
               onChange={handleChange}
               sx={{
                 width: "30rem",
@@ -126,9 +164,9 @@ export default function ManageStudent() {
               placeholder="학생 이름, 그룹 검색"
             />
           </Box>
-          {studentData && (
+          {searchResult && (
             <StudentListTable
-              data={studentData}
+              data={searchResult}
               accentColumnNum={-1}
               longWidthColumnNum={-1}
               type="student"

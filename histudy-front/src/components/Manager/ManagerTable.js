@@ -16,7 +16,7 @@ export default function ManagerTable({
   const handleDeleteRow = (index) => {
     console.log("index");
     console.log(index);
-    console.log(deleteCourse());
+    console.log(deleteCourse(index));
   };
   return (
     <>
@@ -95,7 +95,7 @@ export default function ManagerTable({
                   textOverflow: "ellipsis",
                   overflowX: "auto",
                   whiteSpace: "nowrap",
-                  marginLeft: "2rem",
+
                   py: "20px",
                   borderColor: "primary.border",
                 }}
@@ -111,7 +111,7 @@ export default function ManagerTable({
                   textOverflow: "ellipsis",
                   overflowX: "auto",
                   whiteSpace: "nowrap",
-                  marginLeft: "2rem",
+
                   py: "20px",
                   borderColor: "primary.border",
                 }}
@@ -119,14 +119,14 @@ export default function ManagerTable({
                 {row.prof}
               </Box>
             </Box>
-            <IconButton
+            {/* <IconButton
               onClick={() => handleDeleteRow(row.id)}
               sx={{
                 marginRight: "1rem",
               }}
             >
               <Cancel />
-            </IconButton>
+            </IconButton> */}
           </Box>
         ))}
       </Box>
