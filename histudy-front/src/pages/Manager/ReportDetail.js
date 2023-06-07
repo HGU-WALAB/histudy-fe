@@ -85,13 +85,14 @@ export default function ReportDetail() {
     navigate(-1);
   };
 
-  const handleClick = async (buttonId, event) => {
+  const handleClick = async (event, buttonId) => {
     // event.preventDefault();
 
     if (buttonId === "modify") {
       navigate(`/report/modify/${state.id}`, { state: state });
     } else if (buttonId === "delete") {
-      setOpen(true);
+      // setOpen(true);
+      alert("삭제되었습니다.");
       if (useUserReportDeatilMatch) {
         await deleteReport(state.id);
       } else {
