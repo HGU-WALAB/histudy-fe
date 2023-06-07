@@ -40,9 +40,13 @@ export default function Profile() {
           borderColor: "lightGray",
           display: "flex",
           flexDirection: "column",
+          alignItems: "center",
         }}
       >
-        <Typography variant="h6" sx={{ mb: "30px", textAlign: "center" }}>
+        <Typography
+          variant="body1"
+          sx={{ mb: "10px", textAlign: "center", fontWeight: "600" }}
+        >
           이름 , 학번
         </Typography>
         <AnimatePresence>
@@ -52,10 +56,10 @@ export default function Profile() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
             sx={{
-              mb: 1,
+              mb: "30px",
               display: "flex",
               alignItems: "center",
-              justifyContent: "space-between",
+              justifyContent: "center",
               color: "primary.main",
             }}
           >
@@ -63,7 +67,7 @@ export default function Profile() {
           </Box>
         </AnimatePresence>
 
-        <Typography variant="body1" sx={{ mb: 1, mt: 3 }}>
+        <Typography variant="body1" sx={{ mb: "10px", fontWeight: "600" }}>
           이메일
         </Typography>
         <AnimatePresence>
@@ -73,7 +77,6 @@ export default function Profile() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
             sx={{
-              mb: 1,
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",

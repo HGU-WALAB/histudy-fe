@@ -33,7 +33,7 @@ export default function ReportTable({
   //   // console.log(formattedDate);
   // }, []);
   return (
-    <>
+    <Box sx={{ minHeight: "100vh" }}>
       <Box
         sx={{
           py: "5px",
@@ -67,7 +67,6 @@ export default function ReportTable({
           py: "5px",
           border: 1,
           backgroundColor: "primary.default",
-
           borderColor: "primary.main",
           borderRadius: "45px",
         }}
@@ -77,7 +76,7 @@ export default function ReportTable({
             color: "text.secondary",
             display: "flex",
             py: "20px",
-            borderBottom: 1,
+            borderBottom: data.reports.length !== 0 && 1,
             borderColor: "primary.main",
             px: "60px",
           }}
@@ -201,6 +200,6 @@ export default function ReportTable({
           </Box>
         ))}
       </Box>
-    </>
+    </Box>
   );
 }

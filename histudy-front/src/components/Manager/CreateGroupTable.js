@@ -14,9 +14,11 @@ export default function CreateGroupTable({
   const handleDeleteRow = (index) => {};
 
   return (
-    <>
+    <Box sx={{ minHeight: "100vh" }}>
       <Box
         sx={{
+          maxHeight: "60vh",
+          overflow: "scroll",
           py: "5px",
           border: 1,
           backgroundColor: "primary.default",
@@ -154,6 +156,6 @@ export default function CreateGroupTable({
           </Box>
         ))}
       </Box>
-    </>
+    </Box>
   );
 }

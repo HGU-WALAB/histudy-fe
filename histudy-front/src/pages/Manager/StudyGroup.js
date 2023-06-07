@@ -1,4 +1,10 @@
-import { Button, InputAdornment, TextField, Typography } from "@mui/material";
+import {
+  Button,
+  InputAdornment,
+  TextField,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import { border, Box } from "@mui/system";
 import { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
@@ -13,16 +19,20 @@ import RegisterClassButton from "../../components/Manager/RegisterClassButton";
 import ManagerTable from "../../components/Manager/ManagerTable";
 import StudyGroupTable from "../../components/Manager/StudyGroupTable";
 import { readAllGroups } from "../../apis/manager";
+import { isLoadingState } from "../../store/atom";
+import { useSetRecoilState } from "recoil";
 
 export default function StudyGroup() {
   const [groupData, setGroupData] = useState();
   const [searchResult, setSearchResult] = useState();
   const [searchValue, setSearchValue] = useState("");
-
+  const setIsLoading = useSetRecoilState(isLoadingState);
   useEffect(() => {
+    setIsLoading(true);
     readAllGroups().then((data) => {
       setSearchResult(data);
       setGroupData(data);
+      setIsLoading(false);
     });
   }, []);
   // const groupData = [
@@ -235,8 +245,9 @@ export default function StudyGroup() {
     }
   }, [searchValue]);
 
+  const theme = useTheme();
   return (
-    <Box sx={{ display: "flex", py: "50px", px: "300px" }}>
+    <Box sx={{ display: "flex", py: "50px", px: "300px", minHeight: "100vh" }}>
       <Box sx={{ position: "fixed", left: "30px", top: "13rem" }}>
         <SideBar />
       </Box>
@@ -253,7 +264,6 @@ export default function StudyGroup() {
             <TextField
               id="search"
               type="search"
-              label="Search"
               value={searchValue}
               onChange={handleChange}
               sx={{
@@ -265,6 +275,9 @@ export default function StudyGroup() {
                 },
               }}
               InputProps={{
+                style: {
+                  backgroundColor: theme.palette.background.default,
+                },
                 startAdornment: (
                   <InputAdornment position="start">
                     <SearchIcon />

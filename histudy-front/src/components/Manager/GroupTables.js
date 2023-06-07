@@ -53,9 +53,11 @@ export default function GroupTables({
     setStudentEdit(newEdit);
   };
   return (
-    <>
+    <Box>
       <Box
         sx={{
+          maxHeight: "60vh",
+          overflow: "scroll",
           py: "5px",
           border: 1,
           backgroundColor: "primary.default",
@@ -356,6 +358,6 @@ export default function GroupTables({
           </Box>
         ))}
       </Box>
-    </>
+    </Box>
   );
 }

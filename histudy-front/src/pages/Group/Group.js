@@ -27,6 +27,17 @@ export default function Group() {
 
   // team 유저 정보
   useEffect(() => {
+    getMyGroup().then((res) => {
+      setCourses(res.courses);
+      setConvertedCourses(
+        res.courses.map((course) => [course.name, course.prof, course.code])
+      );
+      setFriends(res.friends);
+      setConvertedFriends(
+        res.friends.map((friend) => [friend.name, friend.sid])
+      );
+    });
+
     getMyTeamUsers()
       .then((res) => {
         setTeamMembers(res);
@@ -58,19 +69,19 @@ export default function Group() {
   const [convertedCourses, setConvertedCourses] = useState([]);
   const [convertedFriends, setConvertedFriends] = useState([]);
 
-  useEffect(() => {
-    getMyGroup().then((res) => {
-      setCourses(res.courses);
+  // useEffect(() => {
+  //   getMyGroup().then((res) => {
+  //     setCourses(res.courses);
 
-      setConvertedCourses(
-        res.courses.map((course) => [course.name, course.prof, course.code])
-      );
-      setFriends(res.friends);
-      setConvertedFriends(
-        res.friends.map((friend) => [friend.name, friend.sid])
-      );
-    });
-  }, []);
+  //     setConvertedCourses(
+  //       res.courses.map((course) => [course.name, course.prof, course.code])
+  //     );
+  //     setFriends(res.friends);
+  //     setConvertedFriends(
+  //       res.friends.map((friend) => [friend.name, friend.sid])
+  //     );
+  //   });
+  // }, []);
 
   return (
     <Box
@@ -104,7 +115,9 @@ export default function Group() {
         </Box>
       ) : (
         <>
-          <Typography>스터디 그룹이 아직 배정되지 않았어요😅</Typography>
+          <Typography sx={{ mt: "10px", mb: "30px" }}>
+            스터디 그룹이 아직 배정되지 않았어요😅
+          </Typography>
 
           <GrayBorderBox
             courses={convertedCourses}

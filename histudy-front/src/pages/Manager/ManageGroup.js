@@ -15,21 +15,28 @@ import GroupTable from "../../components/Manager/GroupTable";
 import UnGroupTable from "../../components/Manager/UnGroupTable";
 import GroupTables from "../../components/Manager/GroupTables";
 import { readAllGroups, readUngroup } from "../../apis/manager";
-import { useRecoilValue } from "recoil";
-import { unGroupState } from "../../store/atom";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { isLoadingState, unGroupState } from "../../store/atom";
+import { motion } from "framer-motion";
 
 export default function ManageGroup() {
   const [groupData, setGroupData] = useState();
   const [ungroupData, setUngroupData] = useState();
-
+  const setIsLoading = useSetRecoilState(isLoadingState);
   useEffect(() => {
-    readAllGroups().then((data) => setGroupData(data));
-    readUngroup().then((data) => {
-      console.log(data);
-      setUngroupData(data);
+    setIsLoading(true);
+    readAllGroups().then((data) => {
+      setGroupData(data);
+      readUngroup().then((data) => {
+        console.log(data);
+        setUngroupData(data);
+        setIsLoading(false);
+      });
     });
-    // console.log(groupData);
   }, []);
+
+  // console.log(groupData);
+
   // const groupData = [
   //   {
   //     group: 1,
@@ -231,7 +238,7 @@ export default function ManageGroup() {
   // ];
 
   return (
-    <Box sx={{ display: "flex", py: "50px", px: "300px" }}>
+    <Box sx={{ display: "flex", py: "50px", px: "300px", minHeight: "100vh" }}>
       <Box sx={{ position: "fixed", left: "30px", top: "10rem" }}>
         <SideBar />
       </Box>

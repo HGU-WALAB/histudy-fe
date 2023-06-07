@@ -41,3 +41,8 @@ export const selectState = atom({
   key: "sidebarSelect",
   default: null,
 });
+
+export const isLoadingState = atom({
+  key: "isLoading",
+  default: false,
+});
