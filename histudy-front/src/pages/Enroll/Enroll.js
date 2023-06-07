@@ -19,6 +19,7 @@ import Friends from "../../components/Enroll/Friends";
 import Courses from "../../components/Enroll/Courses";
 import { studyEnroll } from "../../apis/study";
 import { useLocation, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export default function Enroll() {
   const location = useLocation();
@@ -103,7 +104,12 @@ export default function Enroll() {
   };
 
   return (
-    <Box sx={{ display: "flex", py: "80px", px: "300px", minHeight: "100vh" }}>
+    <Box
+      component={motion.div}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      sx={{ display: "flex", py: "80px", px: "300px", minHeight: "100vh" }}
+    >
       <Box sx={{ position: "absolute", left: "45px", top: "30px" }}>
         <ProgressBar page={page} setPage={setPage} />
         <GrayBorderBox
@@ -126,7 +132,11 @@ export default function Enroll() {
         </Typography>
 
         {page === 1 && (
-          <>
+          <Box
+            component={motion.div}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+          >
             <Typography sx={{ textAlign: "center", fontWeight: "400" }}>
               스터디를 함께하고 싶은 친구가 있다면 추가하세요!
             </Typography>
@@ -158,11 +168,15 @@ export default function Enroll() {
                 fontColor="white"
               />
             </Box>
-          </>
+          </Box>
         )}
 
         {page === 2 && (
-          <>
+          <Box
+            component={motion.div}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+          >
             <Typography sx={{ textAlign: "center" }}>
               스터디를 하고 싶은 희망 과목들을 담아주세요!
             </Typography>
@@ -205,10 +219,14 @@ export default function Enroll() {
                 />
               </Box>
             </Box>
-          </>
+          </Box>
         )}
         {page === 3 && (
-          <>
+          <Box
+            component={motion.div}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+          >
             <Typography sx={{ textAlign: "center", height: "50px" }}>
               스터디 희망 과목의 우선 순위를 정해주세요!
             </Typography>
@@ -244,7 +262,7 @@ export default function Enroll() {
                 />
               </Box>
             </Box>
-          </>
+          </Box>
         )}
       </Box>
     </Box>

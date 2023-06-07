@@ -33,7 +33,7 @@ export default function ProgressBar({ page, setPage }) {
                 width: "35px",
                 height: "35px",
                 borderRadius: "5px",
-                paddingTop: "3px",
+
                 border: 2,
                 borderColor: "primary.main",
                 backgroundColor: pageNavNum <= page ? "primary.main" : "white",
