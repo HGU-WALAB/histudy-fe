@@ -17,6 +17,7 @@ import { Fragment, useState } from "react";
 import styled from "styled-components";
 import GroupSelector from "./GroupSelector";
 import StudentNumSelector from "./StudentNumSelector";
+import { editUser } from "../../apis/manager";
 
 const theme = createTheme({
   typography: {
@@ -52,6 +53,10 @@ export default function GroupTables({
     newEdit[index] = !newEdit[index];
     setStudentEdit(newEdit);
   };
+
+  const [team, setTeam] = useState(data.group);
+  const [sid, setSid] = useState();
+
   return (
     <Box>
       <Box
@@ -238,7 +243,7 @@ export default function GroupTables({
                             marginTop: "20px",
                           }}
                         >
-                          <GroupSelector />
+                          <GroupSelector setTeam={setTeam} />
                         </Box>
                         <Box
                           sx={{
@@ -263,7 +268,10 @@ export default function GroupTables({
                               },
                               marginTop: "10px",
                             }}
-                            value={student.sid}
+                            defaultValue={student.sid}
+                            onChange={(e) => {
+                              setSid(e.target.value);
+                            }}
                           ></TextField>
                         </Box>
 
@@ -335,7 +343,18 @@ export default function GroupTables({
                                 color: "white",
                                 backgroundColor: "primary.main",
                               }}
-                              onClick={() => handleSave(index)}
+                              onClick={() => {
+                                console.log(row);
+                                const newData = {
+                                  team: Number(team),
+                                  sid: !sid ? student.sid : sid,
+                                  name: student.name,
+                                  id: student.id,
+                                };
+                                console.log(newData);
+                                editUser(newData);
+                                alert("저장되었습니다!");
+                              }}
                               label="저장"
                             />{" "}
                             <Chip

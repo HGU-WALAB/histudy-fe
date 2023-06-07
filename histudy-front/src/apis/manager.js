@@ -136,3 +136,34 @@ export const readUngroup = async () => {
   );
   return response.data;
 };
+
+export const deleteUserForm = async (sid) => {
+  console.log("sid");
+  console.log(sid);
+  const TOKEN = localStorage.getItem("accessToken");
+  const response = await axios.delete(
+    `${process.env.REACT_APP_BACK_BASE_URL}/api/admin/form?sid=${sid}`,
+    {
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+      },
+      withCredentials: true,
+    }
+  );
+  return response.data;
+};
+
+export const editUser = async (data) => {
+  const TOKEN = localStorage.getItem("accessToken");
+  const response = await axios.post(
+    `${process.env.REACT_APP_BACK_BASE_URL}/api/admin/edit-user`,
+    data,
+    {
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+      },
+      withCredentials: true,
+    }
+  );
+  return response;
+};

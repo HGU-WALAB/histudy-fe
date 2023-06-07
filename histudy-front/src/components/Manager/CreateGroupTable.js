@@ -1,5 +1,9 @@
 import { Cancel } from "@mui/icons-material";
 import { Box, IconButton, MenuItem, Select, Typography } from "@mui/material";
+import { deleteUserForm } from "../../apis/manager";
+import { useState } from "react";
+import { useSetRecoilState } from "recoil";
+import { isLoadingState } from "../../store/atom";
 
 export default function CreateGroupTable({
   type,
@@ -11,7 +15,12 @@ export default function CreateGroupTable({
     all: ["이름", "학번", "희망과목", "함께하고 싶은 친구"],
   };
 
-  const handleDeleteRow = (index) => {};
+  const setIsLoading = useSetRecoilState(isLoadingState);
+  const handleDeleteRow = (sid) => {
+    deleteUserForm(sid);
+    setIsLoading(true);
+    window.location.reload();
+  };
 
   return (
     <Box sx={{ minHeight: "100vh" }}>
@@ -146,7 +155,7 @@ export default function CreateGroupTable({
               </Box>
             </Box>
             <IconButton
-              onClick={() => handleDeleteRow(index)}
+              onClick={() => handleDeleteRow(row.sid)}
               sx={{
                 marginRight: "1rem",
               }}

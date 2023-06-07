@@ -40,10 +40,15 @@ export const isDelete = atom({
 
 export const selectState = atom({
   key: "sidebarSelect",
-  default: null,
+  default: 1,
 });
 
 export const isLoadingState = atom({
   key: "isLoading",
   default: false,
+});
+
+export const groupAutoCompleteState = atom({
+  key: "groupAutoComplete",
+  default: [],
 });
