@@ -15,35 +15,43 @@ import ManageReport from "../pages/Manager/ManageReport";
 import ReportDetail from "../pages/Manager/ReportDetail";
 import CreateGroup from "../pages/Manager/CreateGroup";
 import MainTest from "./Main/MainTest";
+import Snackbars from "../pages/Manager/Snackbars";
+import { useRecoilState } from "recoil";
+import { isDelete } from "../store/atom";
 import Profile from "../pages/Profile/Profile";
 import { motion } from "framer-motion";
 import { Box } from "@mui/material";
 
 export default function ARouter() {
+  const [open, setOpen] = useRecoilState(isDelete);
   return (
-    <BrowserRouter>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Main />}></Route>
-        <Route path="/post" element={<Post />}></Route>
-        <Route path="/rank" element={<Rank />}></Route>
-        <Route path="/enroll" element={<Enroll />}></Route>
-        <Route path="/group" element={<Group />}></Route>
-        <Route path="/report" element={<Report />}></Route>
-        <Route path="/report/:id" element={<ReportDetail />}></Route>
-        <Route path="/report/modify/:id" element={<Post />}></Route>
-        <Route path="/add" element={<Post />}></Route>
-        <Route path="/manageClass" element={<ManageClass />}></Route>
-        <Route path="/manageGroup" element={<ManageGroup />}></Route>
-        <Route path="/studyGroup" element={<StudyGroup />}></Route>
-        <Route path="/createGroup" element={<CreateGroup />}></Route>
-        <Route path="/manageStudent" element={<ManageStudent />}></Route>
-        <Route path="/manageReport" element={<ManageReport />}></Route>
-        <Route path="/reportDetail" element={<ReportDetail />}></Route>
-        <Route path="/test" element={<MainTest />}></Route>
-        <Route path="/profile" element={<Profile />}></Route>
-      </Routes>
-      <Footer />
-    </BrowserRouter>
+    <>
+      <BrowserRouter sx={{ position: "relative" }}>
+        <Header />
+
+        <Snackbars open={open} setOpen={setOpen} />
+        <Routes>
+          <Route path="/" element={<Main />}></Route>
+          <Route path="/post" element={<Post />}></Route>
+          <Route path="/rank" element={<Rank />}></Route>
+          <Route path="/enroll" element={<Enroll />}></Route>
+          <Route path="/group" element={<Group />}></Route>
+          <Route path="/report" element={<Report />}></Route>
+          <Route path="/report/:id" element={<ReportDetail />}></Route>
+          <Route path="/report/modify/:id" element={<Post />}></Route>
+          <Route path="/add" element={<Post />}></Route>
+          <Route path="/manageClass" element={<ManageClass />}></Route>
+          <Route path="/manageGroup" element={<ManageGroup />}></Route>
+          <Route path="/studyGroup" element={<StudyGroup />}></Route>
+          <Route path="/createGroup" element={<CreateGroup />}></Route>
+          <Route path="/manageStudent" element={<ManageStudent />}></Route>
+          <Route path="/manageReport" element={<ManageReport />}></Route>
+          <Route path="/reportDetail" element={<ReportDetail />}></Route>
+          <Route path="/test" element={<MainTest />}></Route>
+          <Route path="/profile" element={<Profile />}></Route>
+        </Routes>
+        <Footer />
+      </BrowserRouter>
+    </>
   );
 }

@@ -19,7 +19,7 @@ export const readAllUsers = async () => {
   const TOKEN = localStorage.getItem("accessToken");
 
   const response = await axios.get(
-    `${process.env.REACT_APP_BACK_BASE_URL}/api/users/manageUsers`,
+    `${process.env.REACT_APP_BACK_BASE_URL}/api/admin/allUsers`,
     {
       headers: {
         Authorization: `Bearer ${TOKEN}`,
@@ -49,7 +49,7 @@ export const readApplicants = async () => {
   const TOKEN = localStorage.getItem("accessToken");
 
   const response = await axios.get(
-    `${process.env.REACT_APP_BACK_BASE_URL}api/admin/allUsers`,
+    `${process.env.REACT_APP_BACK_BASE_URL}/api/admin/allUsers`,
     {
       headers: {
         Authorization: `Bearer ${TOKEN}`,
@@ -75,11 +75,14 @@ export const autoCourses = async () => {
   return response.data;
 };
 
-export const deleteCourse = async () => {
+export const deleteCourse = async (id) => {
   const TOKEN = localStorage.getItem("accessToken");
-
+  console.log(id);
   const response = await axios.post(
-    `${process.env.REACT_APP_BACK_BASE_URL}/api/course/delete`,
+    `${process.env.REACT_APP_BACK_BASE_URL}/api/courses/delete`,
+    {
+      id: id,
+    },
     {
       headers: {
         Authorization: `Bearer ${TOKEN}`,
@@ -95,6 +98,35 @@ export const readReportDetail = async (reportId) => {
 
   const response = await axios.get(
     `${process.env.REACT_APP_BACK_BASE_URL}/api/team/reports/${reportId}`,
+    {
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+      },
+      withCredentials: true,
+    }
+  );
+  return response.data;
+};
+
+export const teamMatch = async () => {
+  const TOKEN = localStorage.getItem("accessToken");
+  const response = await axios.post(
+    `${process.env.REACT_APP_BACK_BASE_URL}/api/admin/team-match`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+      },
+      withCredentials: true,
+    }
+  );
+  return response.data;
+};
+
+export const readUngroup = async () => {
+  const TOKEN = localStorage.getItem("accessToken");
+  const response = await axios.get(
+    `${process.env.REACT_APP_BACK_BASE_URL}/api/admin/unmatched-users`,
     {
       headers: {
         Authorization: `Bearer ${TOKEN}`,

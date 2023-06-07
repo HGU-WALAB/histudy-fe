@@ -4,11 +4,14 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useMatch } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { selectState, testState } from "../../store/atom";
 
 export default function SideBar() {
-  const [selectedMenu, setSelectedMenu] = useState(0);
+  // const [selectedMenu, setSelectedMenu] = useState(null);
+  const [selectedMenu, setSelectedMenu] = useRecoilState(selectState);
 
   const listItemButtonStyles = {
     "&:hover": {
@@ -22,8 +25,8 @@ export default function SideBar() {
 
   const handleClick = (menu) => {
     setSelectedMenu(menu);
-    console.log(selectedMenu);
   };
+
   return (
     <Box
       sx={{
@@ -31,7 +34,6 @@ export default function SideBar() {
         border: 2,
         borderRadius: "20px",
         width: "280px",
-        height: "500px",
         mt: "30px",
         mb: "15px",
         backgroundColor: "background.sidebar",
@@ -62,7 +64,7 @@ export default function SideBar() {
             >
               <ListItemText
                 style={{ color: selectedMenu === 1 && "#007AFF" }}
-                primary="현재 학기 수업 일정"
+                primary="현재 학기 수업 조회"
               />
             </ListItemButton>
           </Link>
@@ -94,7 +96,7 @@ export default function SideBar() {
             >
               <ListItemText
                 style={{ color: selectedMenu === 3 && "#007AFF" }}
-                primary="스터디 그룹 관리"
+                primary="그룹 매칭 관리"
               />
             </ListItemButton>
           </Link>
@@ -110,7 +112,7 @@ export default function SideBar() {
             >
               <ListItemText
                 style={{ color: selectedMenu === 4 && "#007AFF" }}
-                primary="스터디 그룹 목록"
+                primary="그룹별 활동 조회"
               />
             </ListItemButton>
           </Link>
@@ -126,7 +128,7 @@ export default function SideBar() {
             >
               <ListItemText
                 style={{ color: selectedMenu === 5 && "#007AFF" }}
-                primary="학생 목록"
+                primary="매칭된 학생 정보 조회"
               />
             </ListItemButton>
           </Link>

@@ -11,6 +11,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function StudyGroupTable({
+  searchResult,
   type,
   accentColumnNum,
   longWidthColumnNum,
@@ -53,8 +54,8 @@ export default function StudyGroupTable({
           sx={{
             color: "text.secondary",
             display: "flex",
-            py: "20px",
             borderBottom: 1,
+            py: "20px",
             borderColor: "primary.main",
             px: "60px",
           }}
@@ -111,20 +112,17 @@ export default function StudyGroupTable({
                   color: "text.secondary",
                   display: "flex",
                   flexGrow: 1,
-
                   py: "20px",
                   borderColor: "primary.border",
                 }}
               >
                 <Select
-                  sx={{ color: "text.secondary" }}
+                  sx={{ width: "100px", color: "text.secondary" }}
                   value={row.members.length > 0 ? row.members[0].name : ""}
                 >
                   {row.members.map((student, index) => (
                     <MenuItem key={index} value={student.name}>
-                      <Typography>
-                        {student.name}, {student.number}
-                      </Typography>
+                      <Typography>{student.name}</Typography>
                     </MenuItem>
                   ))}
                 </Select>
@@ -161,7 +159,7 @@ export default function StudyGroupTable({
                   borderColor: "primary.border",
                 }}
               >
-                {row.times}
+                {row.times}분
               </Box>
             </Box>
 

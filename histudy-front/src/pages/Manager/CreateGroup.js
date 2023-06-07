@@ -19,88 +19,92 @@ import MatchStartButton from "../../components/Manager/MatchStartButton";
 import { readApplicants } from "../../apis/manager";
 
 export default function CreateGroup() {
-  // const [allData, setAllData] = useState();
-  // useEffect(() => {
-  //   readApplicants().then((data) => {
-  //     setAllData(data);
-  //   });
-  // }, []);
-  const allData = [
-    {
-      id: 1,
-      name: "오인혁",
-      number: "21800339",
-      friends: [
-        {
-          id: 5,
-          name: "김진수",
-          number: "21800394",
-        },
-      ],
-      courses: [
-        {
-          id: 1,
-          name: "Software Engineering",
-        },
-        {
-          id: 2,
-          name: "Open-source Software Laboratories",
-        },
-      ],
-    },
-    {
-      id: 2,
-      name: "배주영",
-      number: "21800111",
-      friends: [],
-      courses: [
-        {
-          id: 1,
-          name: "Software Engineering",
-        },
-        {
-          id: 2,
-          name: "Open-source Software Laboratories",
-        },
-      ],
-    },
-    {
-      id: 3,
-      name: "한시온",
-      number: "21800112",
-      friends: [],
-      courses: [
-        {
-          id: 1,
-          name: "Software Engineering",
-        },
-        {
-          id: 2,
-          name: "Open-source Software Laboratories",
-        },
-      ],
-    },
-    {
-      id: 4,
-      name: "이인혁",
-      number: "21800239",
-      friends: [],
-      courses: [
-        {
-          id: 1,
-          name: "Software Engineering",
-        },
-        {
-          id: 2,
-          name: "Open-source Software Laboratories",
-        },
-      ],
-    },
-  ];
+  const [allData, setAllData] = useState();
+  useEffect(() => {
+    readApplicants().then((data) => {
+      console.log(data);
+      setAllData(data);
+    });
+  }, []);
+  useEffect(() => {
+    console.log(allData);
+  }, [allData]);
+  // const allData = [
+  //   {
+  //     id: 1,
+  //     name: "오인혁",
+  //     number: "21800339",
+  //     friends: [
+  //       {
+  //         id: 5,
+  //         name: "김진수",
+  //         number: "21800394",
+  //       },
+  //     ],
+  //     courses: [
+  //       {
+  //         id: 1,
+  //         name: "Software Engineering",
+  //       },
+  //       {
+  //         id: 2,
+  //         name: "Open-source Software Laboratories",
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "배주영",
+  //     number: "21800111",
+  //     friends: [],
+  //     courses: [
+  //       {
+  //         id: 1,
+  //         name: "Software Engineering",
+  //       },
+  //       {
+  //         id: 2,
+  //         name: "Open-source Software Laboratories",
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "한시온",
+  //     number: "21800112",
+  //     friends: [],
+  //     courses: [
+  //       {
+  //         id: 1,
+  //         name: "Software Engineering",
+  //       },
+  //       {
+  //         id: 2,
+  //         name: "Open-source Software Laboratories",
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     id: 4,
+  //     name: "이인혁",
+  //     number: "21800239",
+  //     friends: [],
+  //     courses: [
+  //       {
+  //         id: 1,
+  //         name: "Software Engineering",
+  //       },
+  //       {
+  //         id: 2,
+  //         name: "Open-source Software Laboratories",
+  //       },
+  //     ],
+  //   },
+  // ];
 
   return (
     <Box sx={{ display: "flex", py: "50px", px: "300px" }}>
-      <Box sx={{ position: "fixed", left: "30px", top: "50px" }}>
+      <Box sx={{ position: "fixed", left: "30px", top: "10rem" }}>
         <SideBar />
       </Box>
       <Box sx={{ width: "100%", ml: "50px" }}>
