@@ -20,12 +20,13 @@ import { readApplicants } from "../../apis/manager";
 
 export default function CreateGroup() {
   const [allData, setAllData] = useState();
+
   useEffect(() => {
     readApplicants().then((data) => {
-      console.log(data);
       setAllData(data);
     });
   }, []);
+
   useEffect(() => {
     console.log(allData);
   }, [allData]);
