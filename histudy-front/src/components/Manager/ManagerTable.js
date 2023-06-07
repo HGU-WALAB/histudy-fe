@@ -22,6 +22,8 @@ export default function ManagerTable({
     <>
       <Box
         sx={{
+          overflow: "scroll",
+          maxHeight: "60vh",
           py: "5px",
           border: 1,
           backgroundColor: "primary.default",

@@ -17,16 +17,20 @@ import GroupTables from "../../components/Manager/GroupTables";
 import CreateGroupTable from "../../components/Manager/CreateGroupTable";
 import MatchStartButton from "../../components/Manager/MatchStartButton";
 import { readApplicants } from "../../apis/manager";
+import { useSetRecoilState } from "recoil";
+import { isLoadingState } from "../../store/atom";
 
 export default function CreateGroup() {
   const [allData, setAllData] = useState();
-
+  const setIsLoading = useSetRecoilState(isLoadingState);
   useEffect(() => {
+    setIsLoading(true);
     readApplicants().then((data) => {
+      console.log(data);
       setAllData(data);
+      setIsLoading(false);
     });
   }, []);
-
   useEffect(() => {
     console.log(allData);
   }, [allData]);
@@ -104,7 +108,7 @@ export default function CreateGroup() {
   // ];
 
   return (
-    <Box sx={{ display: "flex", py: "50px", px: "300px" }}>
+    <Box sx={{ display: "flex", py: "50px", px: "300px", minHeight: "100vh" }}>
       <Box sx={{ position: "fixed", left: "30px", top: "10rem" }}>
         <SideBar />
       </Box>

@@ -15,6 +15,7 @@ import ImportCSV from "../../components/scv/ImportCSV";
 import NavGrid from "../../components/Main/NavGrid";
 import MainTest from "../../components/Main/MainTest";
 import RegisterModal from "../../components/Main/RegisterModal";
+import { motion } from "framer-motion";
 
 export default function Main() {
   const [sid, setSid] = useState("");
@@ -62,7 +63,11 @@ export default function Main() {
   }, []);
 
   return (
-    <Box>
+    <Box
+      component={motion.div}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+    >
       {/* <NavGrid /> */}
       <MainTest />
       {!isLogin && <GoogleButton />}

@@ -15,9 +15,10 @@ export default function Courses({ sideCourses, setSideCourses }) {
   const courseConverter = (allCourses) => {
     const result = [];
 
-    const newArr = allCourses.filter((course) =>
-      course.name.includes(courseInput)
-    );
+    const newArr =
+      courseInput === ""
+        ? allCourses
+        : allCourses.filter((course) => course.name.includes(courseInput));
     newArr.map((elem) => {
       result.push([elem.name, elem.code, elem.prof, elem.id]);
     });
@@ -28,7 +29,7 @@ export default function Courses({ sideCourses, setSideCourses }) {
 
   useEffect(() => {
     setCourses(courseConverter(allCourses));
-  }, [courseInput]);
+  }, [allCourses, courseInput]);
 
   useEffect(() => {
     autoCourses().then((res) => {

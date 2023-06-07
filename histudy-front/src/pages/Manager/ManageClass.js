@@ -12,17 +12,24 @@ import SemesterSelectButton from "../../components/Manager/SemesterSelectButton"
 import RegisterClassButton from "../../components/Manager/RegisterClassButton";
 import ManagerTable from "../../components/Manager/ManagerTable";
 import { autoCourses } from "../../apis/course";
+import { useSetRecoilState } from "recoil";
+import { isLoadingState } from "../../store/atom";
+import { motion } from "framer-motion";
 
 export default function ManageClass() {
   const [classData, setClassData] = useState();
+
+  const setIsLoading = useSetRecoilState(isLoadingState);
   useEffect(() => {
+    setIsLoading(true);
     autoCourses().then((info) => {
       setClassData(info.courses);
+      setIsLoading(false);
     });
   }, []);
 
   return (
-    <Box sx={{ display: "flex", py: "50px", px: "300px" }}>
+    <Box sx={{ display: "flex", py: "50px", px: "300px", minHeight: "100vh" }}>
       <Box sx={{ position: "fixed", left: "30px", top: "10rem" }}>
         <SideBar />
       </Box>

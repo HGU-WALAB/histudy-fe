@@ -52,12 +52,12 @@ export default function Header() {
           match={homeMatch}
         />
         {/* <img src="./img/logo_histudy.png" width={130} /> */}
-        <HeaderButton link="/group" name="My Group" match={groupMatch} />
+        <HeaderButton link="/group" name="My Study" match={groupMatch} />
         <HeaderButton link="/report" name="Report" match={reportMatch} />
         <HeaderButton link="/rank" name="Rank" match={rankMatch} />
         <HeaderButton
           link="/enroll"
-          name="Sign Up for HISTUDY"
+          name="Apply For HISTUDY"
           color="text.header"
           match={enrollMatch}
         />
@@ -71,7 +71,7 @@ export default function Header() {
           </Button>
         )}
 
-        <HeaderButton link="/profile" name="My Account" match={profileMatch} />
+        <HeaderButton link="/profile" name="My Profile" match={profileMatch} />
         <DarkModeToggle />
       </Box>
     </Box>

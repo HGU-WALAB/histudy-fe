@@ -38,6 +38,8 @@ export default function UnGroupTable({
     <>
       <Box
         sx={{
+          maxHeight: "60vh",
+          overflow: "scroll",
           py: "5px",
           border: 1,
           backgroundColor: "primary.default",

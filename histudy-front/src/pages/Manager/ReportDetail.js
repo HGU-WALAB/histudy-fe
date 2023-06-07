@@ -85,8 +85,8 @@ export default function ReportDetail() {
     navigate(-1);
   };
 
-  const handleClick = async (event, buttonId) => {
-    event.preventDefault();
+  const handleClick = async (buttonId, event) => {
+    // event.preventDefault();
 
     if (buttonId === "modify") {
       navigate(`/report/modify/${state.id}`, { state: state });
