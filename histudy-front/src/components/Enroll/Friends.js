@@ -1,4 +1,4 @@
-import { InputAdornment, TextField } from "@mui/material";
+import { InputAdornment, TextField, useTheme } from "@mui/material";
 import CustomTable from "../CustomTable";
 import { useEffect, useState } from "react";
 import { autoUser } from "../../apis/users";
@@ -26,6 +26,8 @@ export default function Friends({ sideFriends, setSideFriends }) {
     });
   }, [friendInput]);
 
+  const theme = useTheme();
+
   return (
     <>
       <TextFieldWrapper
@@ -39,6 +41,9 @@ export default function Friends({ sideFriends, setSideFriends }) {
           mb: 4,
         }}
         InputProps={{
+          style: {
+            backgroundColor: theme.palette.background.default,
+          },
           startAdornment: (
             <InputAdornment position="start">
               <SearchIcon />

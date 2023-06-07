@@ -194,7 +194,7 @@ export default function Enroll() {
                 <LongButton
                   name="이전"
                   onClick={handleClick}
-                  bgColor="primary.border"
+                  bgColor="primary.lighter"
                   fontColor="primary.main"
                 />
                 <LongButton
@@ -232,7 +232,7 @@ export default function Enroll() {
                 <LongButton
                   name="이전"
                   onClick={handleClick}
-                  bgColor="primary.border"
+                  bgColor="primary.lighter"
                   fontColor="primary.main"
                 />
 

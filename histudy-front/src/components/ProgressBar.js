@@ -56,11 +56,15 @@ export default function ProgressBar({ page, setPage }) {
         ))}
       </Box>
       <Box sx={{ color: "gray", display: "flex", mt: "10px", mr: "10px" }}>
-        <Typography variant="body2">함께할 친구 등록</Typography>
-        <Typography variant="body2" sx={{ mx: 2 }}>
+        <Typography variant="body2" sx={{ color: "text.disabled" }}>
+          함께할 친구 등록
+        </Typography>
+        <Typography variant="body2" sx={{ mx: 2, color: "text.disabled" }}>
           희망 과목 선택
         </Typography>
-        <Typography variant="body2">우선 순위 설정</Typography>
+        <Typography variant="body2" sx={{ color: "text.disabled" }}>
+          우선 순위 설정
+        </Typography>
       </Box>
     </Box>
   );
