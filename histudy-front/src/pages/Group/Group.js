@@ -81,7 +81,7 @@ export default function Group() {
         mt: "50px",
       }}
     >
-      <Typography variant="h4" sx={{ mb: "10px" }}>
+      <Typography sx={{ fontSize: "30px", fontWeight: "300" }}>
         스터디 그룹 정보
       </Typography>
       {hasTeam ? (

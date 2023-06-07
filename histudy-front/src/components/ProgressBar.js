@@ -5,8 +5,8 @@ export default function ProgressBar({ page, setPage }) {
     <Box
       sx={{
         //   border: 1,
-        mt: "80px",
-        mb: "45px",
+        mt: "85px",
+        mb: "40px",
         minWidth: "290px",
         display: "flex",
         flexDirection: "column",
@@ -15,11 +15,17 @@ export default function ProgressBar({ page, setPage }) {
     >
       <Box sx={{ display: "flex", alignItems: "center" }}>
         {[1, 2, 3].map((pageNavNum, index) => (
-          <>
+          <Box
+            key={index}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
             <Box
-              key={index}
               sx={{
                 display: "flex",
+                // fontWeight: "bold",
                 fontWeight: "500",
                 justifyContent: "center",
                 alignItems: "center",
@@ -46,7 +52,7 @@ export default function ProgressBar({ page, setPage }) {
                 }}
               ></Box>
             )}
-          </>
+          </Box>
         ))}
       </Box>
       <Box sx={{ color: "gray", display: "flex", mt: "10px", mr: "10px" }}>

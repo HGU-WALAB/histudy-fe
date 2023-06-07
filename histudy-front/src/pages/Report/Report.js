@@ -64,7 +64,9 @@ export default function Report() {
           justifyContent: "center",
         }}
       >
-        <Typography variant="h5">제출한 보고서 목록</Typography>
+        <Typography sx={{ fontSize: "30px", fontWeight: "300" }}>
+          제출한 보고서 목록
+        </Typography>
       </Box>
 
       <Box

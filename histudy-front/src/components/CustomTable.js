@@ -77,10 +77,9 @@ export default function CustomTable({
 
   const COLUMN_NUM = TableHead[type].length;
   const ROW_NUM = data.length;
-  console.log("side", sidebarValues);
+
   const pkList = [
     ...sidebarValues.map((row, index) => {
-      console.log("checkt", row[1], row);
       return row[1];
     }),
   ];
@@ -88,8 +87,6 @@ export default function CustomTable({
   const checkInclude = (pk) => {
     return pkList.includes(pk);
   };
-
-  console.log("data!" + data);
 
   return (
     <>
@@ -239,7 +236,7 @@ export default function CustomTable({
                       onClick={() => {
                         if (0 >= index) return;
                         const temp = data[index];
-                        console.log(temp);
+
                         addData((prev) => [
                           ...prev.slice(0, index - 1),
                           temp,
@@ -252,7 +249,7 @@ export default function CustomTable({
                       onClick={() => {
                         if (data.length - 1 <= index) return;
                         const temp = data[index];
-                        console.log(temp);
+
                         addData((prev) => [
                           ...prev.slice(0, index),
                           prev[index + 1],

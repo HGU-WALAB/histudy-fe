@@ -74,7 +74,7 @@ export default function Enroll() {
   const navigate = useNavigate();
   const handleClick = (event) => {
     const ID = event.target.id;
-    console.log(ID);
+
     if (ID === "다음") setPage((prev) => prev + 1);
     else if (ID === "이전") setPage((prev) => prev - 1);
     else if (ID === "제출") {
@@ -89,7 +89,6 @@ export default function Enroll() {
       alert("스터디 신청이 완료되었습니다.");
       studyEnroll(data);
       navigate("/");
-      console.log(data);
     }
   };
   const [sideCourses, setSideCourses] = useState([]);
@@ -105,7 +104,7 @@ export default function Enroll() {
 
   return (
     <Box sx={{ display: "flex", py: "80px", px: "300px", minHeight: "100vh" }}>
-      <Box sx={{ position: "absolute", left: "40px", top: "30px" }}>
+      <Box sx={{ position: "absolute", left: "45px", top: "30px" }}>
         <ProgressBar page={page} setPage={setPage} />
         <GrayBorderBox
           courses={sideCourses}
@@ -116,8 +115,12 @@ export default function Enroll() {
       </Box>
       <Box sx={{ width: "100%", ml: "70px" }}>
         <Typography
-          variant="h4"
-          sx={{ textAlign: "center", mb: "20px", fontWeight: "500" }}
+          sx={{
+            textAlign: "center",
+            mb: "20px",
+            fontSize: "25px",
+            fontWeight: "400",
+          }}
         >
           Histudy 신청하기
         </Typography>

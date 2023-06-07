@@ -9,9 +9,9 @@ export default function Friends({ sideFriends, setSideFriends }) {
   const [friends, setFriends] = useState([]);
   const friendConverter = (allFriends) => {
     const result = [];
-    allFriends.map((elem) => {
-      result.push([elem.name, elem.sid, elem.email, elem.id]);
-    });
+    allFriends.map((elem) =>
+      result.push([elem.name, elem.sid, elem.email, elem.id])
+    );
     return result;
   };
 
@@ -23,7 +23,6 @@ export default function Friends({ sideFriends, setSideFriends }) {
   useEffect(() => {
     autoUser(friendInput).then((res) => {
       setFriends(friendConverter(res.users));
-      console.log("users", res.users);
     });
   }, [friendInput]);
 
