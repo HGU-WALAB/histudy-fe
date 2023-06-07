@@ -50,6 +50,8 @@ export default function StudentListTable({
           backgroundColor: "primary.default",
           borderColor: "primary.main",
           borderRadius: "45px",
+          maxHeight: "60vh",
+          overflow: "scroll",
         }}
       >
         <Box

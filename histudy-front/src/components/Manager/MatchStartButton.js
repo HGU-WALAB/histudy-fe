@@ -11,9 +11,12 @@ export default function MatchStartButton() {
     <Stack direction="row" spacing={2}>
       <Button
         variant="contained"
+        sx={{
+          backgroundColor: "primary.main",
+        }}
         style={{
-          color: "#007AFF",
-          backgroundColor: "#E4F1FF",
+          color: "white",
+          // backgroundColor: "primary.darker",
           borderRadius: 7,
         }}
         onClick={() => {

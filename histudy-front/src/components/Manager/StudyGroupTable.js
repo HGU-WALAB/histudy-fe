@@ -43,6 +43,8 @@ export default function StudyGroupTable({
     <>
       <Box
         sx={{
+          maxHeight: "60vh",
+          overflow: "scroll",
           py: "5px",
           border: 1,
           backgroundColor: "primary.default",
@@ -175,8 +177,8 @@ export default function StudyGroupTable({
                 <Chip
                   label="보고서 열람"
                   sx={{
-                    backgroundColor: "primary.light",
-                    color: "primary.main",
+                    backgroundColor: "primary.main",
+                    color: "white",
                   }}
                   onClick={() => handleClick(row.group)}
                 />

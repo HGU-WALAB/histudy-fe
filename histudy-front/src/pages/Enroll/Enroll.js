@@ -81,7 +81,8 @@ export default function Enroll() {
     else if (ID === "제출") {
       const data = {
         friendIds: sideFriends.map((elem) => elem[1]),
-        courseIds: expandCourses(sideCourses.map((elem) => elem[3])),
+        // courseIds: expandCourses(sideCourses.map((elem) => elem[3])),
+        courseIds: sideCourses.map((elem) => elem[3]),
       };
       if (data.courseIds.length === 0) {
         alert("과목을 최소 1개는 선택해야 합니다.");
