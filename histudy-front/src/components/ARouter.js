@@ -16,6 +16,8 @@ import ReportDetail from "../pages/Manager/ReportDetail";
 import CreateGroup from "../pages/Manager/CreateGroup";
 import MainTest from "./Main/MainTest";
 import Profile from "../pages/Profile/Profile";
+import { motion } from "framer-motion";
+import { Box } from "@mui/material";
 
 export default function ARouter() {
   return (

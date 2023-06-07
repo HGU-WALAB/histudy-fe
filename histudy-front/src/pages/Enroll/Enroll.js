@@ -19,6 +19,7 @@ import Friends from "../../components/Enroll/Friends";
 import Courses from "../../components/Enroll/Courses";
 import { studyEnroll } from "../../apis/study";
 import { useLocation, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export default function Enroll() {
   const location = useLocation();
@@ -74,7 +75,7 @@ export default function Enroll() {
   const navigate = useNavigate();
   const handleClick = (event) => {
     const ID = event.target.id;
-    console.log(ID);
+
     if (ID === "다음") setPage((prev) => prev + 1);
     else if (ID === "이전") setPage((prev) => prev - 1);
     else if (ID === "제출") {
@@ -89,7 +90,6 @@ export default function Enroll() {
       alert("스터디 신청이 완료되었습니다.");
       studyEnroll(data);
       navigate("/");
-      console.log(data);
     }
   };
   const [sideCourses, setSideCourses] = useState([]);
@@ -104,8 +104,13 @@ export default function Enroll() {
   };
 
   return (
-    <Box sx={{ display: "flex", py: "80px", px: "300px", minHeight: "100vh" }}>
-      <Box sx={{ position: "absolute", left: "40px", top: "30px" }}>
+    <Box
+      component={motion.div}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      sx={{ display: "flex", py: "80px", px: "300px", minHeight: "100vh" }}
+    >
+      <Box sx={{ position: "absolute", left: "45px", top: "30px" }}>
         <ProgressBar page={page} setPage={setPage} />
         <GrayBorderBox
           courses={sideCourses}
@@ -116,14 +121,22 @@ export default function Enroll() {
       </Box>
       <Box sx={{ width: "100%", ml: "70px" }}>
         <Typography
-          variant="h4"
-          sx={{ textAlign: "center", mb: "20px", fontWeight: "500" }}
+          sx={{
+            textAlign: "center",
+            mb: "20px",
+            fontSize: "25px",
+            fontWeight: "400",
+          }}
         >
           Histudy 신청하기
         </Typography>
 
         {page === 1 && (
-          <>
+          <Box
+            component={motion.div}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+          >
             <Typography sx={{ textAlign: "center", fontWeight: "400" }}>
               스터디를 함께하고 싶은 친구가 있다면 추가하세요!
             </Typography>
@@ -155,11 +168,15 @@ export default function Enroll() {
                 fontColor="white"
               />
             </Box>
-          </>
+          </Box>
         )}
 
         {page === 2 && (
-          <>
+          <Box
+            component={motion.div}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+          >
             <Typography sx={{ textAlign: "center" }}>
               스터디를 하고 싶은 희망 과목들을 담아주세요!
             </Typography>
@@ -191,7 +208,7 @@ export default function Enroll() {
                 <LongButton
                   name="이전"
                   onClick={handleClick}
-                  bgColor="primary.border"
+                  bgColor="primary.lighter"
                   fontColor="primary.main"
                 />
                 <LongButton
@@ -202,10 +219,14 @@ export default function Enroll() {
                 />
               </Box>
             </Box>
-          </>
+          </Box>
         )}
         {page === 3 && (
-          <>
+          <Box
+            component={motion.div}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+          >
             <Typography sx={{ textAlign: "center", height: "50px" }}>
               스터디 희망 과목의 우선 순위를 정해주세요!
             </Typography>
@@ -229,7 +250,7 @@ export default function Enroll() {
                 <LongButton
                   name="이전"
                   onClick={handleClick}
-                  bgColor="primary.border"
+                  bgColor="primary.lighter"
                   fontColor="primary.main"
                 />
 
@@ -241,7 +262,7 @@ export default function Enroll() {
                 />
               </Box>
             </Box>
-          </>
+          </Box>
         )}
       </Box>
     </Box>

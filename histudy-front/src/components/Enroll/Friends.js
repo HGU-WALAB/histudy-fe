@@ -1,4 +1,4 @@
-import { InputAdornment, TextField } from "@mui/material";
+import { InputAdornment, TextField, useTheme } from "@mui/material";
 import CustomTable from "../CustomTable";
 import { useEffect, useState } from "react";
 import { autoUser } from "../../apis/users";
@@ -9,9 +9,9 @@ export default function Friends({ sideFriends, setSideFriends }) {
   const [friends, setFriends] = useState([]);
   const friendConverter = (allFriends) => {
     const result = [];
-    allFriends.map((elem) => {
-      result.push([elem.name, elem.sid, elem.email, elem.id]);
-    });
+    allFriends.map((elem) =>
+      result.push([elem.name, elem.sid, elem.email, elem.id])
+    );
     return result;
   };
 
@@ -23,9 +23,10 @@ export default function Friends({ sideFriends, setSideFriends }) {
   useEffect(() => {
     autoUser(friendInput).then((res) => {
       setFriends(friendConverter(res.users));
-      console.log("users", res.users);
     });
   }, [friendInput]);
+
+  const theme = useTheme();
 
   return (
     <>
@@ -40,6 +41,9 @@ export default function Friends({ sideFriends, setSideFriends }) {
           mb: 4,
         }}
         InputProps={{
+          style: {
+            backgroundColor: theme.palette.background.default,
+          },
           startAdornment: (
             <InputAdornment position="start">
               <SearchIcon />

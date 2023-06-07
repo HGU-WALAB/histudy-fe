@@ -17,7 +17,6 @@ export default function Header() {
   const enrollMatch = useMatch("/enroll");
   const managerMatch = useMatch("/manageClass");
   const profileMatch = useMatch("/profile");
-  console.log(rankMatch);
 
   const [isLogin, setIsLogin] = useRecoilState(isLoginState);
 

@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import NoDataLottie from "../../components/NoDataLottie";
 import { getMyTeamUsers } from "../../apis/users";
 import CustomTable from "../../components/CustomTable";
+import { motion } from "framer-motion";
 
 export default function Group() {
   const [teamMembers, setTeamMembers] = useState([]);
@@ -73,6 +74,9 @@ export default function Group() {
 
   return (
     <Box
+      component={motion.div}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       sx={{
         minHeight: "100vh",
         display: "flex",
@@ -81,7 +85,7 @@ export default function Group() {
         mt: "50px",
       }}
     >
-      <Typography variant="h4" sx={{ mb: "10px" }}>
+      <Typography sx={{ fontSize: "30px", fontWeight: "300" }}>
         스터디 그룹 정보
       </Typography>
       {hasTeam ? (
@@ -95,7 +99,7 @@ export default function Group() {
           />
         </Box>
       ) : convertedCourses.length === 0 && convertedFriends.length === 0 ? (
-        <Box sx={{ mt: 10 }}>
+        <Box sx={{ mt: "100px" }}>
           <NoDataLottie />
         </Box>
       ) : (

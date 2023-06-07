@@ -25,6 +25,7 @@ import { CodeModal } from "../../components/Post/CodeModal";
 import { useRecoilState } from "recoil";
 import { isCodeModalState } from "../../store/atom";
 import { useLocation, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export default function Post({ children }) {
   const { state } = useLocation();
@@ -76,7 +77,11 @@ export default function Post({ children }) {
   };
 
   return (
-    <>
+    <Box
+      component={motion.div}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+    >
       {isCodeModal && <CodeModal onClick={() => setIsCodeModal(false)} />}
 
       <FormControl
@@ -186,6 +191,6 @@ export default function Post({ children }) {
           />
         </Box>
       </FormControl>
-    </>
+    </Box>
   );
 }

@@ -37,6 +37,9 @@ export default function Rank() {
 
   return (
     <Box
+      component={motion.div}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       sx={{
         minHeight: "100vh",
         px: "50px",

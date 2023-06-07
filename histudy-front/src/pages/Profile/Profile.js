@@ -15,17 +15,17 @@ export default function Profile() {
   return (
     <Box
       component={motion.div}
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       sx={{
         height: "100vh",
         display: "flex",
-        justifyContent: "center",
+        // justifyContent: "center",
         alignItems: "center",
         flexDirection: "column",
       }}
     >
-      <Typography sx={{ fontSize: "30px", fontWeight: "300" }}>
+      <Typography sx={{ fontSize: "30px", fontWeight: "300", mt: "50px" }}>
         😀 마이페이지
       </Typography>
       <Box
@@ -34,7 +34,7 @@ export default function Profile() {
           border: 2,
           borderRadius: "20px",
           width: "280px",
-          mt: "30px",
+          mt: "100px",
           mb: "15px",
           backgroundColor: "background.sidebar",
           borderColor: "lightGray",
