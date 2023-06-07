@@ -8,8 +8,9 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import GroupSelector from "./GroupSelector";
+import { editUser } from "../../apis/manager";
 
 export default function UnGroupTable({
   type,
@@ -23,9 +24,17 @@ export default function UnGroupTable({
 
   const [edit, setEdit] = useState([false]);
 
-  const handleSave = (index) => {
-    alert("저장되었습니다!");
-  };
+  const [team, setTeam] = useState(data.group);
+  const [sid, setSid] = useState();
+
+  // const handleSave = (index) => {
+  //   const newData = {
+  //     team: team,
+  //     id: id,
+  //   };
+  //   editUser();
+  //   alert("저장되었습니다!");
+  // };
   const handleDeleteRow = (index) => {};
 
   const handleEdit = (index) => {
@@ -112,7 +121,7 @@ export default function UnGroupTable({
                       color: "text.secondary",
                       display: "flex",
                       flexGrow: 1,
-                      width: "70px",
+                      width: "80px",
                       textOverflow: "ellipsis",
                       overflowX: "auto",
                       whiteSpace: "nowrap",
@@ -208,7 +217,7 @@ export default function UnGroupTable({
                       borderColor: "primary.border",
                     }}
                   >
-                    <GroupSelector></GroupSelector>
+                    <GroupSelector setTeam={setTeam} />
                   </Box>
 
                   <Box
@@ -232,7 +241,10 @@ export default function UnGroupTable({
                           height: "10px",
                         },
                       }}
-                      value={row.sid}
+                      defaultValue={row.sid}
+                      onChange={(e) => {
+                        setSid(e.target.value);
+                      }}
                     ></TextField>
                   </Box>
 
@@ -290,7 +302,18 @@ export default function UnGroupTable({
                       color: "white",
                       backgroundColor: "primary.main",
                     }}
-                    onClick={() => handleSave(index)}
+                    onClick={() => {
+                      const newData = {
+                        team: Number(team),
+                        sid: !sid ? row.sid : sid,
+                        name: row.name,
+                        id: row.id,
+                      };
+                      console.log(newData);
+                      editUser(newData);
+                      alert("저장되었습니다!");
+                      handleEdit(index);
+                    }}
                     label="저장"
                   />{" "}
                   <Chip
