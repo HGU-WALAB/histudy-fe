@@ -21,6 +21,7 @@ export default function MatchStartButton() {
         }}
         onClick={() => {
           teamMatch();
+          alert("매칭 완료!");
         }}
       >
         그룹 매칭하기

@@ -16,17 +16,31 @@ import UnGroupTable from "../../components/Manager/UnGroupTable";
 import GroupTables from "../../components/Manager/GroupTables";
 import { readAllGroups, readUngroup } from "../../apis/manager";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { isLoadingState, unGroupState } from "../../store/atom";
+import {
+  groupAutoCompleteState,
+  isLoadingState,
+  unGroupState,
+} from "../../store/atom";
 import { motion } from "framer-motion";
 
 export default function ManageGroup() {
   const [groupData, setGroupData] = useState();
   const [ungroupData, setUngroupData] = useState();
+  const setGroupAutoCompleteState = useSetRecoilState(groupAutoCompleteState);
+  const groupAutoCompleteConverter = (allGroup) => {
+    return [
+      ...allGroup.map((group) => {
+        return { label: `group ${group.group}` };
+      }),
+    ];
+  };
+
   const setIsLoading = useSetRecoilState(isLoadingState);
   useEffect(() => {
     setIsLoading(true);
     readAllGroups().then((data) => {
       setGroupData(data);
+      setGroupAutoCompleteState(groupAutoCompleteConverter(data));
       readUngroup().then((data) => {
         console.log(data);
         setUngroupData(data);
