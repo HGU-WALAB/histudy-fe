@@ -1,6 +1,6 @@
 import { Cancel } from "@mui/icons-material";
 import { Box, Chip, IconButton, Typography } from "@mui/material";
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function ReportTable({
@@ -20,13 +20,24 @@ export default function ReportTable({
     navigate("/reportDetail", { state: index });
   };
   const handleDeleteRow = (index) => {};
+  // useEffect(() => {
+  //   const dateObj = new Date(data.regDate);
+  //   const year = dateObj.getFullYear();
+  //   const month = String(dateObj.getMonth() + 1).padStart(2, "0");
+  //   const day = String(dateObj.getDate()).padStart(2, "0");
+
+  //   // const formattedDate = `year}-${month}-${day}`;
+  //   console.log(year);
+  //   console.log(month);
+  //   console.log(day);
+  //   // console.log(formattedDate);
+  // }, []);
   return (
     <>
       <Box
         sx={{
           py: "5px",
           border: 1,
-
           backgroundColor: "primary.default",
           height: "60px",
           borderColor: "primary.main",
@@ -149,7 +160,7 @@ export default function ReportTable({
                   borderColor: "primary.border",
                 }}
               >
-                {row.regDate}
+                {row.regDate.split("T")[0]}
               </Box>
               <Box
                 sx={{
@@ -165,7 +176,7 @@ export default function ReportTable({
                   borderColor: "primary.border",
                 }}
               >
-                {row.time}분
+                {row.totalMinutes}분
               </Box>
 
               <Box

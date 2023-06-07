@@ -83,7 +83,6 @@ export default function StudentListTable({
                 sx={{
                   display: "flex",
                   borderTop: index !== 0 && 1,
-                  // py: "20px",
                   borderColor: "primary.border",
                 }}
               >
@@ -121,11 +120,10 @@ export default function StudentListTable({
                       overflowX: "auto",
                       whiteSpace: "nowrap",
                       marginLeft: "5rem",
-                      // py: "20px",
                       borderColor: "primary.border",
                     }}
                   >
-                    {row.number}
+                    {row.sid}
                   </Box>
 
                   <Box
@@ -138,7 +136,6 @@ export default function StudentListTable({
                       overflowX: "auto",
                       whiteSpace: "nowrap",
                       marginLeft: "4rem",
-                      // py: "20px",
                       borderColor: "primary.border",
                     }}
                   >
@@ -155,7 +152,7 @@ export default function StudentListTable({
                     }}
                   >
                     <Select
-                      sx={{ color: "text.secondary" }}
+                      sx={{ width: "170px", color: "text.secondary" }}
                       value={row.courses.length > 0 ? row.courses[0].name : ""}
                     >
                       {row.courses.map((subject, index) => (
@@ -171,7 +168,6 @@ export default function StudentListTable({
                   sx={{
                     color: "text.secondary",
                     display: "flex",
-
                     borderColor: "primary.border",
                   }}
                 >
@@ -261,7 +257,7 @@ export default function StudentListTable({
                           height: "10px",
                         },
                       }}
-                      value={row.number}
+                      value={row.sid}
                     ></TextField>
                   </Box>
 
@@ -299,7 +295,7 @@ export default function StudentListTable({
                     }}
                   >
                     <Select
-                      sx={{ color: "text.secondary" }}
+                      sx={{ width: "170px", color: "text.secondary" }}
                       value={row.courses.length > 0 ? row.courses[0].name : ""}
                     >
                       {row.courses.map((subject, index) => (
@@ -370,163 +366,4 @@ export default function StudentListTable({
       </Box>
     </>
   );
-}
-
-{
-  /* <Box
-                key={index}
-                sx={{
-                  display: "flex",
-
-                  borderTop: index !== 0 && 1,
-                  py: "20px",
-                  borderColor: "primary.border",
-                }}
-              >
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    flexGrow: 1,
-                  }}
-                >
-                  <Box
-                    sx={{
-                      color: "text.secondary",
-                      display: "flex",
-                      flexGrow: 1,
-                      width: "50px",
-                      textOverflow: "ellipsis",
-                      overflowX: "auto",
-                      whiteSpace: "nowrap",
-                      marginLeft: "3rem",
-                      py: "20px",
-                      borderColor: "primary.border",
-                    }}
-                  >
-                    <TextField
-                      sx={{
-                        "& input": {
-                          height: "10px",
-                        },
-                      }}
-                      value={row.name}
-                    ></TextField>
-                  </Box>
-
-                  <Box
-                    sx={{
-                      color: "text.secondary",
-                      display: "flex",
-                      flexGrow: 1,
-                      width: "100px",
-                      textOverflow: "ellipsis",
-                      overflowX: "auto",
-                      whiteSpace: "nowrap",
-                      marginLeft: "7rem",
-                      py: "20px",
-                      borderColor: "primary.border",
-                    }}
-                  >
-                    <TextField
-                      sx={{
-                        "& input": {
-                          height: "10px",
-                        },
-                      }}
-                      value={row.number}
-                    ></TextField>
-                  </Box>
-
-                  <Box
-                    sx={{
-                      color: "text.secondary",
-                      display: "flex",
-                      flexGrow: 1,
-                      width: "50px",
-                      textOverflow: "ellipsis",
-                      overflowX: "auto",
-                      whiteSpace: "nowrap",
-                      marginLeft: "5rem",
-                      py: "20px",
-                      borderColor: "primary.border",
-                    }}
-                  >
-                    <TextField
-                      sx={{
-                        "& input": {
-                          height: "10px",
-                        },
-                      }}
-                      value={row.group}
-                    ></TextField>
-                  </Box>
-                  <Box
-                    sx={{
-                      color: "text.secondary",
-                      display: "flex",
-                      flexGrow: 1,
-                      width: "70px",
-
-                      textOverflow: "ellipsis",
-                      overflowX: "auto",
-                      whiteSpace: "nowrap",
-                      marginLeft: "6rem",
-
-                      py: "20px",
-                      borderColor: "primary.border",
-                      marginRight: "2rem",
-                    }}
-                  >
-                    {row.courses.map((subject, index) => (
-                      <Typography>
-                        {index > 0 && ", "}
-                        {subject.name},
-                      </Typography>
-                    ))}
-                  </Box>
-                </Box>
-
-                <Box
-                  sx={{
-                    color: "text.secondary",
-                    display: "flex",
-                    flexGrow: 1,
-                    borderColor: "primary.border",
-                  }}
-                >
-                  <Box
-                    sx={{
-                      color: "text.secondary",
-                      display: "flex",
-                      flexGrow: 1,
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <Box
-                      sx={{ display: "flex", py: "20px", marginRight: "20px" }}
-                    >
-                      <Chip
-                        sx={{
-                          color: "white",
-                          backgroundColor: "primary.main",
-                        }}
-                        onClick={() => handleSave(index)}
-                        label="저장"
-                      />{" "}
-                      <Chip
-                        sx={{
-                          marginLeft: "0.5rem",
-                          marginRight: "0.5rem",
-                          color: "#FF0000",
-                          backgroundColor: "#FFE4E4",
-                        }}
-                        onClick={() => handleEdit(index)}
-                        label="취소"
-                      />
-                    </Box>
-                  </Box>
-                </Box>
-              </Box> */
 }

@@ -86,7 +86,7 @@ export default function GroupTables({
             </Typography>
           ))}
         </Box>
-        {data.map((row, index) => (
+        {data.map((row, rowIndex) => (
           <Box
             key="Group-wrapper"
             sx={{
@@ -146,7 +146,7 @@ export default function GroupTables({
                         >
                           {index > 0 && ", "}
                           <Typography>{student.name},</Typography>
-                          <Typography>{student.number}</Typography>
+                          <Typography>{student.sid}</Typography>
                         </Box>
                         <Box
                           sx={{
@@ -159,7 +159,7 @@ export default function GroupTables({
                           }}
                         >
                           <Select
-                            sx={{ color: "text.secondary" }}
+                            sx={{ width: "170px", color: "text.secondary" }}
                             value={
                               student.courses.length > 0
                                 ? student.courses[0].name
@@ -236,7 +236,7 @@ export default function GroupTables({
                             marginTop: "20px",
                           }}
                         >
-                          <GroupSelector groupNum={row.group}></GroupSelector>
+                          <GroupSelector />
                         </Box>
                         <Box
                           sx={{
@@ -261,7 +261,7 @@ export default function GroupTables({
                               },
                               marginTop: "10px",
                             }}
-                            value={student.number}
+                            value={student.sid}
                           ></TextField>
                         </Box>
 
@@ -311,7 +311,7 @@ export default function GroupTables({
                             {student.friends.map((friend, index) => (
                               <MenuItem key={index} value={friend.name}>
                                 <Typography>
-                                  {friend.name}, {friend.number}
+                                  {friend.name}, {friend.sid}
                                 </Typography>
                               </MenuItem>
                             ))}

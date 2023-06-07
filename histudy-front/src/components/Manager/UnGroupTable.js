@@ -110,7 +110,7 @@ export default function UnGroupTable({
                       color: "text.secondary",
                       display: "flex",
                       flexGrow: 1,
-                      width: "50px",
+                      width: "70px",
                       textOverflow: "ellipsis",
                       overflowX: "auto",
                       whiteSpace: "nowrap",
@@ -118,7 +118,7 @@ export default function UnGroupTable({
                       borderColor: "primary.border",
                     }}
                   >
-                    {row.name},{row.number}
+                    {row.name},{row.sid}
                   </Box>
 
                   <Box
@@ -132,7 +132,7 @@ export default function UnGroupTable({
                     }}
                   >
                     <Select
-                      sx={{ color: "text.secondary" }}
+                      sx={{ width: "170px", color: "text.secondary" }}
                       value={row.courses.length > 0 ? row.courses[0].name : ""}
                     >
                       {row.courses.map((subject, index) => (
@@ -159,7 +159,7 @@ export default function UnGroupTable({
                       {row.friends.map((friend, index) => (
                         <MenuItem key={index} value={friend.name}>
                           <Typography>
-                            {friend.name}, {friend.number}
+                            {friend.name}, {friend.sid}
                           </Typography>
                         </MenuItem>
                       ))}
@@ -183,7 +183,6 @@ export default function UnGroupTable({
                 sx={{
                   display: "flex",
                   borderTop: index !== 0 && 1,
-                  // py: "20px",
                   borderColor: "primary.border",
                 }}
               >
@@ -200,11 +199,10 @@ export default function UnGroupTable({
                       display: "flex",
                       flexGrow: 1,
                       width: "80px",
-                      marginLeft: "30px",
+                      marginLeft: "20px",
                       textOverflow: "ellipsis",
                       overflowX: "auto",
                       whiteSpace: "nowrap",
-                      // py: "20px",
                       borderColor: "primary.border",
                     }}
                   >
@@ -232,7 +230,7 @@ export default function UnGroupTable({
                           height: "10px",
                         },
                       }}
-                      value={row.number}
+                      value={row.sid}
                     ></TextField>
                   </Box>
 
@@ -247,7 +245,7 @@ export default function UnGroupTable({
                     }}
                   >
                     <Select
-                      sx={{ color: "text.secondary" }}
+                      sx={{ width: "170px", color: "text.secondary" }}
                       value={row.courses.length > 0 ? row.courses[0].name : ""}
                     >
                       {row.courses.map((subject, index) => (
@@ -263,6 +261,8 @@ export default function UnGroupTable({
                       color: "text.secondary",
                       display: "flex",
                       flexGrow: 1,
+                      marginLeft: "-40px",
+                      marginRight: "-40px",
                       py: "20px",
                       borderColor: "primary.border",
                     }}
@@ -274,7 +274,7 @@ export default function UnGroupTable({
                       {row.friends.map((friend, index) => (
                         <MenuItem key={index} value={friend.name}>
                           <Typography>
-                            {friend.name}, {friend.number}
+                            {friend.name}, {friend.sid}
                           </Typography>
                         </MenuItem>
                       ))}
@@ -282,7 +282,7 @@ export default function UnGroupTable({
                   </Box>
                 </Box>
 
-                <Box sx={{ display: "flex", py: "30px", marginRight: "20px" }}>
+                <Box sx={{ display: "flex", py: "30px", marginRight: "5px" }}>
                   <Chip
                     sx={{
                       color: "white",

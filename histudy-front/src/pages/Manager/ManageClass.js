@@ -14,14 +14,6 @@ import ManagerTable from "../../components/Manager/ManagerTable";
 import { autoCourses } from "../../apis/course";
 
 export default function ManageClass() {
-  // const classData = [
-  //   ["Software Engineering", "ITP40002", "남재창"],
-  //   ["Open-source Software Laboratories", "ITP20004", "홍참길 외 1명"],
-  //   ["데이터 구조", "ECE20010", "김호준"],
-  //   ["자바 프로그래밍 언어", "ECE20016", "남재창"],
-  //   ["논리설계", "ECE20057", "이종원"],
-  // ];
-
   const [classData, setClassData] = useState();
   useEffect(() => {
     autoCourses().then((info) => {
@@ -31,7 +23,7 @@ export default function ManageClass() {
 
   return (
     <Box sx={{ display: "flex", py: "50px", px: "300px" }}>
-      <Box sx={{ position: "fixed", left: "30px", top: "50px" }}>
+      <Box sx={{ position: "fixed", left: "30px", top: "10rem" }}>
         <SideBar />
       </Box>
       <Box sx={{ width: "100%", ml: "50px" }}>

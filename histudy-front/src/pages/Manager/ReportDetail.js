@@ -28,9 +28,14 @@ import { readReportDetail } from "../../apis/manager";
 import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { deleteReport, modifyReport } from "../../apis/report";
+import Snackbars from "./Snackbars";
+import { useRecoilState } from "recoil";
+import { isDelete, reportDeleteState } from "../../store/atom";
 
 export default function ReportDetail() {
   const [reportData, setReportData] = useState();
+  const [open, setOpen] = useRecoilState(isDelete);
+
   const { state } = useLocation();
 
   const useUserReportDeatilMatch = useMatch("/report/:id");
@@ -80,12 +85,19 @@ export default function ReportDetail() {
     navigate(-1);
   };
 
-  const handleClick = (buttonId) => {
+  const handleClick = async (event, buttonId) => {
+    event.preventDefault();
+
     if (buttonId === "modify") {
       navigate(`/report/modify/${state.id}`, { state: state });
     } else if (buttonId === "delete") {
-      if (useUserReportDeatilMatch) deleteReport(state.id);
-      else deleteReport(state);
+      setOpen(true);
+      if (useUserReportDeatilMatch) {
+        await deleteReport(state.id);
+      } else {
+        await deleteReport(state);
+      }
+      navigate(-1);
     }
   };
 
@@ -117,13 +129,7 @@ export default function ReportDetail() {
               }}
             >
               <>
-                <Box
-                  sx={
-                    {
-                      // mb: "1rem",
-                    }
-                  }
-                >
+                <Box>
                   <Box
                     sx={{
                       display: "flex",
@@ -151,7 +157,9 @@ export default function ReportDetail() {
 
                     <IconButton>
                       <DeleteIcon
-                        onClick={handleClick("delete")}
+                        onClick={(e) => {
+                          handleClick(e, "delete");
+                        }}
                         color="error"
                       />
                     </IconButton>
