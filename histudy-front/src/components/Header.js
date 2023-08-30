@@ -64,11 +64,13 @@ export default function Header() {
         <HeaderButton link="/manageClass" name="MANAGER" match={managerMatch} />
       </Box>
 
-      <Box sx={{ display: "flex" }}>
-        {isLogin && (
+      <Box sx={{ display: "flex", gap: "10px", alignItems: "center" }}>
+        {isLogin ? (
           <Button sx={{ color: "text.header" }} onClick={handleLogOut}>
             Log out
           </Button>
+        ) : (
+          <GoogleButton />
         )}
 
         <HeaderButton link="/profile" name="My Profile" match={profileMatch} />

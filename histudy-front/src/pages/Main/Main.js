@@ -70,7 +70,7 @@ export default function Main() {
     >
       {/* <NavGrid /> */}
       <MainTest />
-      {!isLogin && <GoogleButton />}
+
       {isRegisterModal && (
         <RegisterModal handleClick={handleClick} sid={sid} setSid={setSid} />
       )}

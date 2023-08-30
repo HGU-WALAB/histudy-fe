@@ -125,7 +125,7 @@ export default function ReportDetail() {
                 borderColor: "primary.main",
                 borderRadius: "40px",
                 marginBottom: "20px",
-
+                minWidth: "700px",
                 padding: "40px 40px",
               }}
             >
