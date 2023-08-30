@@ -18,6 +18,8 @@ import styled from "styled-components";
 import GroupSelector from "./GroupSelector";
 import StudentNumSelector from "./StudentNumSelector";
 import { editUser } from "../../apis/manager";
+import { useSetRecoilState } from "recoil";
+import { isLoadingState } from "../../store/atom";
 
 const theme = createTheme({
   typography: {
@@ -54,8 +56,10 @@ export default function GroupTables({
     setStudentEdit(newEdit);
   };
 
-  const [team, setTeam] = useState(data.group);
+  const [team, setTeam] = useState(data.tag);
   const [sid, setSid] = useState();
+
+  const setIsLoading = useSetRecoilState(isLoadingState);
 
   return (
     <Box>
@@ -137,7 +141,7 @@ export default function GroupTables({
                             borderColor: "primary.border",
                           }}
                         >
-                          <Typography>Group{row.group}</Typography>
+                          <Typography>Group{row.tag}</Typography>
                         </Box>
                         <Box
                           sx={{
@@ -354,6 +358,9 @@ export default function GroupTables({
                                 console.log(newData);
                                 editUser(newData);
                                 alert("저장되었습니다!");
+                                handleEdit(student.id, index);
+                                setIsLoading(true);
+                                window.location.reload();
                               }}
                               label="저장"
                             />{" "}

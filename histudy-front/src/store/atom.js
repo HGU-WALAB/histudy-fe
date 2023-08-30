@@ -14,6 +14,7 @@ export const darkState = atom({
 export const isLoginState = atom({
   key: "isLogin",
   default: false,
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const isRegisterModalState = atom({

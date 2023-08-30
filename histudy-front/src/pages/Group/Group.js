@@ -38,17 +38,14 @@ export default function Group() {
       );
     });
 
-    getMyTeamUsers()
-      .then((res) => {
-        setTeamMembers(res);
-        setHasTeam(true);
-        // console.log(res);
-        // console.log("!!" + typeof teamMembersConverter(res));
-        setConvertedTeamMembers(teamMembersConverter(res));
-      })
-      .catch((err) => {
-        setHasTeam(false);
-      });
+    getMyTeamUsers().then((res) => {
+      setTeamMembers(res);
+
+      if (res.length === 0) setHasTeam(false);
+      else setHasTeam(true);
+
+      setConvertedTeamMembers(teamMembersConverter(res));
+    });
   }, []);
 
   const [courses, setCourses] = useState([

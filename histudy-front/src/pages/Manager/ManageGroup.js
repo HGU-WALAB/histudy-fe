@@ -30,7 +30,7 @@ export default function ManageGroup() {
   const groupAutoCompleteConverter = (allGroup) => {
     return [
       ...allGroup.map((group) => {
-        return { label: `group ${group.group}` };
+        return { label: `group ${group.tag}` };
       }),
     ];
   };
