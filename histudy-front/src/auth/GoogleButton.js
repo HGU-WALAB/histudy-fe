@@ -6,6 +6,7 @@ import React, { useRef } from "react";
 import { userLogin, userSignup } from "../apis/users";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import {
+  authorityState,
   isLoginState,
   isRegisterModalState,
   userLoginInfo,
@@ -21,6 +22,7 @@ export default function GoogleButton() {
   const setRegisterModalState = useSetRecoilState(isRegisterModalState);
   const setUserLoginInfo = useSetRecoilState(userLoginInfo);
   const setIsLogin = useSetRecoilState(isLoginState);
+  const setAuthority = useSetRecoilState(authorityState);
   // const { loginWithCredential } = useAuthContext();
 
   const onSuccess = async (credentialResponse) => {
@@ -37,6 +39,7 @@ export default function GoogleButton() {
 
           window.location.href = "/";
           setIsLogin(true);
+          setAuthority(response.data.role);
         }
       })
       .catch((error) => {

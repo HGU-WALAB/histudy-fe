@@ -1,8 +1,9 @@
 import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import {
+  authorityState,
   isLoginState,
   isRegisterModalState,
   userLoginInfo,
@@ -24,7 +25,7 @@ export default function Main() {
     useRecoilState(isRegisterModalState);
   const [userLoginInfoState, setUserLoginInfoState] =
     useRecoilState(userLoginInfo);
-
+  const setAuthority = useSetRecoilState(authorityState);
   const nameConverter = (name) => {
     if (name.slice(-3) === "학부생") return name.slice(0, -3);
     return name;
@@ -39,6 +40,7 @@ export default function Main() {
       name: nameConverter(userLoginInfoState.name),
       sid: sid,
     };
+
     if (sid.length === 0) {
       alert("학번을 입력해주세요");
       return;
@@ -55,6 +57,8 @@ export default function Main() {
     setIsRegisterModal(false);
     setUserLoginInfoState(null);
     setIsLogin(true);
+    setAuthority(response.role);
+
     // window.location.reload();
   };
 
