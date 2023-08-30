@@ -20,7 +20,7 @@ export default function GoogleButton() {
   const navigate = useNavigate();
   const setRegisterModalState = useSetRecoilState(isRegisterModalState);
   const setUserLoginInfo = useSetRecoilState(userLoginInfo);
-  const setIsLogin = useRecoilValue(isLoginState);
+  const setIsLogin = useSetRecoilState(isLoginState);
   // const { loginWithCredential } = useAuthContext();
 
   const onSuccess = async (credentialResponse) => {
@@ -34,6 +34,7 @@ export default function GoogleButton() {
             "refreshToken",
             response.data.tokens.refreshToken
           );
+
           window.location.href = "/";
           setIsLogin(true);
         }

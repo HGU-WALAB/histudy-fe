@@ -65,10 +65,12 @@ export default function Header() {
       </Box>
 
       <Box sx={{ display: "flex" }}>
-        {isLogin && (
+        {isLogin ? (
           <Button sx={{ color: "text.header" }} onClick={handleLogOut}>
             Log out
           </Button>
+        ) : (
+          <GoogleButton />
         )}
 
         <HeaderButton link="/profile" name="My Profile" match={profileMatch} />

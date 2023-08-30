@@ -13,7 +13,7 @@ export const darkState = atom({
 
 export const isLoginState = atom({
   key: "isLogin",
-  default: true,
+  default: false,
 });
 
 export const isRegisterModalState = atom({
