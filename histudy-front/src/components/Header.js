@@ -71,8 +71,6 @@ export default function Header() {
           </Button>
         ) : (
           <GoogleButton />
-        ) : (
-          <GoogleButton />
         )}
 
         <HeaderButton link="/profile" name="My Profile" match={profileMatch} />
