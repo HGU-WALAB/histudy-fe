@@ -11,6 +11,8 @@ import {
 import { useEffect, useState } from "react";
 import GroupSelector from "./GroupSelector";
 import { editUser } from "../../apis/manager";
+import { useSetRecoilState } from "recoil";
+import { isLoadingState } from "../../store/atom";
 
 export default function UnGroupTable({
   type,
@@ -24,7 +26,7 @@ export default function UnGroupTable({
 
   const [edit, setEdit] = useState([false]);
 
-  const [team, setTeam] = useState(data.group);
+  const [team, setTeam] = useState(data.tag);
   const [sid, setSid] = useState();
 
   // const handleSave = (index) => {
@@ -42,6 +44,7 @@ export default function UnGroupTable({
     newEdit[index] = !newEdit[index];
     setEdit(newEdit);
   };
+  const setIsLoading = useSetRecoilState(isLoadingState);
 
   return (
     <>
@@ -313,6 +316,9 @@ export default function UnGroupTable({
                       editUser(newData);
                       alert("저장되었습니다!");
                       handleEdit(index);
+
+                      setIsLoading(true);
+                      window.location.reload();
                     }}
                     label="저장"
                   />{" "}
