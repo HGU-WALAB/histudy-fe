@@ -1,13 +1,10 @@
-import { Box, Button, Paper, Switch, ToggleButton } from "@mui/material";
-import { Link, useMatch } from "react-router-dom";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { Box, Button } from "@mui/material";
+import { useMatch } from "react-router-dom";
+import { useRecoilState, useRecoilValue } from "recoil";
 import GoogleButton from "../auth/GoogleButton";
-import { darkModeState, isLoginState } from "../store/atom";
+import { authorityState, isLoginState } from "../store/atom";
 import DarkModeToggle from "./DarkModeToggle";
 import HeaderButton from "./HeaderButton";
-import LoginButton from "./LoginButton";
-import ExportCSV from "./scv/ExportCSV";
-import { useRef } from "react";
 
 export default function Header() {
   const homeMatch = useMatch("/");
@@ -27,6 +24,45 @@ export default function Header() {
     localStorage.removeItem("refreshToken");
   };
 
+  const role = useRecoilValue(authorityState);
+
+  /**
+   * @breif 해당 컴포넌트가 로그인한 유저의 권한에 맞는지 확인하는 함수
+   * @param {*} component
+   * @returns
+   */
+  const validateWithRole = (component) => {
+    switch (component.props.name) {
+      case "My Study":
+        {
+          if (role === "MEMBER") {
+            return component;
+          }
+        }
+        break;
+      case "Report":
+        {
+          if (role === "MEMBER") {
+            return component;
+          }
+        }
+        break;
+      case "Apply For HISTUDY":
+        if (role === "USER") {
+          return component;
+        }
+        break;
+      case "MANAGER":
+        if (role === "ADMIN") {
+          return component;
+        }
+
+      default:
+        console.log(component);
+        return null;
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -41,7 +77,8 @@ export default function Header() {
       <Box
         sx={{
           display: "flex",
-          justifyContent: "space-between",
+          justifyContent: "start",
+          gap: "20px",
           alignItems: "center",
           width: "620px",
         }}
@@ -52,16 +89,28 @@ export default function Header() {
           match={homeMatch}
         />
         {/* <img src="./img/logo_histudy.png" width={130} /> */}
-        <HeaderButton link="/group" name="My Study" match={groupMatch} />
-        <HeaderButton link="/report" name="Report" match={reportMatch} />
+        {validateWithRole(
+          <HeaderButton link="/group" name="My Study" match={groupMatch} />
+        )}
+        {validateWithRole(
+          <HeaderButton link="/report" name="Report" match={reportMatch} />
+        )}
         <HeaderButton link="/rank" name="Rank" match={rankMatch} />
-        <HeaderButton
-          link="/enroll"
-          name="Apply For HISTUDY"
-          color="text.header"
-          match={enrollMatch}
-        />
-        <HeaderButton link="/manageClass" name="MANAGER" match={managerMatch} />
+        {validateWithRole(
+          <HeaderButton
+            link="/enroll"
+            name="Apply For HISTUDY"
+            color="text.header"
+            match={enrollMatch}
+          />
+        )}
+        {validateWithRole(
+          <HeaderButton
+            link="/manageClass"
+            name="MANAGER"
+            match={managerMatch}
+          />
+        )}
       </Box>
 
       <Box sx={{ display: "flex", gap: "10px", alignItems: "center" }}>
