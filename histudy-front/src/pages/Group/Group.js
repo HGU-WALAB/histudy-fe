@@ -9,7 +9,7 @@ import { getMyTeamUsers } from "../../apis/users";
 import CustomTable from "../../components/CustomTable";
 import { motion } from "framer-motion";
 
-export default function Group() {
+export default function Group({ setReApply }) {
   const [teamMembers, setTeamMembers] = useState([]);
   const [convertedTeamMembers, setConvertedTeamMembers] = useState([]);
 
@@ -28,6 +28,8 @@ export default function Group() {
   // team 유저 정보
   useEffect(() => {
     getMyGroup().then((res) => {
+      console.log("deb", res.courses);
+
       setCourses(res.courses);
       setConvertedCourses(
         res.courses.map((course) => [course.name, course.prof, course.code])
@@ -48,37 +50,11 @@ export default function Group() {
     });
   }, []);
 
-  const [courses, setCourses] = useState([
-    // { name: "알고리즘 분석", professor: "이원형 교수님" },
-    // { name: "데이타 베이스", professor: "홍참길 교수님" },
-  ]);
-  const [friends, setFriends] = useState([
-    // {
-    //   name: "오인혁",
-    //   id: "21800446",
-    // },
-    // {
-    //   name: "한시온",
-    //   id: "21800888",
-    // },
-  ]);
+  const [courses, setCourses] = useState([]);
+  const [friends, setFriends] = useState([]);
 
   const [convertedCourses, setConvertedCourses] = useState([]);
   const [convertedFriends, setConvertedFriends] = useState([]);
-
-  // useEffect(() => {
-  //   getMyGroup().then((res) => {
-  //     setCourses(res.courses);
-
-  //     setConvertedCourses(
-  //       res.courses.map((course) => [course.name, course.prof, course.code])
-  //     );
-  //     setFriends(res.friends);
-  //     setConvertedFriends(
-  //       res.friends.map((friend) => [friend.name, friend.sid])
-  //     );
-  //   });
-  // }, []);
 
   return (
     <Box
@@ -129,6 +105,10 @@ export default function Group() {
             }}
           >
             <LongButton
+              onClick={(e) => {
+                // e.preventDefault();
+                setReApply(false);
+              }}
               name="다시 제출하기"
               bgColor="primary.main"
               fontColor="white"

@@ -17,11 +17,14 @@ import { autoCourses, getCourses, teamCourses } from "../../apis/course";
 import { autoUser } from "../../apis/users";
 import Friends from "../../components/Enroll/Friends";
 import Courses from "../../components/Enroll/Courses";
-import { studyEnroll } from "../../apis/study";
+import { getMyGroup, studyEnroll } from "../../apis/study";
 import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import Group from "../Group/Group";
 
 export default function Enroll() {
+  const [reApply, setReApply] = useState(false);
+
   const location = useLocation();
   useEffect(() => {
     if (location.state) {
@@ -37,27 +40,20 @@ export default function Enroll() {
         location.state.friends.map((friend) => [friend.name, friend.sid])
       );
     }
+
+    /**
+     * 내가 신청한 스터디가 있는지 확인
+     */
+    getMyGroup().then((res) => {
+      if (res.courses.length !== 0) {
+        setReApply(true);
+        setSideCourses(
+          res.courses.map((course) => [course.name, course.code, course.prof])
+        );
+        setSideFriends(res.friends.map((friend) => [friend.name, friend.sid]));
+      }
+    });
   }, []);
-
-  const firstData = [
-    ["오인혁", "21800446", "8156217@naver.com"],
-    ["한시온", "21800446", "8156217@naver.com"],
-    ["배주영", "21800446", "8156217@naver.com"],
-    ["이인혁", "21800446", "8156217@naver.com"],
-    ["김진수", "21800446", "8156217@naver.com"],
-  ];
-
-  const secondDate = [
-    ["Open-source Software Laboratories", "0000000", "홍참길"],
-    ["Open-source Software Laboratories", "0000000", "홍참길"],
-    ["Open-source Software Laboratories", "0000000", "홍참길"],
-    ["Open-source Software Laboratories", "0000000", "홍참길"],
-  ];
-
-  const thirdData = [
-    ["1", "알고리듬분석", "ECE40008", "용환기"],
-    ["2", "RF회로 설계", "ECE30011", "김영식"],
-  ];
 
   const [page, setPage] = useState(1);
 
@@ -109,163 +105,176 @@ export default function Enroll() {
       component={motion.div}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      sx={{ display: "flex", py: "80px", px: "300px", minHeight: "100vh" }}
+      sx={{
+        display: "flex",
+        py: "40px",
+        px: "300px",
+        minHeight: "100vh",
+        justifyContent: "center",
+      }}
     >
-      <Box sx={{ position: "absolute", left: "45px", top: "30px" }}>
-        <ProgressBar page={page} setPage={setPage} />
-        <GrayBorderBox
-          courses={sideCourses}
-          friends={sideFriends}
-          setSideCourses={setSideCourses}
-          setSideFriends={setSideFriends}
-        />
-      </Box>
-      <Box sx={{ width: "100%", ml: "70px" }}>
-        <Typography
-          sx={{
-            textAlign: "center",
-            mb: "20px",
-            fontSize: "25px",
-            fontWeight: "400",
-          }}
-        >
-          Histudy 신청하기
-        </Typography>
-
-        {page === 1 && (
-          <Box
-            component={motion.div}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-          >
-            <Typography sx={{ textAlign: "center", fontWeight: "400" }}>
-              스터디를 함께하고 싶은 친구가 있다면 추가하세요!
-            </Typography>
-            <Typography
-              sx={{
-                color: "primary.main",
-                textAlign: "center",
-                mt: "5px",
-                mb: "30px",
-                fontWeight: "600",
-              }}
-            >
-              서로 함께 하고 싶은 친구로 신청해야 매칭됩니다! (최대 4명)
-            </Typography>
-            <Friends
-              sideFriends={sideFriends}
+      {reApply ? (
+        <Group setReApply={setReApply} />
+      ) : (
+        <Box sx={{ mt: "40px" }}>
+          <Box sx={{ position: "absolute", left: "45px", top: "30px" }}>
+            <ProgressBar page={page} setPage={setPage} />
+            <GrayBorderBox
+              reApply={reApply}
+              courses={sideCourses}
+              friends={sideFriends}
+              setSideCourses={setSideCourses}
               setSideFriends={setSideFriends}
             />
-            {/* <Typography
+          </Box>
+          <Box sx={{ width: "100%", ml: "70px" }}>
+            <Typography
+              sx={{
+                textAlign: "center",
+                mb: "20px",
+                fontSize: "25px",
+                fontWeight: "400",
+              }}
+            >
+              Histudy 신청하기
+            </Typography>
+
+            {page === 1 && (
+              <Box
+                component={motion.div}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+              >
+                <Typography sx={{ textAlign: "center", fontWeight: "400" }}>
+                  스터디를 함께하고 싶은 친구가 있다면 추가하세요!
+                </Typography>
+                <Typography
+                  sx={{
+                    color: "primary.main",
+                    textAlign: "center",
+                    mt: "5px",
+                    mb: "30px",
+                    fontWeight: "600",
+                  }}
+                >
+                  서로 함께 하고 싶은 친구로 신청해야 매칭됩니다! (최대 4명)
+                </Typography>
+                <Friends
+                  sideFriends={sideFriends}
+                  setSideFriends={setSideFriends}
+                />
+                {/* <Typography
               sx={{ color: "primary.main", textAlign: "center", mt: 4 }}
             >
               서로 함께 하고 싶은 친구로 신청해야 매칭됩니다!
             </Typography> */}
-            <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
-              <LongButton
-                name="다음"
-                onClick={handleClick}
-                bgColor="primary.main"
-                fontColor="white"
-              />
-            </Box>
-          </Box>
-        )}
-
-        {page === 2 && (
-          <Box
-            component={motion.div}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-          >
-            <Typography sx={{ textAlign: "center" }}>
-              스터디를 하고 싶은 희망 과목들을 담아주세요!
-            </Typography>
-            <Typography
-              sx={{
-                color: "primary.main",
-                textAlign: "center",
-                mt: "5px",
-                mb: "30px",
-                fontWeight: "600",
-              }}
-            >
-              최소 1과목, 최대 3과목
-            </Typography>
-
-            <Courses
-              sideCourses={sideCourses}
-              setSideCourses={setSideCourses}
-            />
-            <Box sx={{ display: "flex", justifyContent: "center" }}>
-              <Box
-                sx={{
-                  mt: 5,
-                  display: "flex",
-                  justifyContent: "space-between",
-                  width: "300px",
-                }}
-              >
-                <LongButton
-                  name="이전"
-                  onClick={handleClick}
-                  bgColor="primary.lighter"
-                  fontColor="primary.main"
-                />
-                <LongButton
-                  name="다음"
-                  onClick={handleClick}
-                  bgColor="primary.main"
-                  fontColor="white"
-                />
+                <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
+                  <LongButton
+                    name="다음"
+                    onClick={handleClick}
+                    bgColor="primary.main"
+                    fontColor="white"
+                  />
+                </Box>
               </Box>
-            </Box>
-          </Box>
-        )}
-        {page === 3 && (
-          <Box
-            component={motion.div}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-          >
-            <Typography sx={{ textAlign: "center", height: "50px" }}>
-              스터디 희망 과목의 우선 순위를 정해주세요!
-            </Typography>
+            )}
 
-            <CustomTable
-              data={rankConverter(sideCourses)}
-              addData={setSideCourses}
-              accentColumnNum={-1}
-              longWidthColumnNum={2}
-              type="third"
-            />
-            <Box sx={{ display: "flex", justifyContent: "center" }}>
+            {page === 2 && (
               <Box
-                sx={{
-                  mt: 5,
-                  display: "flex",
-                  justifyContent: "space-between",
-                  width: "300px",
-                }}
+                component={motion.div}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
               >
-                <LongButton
-                  name="이전"
-                  onClick={handleClick}
-                  bgColor="primary.lighter"
-                  fontColor="primary.main"
-                />
+                <Typography sx={{ textAlign: "center" }}>
+                  스터디를 하고 싶은 희망 과목들을 담아주세요!
+                </Typography>
+                <Typography
+                  sx={{
+                    color: "primary.main",
+                    textAlign: "center",
+                    mt: "5px",
+                    mb: "30px",
+                    fontWeight: "600",
+                  }}
+                >
+                  최소 1과목, 최대 3과목
+                </Typography>
 
-                <LongButton
-                  name="제출"
-                  onClick={handleClick}
-                  bgColor="primary.main"
-                  fontColor="white"
+                <Courses
+                  sideCourses={sideCourses}
+                  setSideCourses={setSideCourses}
                 />
+                <Box sx={{ display: "flex", justifyContent: "center" }}>
+                  <Box
+                    sx={{
+                      mt: 5,
+                      display: "flex",
+                      justifyContent: "space-between",
+                      width: "300px",
+                    }}
+                  >
+                    <LongButton
+                      name="이전"
+                      onClick={handleClick}
+                      bgColor="primary.lighter"
+                      fontColor="primary.main"
+                    />
+                    <LongButton
+                      name="다음"
+                      onClick={handleClick}
+                      bgColor="primary.main"
+                      fontColor="white"
+                    />
+                  </Box>
+                </Box>
               </Box>
-            </Box>
+            )}
+            {page === 3 && (
+              <Box
+                component={motion.div}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+              >
+                <Typography sx={{ textAlign: "center", height: "50px" }}>
+                  스터디 희망 과목의 우선 순위를 정해주세요!
+                </Typography>
+
+                <CustomTable
+                  data={rankConverter(sideCourses)}
+                  addData={setSideCourses}
+                  accentColumnNum={-1}
+                  longWidthColumnNum={2}
+                  type="third"
+                />
+                <Box sx={{ display: "flex", justifyContent: "center" }}>
+                  <Box
+                    sx={{
+                      mt: 5,
+                      display: "flex",
+                      justifyContent: "space-between",
+                      width: "300px",
+                    }}
+                  >
+                    <LongButton
+                      name="이전"
+                      onClick={handleClick}
+                      bgColor="primary.lighter"
+                      fontColor="primary.main"
+                    />
+
+                    <LongButton
+                      name="제출"
+                      onClick={handleClick}
+                      bgColor="primary.main"
+                      fontColor="white"
+                    />
+                  </Box>
+                </Box>
+              </Box>
+            )}
           </Box>
-        )}
-      </Box>
+        </Box>
+      )}
     </Box>
   );
 }

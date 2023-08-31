@@ -6,48 +6,7 @@ import { importCourses } from "../../apis/course";
 export default function RegisterClassButton() {
   const [selectedFile, setSelectedFile] = React.useState();
 
-  const handleSubmit = async (e) => {
-    // e.preventDefault();
-
-    const formData = new FormData();
-
-    // Array.from(selectedFile).forEach((el) => {
-    // formData.append("file", selectedFile);
-    // });
-
-    // const response = await importCourses(formData);
-
-    // // try {
-    // //   const TOKEN = localStorage.getItem("accessToken");
-
-    // //   const response = await axios.post(
-    // //     `${process.env.REACT_APP_BACK_BASE_URL}/api/course`,
-    // //     formData,
-    // //     {
-    // //       headers: {
-    // //         "Content-Type": "multipart/form-data",
-    // //         Authorization: `Bearer ${TOKEN}`,
-    // //         withCredentials: true,
-    // //       },
-    // //       transfromRequest: [
-    // //         function () {
-    // //           return formData;
-    // //         },
-    // //       ],
-    // //     }
-    // //   );
-
-    //   console.log(response);
-    // } catch (error) {
-    //   console.log("!!");
-    //   console.log(error);
-    // }
-
-    formData.append("file", selectedFile);
-
-    // console.log(selectedFile);
-    console.log(importCourses(formData));
-  };
+  const fileRef = React.useRef();
 
   const handleChange = async (event) => {
     event.preventDefault();
@@ -58,13 +17,15 @@ export default function RegisterClassButton() {
 
     formData.append("file", event.target.files[0]);
 
-    console.log(importCourses(formData));
+    importCourses(formData).then((res) => {
+      alert("성공적으로 등록되었습니다.");
+      window.location.reload();
+    });
   };
+
   const handleClick = () => {
     fileRef.current.click();
   };
-
-  const fileRef = React.useRef();
 
   return (
     <Stack direction="row" spacing={2}>

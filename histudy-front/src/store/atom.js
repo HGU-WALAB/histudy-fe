@@ -52,3 +52,9 @@ export const groupAutoCompleteState = atom({
   key: "groupAutoComplete",
   default: [],
 });
+
+export const authorityState = atom({
+  key: "authority",
+  default: "NONUSER",
+  effects_UNSTABLE: [persistAtom],
+});
