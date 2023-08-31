@@ -1,5 +1,5 @@
 import { Box, Button } from "@mui/material";
-import { useMatch } from "react-router-dom";
+import { useLocation, useMatch, useNavigate } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import GoogleButton from "../auth/GoogleButton";
 import { authorityState, isLoginState } from "../store/atom";
@@ -15,6 +15,8 @@ export default function Header() {
   const managerMatch = useMatch("/manageClass");
   const profileMatch = useMatch("/profile");
 
+  const navigate = useNavigate();
+
   const [isLogin, setIsLogin] = useRecoilState(isLoginState);
   const [role, setRole] = useRecoilState(authorityState);
   const handleLogOut = () => {
@@ -23,6 +25,8 @@ export default function Header() {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
     setRole("NONUSER");
+    // 메인페이지로이동
+    navigate("/");
   };
 
   /**
