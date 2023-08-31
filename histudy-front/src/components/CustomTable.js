@@ -4,43 +4,6 @@ import RoundButton from "./RoundButton";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Link } from "react-router-dom";
-const GroupRanking = [
-  {
-    rank: 1,
-    group: "Group 1",
-    reporter: "7장",
-    studyTime: "1027시간",
-    studyTimePerADay: "6시간",
-  },
-  {
-    rank: 2,
-    group: "Group 1",
-    reporter: "7장",
-    studyTime: "1027시간",
-    studyTimePerADay: "6시간",
-  },
-  {
-    rank: 3,
-    group: "Group 1",
-    reporter: "7장",
-    studyTime: "1027시간",
-    studyTimePerADay: "6시간",
-  },
-  {
-    rank: 4,
-    group: "Group 1",
-    reporter: "7장",
-    studyTime: "1027시간",
-    studyTimePerADay: "6시간",
-  },
-  {
-    rank: 5,
-    group: "Group 1",
-    reporter: "7장",
-    studyTime: "1027시간",
-    studyTimePerADay: "6시간",
-  },
-];
 
 //type에 따라 버튼 다르게 생기게
 
