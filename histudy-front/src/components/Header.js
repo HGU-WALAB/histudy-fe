@@ -33,31 +33,21 @@ export default function Header() {
   const validateWithRole = (component) => {
     switch (component.props.name) {
       case "My Study":
-        {
-          if (role === "MEMBER") {
-            return component;
-          }
-        }
+        if (role === "MEMBER") return component;
         break;
       case "Report":
-        {
-          if (role === "MEMBER") {
-            return component;
-          }
-        }
+        if (role === "MEMBER") return component;
         break;
       case "Apply For HISTUDY":
-        if (role === "USER") {
-          return component;
-        }
+        if (role === "USER") return component;
         break;
       case "MANAGER":
-        if (role === "ADMIN") {
-          return component;
-        }
-
+        if (role === "ADMIN") return component;
+        break;
+      case "My Profile":
+        if (role !== "NONUSER") return component;
+        break;
       default:
-        console.log(component);
         return null;
     }
   };
@@ -121,7 +111,13 @@ export default function Header() {
           <GoogleButton />
         )}
 
-        <HeaderButton link="/profile" name="My Profile" match={profileMatch} />
+        {validateWithRole(
+          <HeaderButton
+            link="/profile"
+            name="My Profile"
+            match={profileMatch}
+          />
+        )}
         <DarkModeToggle />
       </Box>
     </Box>
