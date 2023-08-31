@@ -16,15 +16,14 @@ export default function Header() {
   const profileMatch = useMatch("/profile");
 
   const [isLogin, setIsLogin] = useRecoilState(isLoginState);
-
+  const [role, setRole] = useRecoilState(authorityState);
   const handleLogOut = () => {
     alert("로그아웃 되었습니다.");
     setIsLogin(false);
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
+    setRole("NONUSER");
   };
-
-  const role = useRecoilValue(authorityState);
 
   /**
    * @breif 해당 컴포넌트가 로그인한 유저의 권한에 맞는지 확인하는 함수
