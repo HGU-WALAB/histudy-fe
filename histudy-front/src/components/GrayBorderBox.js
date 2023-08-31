@@ -3,6 +3,7 @@ import { useMatch } from "react-router-dom";
 import DeleteDataIcon from "./Enroll/DeleteDataIcon";
 import { AnimatePresence, motion } from "framer-motion";
 export default function GrayBorderBox({
+  reApply,
   setSideFriends,
   setSideCourses,
   friends,
@@ -54,7 +55,7 @@ export default function GrayBorderBox({
               >
                 {friend[0]}, {friend[1]}
               </Typography>
-              {enrollMatch && (
+              {enrollMatch && setSideFriends && (
                 <DeleteDataIcon setData={setSideFriends} compData={friend[1]} />
               )}
             </Box>
@@ -83,9 +84,9 @@ export default function GrayBorderBox({
                 variant="body1"
                 sx={{ color: "primary.main" }}
               >
-                {course[0]} , {course[1]}
+                {course[0]} , {course[1]} , {course[2]}
               </Typography>
-              {enrollMatch && (
+              {enrollMatch && setSideCourses && (
                 <DeleteDataIcon setData={setSideCourses} compData={course[1]} />
               )}
             </Box>

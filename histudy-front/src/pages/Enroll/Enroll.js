@@ -46,30 +46,14 @@ export default function Enroll() {
      */
     getMyGroup().then((res) => {
       if (res.courses.length !== 0) {
-        setReApply(false);
+        setReApply(true);
+        setSideCourses(
+          res.courses.map((course) => [course.name, course.code, course.prof])
+        );
+        setSideFriends(res.friends.map((friend) => [friend.name, friend.sid]));
       }
     });
   }, []);
-
-  const firstData = [
-    ["오인혁", "21800446", "8156217@naver.com"],
-    ["한시온", "21800446", "8156217@naver.com"],
-    ["배주영", "21800446", "8156217@naver.com"],
-    ["이인혁", "21800446", "8156217@naver.com"],
-    ["김진수", "21800446", "8156217@naver.com"],
-  ];
-
-  const secondDate = [
-    ["Open-source Software Laboratories", "0000000", "홍참길"],
-    ["Open-source Software Laboratories", "0000000", "홍참길"],
-    ["Open-source Software Laboratories", "0000000", "홍참길"],
-    ["Open-source Software Laboratories", "0000000", "홍참길"],
-  ];
-
-  const thirdData = [
-    ["1", "알고리듬분석", "ECE40008", "용환기"],
-    ["2", "RF회로 설계", "ECE30011", "김영식"],
-  ];
 
   const [page, setPage] = useState(1);
 
@@ -136,6 +120,7 @@ export default function Enroll() {
           <Box sx={{ position: "absolute", left: "45px", top: "30px" }}>
             <ProgressBar page={page} setPage={setPage} />
             <GrayBorderBox
+              reApply={reApply}
               courses={sideCourses}
               friends={sideFriends}
               setSideCourses={setSideCourses}
