@@ -108,16 +108,24 @@ export default function Enroll() {
       sx={{
         display: "flex",
         py: "40px",
-        px: "300px",
+        px: "50px",
         minHeight: "100vh",
         justifyContent: "center",
+        width: "auto",
       }}
     >
       {reApply ? (
         <Group setReApply={setReApply} />
       ) : (
         <Box sx={{ mt: "40px" }}>
-          <Box sx={{ position: "absolute", left: "45px", top: "30px" }}>
+          <Box
+            sx={{
+              display: { lg: "block", md: "none", sm: "none", xs: "none" },
+              position: "absolute",
+              left: "45px",
+              top: "30px",
+            }}
+          >
             <ProgressBar page={page} setPage={setPage} />
             <GrayBorderBox
               reApply={reApply}
@@ -127,7 +135,17 @@ export default function Enroll() {
               setSideFriends={setSideFriends}
             />
           </Box>
-          <Box sx={{ width: "100%", ml: "70px" }}>
+          <Box
+            sx={{
+              // width: "100%",
+              // minWidth: "500px",
+
+              ml: {
+                lg: "70px",
+                md: "0px",
+              },
+            }}
+          >
             <Typography
               sx={{
                 textAlign: "center",

@@ -1,4 +1,4 @@
-import { InputAdornment, TextField, useTheme } from "@mui/material";
+import { Box, InputAdornment, TextField, useTheme } from "@mui/material";
 import CustomTable from "../CustomTable";
 import { useEffect, useState } from "react";
 import { autoUser } from "../../apis/users";
@@ -29,16 +29,21 @@ export default function Friends({ sideFriends, setSideFriends }) {
   const theme = useTheme();
 
   return (
-    <>
+    <Box
+      sx={{
+        maxWidth: "400px",
+        overflowX: "scroll",
+      }}
+    >
       <TextFieldWrapper
         id="friend"
         type="search"
         value={friendInput}
         onChange={handleChange}
         sx={{
-          width: "100%",
           borderRadius: "30px",
           mb: 4,
+          minWidth: "800px",
         }}
         InputProps={{
           style: {
@@ -60,6 +65,6 @@ export default function Friends({ sideFriends, setSideFriends }) {
         longWidthColumnNum={-1}
         type="first"
       />
-    </>
+    </Box>
   );
 }

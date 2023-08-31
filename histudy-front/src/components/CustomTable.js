@@ -6,7 +6,6 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Link } from "react-router-dom";
 
 //type에 따라 버튼 다르게 생기게
-
 export default function CustomTable({
   reportData,
   sidebarValues = [],
@@ -24,7 +23,7 @@ export default function CustomTable({
       "누적 스터디 시간",
       "하루 평균 스터디 시간",
     ],
-    first: ["이름", "학번", "이메일"],
+    first: ["이름", "학번", "이메일", ""],
     second: ["과목명", "과목코드", "담당 교수"],
     third: ["우선순위", "과목명", "과목코드", "담당 교수"],
     report: ["No.", "제목", "스터디 시간(분)", "작성일"],
@@ -56,13 +55,15 @@ export default function CustomTable({
       <Box
         sx={{
           py: "5px",
+
           // border: 1,
           backgroundColor: "primary.lighter",
           //   border: 2,
           borderColor: "primary.border",
           borderRadius: "45px",
           maxHeight: "400px",
-          overflow: "scroll",
+          minWidth: "800px",
+          overflowX: "scroll",
         }}
       >
         <Box
@@ -79,8 +80,8 @@ export default function CustomTable({
             <Typography
               key={index}
               sx={{
-                width: longWidthColumnNum === index + 1 && "50%",
-                minWidth: longWidthColumnNum !== index + 1 && "150px",
+                // width: longWidthColumnNum === index + 1 && "50%",
+                minWidth: "150px",
               }}
             >
               {headElement}
