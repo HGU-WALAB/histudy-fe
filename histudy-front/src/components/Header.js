@@ -34,7 +34,8 @@ export default function Header() {
    * @param {*} component
    * @returns
    */
-  export const validateWithRole = (component) => {
+
+  const validateWithRole = (component) => {
     switch (component.props.name) {
       case "My Study":
         if (role === "MEMBER") return component;

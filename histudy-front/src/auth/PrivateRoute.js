@@ -1,17 +1,13 @@
 import React, { useEffect } from "react";
-import { Navigate, useLocation } from "react-router-dom";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import {
-  isLoginModalState,
-  isLoginState,
-  isLogoutConfirmState,
-  isPreventAlertState,
-} from "./atom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+
 import { authorityState } from "../store/atom";
 
 function PrivateRoute({ component: Component }) {
   const access = useRecoilValue(authorityState);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const validateWithRole = () => {
     switch (location.pathname) {
@@ -36,8 +32,9 @@ function PrivateRoute({ component: Component }) {
   };
 
   useEffect(() => {
-    if (validateWithRole(access)) {
+    if (!validateWithRole(access)) {
       alert("접근이 불가능 합니다.");
+      navigate("/");
     }
   }, []);
 

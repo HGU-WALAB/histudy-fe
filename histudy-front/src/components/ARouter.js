@@ -22,6 +22,7 @@ import Profile from "../pages/Profile/Profile";
 import { motion } from "framer-motion";
 import { Box } from "@mui/material";
 import LoadingLottie from "./LoadingLottie";
+import PrivateRoute from "../auth/PrivateRoute";
 
 export default function ARouter() {
   const isLoading = useRecoilValue(isLoadingState);
@@ -37,14 +38,26 @@ export default function ARouter() {
           <Route path="/" element={<Main />}></Route>
           <Route path="/post" element={<Post />}></Route>
           <Route path="/rank" element={<Rank />}></Route>
-          <Route path="/enroll" element={<Enroll />}></Route>
-          <Route path="/group" element={<Group />}></Route>
-          <Route path="/report" element={<Report />}></Route>
+          <Route
+            path="/enroll"
+            element={<PrivateRoute component={<Enroll />} />}
+          ></Route>
+          <Route
+            path="/group"
+            element={<PrivateRoute component={<Group />} />}
+          ></Route>
+          <Route
+            path="/report"
+            element={<PrivateRoute component={<Report />} />}
+          ></Route>
           <Route path="/report/:id" element={<ReportDetail />}></Route>
           <Route path="/report/modify/:id" element={<Post />}></Route>
           <Route path="/add" element={<Post />}></Route>
 
-          <Route path="/manageClass" element={<ManageClass />}></Route>
+          <Route
+            path="/manageClass"
+            element={<PrivateRoute component={<ManageClass />} />}
+          ></Route>
           <Route path="/manageGroup" element={<ManageGroup />}></Route>
           <Route path="/studyGroup" element={<StudyGroup />}></Route>
           <Route path="/createGroup" element={<CreateGroup />}></Route>
@@ -53,7 +66,10 @@ export default function ARouter() {
 
           <Route path="/reportDetail" element={<ReportDetail />}></Route>
           <Route path="/test" element={<MainTest />}></Route>
-          <Route path="/profile" element={<Profile />}></Route>
+          <Route
+            path="/profile"
+            element={<PrivateRoute component={<Profile />} />}
+          ></Route>
         </Routes>
         <Footer />
       </BrowserRouter>
