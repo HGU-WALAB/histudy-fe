@@ -43,7 +43,8 @@ export default function Friends({ sideFriends, setSideFriends }) {
         sx={{
           borderRadius: "30px",
           mb: 4,
-          width: "800px",
+          minWidth: "800px",
+          width: "100%",
           overflow: "scroll",
         }}
         InputProps={{

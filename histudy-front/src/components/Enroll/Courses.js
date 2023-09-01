@@ -56,7 +56,7 @@ export default function Courses({ sideCourses, setSideCourses }) {
         type="search"
         value={courseInput}
         onChange={handleChange}
-        sx={{ minWidth: "800px", borderRadius: "30px", mb: 4 }}
+        sx={{ minWidth: "800px", width: "100%", borderRadius: "30px", mb: 4 }}
         InputProps={{
           style: { backgroundColor: theme.palette.background.default },
           startAdornment: (
