@@ -64,7 +64,7 @@ export default function Header() {
         backgroundColor: "",
         display: "flex",
         justifyContent: "space-between",
-        paddingX: "40px",
+        paddingX: "35px",
         paddingY: "20px",
       }}
     >
@@ -72,7 +72,7 @@ export default function Header() {
         sx={{
           display: "flex",
           justifyContent: "start",
-          gap: "20px",
+          gap: { md: "20px", sm: "10px", xs: "10px" },
           alignItems: "center",
           width: "620px",
         }}
@@ -109,7 +109,14 @@ export default function Header() {
 
       <Box sx={{ display: "flex", gap: "10px", alignItems: "center" }}>
         {isLogin ? (
-          <Button sx={{ color: "text.header" }} onClick={handleLogOut}>
+          <Button
+            sx={{
+              color: "text.header",
+              fontSize: { md: "15px", sm: "12px", xs: "12px" },
+              whiteSpace: "nowrap",
+            }}
+            onClick={handleLogOut}
+          >
             Log out
           </Button>
         ) : (
@@ -123,7 +130,17 @@ export default function Header() {
             match={profileMatch}
           />
         )}
-        <DarkModeToggle />
+        <Box
+          sx={{
+            display: {
+              md: "block",
+              sm: "none",
+              xs: "none",
+            },
+          }}
+        >
+          <DarkModeToggle />
+        </Box>
       </Box>
     </Box>
   );
