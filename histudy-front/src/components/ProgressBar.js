@@ -5,7 +5,7 @@ export default function ProgressBar({ page, setPage }) {
     <Box
       sx={{
         //   border: 1,
-        mt: "85px",
+
         mb: "40px",
         minWidth: "290px",
         display: "flex",

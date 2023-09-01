@@ -15,6 +15,7 @@ export default function GrayBorderBox({
   return (
     <Box
       sx={{
+        zIndex: 20,
         p: "30px",
         border: 2,
         borderRadius: "20px",

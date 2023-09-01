@@ -10,7 +10,16 @@ export default function HeaderButton({ link, name, match, color }) {
           position: "relative",
         }}
       >
-        <Button sx={{ color: color }}>{name}</Button>
+        <Button
+          sx={{
+            color: color,
+            whiteSpace: "nowrap",
+            minWidth: link === "/" && "100px",
+            fontSize: { md: "15px", sm: "12px", xs: "12px" },
+          }}
+        >
+          {name}
+        </Button>
         {match && (
           <Box
             component={motion.div}
@@ -21,8 +30,8 @@ export default function HeaderButton({ link, name, match, color }) {
               left: 0,
               right: 0,
               mx: "auto",
-              width: "10px",
-              height: "10px",
+              width: { md: "10px", sm: "7px", xs: "7px" },
+              height: { md: "10px", sm: "7px", xs: "7px" },
               borderRadius: "100%",
               backgroundColor: `${color ? color : "primary.main"}`,
             }}

@@ -1,4 +1,4 @@
-import { InputAdornment, TextField, useTheme } from "@mui/material";
+import { Box, InputAdornment, TextField, useTheme } from "@mui/material";
 import CustomTable from "../CustomTable";
 import SearchIcon from "@mui/icons-material/Search";
 import { useEffect, useState } from "react";
@@ -45,13 +45,18 @@ export default function Courses({ sideCourses, setSideCourses }) {
   };
 
   return (
-    <>
+    <Box
+      sx={{
+        width: { lg: "70vw", md: "90vw", xs: "90vw" },
+        overflow: "scroll",
+      }}
+    >
       <TextFieldWrapper
         id="study"
         type="search"
         value={courseInput}
         onChange={handleChange}
-        sx={{ width: "100%", borderRadius: "30px", mb: 4 }}
+        sx={{ minWidth: "800px", width: "100%", borderRadius: "30px", mb: 4 }}
         InputProps={{
           style: { backgroundColor: theme.palette.background.default },
           startAdornment: (
@@ -71,6 +76,6 @@ export default function Courses({ sideCourses, setSideCourses }) {
         longWidthColumnNum={1}
         type="second"
       />
-    </>
+    </Box>
   );
 }

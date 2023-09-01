@@ -13,19 +13,13 @@ export default function NoDataLottie() {
   // };
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <Box sx={{}}>
       <Lottie animationData={animationData} style={{ width: "250px" }} />
       <Typography
-        variant="h4"
-        sx={{ textAlign: "center", mt: "50px", ml: "20px" }}
+        variant="body1"
+        sx={{ textAlign: "center", mt: "20px", fontSize: "20px" }}
       >
-        데이터가 없습니다
+        아직 데이터가 없습니다!
       </Typography>
     </Box>
   );
