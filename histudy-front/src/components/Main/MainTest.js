@@ -18,7 +18,8 @@ export default function MainTest() {
               "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1))",
             zIndex: 10,
             width: "100%",
-            height: "100%",
+            minHeight: "100%",
+            height: "100vh",
           }}
         />
         <img

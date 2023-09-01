@@ -106,10 +106,9 @@ export default function Group({ setReApply }) {
           >
             <LongButton
               onClick={(e) => {
-                // e.preventDefault();
                 setReApply(false);
               }}
-              name="다시 제출하기"
+              name="신청 수정하기"
               bgColor="primary.main"
               fontColor="white"
             />

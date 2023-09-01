@@ -107,7 +107,7 @@ export default function Enroll() {
       animate={{ opacity: 1 }}
       sx={{
         display: "flex",
-        py: "40px",
+        py: reApply ? "0px" : "60px",
         overflowX: "scroll",
 
         minHeight: "100vh",
