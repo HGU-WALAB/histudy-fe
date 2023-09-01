@@ -3,8 +3,37 @@ import CustomCard from "./CustomCard";
 import RoundButton from "../RoundButton";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { authorityState } from "../../store/atom";
 
 export default function MainTest() {
+  const role = useRecoilValue(authorityState);
+  const mainButtonReturner = (type) => {
+    if (type === "link") {
+      switch (role) {
+        case "NONUSER":
+          return "/rank";
+        case "USER":
+          return "/enroll";
+        case "MEMBER":
+          return "/group";
+        case "ADMIN":
+          return "/manageClass";
+      }
+    } else if (type === "text") {
+      switch (role) {
+        case "NONUSER":
+          return "Look Around";
+        case "USER":
+          return "Apply Study";
+        case "MEMBER":
+          return "My Study";
+        case "ADMIN":
+          return "Manage Study";
+      }
+    }
+  };
+
   const navigate = useNavigate();
   return (
     <Box sx={{}}>
@@ -95,29 +124,10 @@ export default function MainTest() {
               color: "primary.main",
               borderColor: "primary.main",
             }}
-            onClick={() => navigate("/enroll")}
+            onClick={() => navigate(mainButtonReturner("link"))}
           >
-            Apply Study
+            {mainButtonReturner("text")}
           </Button>
-
-          {/* <CustomCard
-            width={"300px"}
-            title={"My Group"}
-            link={"/group"}
-            icon={<>👨‍👩‍👧‍👦</>}
-          />
-          <CustomCard
-            width={"300px"}
-            title={"Report"}
-            link={"/report"}
-            icon={<>📑</>}
-          />
-          <CustomCard
-            width={"300px"}
-            title={"Rank"}
-            link={"/rank"}
-            icon={<>🔥</>}
-          /> */}
         </Box>
       </Box>
     </Box>
