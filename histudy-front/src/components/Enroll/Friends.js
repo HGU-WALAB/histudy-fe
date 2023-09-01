@@ -31,8 +31,8 @@ export default function Friends({ sideFriends, setSideFriends }) {
   return (
     <Box
       sx={{
-        maxWidth: "400px",
-        overflowX: "scroll",
+        width: { lg: "70vw", md: "90vw", xs: "90vw" },
+        overflow: "scroll",
       }}
     >
       <TextFieldWrapper
@@ -43,7 +43,8 @@ export default function Friends({ sideFriends, setSideFriends }) {
         sx={{
           borderRadius: "30px",
           mb: 4,
-          minWidth: "800px",
+          width: "800px",
+          overflow: "scroll",
         }}
         InputProps={{
           style: {

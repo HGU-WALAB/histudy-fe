@@ -108,22 +108,24 @@ export default function Enroll() {
       sx={{
         display: "flex",
         py: "40px",
-        px: "50px",
+        overflowX: "scroll",
+
         minHeight: "100vh",
         justifyContent: "center",
-        width: "auto",
       }}
     >
       {reApply ? (
         <Group setReApply={setReApply} />
       ) : (
-        <Box sx={{ mt: "40px" }}>
+        <Box sx={{ display: "flex", gap: "50px", alignItems: "start" }}>
           <Box
             sx={{
-              display: { lg: "block", md: "none", sm: "none", xs: "none" },
-              position: "absolute",
-              left: "45px",
-              top: "30px",
+              display: { lg: "flex", md: "none", sm: "none", xs: "none" },
+              flexDirection: "column",
+              // position: "absolute",
+              // left: "45px",
+
+              // top: "30px",
             }}
           >
             <ProgressBar page={page} setPage={setPage} />
@@ -136,15 +138,16 @@ export default function Enroll() {
             />
           </Box>
           <Box
-            sx={{
-              // width: "100%",
-              // minWidth: "500px",
-
-              ml: {
-                lg: "70px",
-                md: "0px",
-              },
-            }}
+            sx={
+              {
+                // width: "100%",
+                // minWidth: "500px",
+                // ml: {
+                //   lg: "250px",
+                //   md: "0px",
+                // },
+              }
+            }
           >
             <Typography
               sx={{
@@ -257,13 +260,21 @@ export default function Enroll() {
                   스터디 희망 과목의 우선 순위를 정해주세요!
                 </Typography>
 
-                <CustomTable
-                  data={rankConverter(sideCourses)}
-                  addData={setSideCourses}
-                  accentColumnNum={-1}
-                  longWidthColumnNum={2}
-                  type="third"
-                />
+                <Box
+                  sx={{
+                    width: { lg: "70vw", md: "90vw", xs: "90vw" },
+                    overflow: "scroll",
+                  }}
+                >
+                  <CustomTable
+                    data={rankConverter(sideCourses)}
+                    addData={setSideCourses}
+                    accentColumnNum={-1}
+                    longWidthColumnNum={2}
+                    type="third"
+                  />
+                </Box>
+
                 <Box sx={{ display: "flex", justifyContent: "center" }}>
                   <Box
                     sx={{

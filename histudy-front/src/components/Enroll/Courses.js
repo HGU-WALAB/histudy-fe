@@ -47,8 +47,8 @@ export default function Courses({ sideCourses, setSideCourses }) {
   return (
     <Box
       sx={{
-        maxWidth: "400px",
-        overflowX: "scroll",
+        width: { lg: "70vw", md: "90vw", xs: "90vw" },
+        overflow: "scroll",
       }}
     >
       <TextFieldWrapper

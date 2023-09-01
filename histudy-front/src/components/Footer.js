@@ -20,7 +20,10 @@ export default function Footer() {
         >
           <Box sx={{ display: "flex", alignItems: "end" }}>
             <img src="./img/logo_histudy.png" width={120} />
-            <Typography variant="caption" sx={{ mx: 5 }}>
+            <Typography
+              variant="caption"
+              sx={{ mx: { md: 5, sm: 2, xs: 2 }, whiteSpace: "nowrap" }}
+            >
               <strong>ⓒ </strong> 2023 SWTeam5. All rights reserved.
             </Typography>
           </Box>
