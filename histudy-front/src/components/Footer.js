@@ -1,9 +1,11 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import ExportCSV from "./scv/ExportCSV";
 import { useMatch } from "react-router-dom";
 
 export default function Footer() {
   const mainMatch = useMatch("/");
+
+  const theme = useTheme();
   return (
     <>
       {mainMatch ? (
@@ -11,33 +13,70 @@ export default function Footer() {
       ) : (
         <Box
           sx={{
-            height: "100px",
+            height: "80px",
             px: "50px",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
+            borderTop: 1,
+            borderColor: "primary.border",
+            backgroundColor: "primary.lighter",
           }}
         >
-          <Box sx={{ display: "flex", alignItems: "end" }}>
-            <img src="./img/logo_histudy.png" width={120} />
-            <Typography
-              variant="caption"
-              sx={{ mx: { md: 5, sm: 2, xs: 2 }, whiteSpace: "nowrap" }}
+          <Box
+            sx={{
+              display: "flex",
+              width: "100%",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+              }}
             >
-              <strong>ⓒ </strong> 2023 SWTeam5. All rights reserved.
-            </Typography>
-          </Box>
-          <Box>
-            <a
-              href="https://github.com/orgs/Hisstudy-team05/repositories"
-              target="_blank"
+              <img src="./img/logo_histudy.png" width={120} />
+              <Typography
+                variant="caption"
+                sx={{ mx: { md: 5, sm: 2, xs: 2 }, whiteSpace: "nowrap" }}
+              >
+                <strong>ⓒ </strong> 2023 SWTeam5. All rights reserved.
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+              }}
             >
-              <img
-                src="/img/github.png"
-                style={{ borderRadius: "100%" }}
-                width={60}
-              />
-            </a>
+              <Typography variant="body2">
+                <strong
+                  style={{
+                    fontSize: "18px",
+                    marginRight: "10px",
+                    color: theme.palette.primary.main,
+                  }}
+                >
+                  Developer
+                </strong>{" "}
+                김진수 , 배주영 , 오인혁 , 이인혁 , 한시온
+              </Typography>
+              <Typography variant="body2">
+                {" "}
+                <strong
+                  style={{
+                    fontSize: "18px",
+                    marginRight: "10px",
+                    color: theme.palette.primary.main,
+                  }}
+                >
+                  Designer
+                </strong>{" "}
+                강이경
+              </Typography>
+            </Box>
           </Box>
 
           {/* <ExportCSV /> */}

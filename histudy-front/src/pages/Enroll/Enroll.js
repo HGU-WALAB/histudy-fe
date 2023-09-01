@@ -117,7 +117,7 @@ export default function Enroll() {
       {reApply ? (
         <Group setReApply={setReApply} />
       ) : (
-        <Box sx={{ display: "flex", gap: "50px", alignItems: "start" }}>
+        <Box sx={{ display: "flex", gap: "35px", alignItems: "start" }}>
           <Box
             sx={{
               display: { lg: "flex", md: "none", sm: "none", xs: "none" },

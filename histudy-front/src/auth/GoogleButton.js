@@ -15,7 +15,16 @@ import { useNavigate } from "react-router-dom";
 import HeaderButton from "../components/HeaderButton";
 import { Button } from "@mui/material";
 
-// const clientId = "425799046707-34ek2gt3b287jdl3knk9ib796l998trt.apps.googleusercontent.com";
+const handongEmailValidate = (decodedToken) => {
+  if (
+    decodedToken.hd !== "handong.edu" &&
+    decodedToken.hd !== "handong.ac.kr"
+  ) {
+    alert("한동대학교 이메일로 로그인해주세요.");
+    window.location.href = "/";
+    return;
+  }
+};
 
 export default function GoogleButton() {
   const navigate = useNavigate();
@@ -27,6 +36,8 @@ export default function GoogleButton() {
 
   const onSuccess = async (credentialResponse) => {
     const decodedToken = jwtDecode(credentialResponse.credential);
+
+    handongEmailValidate(decodedToken);
 
     userLogin(decodedToken.sub)
       .then((response) => {
