@@ -41,6 +41,7 @@ export const isDelete = atom({
 export const selectState = atom({
   key: "sidebarSelect",
   default: 1,
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const isLoadingState = atom({
