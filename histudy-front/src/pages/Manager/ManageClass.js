@@ -24,37 +24,39 @@ import { motion } from "framer-motion";
 import { StyledLayout } from "./style/StyledLatout";
 import Title from "../../components/Manager/Table/Title";
 import { StyledTitleFlexBox } from "./style/StyledTitleFlexBox";
+import { useQuery } from "react-query";
+import LoadingLayout from "../../components/Manager/Loading/LoadingLayout";
 
 export default function ManageClass() {
   const [classData, setClassData] = useState();
 
-  const setIsLoading = useSetRecoilState(isLoadingState);
-  useEffect(() => {
-    setIsLoading(true);
-    autoCourses().then((info) => {
-      setClassData(info.courses);
-      setIsLoading(false);
-    });
-  }, []);
+  const { isLoading } = useQuery(["courses"], autoCourses, {
+    casheTime: 5 * 60 * 1000,
+    onSuccess: (data) => {
+      setClassData(data.courses);
+    },
+  });
 
   return (
     <StyledLayout>
-      <SideBar />
+      <LoadingLayout isLoading={isLoading}>
+        <SideBar />
 
-      <Box sx={{ width: "100%" }}>
-        <StyledTitleFlexBox>
-          <Title text="등록된 수업 목록" />
-          <RegisterClassButton sx={{ ml: "auto" }} />
-        </StyledTitleFlexBox>
-        {classData && (
-          <ManagerTable
-            data={classData}
-            accentColumnNum={-1}
-            longWidthColumnNum={-1}
-            type="class"
-          />
-        )}
-      </Box>
+        <Box sx={{ width: "100%" }}>
+          <StyledTitleFlexBox>
+            <Title text="등록된 수업 목록" />
+            <RegisterClassButton sx={{ ml: "auto" }} />
+          </StyledTitleFlexBox>
+          {classData && (
+            <ManagerTable
+              data={classData}
+              accentColumnNum={-1}
+              longWidthColumnNum={-1}
+              type="class"
+            />
+          )}
+        </Box>
+      </LoadingLayout>
     </StyledLayout>
   );
 }

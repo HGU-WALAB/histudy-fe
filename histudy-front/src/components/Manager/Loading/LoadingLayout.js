@@ -1,9 +1,9 @@
 import LoadingLottie from "../../LoadingLottie";
 
-export default function LoadingLayout({ results, children }) {
+export default function LoadingLayout({ isLoading, results, children }) {
   return (
     <>
-      {results.some((result) => result.isLoading) ? (
+      {isLoading || results?.some((result) => result.isLoading) ? (
         <LoadingLottie />
       ) : (
         <>{children}</>
