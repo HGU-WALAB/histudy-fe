@@ -29,10 +29,19 @@ export default function ManageClass() {
   }, []);
 
   return (
-    <Box sx={{ display: "flex", py: "50px", px: "300px", minHeight: "100vh" }}>
-      <Box sx={{ position: "fixed", left: "30px", top: "10rem" }}>
+    <Box
+      sx={{
+        display: "flex",
+        gap: "30px",
+        py: "50px",
+        px: "50px",
+        minHeight: "100vh",
+      }}
+    >
+      <Box>
         <SideBar />
       </Box>
+
       <Box sx={{ width: "100%", ml: "50px" }}>
         <>
           <Box
@@ -42,7 +51,7 @@ export default function ManageClass() {
               mb: "1rem",
             }}
           >
-            <Typography variant="h7">등록된 수업 목록</Typography>
+            <Typography variant="h6">등록된 수업 목록</Typography>
             <RegisterClassButton sx={{ ml: "auto" }} />
           </Box>
           {classData && (

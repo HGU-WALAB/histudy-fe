@@ -34,7 +34,6 @@ export default function SideBar() {
         border: 2,
         borderRadius: "20px",
         width: "280px",
-        mt: "30px",
         mb: "15px",
         backgroundColor: "background.sidebar",
         borderColor: "lightGray",

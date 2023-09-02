@@ -25,7 +25,7 @@ export default function ProgressBar({ page, setPage }) {
             <Box
               sx={{
                 display: "flex",
-                // fontWeight: "bold",
+                pt: "3px",
                 fontWeight: "500",
                 justifyContent: "center",
                 alignItems: "center",

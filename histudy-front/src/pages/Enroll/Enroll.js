@@ -120,7 +120,12 @@ export default function Enroll() {
         <Box sx={{ display: "flex", gap: "35px", alignItems: "start" }}>
           <Box
             sx={{
-              display: { lg: "flex", md: "none", sm: "none", xs: "none" },
+              display: {
+                lg: "flex",
+                md: "none",
+                sm: "none",
+                xs: "none",
+              },
               flexDirection: "column",
               // position: "absolute",
               // left: "45px",

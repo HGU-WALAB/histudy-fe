@@ -23,9 +23,8 @@ export default function Manager() {
 
   return (
     <Box sx={{ display: "flex", py: "50px", px: "300px" }}>
-      <Box sx={{ position: "fixed", left: "30px", top: "50px" }}>
-        <SideBar />
-      </Box>
+      <SideBar />
+
       <Box sx={{ width: "100%", ml: "50px" }}>
         <>
           <Box sx={{ display: "flex", mb: "3rem" }}>
