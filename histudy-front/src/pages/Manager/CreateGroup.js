@@ -22,40 +22,39 @@ import { isLoadingState } from "../../store/atom";
 import Title from "../../components/Manager/Table/Title";
 import { StyledLayout } from "./style/StyledLatout";
 import { StyledTitleFlexBox } from "./style/StyledTitleFlexBox";
+import LoadingLayout from "../../components/Manager/Loading/LoadingLayout";
+import { useQuery } from "react-query";
 
 export default function CreateGroup() {
   const [allData, setAllData] = useState();
-  const setIsLoading = useSetRecoilState(isLoadingState);
-  useEffect(() => {
-    setIsLoading(true);
-    readApplicants().then((data) => {
-      console.log(data);
+
+  const { isLoading } = useQuery(["courses"], readApplicants, {
+    casheTime: 5 * 60 * 1000,
+    onSuccess: (data) => {
       setAllData(data);
-      setIsLoading(false);
-    });
-  }, []);
-  useEffect(() => {
-    console.log(allData);
-  }, [allData]);
+    },
+  });
 
   return (
     <StyledLayout>
-      <SideBar />
+      <LoadingLayout isLoading={isLoading}>
+        <SideBar />
 
-      <Box sx={{ width: "100%" }}>
-        <StyledTitleFlexBox>
-          <Title text={"신청자 리스트"} />
-          <MatchStartButton />
-        </StyledTitleFlexBox>
-        {allData && (
-          <CreateGroupTable
-            data={allData}
-            accentColumnNum={-1}
-            longWidthColumnNum={-1}
-            type="all"
-          />
-        )}
-      </Box>
+        <Box sx={{ width: "100%" }}>
+          <StyledTitleFlexBox>
+            <Title text={"신청자 리스트"} />
+            <MatchStartButton />
+          </StyledTitleFlexBox>
+          {allData && (
+            <CreateGroupTable
+              data={allData}
+              accentColumnNum={-1}
+              longWidthColumnNum={-1}
+              type="all"
+            />
+          )}
+        </Box>
+      </LoadingLayout>
     </StyledLayout>
   );
 }
