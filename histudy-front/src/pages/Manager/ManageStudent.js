@@ -3,6 +3,7 @@ import {
   InputAdornment,
   TextField,
   Typography,
+  styled,
   useTheme,
 } from "@mui/material";
 import { border, Box } from "@mui/system";
@@ -22,6 +23,15 @@ import StudentListTable from "../../components/Manager/StudentListTable";
 import { readAllUsers } from "../../apis/manager";
 import { isLoadingState } from "../../store/atom";
 import { useSetRecoilState } from "recoil";
+import Title from "../../components/Manager/Table/Title";
+import { StyledTitleFlexBox } from "./style/StyledTitleFlexBox";
+import { StyledLayout } from "./style/StyledLatout";
+
+const StyledFlexButtonBox = styled(Box)({
+  display: "flex",
+  justifyContent: "center",
+  marginTop: "20px",
+});
 
 export default function ManageStudent() {
   const [studentData, setStudentData] = useState();
@@ -38,46 +48,7 @@ export default function ManageStudent() {
       setIsLoading(false);
     });
   }, []);
-  //   const studentData = [
-  //     {
-  //       id: 1,
-  //       name: "오인혁",
-  //       sid: "21800339",
-  //       group: 1,
-  //       courses: [
-  //         {
-  //           id: 1,
-  //           name: "Software Engineering",
-  //         },
-  //         {
-  //           id: 2,
-  //           name: "Open-source Software Laboratories",
-  //         },
-  //       ],
-  //       friends: [
-  //          {id: 1,
-  // name:  "hi"
-  //  sid: 1
-  // }
-  //       ]
-  //     },
-  //   {
-  //     id: 2,
-  //     name: "한시온",
-  //     number: "21800311",
-  //     group: 1,
-  //     courses: [
-  //       {
-  //         id: 1,
-  //         name: "Software Engineering",
-  //       },
-  //       {
-  //         id: 2,
-  //         name: "Open-source Software Laboratories",
-  //       },
-  //     ],
-  //   },
-  // ];
+
   let sheetData;
   if (studentData) {
     sheetData = studentData.map((student) => ({
@@ -137,21 +108,13 @@ export default function ManageStudent() {
   }, [searchValue]);
   const theme = useTheme();
   return (
-    <Box sx={{ display: "flex", py: "50px", px: "300px", minHeight: "100vh" }}>
-      <Box sx={{ position: "fixed", left: "30px", top: "13rem" }}>
-        <SideBar />
-      </Box>
+    <StyledLayout>
+      <SideBar />
 
-      <Box sx={{ width: "100%", ml: "50px" }}>
+      <Box sx={{ width: "100%" }}>
         <>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              mb: "1rem",
-            }}
-          >
-            <Typography variant="h7">매칭된 학생 목록</Typography>
+          <StyledTitleFlexBox>
+            <Title text={"매칭된 학생 목록"} />
             <TextField
               id="search"
               type="search"
@@ -169,7 +132,6 @@ export default function ManageStudent() {
                 style: {
                   backgroundColor: theme.palette.background.default,
                 },
-
                 startAdornment: (
                   <InputAdornment position="start">
                     <SearchIcon />
@@ -178,7 +140,7 @@ export default function ManageStudent() {
               }}
               placeholder="학생 이름, 그룹 검색"
             />
-          </Box>
+          </StyledTitleFlexBox>
           {searchResult && (
             <StudentListTable
               data={searchResult}
@@ -187,16 +149,16 @@ export default function ManageStudent() {
               type="student"
             />
           )}
-          <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
+          <StyledFlexButtonBox>
             <LongButton
               name="목록 받기"
               onClick={excelDownload}
               bgColor="primary.main"
               fontColor="white"
             />
-          </Box>
+          </StyledFlexButtonBox>
         </>
       </Box>
-    </Box>
+    </StyledLayout>
   );
 }
