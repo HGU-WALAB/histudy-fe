@@ -23,6 +23,7 @@ import { isLoadingState } from "../../store/atom";
 import { motion } from "framer-motion";
 import { StyledLayout } from "./style/StyledLatout";
 import Title from "../../components/Manager/Table/Title";
+import { StyledTitleFlexBox } from "./style/StyledTitleFlexBox";
 
 export default function ManageClass() {
   const [classData, setClassData] = useState();
@@ -41,26 +42,18 @@ export default function ManageClass() {
       <SideBar />
 
       <Box sx={{ width: "100%" }}>
-        <Box>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              mb: "1rem",
-            }}
-          >
-            <Title text="등록된 수업 목록" />
-            <RegisterClassButton sx={{ ml: "auto" }} />
-          </Box>
-          {classData && (
-            <ManagerTable
-              data={classData}
-              accentColumnNum={-1}
-              longWidthColumnNum={-1}
-              type="class"
-            />
-          )}
-        </Box>
+        <StyledTitleFlexBox>
+          <Title text="등록된 수업 목록" />
+          <RegisterClassButton sx={{ ml: "auto" }} />
+        </StyledTitleFlexBox>
+        {classData && (
+          <ManagerTable
+            data={classData}
+            accentColumnNum={-1}
+            longWidthColumnNum={-1}
+            type="class"
+          />
+        )}
       </Box>
     </StyledLayout>
   );

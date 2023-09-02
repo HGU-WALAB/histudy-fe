@@ -37,98 +37,24 @@ export default function CreateGroup() {
   useEffect(() => {
     console.log(allData);
   }, [allData]);
-  // const allData = [
-  //   {
-  //     id: 1,
-  //     name: "오인혁",
-  //     number: "21800339",
-  //     friends: [
-  //       {
-  //         id: 5,
-  //         name: "김진수",
-  //         number: "21800394",
-  //       },
-  //     ],
-  //     courses: [
-  //       {
-  //         id: 1,
-  //         name: "Software Engineering",
-  //       },
-  //       {
-  //         id: 2,
-  //         name: "Open-source Software Laboratories",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "배주영",
-  //     number: "21800111",
-  //     friends: [],
-  //     courses: [
-  //       {
-  //         id: 1,
-  //         name: "Software Engineering",
-  //       },
-  //       {
-  //         id: 2,
-  //         name: "Open-source Software Laboratories",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "한시온",
-  //     number: "21800112",
-  //     friends: [],
-  //     courses: [
-  //       {
-  //         id: 1,
-  //         name: "Software Engineering",
-  //       },
-  //       {
-  //         id: 2,
-  //         name: "Open-source Software Laboratories",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: 4,
-  //     name: "이인혁",
-  //     number: "21800239",
-  //     friends: [],
-  //     courses: [
-  //       {
-  //         id: 1,
-  //         name: "Software Engineering",
-  //       },
-  //       {
-  //         id: 2,
-  //         name: "Open-source Software Laboratories",
-  //       },
-  //     ],
-  //   },
-  // ];
 
   return (
     <StyledLayout>
       <SideBar />
 
       <Box sx={{ width: "100%" }}>
-        <Box>
-          <StyledTitleFlexBox>
-            <Title text={"신청자 리스트"} />
-            <MatchStartButton />
-          </StyledTitleFlexBox>
-          {allData && (
-            <CreateGroupTable
-              data={allData}
-              accentColumnNum={-1}
-              longWidthColumnNum={-1}
-              type="all"
-            />
-          )}
-        </Box>
+        <StyledTitleFlexBox>
+          <Title text={"신청자 리스트"} />
+          <MatchStartButton />
+        </StyledTitleFlexBox>
+        {allData && (
+          <CreateGroupTable
+            data={allData}
+            accentColumnNum={-1}
+            longWidthColumnNum={-1}
+            type="all"
+          />
+        )}
       </Box>
     </StyledLayout>
   );
