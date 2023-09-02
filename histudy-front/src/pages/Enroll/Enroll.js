@@ -80,7 +80,7 @@ export default function Enroll() {
     if (ID === "다음") setPage((prev) => prev + 1);
     else if (ID === "이전") setPage((prev) => prev - 1);
     else if (ID === "제출") {
-      console.log(sideCourses);
+      console.log(sideFriends);
       const data = {
         friendIds: sideFriends.map((elem) => elem[1]),
         // courseIds: expandCourses(sideCourses.map((elem) => elem[3])),

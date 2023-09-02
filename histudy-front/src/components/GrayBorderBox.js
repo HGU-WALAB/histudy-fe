@@ -83,7 +83,7 @@ export default function GrayBorderBox({
               <Typography
                 key={index}
                 variant="body1"
-                sx={{ color: "primary.main" }}
+                sx={{ color: "primary.main", fontSize: "13px" }}
               >
                 {course[0]} , {course[1]} , {course[2]}
               </Typography>

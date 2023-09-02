@@ -310,15 +310,19 @@ export default function UnGroupTable({
                         team: Number(team),
                         sid: !sid ? row.sid : sid,
                         name: row.name,
-                        id: row.id,
+                        id: row.sub,
                       };
-                      console.log(newData);
-                      editUser(newData);
-                      alert("저장되었습니다!");
-                      handleEdit(index);
 
-                      setIsLoading(true);
-                      window.location.reload();
+                      editUser(newData).then((res) => {
+                        alert("변경되었습니다!");
+                        window.location.reload();
+                      });
+
+                      // alert("저장되었습니다!");
+                      // handleEdit(index);
+
+                      // setIsLoading(true);
+                      // window.location.reload();
                     }}
                     label="저장"
                   />{" "}
