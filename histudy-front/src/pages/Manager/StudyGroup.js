@@ -21,6 +21,9 @@ import StudyGroupTable from "../../components/Manager/StudyGroupTable";
 import { readAllGroups } from "../../apis/manager";
 import { isLoadingState } from "../../store/atom";
 import { useSetRecoilState } from "recoil";
+import { StyledTitleFlexBox } from "./style/StyledTitleFlexBox";
+import Title from "../../components/Manager/Table/Title";
+import { StyledLayout } from "./style/StyledLatout";
 
 export default function StudyGroup() {
   const [groupData, setGroupData] = useState();
@@ -247,66 +250,57 @@ export default function StudyGroup() {
 
   const theme = useTheme();
   return (
-    <Box sx={{ display: "flex", py: "50px", px: "300px", minHeight: "100vh" }}>
-      <Box sx={{ position: "fixed", left: "30px", top: "13rem" }}>
-        <SideBar />
-      </Box>
-      <Box sx={{ width: "100%", ml: "50px" }}>
-        <>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              mb: "1rem",
-            }}
-          >
-            <Typography variant="h7">그룹 활동 목록</Typography>
-            <TextField
-              id="search"
-              type="search"
-              value={searchValue}
-              onChange={handleChange}
-              sx={{
-                width: "30rem",
-                borderRadius: "30px",
-                mb: 4,
-                "& .MuiInputBase-root": {
-                  borderRadius: "30px",
-                },
-              }}
-              InputProps={{
-                style: {
-                  backgroundColor: theme.palette.background.default,
-                },
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchIcon />
-                  </InputAdornment>
-                ),
-              }}
-              placeholder="학생 이름, 그룹 검색"
-            />
-          </Box>
+    <StyledLayout>
+      <SideBar />
 
-          {searchResult && (
-            <StudyGroupTable
-              searchResult={searchResult}
-              data={searchResult}
-              accentColumnNum={-1}
-              longWidthColumnNum={-1}
-              type="studyGroup"
-            />
-          )}
-          <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
-            <LongButton
-              name="목록 받기"
-              onClick={excelDownload}
-              bgColor="primary.main"
-              fontColor="white"
-            />
-          </Box>
-        </>
+      <Box sx={{ width: "100%" }}>
+        <StyledTitleFlexBox>
+          <Title text={"그룹 활동 목록"} />
+          <TextField
+            id="search"
+            type="search"
+            value={searchValue}
+            onChange={handleChange}
+            sx={{
+              width: "50%",
+              borderRadius: "30px",
+              mb: 4,
+              "& .MuiInputBase-root": {
+                borderRadius: "30px",
+              },
+            }}
+            InputProps={{
+              style: {
+                backgroundColor: theme.palette.background.default,
+              },
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+            }}
+            placeholder="학생 이름, 그룹 검색"
+          />
+        </StyledTitleFlexBox>
+
+        {searchResult && (
+          <StudyGroupTable
+            searchResult={searchResult}
+            data={searchResult}
+            accentColumnNum={-1}
+            longWidthColumnNum={-1}
+            type="studyGroup"
+          />
+        )}
+        <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
+          <LongButton
+            name="목록 받기"
+            onClick={excelDownload}
+            bgColor="primary.main"
+            fontColor="white"
+          />
+        </Box>
       </Box>
-    </Box>
+    </StyledLayout>
   );
 }
