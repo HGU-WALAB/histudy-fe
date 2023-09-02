@@ -24,172 +24,21 @@ import { useSetRecoilState } from "recoil";
 import { StyledTitleFlexBox } from "./style/StyledTitleFlexBox";
 import Title from "../../components/Manager/Table/Title";
 import { StyledLayout } from "./style/StyledLatout";
+import { useQuery } from "react-query";
+import LoadingLayout from "../../components/Manager/Loading/LoadingLayout";
 
 export default function StudyGroup() {
   const [groupData, setGroupData] = useState();
   const [searchResult, setSearchResult] = useState();
   const [searchValue, setSearchValue] = useState("");
-  const setIsLoading = useSetRecoilState(isLoadingState);
-  useEffect(() => {
-    setIsLoading(true);
-    readAllGroups().then((data) => {
+
+  const { isLoading } = useQuery(["courses"], readAllGroups, {
+    casheTime: 5 * 60 * 1000,
+    onSuccess: (data) => {
       setSearchResult(data);
       setGroupData(data);
-      setIsLoading(false);
-    });
-  }, []);
-  // const groupData = [
-  //   {
-  //     group: 1,
-  //     members: [
-  //       {
-  //         id: 1,
-  //         name: "오인혁",
-  //         sid: "21800339",
-  //         friends: [
-  //           {
-  //             id: 5,
-  //             name: "김진수",
-  //             sid: "21800394",
-  //           },
-  //         ],
-  //         courses: [
-  //           {
-  //             id: 1,
-  //             name: "Software Engineering",
-  //           },
-  //           {
-  //             id: 2,
-  //             name: "Open-source Software Laboratories",
-  //           },
-  //         ],
-  //       },
-  //       {
-  //         id: 2,
-  //         name: "배주영",
-  //         sid: "21800111",
-  //         friends: [],
-  //         courses: [
-  //           {
-  //             id: 1,
-  //             name: "Software Engineering",
-  //           },
-  //           {
-  //             id: 2,
-  //             name: "Open-source Software Laboratories",
-  //           },
-  //         ],
-  //       },
-  //       {
-  //         id: 3,
-  //         name: "한시온",
-  //         sid: "21800112",
-  //         friends: [],
-  //         courses: [
-  //           {
-  //             id: 1,
-  //             name: "Software Engineering",
-  //           },
-  //           {
-  //             id: 2,
-  //             name: "Open-source Software Laboratories",
-  //           },
-  //         ],
-  //       },
-  //       {
-  //         id: 4,
-  //         name: "이인혁",
-  //         sid: "21800239",
-  //         friends: [],
-  //         courses: [
-  //           {
-  //             id: 1,
-  //             name: "Software Engineering",
-  //           },
-  //           {
-  //             id: 2,
-  //             name: "Open-source Software Laboratories",
-  //           },
-  //         ],
-  //       },
-  //     ],
-
-  //     reports: 3,
-  //     totalMinutes: 120,
-  //   },
-  //   {
-  //     group: 2,
-  //     members: [
-  //       {
-  //         id: 5,
-  //         name: "장유진",
-  //         number: "21800459",
-  //         friends: [],
-  //         subjects: [
-  //           {
-  //             id: 1,
-  //             name: "Software Engineering",
-  //           },
-  //           {
-  //             id: 2,
-  //             name: "Open-source Software Laboratories",
-  //           },
-  //         ],
-  //       },
-  //       {
-  //         id: 6,
-  //         name: "최혜림",
-  //         number: "21800333",
-  //         friends: [],
-  //         subjects: [
-  //           {
-  //             id: 1,
-  //             name: "Software Engineering",
-  //           },
-  //           {
-  //             id: 2,
-  //             name: "Open-source Software Laboratories",
-  //           },
-  //         ],
-  //       },
-  //       {
-  //         id: 7,
-  //         name: "정석민",
-  //         number: "21800123",
-  //         friends: [],
-  //         subjects: [
-  //           {
-  //             id: 1,
-  //             name: "Software Engineering",
-  //           },
-  //           {
-  //             id: 2,
-  //             name: "Open-source Software Laboratories",
-  //           },
-  //         ],
-  //       },
-  //       {
-  //         id: 8,
-  //         name: "송다빈",
-  //         number: "21800233",
-  //         friends: [],
-  //         subjects: [
-  //           {
-  //             id: 1,
-  //             name: "Software Engineering",
-  //           },
-  //           {
-  //             id: 2,
-  //             name: "Open-source Software Laboratories",
-  //           },
-  //         ],
-  //       },
-  //     ],
-
-  //     reports: 4,
-  //     times: 120,
-  //   },
-  // ];
+    },
+  });
 
   const [page, setPage] = useState(1);
 
@@ -251,56 +100,58 @@ export default function StudyGroup() {
   const theme = useTheme();
   return (
     <StyledLayout>
-      <SideBar />
+      <LoadingLayout isLoading={isLoading}>
+        <SideBar />
 
-      <Box sx={{ width: "100%" }}>
-        <StyledTitleFlexBox>
-          <Title text={"그룹 활동 목록"} />
-          <TextField
-            id="search"
-            type="search"
-            value={searchValue}
-            onChange={handleChange}
-            sx={{
-              width: "50%",
-              borderRadius: "30px",
-              mb: 4,
-              "& .MuiInputBase-root": {
+        <Box sx={{ width: "100%" }}>
+          <StyledTitleFlexBox>
+            <Title text={"그룹 활동 목록"} />
+            <TextField
+              id="search"
+              type="search"
+              value={searchValue}
+              onChange={handleChange}
+              sx={{
+                width: "50%",
                 borderRadius: "30px",
-              },
-            }}
-            InputProps={{
-              style: {
-                backgroundColor: theme.palette.background.default,
-              },
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-            }}
-            placeholder="학생 이름, 그룹 검색"
-          />
-        </StyledTitleFlexBox>
+                mb: 4,
+                "& .MuiInputBase-root": {
+                  borderRadius: "30px",
+                },
+              }}
+              InputProps={{
+                style: {
+                  backgroundColor: theme.palette.background.default,
+                },
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon />
+                  </InputAdornment>
+                ),
+              }}
+              placeholder="학생 이름, 그룹 검색"
+            />
+          </StyledTitleFlexBox>
 
-        {searchResult && (
-          <StudyGroupTable
-            searchResult={searchResult}
-            data={searchResult}
-            accentColumnNum={-1}
-            longWidthColumnNum={-1}
-            type="studyGroup"
-          />
-        )}
-        <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
-          <LongButton
-            name="목록 받기"
-            onClick={excelDownload}
-            bgColor="primary.main"
-            fontColor="white"
-          />
+          {searchResult && (
+            <StudyGroupTable
+              searchResult={searchResult}
+              data={searchResult}
+              accentColumnNum={-1}
+              longWidthColumnNum={-1}
+              type="studyGroup"
+            />
+          )}
+          <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
+            <LongButton
+              name="그룹 활동 목록 엑셀 다운"
+              onClick={excelDownload}
+              bgColor="primary.main"
+              fontColor="white"
+            />
+          </Box>
         </Box>
-      </Box>
+      </LoadingLayout>
     </StyledLayout>
   );
 }
