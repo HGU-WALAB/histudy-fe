@@ -3,15 +3,6 @@ import animationData from "../loading.json";
 import Lottie from "lottie-react";
 
 export default function LoadingLottie() {
-  // const defaultOptions = {
-  //   loop: true,
-  //   autoplay: true,
-  //   animationData: animationData,
-  //   rendererSettings: {
-  //     preserveAspectRatio: "xMidYMid slice",
-  //   },
-  // };
-
   return (
     <Box
       sx={{

@@ -26,6 +26,7 @@ import { useSetRecoilState } from "recoil";
 import Title from "../../components/Manager/Table/Title";
 import { StyledTitleFlexBox } from "./style/StyledTitleFlexBox";
 import { StyledLayout } from "./style/StyledLatout";
+import { useQuery } from "react-query";
 
 const StyledFlexButtonBox = styled(Box)({
   display: "flex",
@@ -38,16 +39,31 @@ export default function ManageStudent() {
   const [searchResult, setSearchResult] = useState();
   const [searchValue, setSearchValue] = useState("");
   const setIsLoading = useSetRecoilState(isLoadingState);
-  useEffect(() => {
-    setIsLoading(true);
-    readAllUsers().then((data) => {
-      console.log("data");
-      console.log(data);
+
+  const { data, isLoading } = useQuery(["users"], readAllUsers, {
+    staleTime: 5 * 60 * 1000,
+    cacheTime: 5 * 60 * 1000,
+    onSuccess: (data) => {
+      console.log("useQuery Data", data);
       setSearchResult(data);
       setStudentData(data);
-      setIsLoading(false);
-    });
-  }, []);
+      // setIsLoading(false);
+    },
+    onError: (error) => {
+      console.log("error", error);
+    },
+  });
+
+  // useEffect(() => {
+  //   setIsLoading(true);
+  //   readAllUsers().then((data) => {
+  //     console.log("data");
+  //     console.log(data);
+  //     setSearchResult(data);
+  //     setStudentData(data);
+  //     setIsLoading(false);
+  //   });
+  // }, []);
 
   let sheetData;
   if (studentData) {

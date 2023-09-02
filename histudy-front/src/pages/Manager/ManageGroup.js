@@ -31,6 +31,9 @@ import { motion } from "framer-motion";
 import Title from "../../components/Manager/Table/Title";
 import { StyledLayout } from "./style/StyledLatout";
 import { StyledTitleFlexBox } from "./style/StyledTitleFlexBox";
+import { useQueries, useQuery } from "react-query";
+import LoadingLottie from "../../components/LoadingLottie";
+import LoadingLayout from "../../components/Manager/Loading/LoadingLayout";
 
 const SizedBox = styled(Box)({
   height: "50px",
@@ -49,51 +52,78 @@ export default function ManageGroup() {
   };
 
   const setIsLoading = useSetRecoilState(isLoadingState);
-  useEffect(() => {
-    setIsLoading(true);
-    readAllGroups().then((data) => {
-      setGroupData(data);
-      setGroupAutoCompleteState(groupAutoCompleteConverter(data));
-      readUngroup().then((data) => {
-        console.log(data);
+
+  const results = useQueries([
+    {
+      queryKey: ["groups"],
+      queryFn: readAllGroups,
+
+      cacheTime: 5 * 60 * 1000,
+      onSuccess: (data) => {
+        console.log("gruop data", data);
+        setGroupData(data);
+        setGroupAutoCompleteState(groupAutoCompleteConverter(data));
+      },
+    },
+    {
+      queryKey: ["ungroups"],
+      queryFn: readUngroup,
+
+      cacheTime: 5 * 60 * 1000,
+      onSuccess: (data) => {
+        console.log("ungroup data", data);
         setUngroupData(data);
-        setIsLoading(false);
-      });
-    });
-  }, []);
+      },
+    },
+  ]);
+
+  // useEffect(() => {
+  //   setIsLoading(true);
+  //   readAllGroups().then((data) => {
+  //     setGroupData(data);
+  //     setGroupAutoCompleteState(groupAutoCompleteConverter(data));
+  //     readUngroup().then((data) => {
+  //       console.log(data);
+  //       setUngroupData(data);
+  //       setIsLoading(false);
+  //     });
+  //   });
+  // }, []);
 
   return (
     <StyledLayout>
-      <SideBar />
+      <LoadingLayout results={results}>
+        <SideBar />
 
-      <Box sx={{ width: "100%" }}>
-        <StyledTitleFlexBox>
-          <Title text="매칭된 그룹 목록" />
-        </StyledTitleFlexBox>
+        <Box sx={{ width: "100%" }}>
+          <StyledTitleFlexBox>
+            <Title text="매칭된 그룹 목록" />
+          </StyledTitleFlexBox>
 
-        {groupData && (
-          <GroupTables
-            data={groupData}
-            accentColumnNum={-1}
-            longWidthColumnNum={-1}
-            type="group"
-          />
-        )}
+          {groupData && (
+            <GroupTables
+              data={groupData}
+              accentColumnNum={-1}
+              longWidthColumnNum={-1}
+              type="group"
+            />
+          )}
 
-        <SizedBox />
+          <SizedBox />
 
-        <StyledTitleFlexBox>
-          <Title text={"그룹 미배정 학생 목록"} />
-        </StyledTitleFlexBox>
-        {ungroupData && (
-          <UnGroupTable
-            data={ungroupData}
-            accentColumnNum={-1}
-            longWidthColumnNum={-1}
-            type="group"
-          />
-        )}
-      </Box>
+          <StyledTitleFlexBox>
+            <Title text={"그룹 미배정 학생 목록"} />
+          </StyledTitleFlexBox>
+          {ungroupData && (
+            <UnGroupTable
+              data={ungroupData}
+              accentColumnNum={-1}
+              longWidthColumnNum={-1}
+              type="group"
+            />
+          )}
+        </Box>
+      </LoadingLayout>
     </StyledLayout>
   );
 }
