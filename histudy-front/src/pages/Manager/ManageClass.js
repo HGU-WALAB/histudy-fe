@@ -1,4 +1,10 @@
-import { Button, InputAdornment, TextField, Typography } from "@mui/material";
+import {
+  Button,
+  InputAdornment,
+  TextField,
+  Typography,
+  styled,
+} from "@mui/material";
 import { border, Box } from "@mui/system";
 import { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
@@ -15,6 +21,7 @@ import { autoCourses } from "../../apis/course";
 import { useSetRecoilState } from "recoil";
 import { isLoadingState } from "../../store/atom";
 import { motion } from "framer-motion";
+import { StyledLayout } from "./style/StyledLatout";
 
 export default function ManageClass() {
   const [classData, setClassData] = useState();
@@ -29,21 +36,11 @@ export default function ManageClass() {
   }, []);
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        gap: "30px",
-        py: "50px",
-        px: "50px",
-        minHeight: "100vh",
-      }}
-    >
-      <Box>
-        <SideBar />
-      </Box>
+    <StyledLayout>
+      <SideBar />
 
-      <Box sx={{ width: "100%", ml: "50px" }}>
-        <>
+      <Box sx={{ width: "100%" }}>
+        <Box>
           <Box
             sx={{
               display: "flex",
@@ -62,8 +59,8 @@ export default function ManageClass() {
               type="class"
             />
           )}
-        </>
+        </Box>
       </Box>
-    </Box>
+    </StyledLayout>
   );
 }

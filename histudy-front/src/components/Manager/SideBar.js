@@ -28,111 +28,113 @@ export default function SideBar() {
   };
 
   return (
-    <Box
-      sx={{
-        p: "30px",
-        border: 2,
-        borderRadius: "20px",
-        width: "280px",
-        mb: "15px",
-        backgroundColor: "background.sidebar",
-        borderColor: "lightGray",
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
-      <Typography variant="h6" sx={{ mb: "30px", ml: "15px" }}>
-        관리자 페이지
-      </Typography>
-      <List
+    <Box>
+      <Box
         sx={{
-          width: "100%",
-          maxWidth: 360,
-          bgcolor: "background.sidebar",
+          p: "30px",
+          border: 2,
+          borderRadius: "20px",
+          width: "280px",
+          mb: "15px",
+          backgroundColor: "background.sidebar",
+          borderColor: "lightGray",
+          display: "flex",
+          flexDirection: "column",
         }}
-        aria-label="contacts"
       >
-        <ListItem disablePadding>
-          <Link
-            to={"/manageClass"}
-            style={{ textDecoration: "none", color: "inherit" }}
-          >
-            <ListItemButton
-              sx={{ ...listItemButtonStyles }}
-              onClick={() => handleClick(1)}
+        <Typography variant="h6" sx={{ mb: "30px", ml: "15px" }}>
+          관리자 페이지
+        </Typography>
+        <List
+          sx={{
+            width: "100%",
+            maxWidth: 360,
+            bgcolor: "background.sidebar",
+          }}
+          aria-label="contacts"
+        >
+          <ListItem disablePadding>
+            <Link
+              to={"/manageClass"}
+              style={{ textDecoration: "none", color: "inherit" }}
             >
-              <ListItemText
-                style={{ color: selectedMenu === 1 && "#007AFF" }}
-                primary="현재 학기 수업 조회"
-              />
-            </ListItemButton>
-          </Link>
-        </ListItem>
-        <ListItem disablePadding>
-          <Link
-            to={"/createGroup"}
-            style={{ textDecoration: "none", color: "inherit" }}
-          >
-            <ListItemButton
-              sx={{ ...listItemButtonStyles }}
-              onClick={() => handleClick(2)}
+              <ListItemButton
+                sx={{ ...listItemButtonStyles }}
+                onClick={() => handleClick(1)}
+              >
+                <ListItemText
+                  style={{ color: selectedMenu === 1 && "#007AFF" }}
+                  primary="현재 학기 수업 조회"
+                />
+              </ListItemButton>
+            </Link>
+          </ListItem>
+          <ListItem disablePadding>
+            <Link
+              to={"/createGroup"}
+              style={{ textDecoration: "none", color: "inherit" }}
             >
-              <ListItemText
-                style={{ color: selectedMenu === 2 && "#007AFF" }}
-                primary="스터디 그룹 생성"
-              />
-            </ListItemButton>
-          </Link>
-        </ListItem>
-        <ListItem disablePadding>
-          <Link
-            to={"/manageGroup"}
-            style={{ textDecoration: "none", color: "inherit" }}
-          >
-            <ListItemButton
-              sx={{ ...listItemButtonStyles }}
-              onClick={() => handleClick(3)}
+              <ListItemButton
+                sx={{ ...listItemButtonStyles }}
+                onClick={() => handleClick(2)}
+              >
+                <ListItemText
+                  style={{ color: selectedMenu === 2 && "#007AFF" }}
+                  primary="스터디 그룹 생성"
+                />
+              </ListItemButton>
+            </Link>
+          </ListItem>
+          <ListItem disablePadding>
+            <Link
+              to={"/manageGroup"}
+              style={{ textDecoration: "none", color: "inherit" }}
             >
-              <ListItemText
-                style={{ color: selectedMenu === 3 && "#007AFF" }}
-                primary="그룹 매칭 관리"
-              />
-            </ListItemButton>
-          </Link>
-        </ListItem>
-        <ListItem disablePadding>
-          <Link
-            to={"/studyGroup"}
-            style={{ textDecoration: "none", color: "inherit" }}
-          >
-            <ListItemButton
-              sx={{ ...listItemButtonStyles }}
-              onClick={() => handleClick(4)}
+              <ListItemButton
+                sx={{ ...listItemButtonStyles }}
+                onClick={() => handleClick(3)}
+              >
+                <ListItemText
+                  style={{ color: selectedMenu === 3 && "#007AFF" }}
+                  primary="그룹 매칭 관리"
+                />
+              </ListItemButton>
+            </Link>
+          </ListItem>
+          <ListItem disablePadding>
+            <Link
+              to={"/studyGroup"}
+              style={{ textDecoration: "none", color: "inherit" }}
             >
-              <ListItemText
-                style={{ color: selectedMenu === 4 && "#007AFF" }}
-                primary="그룹별 활동 조회"
-              />
-            </ListItemButton>
-          </Link>
-        </ListItem>
-        <ListItem disablePadding>
-          <Link
-            to={"/manageStudent"}
-            style={{ textDecoration: "none", color: "inherit" }}
-          >
-            <ListItemButton
-              sx={{ ...listItemButtonStyles }}
-              onClick={() => handleClick(5)}
+              <ListItemButton
+                sx={{ ...listItemButtonStyles }}
+                onClick={() => handleClick(4)}
+              >
+                <ListItemText
+                  style={{ color: selectedMenu === 4 && "#007AFF" }}
+                  primary="그룹별 활동 조회"
+                />
+              </ListItemButton>
+            </Link>
+          </ListItem>
+          <ListItem disablePadding>
+            <Link
+              to={"/manageStudent"}
+              style={{ textDecoration: "none", color: "inherit" }}
             >
-              <ListItemText
-                style={{ color: selectedMenu === 5 && "#007AFF" }}
-                primary="매칭된 학생 정보 조회"
-              />
-            </ListItemButton>
-          </Link>
-        </ListItem>
-      </List>
+              <ListItemButton
+                sx={{ ...listItemButtonStyles }}
+                onClick={() => handleClick(5)}
+              >
+                <ListItemText
+                  style={{ color: selectedMenu === 5 && "#007AFF" }}
+                  primary="매칭된 학생 정보 조회"
+                />
+              </ListItemButton>
+            </Link>
+          </ListItem>
+        </List>
+      </Box>
     </Box>
   );
 }

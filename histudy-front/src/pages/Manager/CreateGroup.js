@@ -19,6 +19,8 @@ import MatchStartButton from "../../components/Manager/MatchStartButton";
 import { readApplicants } from "../../apis/manager";
 import { useSetRecoilState } from "recoil";
 import { isLoadingState } from "../../store/atom";
+import Title from "../../components/Manager/Table/Title";
+import { StyledLayout } from "./style/StyledLatout";
 
 export default function CreateGroup() {
   const [allData, setAllData] = useState();
@@ -108,12 +110,11 @@ export default function CreateGroup() {
   // ];
 
   return (
-    <Box sx={{ display: "flex", py: "50px", px: "300px", minHeight: "100vh" }}>
-      <Box sx={{ position: "fixed", left: "30px", top: "10rem" }}>
-        <SideBar />
-      </Box>
-      <Box sx={{ width: "100%", ml: "50px" }}>
-        <>
+    <StyledLayout>
+      <SideBar />
+
+      <Box sx={{ width: "100%" }}>
+        <Box>
           <Box
             sx={{
               display: "flex",
@@ -121,7 +122,7 @@ export default function CreateGroup() {
               mb: "1rem",
             }}
           >
-            <Typography variant="h7">신청자 리스트</Typography>
+            <Title text={"신청자 리스트"} />
             <MatchStartButton sx={{ ml: "auto" }} />
           </Box>
           {allData && (
@@ -132,8 +133,8 @@ export default function CreateGroup() {
               type="all"
             />
           )}
-        </>
+        </Box>
       </Box>
-    </Box>
+    </StyledLayout>
   );
 }
