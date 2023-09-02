@@ -21,6 +21,7 @@ import { useSetRecoilState } from "recoil";
 import { isLoadingState } from "../../store/atom";
 import Title from "../../components/Manager/Table/Title";
 import { StyledLayout } from "./style/StyledLatout";
+import { StyledTitleFlexBox } from "./style/StyledTitleFlexBox";
 
 export default function CreateGroup() {
   const [allData, setAllData] = useState();
@@ -115,16 +116,10 @@ export default function CreateGroup() {
 
       <Box sx={{ width: "100%" }}>
         <Box>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              mb: "1rem",
-            }}
-          >
+          <StyledTitleFlexBox>
             <Title text={"신청자 리스트"} />
-            <MatchStartButton sx={{ ml: "auto" }} />
-          </Box>
+            <MatchStartButton />
+          </StyledTitleFlexBox>
           {allData && (
             <CreateGroupTable
               data={allData}

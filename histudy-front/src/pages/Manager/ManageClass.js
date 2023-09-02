@@ -22,6 +22,7 @@ import { useSetRecoilState } from "recoil";
 import { isLoadingState } from "../../store/atom";
 import { motion } from "framer-motion";
 import { StyledLayout } from "./style/StyledLatout";
+import Title from "../../components/Manager/Table/Title";
 
 export default function ManageClass() {
   const [classData, setClassData] = useState();
@@ -48,7 +49,7 @@ export default function ManageClass() {
               mb: "1rem",
             }}
           >
-            <Typography variant="h6">등록된 수업 목록</Typography>
+            <Title text="등록된 수업 목록" />
             <RegisterClassButton sx={{ ml: "auto" }} />
           </Box>
           {classData && (

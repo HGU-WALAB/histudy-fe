@@ -22,6 +22,8 @@ import {
   unGroupState,
 } from "../../store/atom";
 import { motion } from "framer-motion";
+import Title from "../../components/Manager/Table/Title";
+import { StyledLayout } from "./style/StyledLatout";
 
 export default function ManageGroup() {
   const [groupData, setGroupData] = useState();
@@ -252,12 +254,11 @@ export default function ManageGroup() {
   // ];
 
   return (
-    <Box sx={{ display: "flex", py: "50px", px: "300px", minHeight: "100vh" }}>
-      <Box sx={{ position: "fixed", left: "30px", top: "10rem" }}>
-        <SideBar />
-      </Box>
-      <Box sx={{ width: "100%", ml: "50px" }}>
-        <>
+    <StyledLayout>
+      <SideBar />
+
+      <Box sx={{ width: "100%" }}>
+        <Box>
           <Box
             sx={{
               display: "flex",
@@ -265,7 +266,7 @@ export default function ManageGroup() {
               mb: "1rem",
             }}
           >
-            <Typography variant="h7">매칭된 그룹 목록</Typography>
+            <Title text="매칭된 그룹 목록" />
           </Box>
 
           {groupData && (
@@ -287,8 +288,8 @@ export default function ManageGroup() {
               type="group"
             />
           )}
-        </>
+        </Box>
       </Box>
-    </Box>
+    </StyledLayout>
   );
 }
