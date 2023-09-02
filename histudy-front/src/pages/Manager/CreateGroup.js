@@ -19,111 +19,33 @@ import MatchStartButton from "../../components/Manager/MatchStartButton";
 import { readApplicants } from "../../apis/manager";
 import { useSetRecoilState } from "recoil";
 import { isLoadingState } from "../../store/atom";
+import Title from "../../components/Manager/Table/Title";
+import { StyledLayout } from "./style/StyledLatout";
+import { StyledTitleFlexBox } from "./style/StyledTitleFlexBox";
+import LoadingLayout from "../../components/Manager/Loading/LoadingLayout";
+import { useQuery } from "react-query";
 
 export default function CreateGroup() {
   const [allData, setAllData] = useState();
-  const setIsLoading = useSetRecoilState(isLoadingState);
-  useEffect(() => {
-    setIsLoading(true);
-    readApplicants().then((data) => {
-      console.log(data);
+
+  const { isLoading } = useQuery(["courses"], readApplicants, {
+    casheTime: 5 * 60 * 1000,
+    onSuccess: (data) => {
       setAllData(data);
-      setIsLoading(false);
-    });
-  }, []);
-  useEffect(() => {
-    console.log(allData);
-  }, [allData]);
-  // const allData = [
-  //   {
-  //     id: 1,
-  //     name: "오인혁",
-  //     number: "21800339",
-  //     friends: [
-  //       {
-  //         id: 5,
-  //         name: "김진수",
-  //         number: "21800394",
-  //       },
-  //     ],
-  //     courses: [
-  //       {
-  //         id: 1,
-  //         name: "Software Engineering",
-  //       },
-  //       {
-  //         id: 2,
-  //         name: "Open-source Software Laboratories",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "배주영",
-  //     number: "21800111",
-  //     friends: [],
-  //     courses: [
-  //       {
-  //         id: 1,
-  //         name: "Software Engineering",
-  //       },
-  //       {
-  //         id: 2,
-  //         name: "Open-source Software Laboratories",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "한시온",
-  //     number: "21800112",
-  //     friends: [],
-  //     courses: [
-  //       {
-  //         id: 1,
-  //         name: "Software Engineering",
-  //       },
-  //       {
-  //         id: 2,
-  //         name: "Open-source Software Laboratories",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: 4,
-  //     name: "이인혁",
-  //     number: "21800239",
-  //     friends: [],
-  //     courses: [
-  //       {
-  //         id: 1,
-  //         name: "Software Engineering",
-  //       },
-  //       {
-  //         id: 2,
-  //         name: "Open-source Software Laboratories",
-  //       },
-  //     ],
-  //   },
-  // ];
+      console.log(data);
+    },
+  });
 
   return (
-    <Box sx={{ display: "flex", py: "50px", px: "300px", minHeight: "100vh" }}>
-      <Box sx={{ position: "fixed", left: "30px", top: "10rem" }}>
+    <StyledLayout>
+      <LoadingLayout isLoading={isLoading}>
         <SideBar />
-      </Box>
-      <Box sx={{ width: "100%", ml: "50px" }}>
-        <>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              mb: "1rem",
-            }}
-          >
-            <Typography variant="h7">신청자 리스트</Typography>
-            <MatchStartButton sx={{ ml: "auto" }} />
-          </Box>
+
+        <Box sx={{ width: "100%" }}>
+          <StyledTitleFlexBox>
+            <Title text={"신청자 리스트"} />
+            <MatchStartButton />
+          </StyledTitleFlexBox>
           {allData && (
             <CreateGroupTable
               data={allData}
@@ -132,8 +54,8 @@ export default function CreateGroup() {
               type="all"
             />
           )}
-        </>
-      </Box>
-    </Box>
+        </Box>
+      </LoadingLayout>
+    </StyledLayout>
   );
 }

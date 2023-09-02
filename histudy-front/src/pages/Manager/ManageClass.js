@@ -1,4 +1,10 @@
-import { Button, InputAdornment, TextField, Typography } from "@mui/material";
+import {
+  Button,
+  InputAdornment,
+  TextField,
+  Typography,
+  styled,
+} from "@mui/material";
 import { border, Box } from "@mui/system";
 import { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
@@ -15,36 +21,32 @@ import { autoCourses } from "../../apis/course";
 import { useSetRecoilState } from "recoil";
 import { isLoadingState } from "../../store/atom";
 import { motion } from "framer-motion";
+import { StyledLayout } from "./style/StyledLatout";
+import Title from "../../components/Manager/Table/Title";
+import { StyledTitleFlexBox } from "./style/StyledTitleFlexBox";
+import { useQuery } from "react-query";
+import LoadingLayout from "../../components/Manager/Loading/LoadingLayout";
 
 export default function ManageClass() {
   const [classData, setClassData] = useState();
 
-  const setIsLoading = useSetRecoilState(isLoadingState);
-  useEffect(() => {
-    setIsLoading(true);
-    autoCourses().then((info) => {
-      setClassData(info.courses);
-      setIsLoading(false);
-    });
-  }, []);
+  const { isLoading } = useQuery(["courses"], autoCourses, {
+    casheTime: 5 * 60 * 1000,
+    onSuccess: (data) => {
+      setClassData(data.courses);
+    },
+  });
 
   return (
-    <Box sx={{ display: "flex", py: "50px", px: "300px", minHeight: "100vh" }}>
-      <Box sx={{ position: "fixed", left: "30px", top: "10rem" }}>
+    <StyledLayout>
+      <LoadingLayout isLoading={isLoading}>
         <SideBar />
-      </Box>
-      <Box sx={{ width: "100%", ml: "50px" }}>
-        <>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              mb: "1rem",
-            }}
-          >
-            <Typography variant="h7">등록된 수업 목록</Typography>
+
+        <Box sx={{ width: "100%" }}>
+          <StyledTitleFlexBox>
+            <Title text="등록된 수업 목록" />
             <RegisterClassButton sx={{ ml: "auto" }} />
-          </Box>
+          </StyledTitleFlexBox>
           {classData && (
             <ManagerTable
               data={classData}
@@ -53,8 +55,8 @@ export default function ManageClass() {
               type="class"
             />
           )}
-        </>
-      </Box>
-    </Box>
+        </Box>
+      </LoadingLayout>
+    </StyledLayout>
   );
 }

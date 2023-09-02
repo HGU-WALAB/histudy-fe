@@ -56,7 +56,7 @@ export default function StudyGroupTable({
           sx={{
             color: "text.secondary",
             display: "flex",
-            borderBottom: 1,
+
             py: "20px",
             borderColor: "primary.main",
             px: "60px",

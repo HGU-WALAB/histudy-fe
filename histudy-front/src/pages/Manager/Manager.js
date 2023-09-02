@@ -11,6 +11,8 @@ import YearSelectButton from "../../components/Manager/YearSelectButton";
 import SemesterSelectButton from "../../components/Manager/SemesterSelectButton";
 import RegisterClassButton from "../../components/Manager/RegisterClassButton";
 import ManagerTable from "../../components/Manager/ManagerTable";
+import { StyledTitleFlexBox } from "./style/StyledTitleFlexBox";
+import Title from "../../components/Manager/Table/Title";
 
 export default function Manager() {
   const classData = [
@@ -33,16 +35,10 @@ export default function Manager() {
             <SemesterSelectButton />
           </Box>
 
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              mb: "1rem",
-            }}
-          >
-            <Typography variant="h7">등록된 수업 목록</Typography>
+          <StyledTitleFlexBox>
+            <Title text={"등록된 수업 목록"} />
             <RegisterClassButton sx={{ ml: "auto" }} />
-          </Box>
+          </StyledTitleFlexBox>
 
           <ManagerTable
             data={classData}

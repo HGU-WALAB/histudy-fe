@@ -59,7 +59,7 @@ export default function StudentListTable({
             color: "text.secondary",
             display: "flex",
             py: "20px",
-            borderBottom: 1,
+
             borderColor: "primary.main",
             px: "60px",
           }}

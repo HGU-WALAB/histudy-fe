@@ -29,6 +29,7 @@ export default function Courses({ sideCourses, setSideCourses }) {
 
   useEffect(() => {
     setCourses(courseConverter(allCourses));
+    console.log("checkout", courseConverter(allCourses));
   }, [allCourses, courseInput]);
 
   useEffect(() => {

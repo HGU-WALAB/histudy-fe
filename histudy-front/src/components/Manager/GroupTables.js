@@ -247,7 +247,7 @@ export default function GroupTables({
                             marginTop: "20px",
                           }}
                         >
-                          <GroupSelector setTeam={setTeam} />
+                          <GroupSelector team={team} setTeam={setTeam} />
                         </Box>
                         <Box
                           sx={{
@@ -348,19 +348,19 @@ export default function GroupTables({
                                 backgroundColor: "primary.main",
                               }}
                               onClick={() => {
-                                console.log(row);
                                 const newData = {
                                   team: Number(team),
                                   sid: !sid ? student.sid : sid,
                                   name: student.name,
                                   id: student.id,
                                 };
+
                                 console.log(newData);
-                                editUser(newData);
-                                alert("저장되었습니다!");
-                                handleEdit(student.id, index);
-                                setIsLoading(true);
-                                window.location.reload();
+
+                                // editUser(newData).then((res) => {
+                                //   alert("변경되었습니다!");
+                                //   window.location.reload();
+                                // });
                               }}
                               label="저장"
                             />{" "}

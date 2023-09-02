@@ -3,6 +3,7 @@ import {
   InputAdornment,
   TextField,
   Typography,
+  styled,
   useTheme,
 } from "@mui/material";
 import { border, Box } from "@mui/system";
@@ -22,62 +23,36 @@ import StudentListTable from "../../components/Manager/StudentListTable";
 import { readAllUsers } from "../../apis/manager";
 import { isLoadingState } from "../../store/atom";
 import { useSetRecoilState } from "recoil";
+import Title from "../../components/Manager/Table/Title";
+import { StyledTitleFlexBox } from "./style/StyledTitleFlexBox";
+import { StyledLayout } from "./style/StyledLatout";
+import { useQuery } from "react-query";
+import LoadingLayout from "../../components/Manager/Loading/LoadingLayout";
+
+const StyledFlexButtonBox = styled(Box)({
+  display: "flex",
+  justifyContent: "center",
+  marginTop: "20px",
+});
 
 export default function ManageStudent() {
   const [studentData, setStudentData] = useState();
   const [searchResult, setSearchResult] = useState();
   const [searchValue, setSearchValue] = useState("");
   const setIsLoading = useSetRecoilState(isLoadingState);
-  useEffect(() => {
-    setIsLoading(true);
-    readAllUsers().then((data) => {
-      console.log("data");
-      console.log(data);
+
+  const { isLoading } = useQuery(["users"], readAllUsers, {
+    cacheTime: 5 * 60 * 1000,
+    onSuccess: (data) => {
+      console.log("useQuery Data", data);
       setSearchResult(data);
       setStudentData(data);
-      setIsLoading(false);
-    });
-  }, []);
-  //   const studentData = [
-  //     {
-  //       id: 1,
-  //       name: "오인혁",
-  //       sid: "21800339",
-  //       group: 1,
-  //       courses: [
-  //         {
-  //           id: 1,
-  //           name: "Software Engineering",
-  //         },
-  //         {
-  //           id: 2,
-  //           name: "Open-source Software Laboratories",
-  //         },
-  //       ],
-  //       friends: [
-  //          {id: 1,
-  // name:  "hi"
-  //  sid: 1
-  // }
-  //       ]
-  //     },
-  //   {
-  //     id: 2,
-  //     name: "한시온",
-  //     number: "21800311",
-  //     group: 1,
-  //     courses: [
-  //       {
-  //         id: 1,
-  //         name: "Software Engineering",
-  //       },
-  //       {
-  //         id: 2,
-  //         name: "Open-source Software Laboratories",
-  //       },
-  //     ],
-  //   },
-  // ];
+    },
+    onError: (error) => {
+      console.log("error", error);
+    },
+  });
+
   let sheetData;
   if (studentData) {
     sheetData = studentData.map((student) => ({
@@ -89,26 +64,9 @@ export default function ManageStudent() {
       Friends: student.friends.map((friend) => friend.name).join(", "),
     }));
   }
-  const [page, setPage] = useState(1);
 
-  const [friendInput, setFriendInput] = useState("");
   const handleChange = (event) => {
     setSearchValue(event.target.value);
-  };
-  // useEffect(() => {
-  //   if (studentData) {
-  //     setStudentData(studentData.filter((student) => student.group !== 0));
-  //     // setStudentData(filteredData);
-  //   }
-  //   console.log(studentData);
-  // }, [studentData]);
-
-  const handleClick = (event) => {
-    const ID = event.target.id;
-    console.log(ID);
-    if (ID === "다음") setPage((prev) => prev + 1);
-    else if (ID === "이전") setPage((prev) => prev - 1);
-    else if (ID === "제출") alert("제출되었습니다.");
   };
 
   const xlsx = require("xlsx");
@@ -137,66 +95,59 @@ export default function ManageStudent() {
   }, [searchValue]);
   const theme = useTheme();
   return (
-    <Box sx={{ display: "flex", py: "50px", px: "300px", minHeight: "100vh" }}>
-      <Box sx={{ position: "fixed", left: "30px", top: "13rem" }}>
+    <StyledLayout>
+      <LoadingLayout isLoading={isLoading}>
         <SideBar />
-      </Box>
 
-      <Box sx={{ width: "100%", ml: "50px" }}>
-        <>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              mb: "1rem",
-            }}
-          >
-            <Typography variant="h7">매칭된 학생 목록</Typography>
-            <TextField
-              id="search"
-              type="search"
-              value={searchValue}
-              onChange={handleChange}
-              sx={{
-                width: "30rem",
-                borderRadius: "30px",
-                mb: 4,
-                "& .MuiInputBase-root": {
+        <Box sx={{ width: "100%" }}>
+          <>
+            <StyledTitleFlexBox>
+              <Title text={"매칭된 학생 목록"} />
+              <TextField
+                id="search"
+                type="search"
+                value={searchValue}
+                onChange={handleChange}
+                sx={{
+                  width: "30rem",
                   borderRadius: "30px",
-                },
-              }}
-              InputProps={{
-                style: {
-                  backgroundColor: theme.palette.background.default,
-                },
-
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchIcon />
-                  </InputAdornment>
-                ),
-              }}
-              placeholder="학생 이름, 그룹 검색"
-            />
-          </Box>
-          {searchResult && (
-            <StudentListTable
-              data={searchResult}
-              accentColumnNum={-1}
-              longWidthColumnNum={-1}
-              type="student"
-            />
-          )}
-          <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
-            <LongButton
-              name="목록 받기"
-              onClick={excelDownload}
-              bgColor="primary.main"
-              fontColor="white"
-            />
-          </Box>
-        </>
-      </Box>
-    </Box>
+                  mb: 4,
+                  "& .MuiInputBase-root": {
+                    borderRadius: "30px",
+                  },
+                }}
+                InputProps={{
+                  style: {
+                    backgroundColor: theme.palette.background.default,
+                  },
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <SearchIcon />
+                    </InputAdornment>
+                  ),
+                }}
+                placeholder="학생 이름, 그룹 검색"
+              />
+            </StyledTitleFlexBox>
+            {searchResult && (
+              <StudentListTable
+                data={searchResult}
+                accentColumnNum={-1}
+                longWidthColumnNum={-1}
+                type="student"
+              />
+            )}
+            <StyledFlexButtonBox>
+              <LongButton
+                name="목록 받기"
+                onClick={excelDownload}
+                bgColor="primary.main"
+                fontColor="white"
+              />
+            </StyledFlexButtonBox>
+          </>
+        </Box>
+      </LoadingLayout>
+    </StyledLayout>
   );
 }

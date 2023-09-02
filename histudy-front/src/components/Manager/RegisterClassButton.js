@@ -2,6 +2,7 @@ import * as React from "react";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { importCourses } from "../../apis/course";
+import { useDrop } from "react-dnd";
 
 export default function RegisterClassButton() {
   const [selectedFile, setSelectedFile] = React.useState();
