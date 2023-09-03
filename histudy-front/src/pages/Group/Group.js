@@ -10,6 +10,7 @@ import CustomTable from "../../components/common/CustomTable";
 import { motion } from "framer-motion";
 import Title from "../../components/common/Title";
 import { StyledColumnAlignLayout } from "../../components/common/StyledLayout";
+import { useQueries } from "react-query";
 
 const StyledScrollTableSize = styled(Box)({
   width: "90%",
@@ -17,52 +18,60 @@ const StyledScrollTableSize = styled(Box)({
   overflow: "scroll",
 });
 
+const teamMembersConverter = (teamMembers) => {
+  return [
+    ...teamMembers?.map((teamMember) => {
+      const memberRow = [teamMember.name, teamMember.sid, teamMember.email];
+
+      return memberRow;
+    }),
+  ];
+};
+
 export default function Group({ setReApply }) {
-  const [teamMembers, setTeamMembers] = useState([]);
-  const [convertedTeamMembers, setConvertedTeamMembers] = useState([]);
-
-  const teamMembersConverter = (teamMembers) => {
-    return [
-      ...teamMembers?.map((teamMember) => {
-        const memberRow = [teamMember.name, teamMember.sid, teamMember.email];
-
-        return memberRow;
-      }),
-    ];
-  };
-
-  const [hasTeam, setHasTeam] = useState(false);
-
-  // team 유저 정보
-  useEffect(() => {
-    getMyGroup().then((res) => {
-      console.log("deb", res.courses);
-
-      setCourses(res.courses);
-      setConvertedCourses(
-        res.courses.map((course) => [course.name, course.prof, course.code])
-      );
-      setFriends(res.friends);
-      setConvertedFriends(
-        res.friends.map((friend) => [friend.name, friend.sid])
-      );
-    });
-
-    getMyTeamUsers().then((res) => {
-      setTeamMembers(res);
-
-      if (res.length === 0) setHasTeam(false);
-      else setHasTeam(true);
-
-      setConvertedTeamMembers(teamMembersConverter(res));
-    });
-  }, []);
-
   const [courses, setCourses] = useState([]);
   const [friends, setFriends] = useState([]);
 
   const [convertedCourses, setConvertedCourses] = useState([]);
   const [convertedFriends, setConvertedFriends] = useState([]);
+
+  const [teamMembers, setTeamMembers] = useState([]);
+  const [convertedTeamMembers, setConvertedTeamMembers] = useState([]);
+
+  const [hasTeam, setHasTeam] = useState(false);
+
+  const results = useQueries([
+    {
+      queryKey: ["myGroup"],
+      queryFn: getMyGroup,
+
+      cacheTime: 5 * 60 * 1000,
+      onSuccess: (data) => {
+        setCourses(data.courses);
+        setConvertedCourses(
+          data.courses.map((course) => [course.name, course.prof, course.code])
+        );
+        setFriends(data.friends);
+        setConvertedFriends(
+          data.friends.map((friend) => [friend.name, friend.sid])
+        );
+      },
+    },
+    {
+      queryKey: ["myTeamUsers"],
+      queryFn: getMyTeamUsers,
+
+      cacheTime: 5 * 60 * 1000,
+      onSuccess: (data) => {
+        setTeamMembers(data);
+
+        if (data.length === 0) setHasTeam(false);
+        else setHasTeam(true);
+
+        setConvertedTeamMembers(teamMembersConverter(data));
+      },
+    },
+  ]);
 
   return (
     <StyledColumnAlignLayout
@@ -74,7 +83,6 @@ export default function Group({ setReApply }) {
       {hasTeam ? (
         <StyledScrollTableSize>
           <CustomTable
-            // reportData={convertedTeamMembers}
             data={convertedTeamMembers}
             accentColumnNum={-1}
             longWidthColumnNum={-1}

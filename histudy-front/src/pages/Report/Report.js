@@ -25,20 +25,18 @@ const StyleButtonBox = styled(Box)({
   marginBottom: "2rem",
 });
 
-export default function Report() {
-  // const [data, setData] = useState([]);
+const dateConverter = (regDate) => {
+  const date = new Date(regDate);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  const formattedDate = `${year}-${month}-${day}`;
+  return formattedDate;
+};
 
+export default function Report() {
   const [reports, setReports] = useState([]);
   const [convertedReports, setConvertedReports] = useState([]);
-
-  const dateConverter = (regDate) => {
-    const date = new Date(regDate);
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-    const formattedDate = `${year}-${month}-${day}`;
-    return formattedDate;
-  };
 
   const { isLoading } = useQuery(["courses"], getMyTeamReport, {
     casheTime: 1 * 30 * 1000,
