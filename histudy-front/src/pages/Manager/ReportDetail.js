@@ -52,33 +52,6 @@ export default function ReportDetail() {
 
   console.log(state);
 
-  // const reportData = {
-  //   title: "알고리듬 분석 스터디1",
-  //   participants: [
-  //     {
-  //       id: 1,
-  //       name: "한시온",
-  //       number: "21800333",
-  //     },
-  //     {
-  //       id: 2,
-  //       name: "오인혁",
-  //       number: "21800123",
-  //     },
-  //   ],
-  //   totalMinutes: 90,
-  //   content: "contents will be placed here",
-  //   images: [
-  //     {
-  //       id: 1,
-  //       url: "/img/puppy.jpeg",
-  //     },
-  //     {
-  //       id: 2,
-  //       url: "/img/puppy2.jpeg",
-  //     },
-  //   ],
-  // };
   const navigate = useNavigate();
 
   const moveToBefore = () => {
@@ -86,8 +59,6 @@ export default function ReportDetail() {
   };
 
   const handleClick = async (event, buttonId) => {
-    // event.preventDefault();
-
     if (buttonId === "modify") {
       navigate(`/report/modify/${state.id}`, { state: state });
     } else if (buttonId === "delete") {
@@ -105,12 +76,20 @@ export default function ReportDetail() {
   return (
     <>
       {reportData && (
-        <Box sx={{ display: "flex", py: "50px", px: "300px" }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            px: "50px",
+            py: "50px",
+          }}
+        >
           <Box sx={{ position: "fixed", left: "30px", top: "50px" }}>
             {!useUserReportDeatilMatch && <SideBar />}
           </Box>
           <Box sx={{ display: "flex", flexDirection: "column" }}>
-            <Box sx={{ display: "flex", marginLeft: "3rem", mb: "3rem" }}>
+            <Box sx={{ display: "flex" }}>
               <IconButton onClick={() => moveToBefore()}>
                 <ArrowBackIcon />
               </IconButton>
@@ -120,12 +99,9 @@ export default function ReportDetail() {
                 py: "5px",
                 border: 1,
                 backgroundColor: "primary.default",
-                width: "100%",
-                marginLeft: "40px",
                 borderColor: "primary.main",
                 borderRadius: "40px",
-                marginBottom: "20px",
-                minWidth: "700px",
+                width: "100%",
                 padding: "40px 40px",
               }}
             >
@@ -144,7 +120,13 @@ export default function ReportDetail() {
                     <Box sx={{ width: "100px", color: "text.secondary" }}>
                       제목
                     </Box>
-                    <Typography sx={{ flex: "10 1 auto", marginLeft: "10px" }}>
+                    <Typography
+                      sx={{
+                        flex: "10 1 auto",
+                        marginLeft: "10px",
+                        minWidth: "150px",
+                      }}
+                    >
                       {reportData.title}
                     </Typography>
                     {useUserReportDeatilMatch && (

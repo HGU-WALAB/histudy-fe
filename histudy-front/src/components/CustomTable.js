@@ -143,7 +143,10 @@ export default function CustomTable({
               to={`/report/${reportData[index].id}`}
               state={reportData[index]}
             >
-              <Button variant="outlined" sx={{ py: "3px" }}>
+              <Button
+                variant="outlined"
+                sx={{ py: "3px", whiteSpace: "nowrap" }}
+              >
                 상세보기
               </Button>
             </Link>
