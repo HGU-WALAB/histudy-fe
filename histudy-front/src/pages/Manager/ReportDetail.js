@@ -193,6 +193,26 @@ export default function ReportDetail() {
                     }}
                   >
                     <Box sx={{ width: "100px", color: "text.secondary" }}>
+                      스터디 과목
+                    </Box>
+                    <Typography sx={{ flex: "10 1 auto", marginLeft: "10px" }}>
+                      {reportData?.courses?.map((course, index) => (
+                        <Fragment key={index}>
+                          {index > 0 && ", "}
+                          {course.name}
+                        </Fragment>
+                      ))}
+                    </Typography>
+                  </Box>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      width: "100%",
+                      height: "40px",
+                      mb: "1rem",
+                    }}
+                  >
+                    <Box sx={{ width: "100px", color: "text.secondary" }}>
                       스터디 시간
                     </Box>
                     <Typography sx={{ flex: "10 1 auto", marginLeft: "10px" }}>

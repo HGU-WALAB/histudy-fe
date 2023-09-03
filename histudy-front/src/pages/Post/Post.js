@@ -39,25 +39,14 @@ export default function Post({ children }) {
     defaultValues: {
       title: state ? state.title : "",
       content: state ? state.content : "",
-      participants: [],
+      participants: state ? state.participants.map((p) => p.sid) : [],
       totalMinutes: state ? state.totalMinutes : "",
-      startTime: getCurrentTime(),
-      endTime: getCurrentTime(),
       images: state ? [...state.images.map((image) => image.url)] : [],
-      courses: state ? state.courses : [],
+      courses: state ? state.courses.map((c) => c.id.toString()) : [],
     },
   });
 
-  function getCurrentTime() {
-    const date = new Date();
-    const hours = String(date.getHours()).padStart(2, "0");
-    const minutes = String(date.getMinutes()).padStart(2, "0");
-    return `${hours}:${minutes}`;
-  }
-
   watch(["totalMinutes", "startTime", "endTime", "images"]);
-
-  const [studyTime, setStudyTime] = useState(0);
 
   const navigate = useNavigate();
 
@@ -112,14 +101,22 @@ export default function Post({ children }) {
             스터디를 한 과목을 모두 골라주세요.
           </Typography>
           <FormControl fullWidth>
-            <PostCourses getValues={getValues} setValue={setValue} />
+            <PostCourses
+              control={control}
+              getValues={getValues}
+              setValue={setValue}
+            />
           </FormControl>
         </PostBox>
         <PostBox>
           <Typography variant="body2" sx={{ mb: "20px" }}>
             스터디에 참여한 맴버를 선택해주세요.
           </Typography>
-          <PostMember getValues={getValues} setValue={setValue} />
+          <PostMember
+            control={control}
+            getValues={getValues}
+            setValue={setValue}
+          />
         </PostBox>
         <PostBox>
           <Typography variant="body2" sx={{ mb: "20px" }}>

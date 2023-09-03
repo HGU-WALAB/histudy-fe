@@ -28,6 +28,7 @@ import ImageListItem from "../../components/Rank/Item";
 import Item from "../../components/Rank/Item";
 
 const StyledScrollBox = styled(Box)({
+  maxWidth: "1245px",
   width: "100%",
   overflow: "scroll",
 });

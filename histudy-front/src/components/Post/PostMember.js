@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { getMyTeamUsers } from "../../apis/users";
+import { Controller } from "react-hook-form";
 
-export default function PostMember({ setValue, getValues }) {
+export default function PostMember({ control, setValue, getValues }) {
   const [teamMember, setTeamMember] = useState([]);
   useEffect(() => {
     getMyTeamUsers().then((res) => {
@@ -28,13 +29,25 @@ export default function PostMember({ setValue, getValues }) {
 
   return (
     <FormGroup>
-      {teamMember?.map((teamMember, index) => (
+      {teamMember?.map((tm, index) => (
         <FormControlLabel
-          key={index}
+          key={tm.sid}
           control={
-            <Checkbox value={teamMember.sid} onChange={handleCheckboxChange} />
+            <Controller
+              name="participants"
+              control={control}
+              defaultValue={false}
+              render={({ field }) => (
+                <Checkbox
+                  {...field}
+                  value={tm.sid}
+                  checked={field.value.includes(tm.sid)}
+                  onChange={handleCheckboxChange}
+                />
+              )}
+            />
           }
-          label={teamMember.name + ", " + teamMember.sid}
+          label={tm.name + ", " + tm.sid}
         />
       ))}
     </FormGroup>
