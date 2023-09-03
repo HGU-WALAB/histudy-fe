@@ -58,6 +58,7 @@ export default function CustomTable({
         borderRadius: "45px",
         maxHeight: "400px",
         minWidth: "900px",
+        overflowY: "scroll",
       }}
     >
       <Box
