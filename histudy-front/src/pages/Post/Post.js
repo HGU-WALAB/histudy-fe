@@ -81,6 +81,7 @@ export default function Post({ children }) {
       component={motion.div}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
+      sx={{ mb: "150px" }}
     >
       {isCodeModal && <CodeModal onClick={() => setIsCodeModal(false)} />}
 

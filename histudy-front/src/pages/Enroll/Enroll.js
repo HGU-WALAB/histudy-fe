@@ -80,10 +80,8 @@ export default function Enroll() {
     if (ID === "다음") setPage((prev) => prev + 1);
     else if (ID === "이전") setPage((prev) => prev - 1);
     else if (ID === "제출") {
-      console.log(sideFriends);
       const data = {
         friendIds: sideFriends.map((elem) => elem[1]),
-        // courseIds: expandCourses(sideCourses.map((elem) => elem[3])),
         courseIds: sideCourses.map((elem) => elem[3]),
       };
       if (data.courseIds.length === 0) {
@@ -92,8 +90,7 @@ export default function Enroll() {
       }
       alert("스터디 신청이 완료되었습니다.");
       studyEnroll(data);
-      console.log("신청전 데이터", data);
-      // navigate("/");
+      navigate("/");
     }
   };
   const [sideCourses, setSideCourses] = useState([]);
