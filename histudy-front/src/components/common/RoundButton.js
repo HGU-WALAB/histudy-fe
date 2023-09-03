@@ -12,6 +12,7 @@ export default function RoundButton({ onClick, name, bgColor, fontColor }) {
         backgroundColor: bgColor,
         color: fontColor,
         borderRadius: "15px",
+        whiteSpace: "nowrap",
       }}
     >
       {name}

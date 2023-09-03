@@ -1,5 +1,5 @@
 import { Box, InputAdornment, TextField, useTheme } from "@mui/material";
-import CustomTable from "../CustomTable";
+import CustomTable from "../common/CustomTable";
 import { useEffect, useState } from "react";
 import { autoUser } from "../../apis/users";
 import SearchIcon from "@mui/icons-material/Search";

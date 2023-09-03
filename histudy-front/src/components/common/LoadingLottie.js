@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import animationData from "../loading.json";
+import animationData from "../../loading.json";
 import Lottie from "lottie-react";
 
 export default function LoadingLottie() {

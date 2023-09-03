@@ -12,7 +12,7 @@ import {
   userLoginInfo,
 } from "../store/atom";
 import { useNavigate } from "react-router-dom";
-import HeaderButton from "../components/HeaderButton";
+import HeaderButton from "../components/common/HeaderButton";
 import { Button } from "@mui/material";
 
 const handongEmailValidate = (decodedToken) => {

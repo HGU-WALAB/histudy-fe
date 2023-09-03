@@ -16,7 +16,6 @@ export default function PostMember({ setValue, getValues }) {
 
     // value = value.slice(value.length - 8, value.length);
 
-    console.log(value);
     if (checked) {
       setValue("participants", [...getValues("participants"), value]);
     } else {
@@ -33,30 +32,11 @@ export default function PostMember({ setValue, getValues }) {
         <FormControlLabel
           key={index}
           control={
-            <Checkbox value={teamMember.name} onChange={handleCheckboxChange} />
+            <Checkbox value={teamMember.sid} onChange={handleCheckboxChange} />
           }
           label={teamMember.name + ", " + teamMember.sid}
         />
       ))}
-      {/* <FormControlLabel
-        control={
-          <Checkbox value="장유진, 21900111" onChange={handleCheckboxChange} />
-        }
-        label="장유진, 21900111"
-      />
-
-      <FormControlLabel
-        control={
-          <Checkbox value="오인혁, 21800446" onChange={handleCheckboxChange} />
-        }
-        label="오인혁, 21800446"
-      />
-      <FormControlLabel
-        control={
-          <Checkbox value="한시온, 21800222" onChange={handleCheckboxChange} />
-        }
-        label="한시온, 21800222"
-      /> */}
     </FormGroup>
   );
 }

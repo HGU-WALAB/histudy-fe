@@ -8,9 +8,9 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import PostBox from "../../components/PostBox";
-import LongButton from "../../components/LongButton";
-import RoundButton from "../../components/RoundButton";
+import PostBox from "../../components/common/PostBox";
+import LongButton from "../../components/common/LongButton";
+import RoundButton from "../../components/common/RoundButton";
 
 import { useEffect, useState } from "react";
 
@@ -18,7 +18,7 @@ import PostMember from "../../components/Post/PostMember";
 import { useForm, Controller, set } from "react-hook-form";
 import PostStudyTime from "../../components/Post/PostStudyTime";
 import { ImageUpload } from "../../components/Image/UploadImage";
-import { postReport } from "../../apis/report";
+import { modifyReport, postReport } from "../../apis/report";
 import PostCourses from "../../components/Post/PostCourses";
 import { teamCourses } from "../../apis/course";
 import { CodeModal } from "../../components/Post/CodeModal";
@@ -26,11 +26,13 @@ import { useRecoilState } from "recoil";
 import { isCodeModalState } from "../../store/atom";
 import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import Title from "../../components/common/Title";
+import { StyledColumnAlignLayout } from "../../components/common/StyledLayout";
 
 export default function Post({ children }) {
   const { state } = useLocation();
 
-  console.log(state);
+  console.log("작성", state);
   const [isCodeModal, setIsCodeModal] = useState(false);
 
   const { handleSubmit, watch, setValue, getValues, control } = useForm({
@@ -70,31 +72,26 @@ export default function Post({ children }) {
       courses: formData.courses,
     };
     console.log(newReport);
-    postReport(newReport);
+    state ? modifyReport(state.id, newReport) : postReport(newReport);
 
     alert("보고서 제출이 완료되었습니다.");
     navigate("/");
   };
 
   return (
-    <Box
+    <StyledColumnAlignLayout
       component={motion.div}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
     >
       {isCodeModal && <CodeModal onClick={() => setIsCodeModal(false)} />}
 
+      <Title text="스터디 모임 보고서 작성" />
       <FormControl
         sx={{
-          display: "flex",
-          flexDirection: "column",
-          width: "70%",
-          mx: "auto",
+          width: "80%",
         }}
       >
-        <Typography variant="h5" sx={{ my: "50px", textAlign: "center" }}>
-          스터디 모임 보고서 작성
-        </Typography>
         <PostBox sx={{ display: "flex", flexDirection: "column" }}>
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <Typography variant="body2" sx={{ mr: "10px" }}>
@@ -191,6 +188,6 @@ export default function Post({ children }) {
           />
         </Box>
       </FormControl>
-    </Box>
+    </StyledColumnAlignLayout>
   );
 }

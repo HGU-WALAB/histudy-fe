@@ -1,6 +1,6 @@
 import { RecoilRoot, useRecoilValue } from "recoil";
 import { darkModeState } from "./store/atom";
-import ARouter from "./components/ARouter";
+import ARouter from "./components/common/ARouter";
 import ThemeProvider from "./theme";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { DndProvider } from "react-dnd";

@@ -10,10 +10,10 @@ import {
 import { border, Box } from "@mui/system";
 import { Fragment, useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
-import CustomTable from "../../components/CustomTable";
-import LongButton from "../../components/LongButton";
-import GrayBorderBox from "../../components/GrayBorderBox";
-import ProgressBar from "../../components/ProgressBar";
+import CustomTable from "../../components/common/CustomTable";
+import LongButton from "../../components/common/LongButton";
+import GrayBorderBox from "../../components/common/GrayBorderBox";
+import ProgressBar from "../../components/common/ProgressBar";
 import SideBar from "../../components/Manager/SideBar";
 import YearSelectButton from "../../components/Manager/YearSelectButton";
 import SemesterSelectButton from "../../components/Manager/SemesterSelectButton";
@@ -31,6 +31,9 @@ import { deleteReport, modifyReport } from "../../apis/report";
 import Snackbars from "./Snackbars";
 import { useRecoilState } from "recoil";
 import { isDelete, reportDeleteState } from "../../store/atom";
+
+import { StyledColumnAlignLayout } from "../../components/common/StyledLayout";
+import Title from "../../components/common/Title";
 
 export default function ReportDetail() {
   const [reportData, setReportData] = useState();
@@ -52,80 +55,70 @@ export default function ReportDetail() {
 
   console.log(state);
 
-  // const reportData = {
-  //   title: "알고리듬 분석 스터디1",
-  //   participants: [
-  //     {
-  //       id: 1,
-  //       name: "한시온",
-  //       number: "21800333",
-  //     },
-  //     {
-  //       id: 2,
-  //       name: "오인혁",
-  //       number: "21800123",
-  //     },
-  //   ],
-  //   totalMinutes: 90,
-  //   content: "contents will be placed here",
-  //   images: [
-  //     {
-  //       id: 1,
-  //       url: "/img/puppy.jpeg",
-  //     },
-  //     {
-  //       id: 2,
-  //       url: "/img/puppy2.jpeg",
-  //     },
-  //   ],
-  // };
   const navigate = useNavigate();
 
   const moveToBefore = () => {
     navigate(-1);
   };
 
-  const handleClick = async (event, buttonId) => {
-    // event.preventDefault();
-
+  const handleClick = async (buttonId) => {
+    console.log(buttonId, "clicked");
     if (buttonId === "modify") {
       navigate(`/report/modify/${state.id}`, { state: state });
     } else if (buttonId === "delete") {
       // setOpen(true);
-      alert("삭제되었습니다.");
+
       if (useUserReportDeatilMatch) {
-        await deleteReport(state.id);
+        if (window.confirm("정말 삭제하시겠습니까?")) {
+          deleteReport(state.id).then(() => {
+            alert("성공적으로 삭제되었습니다.");
+            navigate(-1);
+          });
+        }
       } else {
-        await deleteReport(state);
+        if (window.confirm("정말 삭제하시겠습니까?")) {
+          deleteReport(state).then(() => {
+            alert("성공적으로 삭제되었습니다.");
+            navigate(-1);
+          });
+        }
       }
-      navigate(-1);
     }
   };
 
   return (
     <>
       {reportData && (
-        <Box sx={{ display: "flex", py: "50px", px: "300px" }}>
+        <StyledColumnAlignLayout>
           <Box sx={{ position: "fixed", left: "30px", top: "50px" }}>
             {!useUserReportDeatilMatch && <SideBar />}
           </Box>
-          <Box sx={{ display: "flex", flexDirection: "column" }}>
-            <Box sx={{ display: "flex", marginLeft: "3rem", mb: "3rem" }}>
-              <IconButton onClick={() => moveToBefore()}>
-                <ArrowBackIcon />
-              </IconButton>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              position: "relative",
+              gap: "20px",
+              width: "100%",
+            }}
+          >
+            <IconButton
+              sx={{ position: "absolute", left: "0px", top: "0px" }}
+              onClick={() => moveToBefore()}
+            >
+              <ArrowBackIcon />
+            </IconButton>
+            <Box sx={{ display: "flex", justifyContent: "center" }}>
+              <Title text={"보고서 상세 페이지"} />
             </Box>
+
             <Box
               sx={{
-                py: "5px",
                 border: 1,
                 backgroundColor: "primary.default",
-                width: "100%",
-                marginLeft: "40px",
                 borderColor: "primary.main",
-                borderRadius: "40px",
-                marginBottom: "20px",
-                minWidth: "700px",
+                borderRadius: "30px",
+                width: "100%",
                 padding: "40px 40px",
               }}
             >
@@ -144,23 +137,24 @@ export default function ReportDetail() {
                     <Box sx={{ width: "100px", color: "text.secondary" }}>
                       제목
                     </Box>
-                    <Typography sx={{ flex: "10 1 auto", marginLeft: "10px" }}>
+                    <Typography
+                      sx={{
+                        flex: "10 1 auto",
+                        marginLeft: "10px",
+                        minWidth: "150px",
+                      }}
+                    >
                       {reportData.title}
                     </Typography>
                     {useUserReportDeatilMatch && (
-                      <IconButton>
-                        <DriveFileRenameOutlineIcon
-                          onClick={() => handleClick("modify")}
-                          color="primary"
-                        />
+                      <IconButton onClick={() => handleClick("modify")}>
+                        <DriveFileRenameOutlineIcon color="primary" />
                       </IconButton>
                     )}
 
                     <IconButton>
                       <DeleteIcon
-                        onClick={(e) => {
-                          handleClick(e, "delete");
-                        }}
+                        onClick={() => handleClick("delete")}
                         color="error"
                       />
                     </IconButton>
@@ -215,11 +209,15 @@ export default function ReportDetail() {
                       {reportData.content}
                     </Typography>
                   </Box>
+                  <Box sx={{ width: "100px", color: "text.secondary" }}>
+                    인증 사진
+                  </Box>
                   <Box
                     sx={{
                       display: "flex",
+
                       width: "100%",
-                      mb: "1rem",
+                      my: "1rem",
                     }}
                   >
                     <ImageList>
@@ -234,7 +232,7 @@ export default function ReportDetail() {
               </>
             </Box>
           </Box>
-        </Box>
+        </StyledColumnAlignLayout>
       )}
     </>
   );

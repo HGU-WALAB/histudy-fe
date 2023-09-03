@@ -1,6 +1,6 @@
 import { Box, Button, Typography } from "@mui/material";
 import CustomCard from "./CustomCard";
-import RoundButton from "../RoundButton";
+import RoundButton from "../common/RoundButton";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";

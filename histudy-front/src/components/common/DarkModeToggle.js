@@ -1,23 +1,8 @@
-// import { useRecoilState } from "recoil";
-// import { Switch } from "@mui/material";
-// import { darkState } from "../store/atom";
-
-// function DarkModeToggle() {
-//   const [isDark, setIsDark] = useRecoilState(darkState);
-//   const handleChange = (event) => {
-//     setIsDark(event.target.checked);
-//   };
-//   localStorage.setItem("darkMode", isDark.toString());
-//   return <Switch checked={isDark} onChange={handleChange} />;
-// }
-
-// export default DarkModeToggle;
-
 import { useRecoilState } from "recoil";
 import { IconButton, Fade } from "@mui/material";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import Brightness2Icon from "@mui/icons-material/Brightness2";
-import { darkState } from "../store/atom";
+import { darkState } from "../../store/atom";
 
 function DarkModeToggle() {
   const [isDark, setIsDark] = useRecoilState(darkState);
