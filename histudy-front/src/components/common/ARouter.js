@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Enroll from "../../pages/Enroll/Enroll";
 import Group from "../../pages/Group/Group";
 import Main from "../../pages/Main/Main";
@@ -14,15 +14,13 @@ import ManageStudent from "../../pages/Manager/ManageStudent";
 import ManageReport from "../../pages/Manager/ManageReport";
 import ReportDetail from "../../pages/Manager/ReportDetail";
 import CreateGroup from "../../pages/Manager/CreateGroup";
-import MainTest from "../Main/MainTest";
 import Snackbars from "../../pages/Manager/Snackbars";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { isDelete, isLoadingState } from "../../store/atom";
 import Profile from "../../pages/Profile/Profile";
-import { motion } from "framer-motion";
-import { Box } from "@mui/material";
 import LoadingLottie from "./LoadingLottie";
 import PrivateRoute from "../../auth/PrivateRoute";
+import MainImage from "../Main/MainImage";
 
 export default function ARouter() {
   const isLoading = useRecoilValue(isLoadingState);
@@ -65,7 +63,7 @@ export default function ARouter() {
           <Route path="/manageReport" element={<ManageReport />}></Route>
 
           <Route path="/reportDetail" element={<ReportDetail />}></Route>
-          <Route path="/test" element={<MainTest />}></Route>
+          <Route path="/test" element={<MainImage />}></Route>
           <Route
             path="/profile"
             element={<PrivateRoute component={<Profile />} />}

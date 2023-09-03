@@ -1,4 +1,3 @@
-import Button from "@mui/material/Button";
 import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
@@ -8,15 +7,11 @@ import {
   isRegisterModalState,
   userLoginInfo,
 } from "../../store/atom";
-import { TextField, Typography } from "@mui/material";
 import "./css/Textfield.css";
 import { userSignup } from "../../apis/users";
-import GoogleButton from "../../auth/GoogleButton";
-import ImportCSV from "../../components/scv/ImportCSV";
-import NavGrid from "../../components/Main/NavGrid";
-import MainTest from "../../components/Main/MainTest";
 import RegisterModal from "../../components/Main/RegisterModal";
 import { motion } from "framer-motion";
+import MainImage from "../../components/Main/MainImage";
 
 export default function Main() {
   const [sid, setSid] = useState("");
@@ -49,6 +44,7 @@ export default function Main() {
       alert("학번을 정확히 입력해주세요.");
       return;
     }
+
     const response = await userSignup(newUser);
 
     alert("회원가입이 완료되었습니다.");
@@ -72,8 +68,7 @@ export default function Main() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
     >
-      {/* <NavGrid /> */}
-      <MainTest />
+      <MainImage />
 
       {isRegisterModal && (
         <RegisterModal handleClick={handleClick} sid={sid} setSid={setSid} />

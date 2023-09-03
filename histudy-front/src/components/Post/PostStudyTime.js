@@ -13,7 +13,7 @@ export default function PostStudyTime({ setValue, getValues, control }) {
           render={({ field }) => (
             <TextField
               {...field}
-              sx={{ width: "100%" }}
+              sx={{ width: "100%", mt: 2 }}
               type="number"
               InputProps={{
                 endAdornment: (

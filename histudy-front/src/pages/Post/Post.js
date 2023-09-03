@@ -46,16 +46,7 @@ export default function Post({ children }) {
     },
   });
 
-  function getCurrentTime() {
-    const date = new Date();
-    const hours = String(date.getHours()).padStart(2, "0");
-    const minutes = String(date.getMinutes()).padStart(2, "0");
-    return `${hours}:${minutes}`;
-  }
-
   watch(["totalMinutes", "startTime", "endTime", "images"]);
-
-  const [studyTime, setStudyTime] = useState(0);
 
   const navigate = useNavigate();
 
