@@ -1,7 +1,52 @@
-import { Box, Button, Typography } from "@mui/material";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { Box, Button, Typography, styled } from "@mui/material";
 import { Link } from "react-router-dom";
+import UpDownButton from "./UpDownButton";
+import AddDeleteButton from "./AddDeleteButton";
+
+const StyledCustomTableContainer = styled(Box)(({ theme }) => ({
+  py: "5px",
+  backgroundColor: theme.palette.primary.lighter,
+  borderColor: theme.palette.primary.border,
+  borderRadius: "45px",
+  maxHeight: "400px",
+  minWidth: "900px",
+  overflowY: "scroll",
+}));
+
+const StyledHeaderContainer = styled(Box)(({ theme, dataLength }) => ({
+  color: theme.palette.text.secondary,
+  display: "flex",
+  borderBottom: dataLength !== 0 && "1px solid",
+  borderColor: theme.palette.primary.border,
+  padding: "20px 60px",
+  justifyContent: "start",
+}));
+const FieldBox = styled(Box)({
+  minWidth: "180px",
+});
+
+const StyledRowContainer = styled(Box)(({ theme, index }) => ({
+  position: "relative",
+  alignItems: "center",
+  margin: "0px 60px",
+  display: "flex",
+  borderTop: index !== 0 && "1px solid",
+  padding: "20px 0px",
+  borderColor: theme.palette.primary.border,
+}));
+
+const StyledOptionBox = styled(Box)({
+  position: "absolute",
+  right: 0,
+});
+
+const StyledTypo = styled(Typography)(
+  ({ accentColumnNum, idxConverter, idx }) => ({
+    minWidth: "180px",
+    color: accentColumnNum === idxConverter(idx + 1) && "primary.main",
+    fontWeight: accentColumnNum === idxConverter(idx + 1) && "bold",
+  })
+);
 
 //type에 따라 버튼 다르게 생기게
 export default function CustomTable({
@@ -35,105 +80,29 @@ export default function CustomTable({
     return idx;
   };
 
-  const COLUMN_NUM = TableHead[type].length;
-  const ROW_NUM = data.length;
-
-  const pkList = [
-    ...sidebarValues.map((row, index) => {
-      return row[1];
-    }),
-  ];
-
-  const checkInclude = (pk) => {
-    return pkList.includes(pk);
-  };
-
   return (
-    <Box
-      sx={{
-        // width: "100wh",
-        py: "5px",
-        backgroundColor: "primary.lighter",
-        borderColor: "primary.border",
-        borderRadius: "45px",
-        maxHeight: "400px",
-        minWidth: "900px",
-        overflowY: "scroll",
-      }}
-    >
-      <Box
-        sx={{
-          color: "text.secondary",
-          display: "flex",
-          py: "20px",
-          borderBottom: data.length !== 0 && 1,
-          borderColor: "primary.border",
-          px: "60px",
-          justifyContent: "start",
-        }}
-      >
+    <StyledCustomTableContainer>
+      <StyledHeaderContainer dataLength={data.length}>
         {TableHead[type].map((headElement, index) => (
-          <Box
-            key={index}
-            sx={{
-              // width: longWidthColumnNum === index + 1 && "50%",
-              minWidth: "180px",
-            }}
-          >
-            {headElement}
-          </Box>
+          <FieldBox key={index}>{headElement}</FieldBox>
         ))}
-        {/* <Typography
-            sx={{
-              minWidth: "180px",
-            }}
-          ></Typography> */}
-      </Box>
+      </StyledHeaderContainer>
       {data.map((row, index) => (
-        <Box
-          key={index}
-          sx={{
-            position: "relative",
-            alignItems: "center",
-            mx: "60px",
-            display: "flex",
-            borderTop: index !== 0 && 1,
-            py: "20px",
-            borderColor: "primary.border",
-          }}
-        >
+        <StyledRowContainer key={index} index={index}>
           {(type === "third" || type === "report") && (
-            <Typography
-              sx={{
-                minWidth: "180px",
-                // minWidth: longWidthColumnNum !== index + 1 && "180px",
-                // color: accentColumnNum === index + 1 && "primary.main",
-                // fontWeight: accentColumnNum === index + 1 && "bold",
-              }}
-            >
-              {index + 1}
-            </Typography>
+            <FieldBox>{index + 1}</FieldBox>
           )}
           {row.map(
             (elem, idx) =>
               idx < 3 && (
-                <Typography
+                <StyledTypo
                   key={idx}
-                  sx={{
-                    // width:
-                    //   longWidthColumnNum === idxConverter(idx + 1) && "50%",
-                    // minWidth:
-                    //   longWidthColumnNum !== idxConverter(idx + 1) && "180px",
-                    minWidth: "180px",
-                    color:
-                      accentColumnNum === idxConverter(idx + 1) &&
-                      "primary.main",
-                    fontWeight:
-                      accentColumnNum === idxConverter(idx + 1) && "bold",
-                  }}
+                  accentColumnNum={accentColumnNum}
+                  idxConverter={idxConverter}
+                  idx={idx}
                 >
                   {elem}
-                </Typography>
+                </StyledTypo>
               )
           )}
           {/* 상세보기 */}
@@ -150,84 +119,23 @@ export default function CustomTable({
               </Button>
             </Link>
           )}
-          <Box sx={{ position: "absolute", right: 0 }}>
+          <StyledOptionBox>
             {type === "first" || type === "second" ? (
-              checkInclude(row[1]) ? (
-                <Button
-                  key={index}
-                  onClick={() => {
-                    addData((prev) => [
-                      ...prev.filter((elem) => elem[1] !== row[1]),
-                    ]);
-                  }}
-                  sx={{
-                    borderRadius: "15px",
-                    color: "white",
-                    backgroundColor: "error.main",
-                    paddingY: "3px",
-                  }}
-                >
-                  제거
-                </Button>
-              ) : (
-                <Button
-                  key={index}
-                  onClick={() => {
-                    if (type === "second" && sidebarValues.length >= 3)
-                      alert("최대 3개까지만 선택 가능합니다.");
-                    else if (type === "first" && sidebarValues.length >= 4)
-                      alert("최대 4개까지만 선택 가능합니다.");
-                    else addData((prev) => [...prev, row]);
-                  }}
-                  sx={{
-                    borderRadius: "15px",
-                    color: "white",
-                    backgroundColor: "primary.main",
-
-                    // right: "0px"
-                    // left: type === "first" ? "80px" : "-60px",
-
-                    paddingY: "3px",
-                  }}
-                >
-                  추가
-                </Button>
-              )
+              <AddDeleteButton
+                row={row}
+                index={index}
+                addData={addData}
+                sidebarValues={sidebarValues}
+                type={type}
+              />
             ) : (
               type === "third" && (
-                <Box sx={{ display: "flex", flexDirection: "column" }}>
-                  <KeyboardArrowUpIcon
-                    onClick={() => {
-                      if (0 >= index) return;
-                      const temp = data[index];
-
-                      addData((prev) => [
-                        ...prev.slice(0, index - 1),
-                        temp,
-                        prev[index - 1],
-                        ...prev.slice(index + 1),
-                      ]);
-                    }}
-                  />
-                  <KeyboardArrowDownIcon
-                    onClick={() => {
-                      if (data.length - 1 <= index) return;
-                      const temp = data[index];
-
-                      addData((prev) => [
-                        ...prev.slice(0, index),
-                        prev[index + 1],
-                        temp,
-                        ...prev.slice(index + 2),
-                      ]);
-                    }}
-                  />
-                </Box>
+                <UpDownButton index={index} addData={addData} data={data} />
               )
             )}
-          </Box>
-        </Box>
+          </StyledOptionBox>
+        </StyledRowContainer>
       ))}
-    </Box>
+    </StyledCustomTableContainer>
   );
 }
