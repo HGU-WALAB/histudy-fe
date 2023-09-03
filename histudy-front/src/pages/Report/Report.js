@@ -8,15 +8,6 @@ import NoDataLottie from "../../components/NoDataLottie";
 import { motion } from "framer-motion";
 import LoadingLottie from "../../components/LoadingLottie";
 
-const data = [
-  ["1", "보고서 제목 1", "글쓴이 1", "2023-05-13"],
-  ["2", "보고서 제목 2", "글쓴이 2", "2024-05-13"],
-  ["3", "보고서 제목 3", "글쓴이 3", "2023-05-13"],
-  ["4", "보고서 제목 4", "글쓴이 4", "2024-05-13"],
-  ["5", "보고서 제목 5", "글쓴이 5", "2023-05-13"],
-  ["6", "보고서 제목 6", "글쓴이 6", "2024-05-13"],
-];
-
 export default function Report() {
   // const [data, setData] = useState([]);
 

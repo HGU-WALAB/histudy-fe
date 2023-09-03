@@ -1,19 +1,16 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, styled } from "@mui/material";
 import animationData from "../noData.json";
 import Lottie from "lottie-react";
 
-export default function NoDataLottie() {
-  // const defaultOptions = {
-  //   loop: true,
-  //   autoplay: true,
-  //   animationData: animationData,
-  //   rendererSettings: {
-  //     preserveAspectRatio: "xMidYMid slice",
-  //   },
-  // };
+const StyledFlexColumnBox = styled(Box)({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+});
 
+export default function NoDataLottie() {
   return (
-    <Box sx={{}}>
+    <StyledFlexColumnBox>
       <Lottie animationData={animationData} style={{ width: "250px" }} />
       <Typography
         variant="body1"
@@ -21,6 +18,6 @@ export default function NoDataLottie() {
       >
         아직 데이터가 없습니다!
       </Typography>
-    </Box>
+    </StyledFlexColumnBox>
   );
 }
