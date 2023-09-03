@@ -31,7 +31,9 @@ import { deleteReport, modifyReport } from "../../apis/report";
 import Snackbars from "./Snackbars";
 import { useRecoilState } from "recoil";
 import { isDelete, reportDeleteState } from "../../store/atom";
-import Title from "../../components/Manager/Table/Title";
+
+import { StyledColumnAlignLayout } from "../../components/common/StyledLayout";
+import Title from "../../components/common/Title";
 
 export default function ReportDetail() {
   const [reportData, setReportData] = useState();
@@ -87,16 +89,7 @@ export default function ReportDetail() {
   return (
     <>
       {reportData && (
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            px: "50px",
-            pt: "50px",
-            pb: "200px",
-          }}
-        >
+        <StyledColumnAlignLayout>
           <Box sx={{ position: "fixed", left: "30px", top: "50px" }}>
             {!useUserReportDeatilMatch && <SideBar />}
           </Box>
@@ -106,26 +99,25 @@ export default function ReportDetail() {
               flexDirection: "column",
               position: "relative",
               gap: "20px",
+              width: "100%",
             }}
           >
             <IconButton
-              sx={{ position: "absolute", left: "-40px", top: "-5px" }}
+              sx={{ position: "absolute", left: "0px", top: "0px" }}
               onClick={() => moveToBefore()}
             >
               <ArrowBackIcon />
             </IconButton>
             <Box sx={{ display: "flex", justifyContent: "center" }}>
-              <Typography sx={{ fontSize: "30px", fontWeight: "300", mb: 5 }}>
-                보고서 상세 페이지
-              </Typography>
+              <Title text={"보고서 상세 페이지"} />
             </Box>
+
             <Box
               sx={{
-                py: "5px",
                 border: 1,
                 backgroundColor: "primary.default",
                 borderColor: "primary.main",
-                borderRadius: "40px",
+                borderRadius: "30px",
                 width: "100%",
                 padding: "40px 40px",
               }}
@@ -240,7 +232,7 @@ export default function ReportDetail() {
               </>
             </Box>
           </Box>
-        </Box>
+        </StyledColumnAlignLayout>
       )}
     </>
   );
