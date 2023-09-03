@@ -39,7 +39,7 @@ export default function Post({ children }) {
     defaultValues: {
       title: state ? state.title : "",
       content: state ? state.content : "",
-      participants: [],
+      participants: state ? state.participants.map((p) => p.sid) : [],
       totalMinutes: state ? state.totalMinutes : "",
       startTime: getCurrentTime(),
       endTime: getCurrentTime(),
@@ -119,7 +119,11 @@ export default function Post({ children }) {
           <Typography variant="body2" sx={{ mb: "20px" }}>
             스터디에 참여한 맴버를 선택해주세요.
           </Typography>
-          <PostMember getValues={getValues} setValue={setValue} />
+          <PostMember
+            control={control}
+            getValues={getValues}
+            setValue={setValue}
+          />
         </PostBox>
         <PostBox>
           <Typography variant="body2" sx={{ mb: "20px" }}>
