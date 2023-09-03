@@ -13,10 +13,10 @@ const StyledCustomTableContainer = styled(Box)(({ theme }) => ({
   overflowY: "scroll",
 }));
 
-const StyledHeaderContainer = styled(Box)(({ theme, dataLength }) => ({
+const StyledHeaderContainer = styled(Box)(({ theme, $dataLength }) => ({
   color: theme.palette.text.secondary,
   display: "flex",
-  borderBottom: dataLength !== 0 && "1px solid",
+  borderBottom: $dataLength !== 0 ? "1px solid" : "none",
   borderColor: theme.palette.primary.border,
   padding: "20px 60px",
   justifyContent: "start",
@@ -82,7 +82,7 @@ export default function CustomTable({
 
   return (
     <StyledCustomTableContainer>
-      <StyledHeaderContainer dataLength={data.length}>
+      <StyledHeaderContainer $dataLength={data.length}>
         {TableHead[type].map((headElement, index) => (
           <FieldBox key={index}>{headElement}</FieldBox>
         ))}

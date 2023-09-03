@@ -42,7 +42,7 @@ export default function Post({ children }) {
       participants: state ? state.participants.map((p) => p.sid) : [],
       totalMinutes: state ? state.totalMinutes : "",
       images: state ? [...state.images.map((image) => image.url)] : [],
-      courses: state ? state.courses : [],
+      courses: state ? state.courses.map((c) => c.id.toString()) : [],
     },
   });
 

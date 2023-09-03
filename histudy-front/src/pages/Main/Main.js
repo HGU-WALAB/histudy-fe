@@ -13,18 +13,20 @@ import RegisterModal from "../../components/Main/RegisterModal";
 import { motion } from "framer-motion";
 import MainImage from "../../components/Main/MainImage";
 
+const nameConverter = (name) => {
+  if (name.slice(-3) === "학부생") return name.slice(0, -3);
+  return name;
+};
+
 export default function Main() {
   const [sid, setSid] = useState("");
   const [isLogin, setIsLogin] = useRecoilState(isLoginState);
+
   const [isRegisterModal, setIsRegisterModal] =
     useRecoilState(isRegisterModalState);
   const [userLoginInfoState, setUserLoginInfoState] =
     useRecoilState(userLoginInfo);
   const setAuthority = useSetRecoilState(authorityState);
-  const nameConverter = (name) => {
-    if (name.slice(-3) === "학부생") return name.slice(0, -3);
-    return name;
-  };
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -55,7 +57,7 @@ export default function Main() {
     setIsLogin(true);
     setAuthority(response.role);
 
-    // window.location.reload();
+    window.location.reload();
   };
 
   useEffect(() => {
