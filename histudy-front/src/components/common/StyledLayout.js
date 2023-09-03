@@ -7,4 +7,5 @@ export const StyledColumnAlignLayout = styled(Box)({
   alignItems: "center",
   marginBottom: "100px",
   marginTop: "50px",
+  padding: "0px 50px",
 });
