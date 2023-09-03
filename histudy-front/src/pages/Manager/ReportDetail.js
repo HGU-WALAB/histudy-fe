@@ -65,13 +65,22 @@ export default function ReportDetail() {
       navigate(`/report/modify/${state.id}`, { state: state });
     } else if (buttonId === "delete") {
       // setOpen(true);
-      alert("삭제되었습니다.");
+
       if (useUserReportDeatilMatch) {
-        await deleteReport(state.id);
+        if (window.confirm("정말 삭제하시겠습니까?")) {
+          deleteReport(state.id).then(() => {
+            alert("성공적으로 삭제되었습니다.");
+            navigate(-1);
+          });
+        }
       } else {
-        await deleteReport(state);
+        if (window.confirm("정말 삭제하시겠습니까?")) {
+          deleteReport(state).then(() => {
+            alert("성공적으로 삭제되었습니다.");
+            navigate(-1);
+          });
+        }
       }
-      navigate(-1);
     }
   };
 
@@ -153,9 +162,7 @@ export default function ReportDetail() {
 
                     <IconButton>
                       <DeleteIcon
-                        onClick={(e) => {
-                          handleClick(e, "delete");
-                        }}
+                        onClick={() => handleClick("delete")}
                         color="error"
                       />
                     </IconButton>
