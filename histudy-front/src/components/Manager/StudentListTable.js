@@ -101,304 +101,311 @@ export default function StudentListTable({
             </Typography>
           ))}
         </Box>
-        {data.map((row, index) => (
-          <>
-            {!edit[index] ? (
-              <Box
-                key={index}
-                sx={{
-                  display: "flex",
-                  borderTop: index !== 0 && 1,
-                  borderColor: "primary.border",
-                }}
-              >
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    flexGrow: 1,
-                  }}
-                >
+        {data.map(
+          (row, index) =>
+            row.group !== 0 && (
+              <>
+                {!edit[index] ? (
                   <Box
+                    key={index}
                     sx={{
-                      color: "text.secondary",
                       display: "flex",
-                      flexGrow: 1,
-                      width: "50px",
-                      textOverflow: "ellipsis",
-                      overflowX: "auto",
-                      whiteSpace: "nowrap",
-                      marginLeft: "3rem",
-                      // py: "20px",
+                      borderTop: index !== 0 && 1,
                       borderColor: "primary.border",
-                    }}
-                  >
-                    {row.name}
-                  </Box>
-
-                  <Box
-                    sx={{
-                      color: "text.secondary",
-                      display: "flex",
-                      flexGrow: 1,
-                      width: "50px",
-                      textOverflow: "ellipsis",
-                      overflowX: "auto",
-                      whiteSpace: "nowrap",
-                      marginLeft: "5rem",
-                      borderColor: "primary.border",
-                    }}
-                  >
-                    {row.sid}
-                  </Box>
-
-                  <Box
-                    sx={{
-                      color: "text.secondary",
-                      display: "flex",
-                      flexGrow: 1,
-                      width: "50px",
-                      textOverflow: "ellipsis",
-                      overflowX: "auto",
-                      whiteSpace: "nowrap",
-                      marginLeft: "4rem",
-                      borderColor: "primary.border",
-                    }}
-                  >
-                    Group{row.group}
-                  </Box>
-                  <Box
-                    sx={{
-                      color: "text.secondary",
-                      display: "flex",
-                      flexGrow: 1,
-                      marginLeft: "20px",
-                      py: "20px",
-                      borderColor: "primary.border",
-                    }}
-                  >
-                    <Select
-                      sx={{ width: "170px", color: "text.secondary" }}
-                      value={row.courses.length > 0 ? row.courses[0].name : ""}
-                    >
-                      {row.courses.map((subject, index) => (
-                        <MenuItem key={index} value={subject.name}>
-                          <Typography>{subject.name}</Typography>
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </Box>
-                </Box>
-
-                <Box
-                  sx={{
-                    color: "text.secondary",
-                    display: "flex",
-                    borderColor: "primary.border",
-                  }}
-                >
-                  <Box
-                    sx={{
-                      color: "text.secondary",
-                      display: "flex",
-                      flexGrow: 1,
-                      alignItems: "center",
-                      justifyContent: "space-between",
                     }}
                   >
                     <Box
                       sx={{
                         display: "flex",
                         alignItems: "center",
-                        marginRight: "20px",
-                      }}
-                    >
-                      <Box sx={{ display: "flex" }}>
-                        <IconButton
-                          onClick={() => {
-                            handleEdit(index);
-                            setValue("name", row.name);
-                            setValue("sid", row.sid);
-                            setValue("team", row.group);
-                          }}
-                        >
-                          <Edit />
-                        </IconButton>
-                      </Box>
-                    </Box>
-                  </Box>
-                </Box>
-              </Box>
-            ) : (
-              <Box
-                key={index}
-                sx={{
-                  display: "flex",
-                  borderTop: index !== 0 && 1,
-                  // py: "20px",
-                  borderColor: "primary.border",
-                }}
-              >
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    flexGrow: 1,
-                  }}
-                >
-                  <Box
-                    sx={{
-                      color: "text.secondary",
-                      display: "flex",
-                      flexGrow: 1,
-                      width: "50px",
-                      textOverflow: "ellipsis",
-                      overflowX: "auto",
-                      whiteSpace: "nowrap",
-                      marginLeft: "3rem",
-                      // py: "20px",
-                      borderColor: "primary.border",
-                    }}
-                  >
-                    <TextField
-                      sx={{
-                        "& input": {
-                          height: "10px",
-                        },
-                      }}
-                      initialValues={row.name}
-                      {...register("name")}
-                    ></TextField>
-                  </Box>
-
-                  <Box
-                    sx={{
-                      color: "text.secondary",
-                      display: "flex",
-                      flexGrow: 1,
-                      width: "50px",
-                      textOverflow: "ellipsis",
-                      overflowX: "auto",
-                      whiteSpace: "nowrap",
-                      marginLeft: "5rem",
-                      // py: "20px",
-                      borderColor: "primary.border",
-                    }}
-                  >
-                    <TextField
-                      sx={{
-                        "& input": {
-                          height: "10px",
-                        },
-                      }}
-                      initialValues={row.sid}
-                      {...register("sid")}
-                    ></TextField>
-                  </Box>
-
-                  <Box
-                    sx={{
-                      color: "text.secondary",
-                      display: "flex",
-                      flexGrow: 1,
-                      width: "50px",
-                      textOverflow: "ellipsis",
-                      overflowX: "auto",
-                      whiteSpace: "nowrap",
-                      marginLeft: "4rem",
-                      // py: "20px",
-                      borderColor: "primary.border",
-                    }}
-                  >
-                    <TextField
-                      sx={{
-                        "& input": {
-                          height: "10px",
-                        },
-                      }}
-                      initialValues={row.group}
-                      {...register("team")}
-                    ></TextField>
-                  </Box>
-                  <Box
-                    sx={{
-                      color: "text.secondary",
-                      display: "flex",
-                      flexGrow: 0.5,
-                      marginLeft: "20px",
-                      py: "20px",
-                      borderColor: "primary.border",
-                    }}
-                  >
-                    <Select
-                      sx={{ width: "170px", color: "text.secondary" }}
-                      value={row.courses.length > 0 ? row.courses[0].name : ""}
-                    >
-                      {row.courses.map((subject, index) => (
-                        <MenuItem key={index} value={subject.name}>
-                          <Typography>{subject.name}</Typography>
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </Box>
-                </Box>
-
-                <Box
-                  sx={{
-                    color: "text.secondary",
-                    display: "flex",
-
-                    borderColor: "primary.border",
-                  }}
-                >
-                  <Box
-                    sx={{
-                      color: "text.secondary",
-                      display: "flex",
-                      flexGrow: 1,
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <Box
-                      sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        marginRight: "20px",
+                        flexGrow: 1,
                       }}
                     >
                       <Box
                         sx={{
+                          color: "text.secondary",
                           display: "flex",
-                          py: "20px",
+                          flexGrow: 1,
+                          width: "50px",
+                          textOverflow: "ellipsis",
+                          overflowX: "auto",
+                          whiteSpace: "nowrap",
+                          marginLeft: "3rem",
+                          // py: "20px",
+                          borderColor: "primary.border",
                         }}
                       >
-                        <Chip
+                        {row.name}
+                      </Box>
+
+                      <Box
+                        sx={{
+                          color: "text.secondary",
+                          display: "flex",
+                          flexGrow: 1,
+                          width: "50px",
+                          textOverflow: "ellipsis",
+                          overflowX: "auto",
+                          whiteSpace: "nowrap",
+                          marginLeft: "5rem",
+                          borderColor: "primary.border",
+                        }}
+                      >
+                        {row.sid}
+                      </Box>
+
+                      <Box
+                        sx={{
+                          color: "text.secondary",
+                          display: "flex",
+                          flexGrow: 1,
+                          width: "50px",
+                          textOverflow: "ellipsis",
+                          overflowX: "auto",
+                          whiteSpace: "nowrap",
+                          marginLeft: "4rem",
+                          borderColor: "primary.border",
+                        }}
+                      >
+                        Group{row.group}
+                      </Box>
+                      <Box
+                        sx={{
+                          color: "text.secondary",
+                          display: "flex",
+                          flexGrow: 1,
+                          marginLeft: "20px",
+                          py: "20px",
+                          borderColor: "primary.border",
+                        }}
+                      >
+                        <Select
+                          sx={{ width: "170px", color: "text.secondary" }}
+                          value={
+                            row.courses.length > 0 ? row.courses[0].name : ""
+                          }
+                        >
+                          {row.courses.map((subject, index) => (
+                            <MenuItem key={index} value={subject.name}>
+                              <Typography>{subject.name}</Typography>
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </Box>
+                    </Box>
+
+                    <Box
+                      sx={{
+                        color: "text.secondary",
+                        display: "flex",
+                        borderColor: "primary.border",
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          color: "text.secondary",
+                          display: "flex",
+                          flexGrow: 1,
+                          alignItems: "center",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <Box
                           sx={{
-                            color: "white",
-                            backgroundColor: "primary.main",
+                            display: "flex",
+                            alignItems: "center",
+                            marginRight: "20px",
                           }}
-                          onClick={() => handleSave(row.id)}
-                          label="저장"
-                        />{" "}
-                        <Chip
-                          sx={{
-                            marginLeft: "0.5rem",
-                            marginRight: "0.5rem",
-                            color: "#FF0000",
-                            backgroundColor: "#FFE4E4",
-                          }}
-                          onClick={() => handleEdit(index)}
-                          label="취소"
-                        />
+                        >
+                          <Box sx={{ display: "flex" }}>
+                            <IconButton
+                              onClick={() => {
+                                handleEdit(index);
+                                setValue("name", row.name);
+                                setValue("sid", row.sid);
+                                setValue("team", row.group);
+                              }}
+                            >
+                              <Edit />
+                            </IconButton>
+                          </Box>
+                        </Box>
                       </Box>
                     </Box>
                   </Box>
-                </Box>
-              </Box>
-            )}
-          </>
-        ))}
+                ) : (
+                  <Box
+                    key={index}
+                    sx={{
+                      display: "flex",
+                      borderTop: index !== 0 && 1,
+                      // py: "20px",
+                      borderColor: "primary.border",
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        flexGrow: 1,
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          color: "text.secondary",
+                          display: "flex",
+                          flexGrow: 1,
+                          width: "50px",
+                          textOverflow: "ellipsis",
+                          overflowX: "auto",
+                          whiteSpace: "nowrap",
+                          marginLeft: "3rem",
+                          // py: "20px",
+                          borderColor: "primary.border",
+                        }}
+                      >
+                        <TextField
+                          sx={{
+                            "& input": {
+                              height: "10px",
+                            },
+                          }}
+                          initialValues={row.name}
+                          {...register("name")}
+                        ></TextField>
+                      </Box>
+
+                      <Box
+                        sx={{
+                          color: "text.secondary",
+                          display: "flex",
+                          flexGrow: 1,
+                          width: "50px",
+                          textOverflow: "ellipsis",
+                          overflowX: "auto",
+                          whiteSpace: "nowrap",
+                          marginLeft: "5rem",
+                          // py: "20px",
+                          borderColor: "primary.border",
+                        }}
+                      >
+                        <TextField
+                          sx={{
+                            "& input": {
+                              height: "10px",
+                            },
+                          }}
+                          initialValues={row.sid}
+                          {...register("sid")}
+                        ></TextField>
+                      </Box>
+
+                      <Box
+                        sx={{
+                          color: "text.secondary",
+                          display: "flex",
+                          flexGrow: 1,
+                          width: "50px",
+                          textOverflow: "ellipsis",
+                          overflowX: "auto",
+                          whiteSpace: "nowrap",
+                          marginLeft: "4rem",
+                          // py: "20px",
+                          borderColor: "primary.border",
+                        }}
+                      >
+                        <TextField
+                          sx={{
+                            "& input": {
+                              height: "10px",
+                            },
+                          }}
+                          initialValues={row.group}
+                          {...register("team")}
+                        ></TextField>
+                      </Box>
+                      <Box
+                        sx={{
+                          color: "text.secondary",
+                          display: "flex",
+                          flexGrow: 0.5,
+                          marginLeft: "20px",
+                          py: "20px",
+                          borderColor: "primary.border",
+                        }}
+                      >
+                        <Select
+                          sx={{ width: "170px", color: "text.secondary" }}
+                          value={
+                            row.courses.length > 0 ? row.courses[0].name : ""
+                          }
+                        >
+                          {row.courses.map((subject, index) => (
+                            <MenuItem key={index} value={subject.name}>
+                              <Typography>{subject.name}</Typography>
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </Box>
+                    </Box>
+
+                    <Box
+                      sx={{
+                        color: "text.secondary",
+                        display: "flex",
+
+                        borderColor: "primary.border",
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          color: "text.secondary",
+                          display: "flex",
+                          flexGrow: 1,
+                          alignItems: "center",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <Box
+                          sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            marginRight: "20px",
+                          }}
+                        >
+                          <Box
+                            sx={{
+                              display: "flex",
+                              py: "20px",
+                            }}
+                          >
+                            <Chip
+                              sx={{
+                                color: "white",
+                                backgroundColor: "primary.main",
+                              }}
+                              onClick={() => handleSave(row.id)}
+                              label="저장"
+                            />{" "}
+                            <Chip
+                              sx={{
+                                marginLeft: "0.5rem",
+                                marginRight: "0.5rem",
+                                color: "#FF0000",
+                                backgroundColor: "#FFE4E4",
+                              }}
+                              onClick={() => handleEdit(index)}
+                              label="취소"
+                            />
+                          </Box>
+                        </Box>
+                      </Box>
+                    </Box>
+                  </Box>
+                )}
+              </>
+            )
+        )}
       </Box>
     </>
   );

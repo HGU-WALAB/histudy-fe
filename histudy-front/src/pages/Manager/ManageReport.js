@@ -101,7 +101,7 @@ export default function ManageReport() {
     navigate("/reportDetail", { state: index });
   };
   return (
-    <Box sx={{ display: "flex", py: "50px", gap: "20px", px: "50px" }}>
+    <Box sx={{ display: "flex", py: "50px", gap: "50px", px: "50px" }}>
       <Box sx={{}}>
         <SideBar />
       </Box>
