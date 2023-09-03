@@ -31,6 +31,7 @@ import { deleteReport, modifyReport } from "../../apis/report";
 import Snackbars from "./Snackbars";
 import { useRecoilState } from "recoil";
 import { isDelete, reportDeleteState } from "../../store/atom";
+import Title from "../../components/Manager/Table/Title";
 
 export default function ReportDetail() {
   const [reportData, setReportData] = useState();
@@ -82,17 +83,29 @@ export default function ReportDetail() {
             justifyContent: "center",
             alignItems: "center",
             px: "50px",
-            py: "50px",
+            pt: "50px",
+            pb: "200px",
           }}
         >
           <Box sx={{ position: "fixed", left: "30px", top: "50px" }}>
             {!useUserReportDeatilMatch && <SideBar />}
           </Box>
-          <Box sx={{ display: "flex", flexDirection: "column" }}>
-            <Box sx={{ display: "flex" }}>
-              <IconButton onClick={() => moveToBefore()}>
-                <ArrowBackIcon />
-              </IconButton>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              position: "relative",
+              gap: "20px",
+            }}
+          >
+            <IconButton
+              sx={{ position: "absolute", left: "-40px", top: "-5px" }}
+              onClick={() => moveToBefore()}
+            >
+              <ArrowBackIcon />
+            </IconButton>
+            <Box sx={{ display: "flex", justifyContent: "center" }}>
+              <Title text="보고서 상세 페이지" />
             </Box>
             <Box
               sx={{
@@ -197,11 +210,14 @@ export default function ReportDetail() {
                       {reportData.content}
                     </Typography>
                   </Box>
+                  <Box sx={{ width: "100px", color: "text.secondary" }}>
+                    인증 사진
+                  </Box>
                   <Box
                     sx={{
                       display: "flex",
                       width: "100%",
-                      mb: "1rem",
+                      my: "1rem",
                     }}
                   >
                     <ImageList>
