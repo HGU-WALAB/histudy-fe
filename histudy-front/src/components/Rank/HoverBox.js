@@ -10,65 +10,61 @@ const StyledChip = styled(Chip)({
   fontSize: "12px",
 });
 
+const StyledFlexWrap = styled(Box)({
+  display: "flex",
+  gap: "10px",
+  flexWrap: "wrap",
+});
+
+const StyledSizedBox = styled(Box)({
+  display: "flex",
+  gap: "10px",
+});
+
+const StyledHoverBox = styled(Box)({
+  display: "flex",
+  flexDirection: "column",
+  width: "100%",
+  height: "100%",
+  position: "absolute",
+  justifyContent: "space-between",
+  left: 0,
+  top: 0,
+  paddingRight: "15px ",
+  paddingLeft: "15px ",
+  paddingTop: "70px",
+  paddingBottom: "30px",
+  backgroundColor: "rgba(0, 0, 0, 0.6)",
+});
+
 export default function HoverBox({ members, reports, totalMinutes }) {
   return (
     // <AnimatePresence>
-    <Box
+    <StyledHoverBox
       component={motion.div}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        width: "100%",
-        height: "100%",
-        position: "absolute",
-        justifyContent: "space-between",
-        left: 0,
-        top: 0,
-        paddingX: "15px",
-        paddingTop: "70px",
-        paddingBottom: "30px",
-        backgroundColor: "rgba(0, 0, 0, 0.6)",
-      }}
     >
-      <Box
-        sx={{
-          display: "flex",
-          gap: "10px",
-          flexWrap: "wrap",
-        }}
-      >
-        {members.map((member) => (
+      <StyledFlexWrap>
+        {members.map((member, index) => (
           <StyledChip
+            key={index}
             icon={<FaceIcon sx={{ fill: "white" }} />}
             label={`${member.slice(0, 5)}`}
             variant="outlined"
           />
         ))}
-      </Box>
+      </StyledFlexWrap>
 
-      <Box
-        sx={{
-          display: "flex",
-
-          gap: "10px",
-        }}
-      >
+      <StyledSizedBox>
         <StyledChip label="보고서 총 갯수" variant="outlined" />
         <StyledChip label={`${reports}개`} />
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-
-          gap: "10px",
-        }}
-      >
+      </StyledSizedBox>
+      <StyledSizedBox>
         <StyledChip label="스터디 총 시간" variant="outlined" />
         <StyledChip label={`${totalMinutes} 분`} />
-      </Box>
-    </Box>
+      </StyledSizedBox>
+    </StyledHoverBox>
   );
 }

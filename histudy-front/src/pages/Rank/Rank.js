@@ -4,13 +4,12 @@ import {
   Grid,
   IconButton,
   ImageList,
-  ImageListItem,
   ImageListItemBar,
   ListSubheader,
   Typography,
   styled,
 } from "@mui/material";
-import GroupsIcon from "@mui/icons-material/Groups";
+
 import { Box } from "@mui/system";
 import CustomTable from "../../components/common/CustomTable";
 import { InfoIcon } from "../../theme/overrides/CustomIcons";
@@ -24,24 +23,48 @@ import { Image } from "@mui/icons-material";
 import NoDataLottie from "../../components/common/NoDataLottie";
 import { StyledColumnAlignLayout } from "../../components/common/StyledLayout";
 import Title from "../../components/common/Title";
+import { useQuery } from "react-query";
+import ImageListItem from "../../components/Rank/Item";
+import Item from "../../components/Rank/Item";
 
 const StyledScrollBox = styled(Box)({
   width: "100%",
   overflow: "scroll",
 });
 
+const StyledItemSize = styled(Box)({
+  position: "relative",
+  width: "300px",
+  height: "300px",
+});
+
 export default function Rank() {
   const [teams, setTeams] = useState([]);
-
   const [itemsHover, setItemsHover] = useState([]);
 
-  useEffect(() => {
-    getAllTeamsForRank().then((res) => {
-      setTeams(res.teams);
-      console.log(res.teams);
-      setItemsHover(new Array(res.teams.length).fill(false));
-    });
-  }, []);
+  const { isLoading } = useQuery(["AllTeamRanks"], getAllTeamsForRank, {
+    casheTime: 10 * 60 * 1000,
+    onSuccess: (data) => {
+      setTeams(data.teams);
+      console.log(data.teams);
+      setItemsHover(new Array(data.teams.length).fill(false));
+    },
+  });
+
+  const handleMouseOver = (index) => {
+    setItemsHover((prev) => [
+      ...prev?.slice(0, index),
+      true,
+      ...prev?.slice(index + 1),
+    ]);
+  };
+  const handleMouseOut = (index) => {
+    setItemsHover((prev) => [
+      ...prev?.slice(0, index),
+      false,
+      ...prev?.slice(index + 1),
+    ]);
+  };
 
   return (
     <StyledColumnAlignLayout
@@ -57,34 +80,16 @@ export default function Rank() {
         <StyledScrollBox>
           <ImageList
             cols={4}
-            gap="15px"
+            gap={15}
             component={motion.div}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
             {teams.map((item, index) => (
               <Grid item key={index}>
-                <div
-                  style={{
-                    position: "relative",
-                    width: "300px",
-                    // border: "1px solid black",
-                    height: "300px",
-                  }}
-                  onMouseOver={() =>
-                    setItemsHover((prev) => [
-                      ...prev?.slice(0, index),
-                      true,
-                      ...prev?.slice(index + 1),
-                    ])
-                  }
-                  onMouseOut={() =>
-                    setItemsHover((prev) => [
-                      ...prev?.slice(0, index),
-                      false,
-                      ...prev?.slice(index + 1),
-                    ])
-                  }
+                <StyledItemSize
+                  onMouseOver={() => handleMouseOver(index)}
+                  onMouseOut={() => handleMouseOut(index)}
                 >
                   <AnimatePresence>
                     {itemsHover[index] && (
@@ -95,41 +100,9 @@ export default function Rank() {
                       />
                     )}
                   </AnimatePresence>
-                  <ImageListItem key={item.img} sx={{ position: "relative" }}>
-                    {!itemsHover[index] && (
-                      <motion.img
-                        key={index}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        src={`${
-                          !item.thumbnail ? "/img/mainImg2.png" : item.thumbnail
-                        }`}
-                        alt={item.title}
-                        loading="lazy"
-                      />
-                    )}
-                    <ImageListItemBar
-                      sx={{
-                        color: "white",
-                        position: "absolute",
-                        top: !itemsHover[index] ? 250 : 30,
-                      }}
-                      title={` ${
-                        itemsHover[index]
-                          ? `Group ${item.id}`
-                          : `Rank ${index + 1}`
-                      }`}
-                      actionIcon={
-                        <IconButton
-                          sx={{ color: "rgba(255, 255, 255, 1)" }}
-                          aria-label={`info about ${item.title}`}
-                        >
-                          <GroupsIcon />
-                        </IconButton>
-                      }
-                    />
-                  </ImageListItem>
-                </div>
+
+                  <Item index={index} item={item} itemsHover={itemsHover} />
+                </StyledItemSize>
               </Grid>
             ))}
           </ImageList>
