@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 import LoadingLottie from "../../components/common/LoadingLottie";
 import { StyledColumnAlignLayout } from "../../components/common/StyledLayout";
 import Title from "../../components/common/Title";
+import { useQuery } from "react-query";
 
 const StyledScrollTableSize = styled(Box)({
   width: "90%",
@@ -24,35 +25,33 @@ const StyleButtonBox = styled(Box)({
   marginBottom: "2rem",
 });
 
-export default function Report() {
-  // const [data, setData] = useState([]);
+const dateConverter = (regDate) => {
+  const date = new Date(regDate);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  const formattedDate = `${year}-${month}-${day}`;
+  return formattedDate;
+};
 
+export default function Report() {
   const [reports, setReports] = useState([]);
   const [convertedReports, setConvertedReports] = useState([]);
 
-  const dateConverter = (regDate) => {
-    const date = new Date(regDate);
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-    const formattedDate = `${year}-${month}-${day}`;
-    return formattedDate;
-  };
-
-  useEffect(() => {
-    getMyTeamReport().then((res) => {
-      setReports(res.reports);
+  const { isLoading } = useQuery(["courses"], getMyTeamReport, {
+    casheTime: 1 * 30 * 1000,
+    onSuccess: (data) => {
+      setReports(data.reports);
 
       setConvertedReports(
-        res.reports.map((report) => [
+        data.reports.map((report) => [
           report.title,
           report.totalMinutes,
           dateConverter(report.regDate),
-          // new Date(report.regDate).toLocaleDateString("en-US"),
         ])
       );
-    });
-  }, []);
+    },
+  });
 
   return (
     <>

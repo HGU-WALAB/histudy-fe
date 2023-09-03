@@ -1,11 +1,4 @@
-import {
-  Autocomplete,
-  Button,
-  InputAdornment,
-  TextField,
-  Typography,
-  withStyles,
-} from "@mui/material";
+import { Typography, styled, withStyles } from "@mui/material";
 import { border, Box } from "@mui/system";
 import { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
@@ -21,11 +14,44 @@ import { getMyGroup, studyEnroll } from "../../apis/study";
 import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Group from "../Group/Group";
+import { useQuery } from "react-query";
+import Title from "../../components/common/Title";
+import FriendDescription from "../../components/common/FriendDescription";
+import CourseDescription from "../../components/common/CourseDescription";
+import ButtonBox from "../../components/Enroll/ButtonBox";
+
+const ResponsiveSidebarContainer = styled("div")({
+  "@media (min-width: 1200px)": {
+    display: "flex",
+  },
+  display: "none",
+  flexDirection: "column",
+});
+
+const StyledCustomTableContainer = styled(Box)(({ reApply }) => ({
+  display: "flex",
+  padding: reApply ? "0px 0px" : "60px 0px",
+  overflowX: "scroll",
+  minHeight: "100vh",
+  justifyContent: "center",
+}));
+
+const StyledTitle = styled(Typography)({
+  textAlign: "center",
+  marginBottom: "20px",
+  fontSize: "25px",
+  fontWeight: "400",
+});
 
 export default function Enroll() {
   const [reApply, setReApply] = useState(false);
 
   const location = useLocation();
+  const navigate = useNavigate();
+  const [page, setPage] = useState(1);
+  const [sideFriends, setSideFriends] = useState([]);
+  const [sideCourses, setSideCourses] = useState([]);
+
   useEffect(() => {
     if (location.state) {
       setSideCourses(
@@ -40,40 +66,30 @@ export default function Enroll() {
         location.state.friends.map((friend) => [friend.name, friend.sid])
       );
     }
+  }, []);
 
-    /**
-     * 내가 신청한 스터디가 있는지 확인
-     */
-    getMyGroup().then((res) => {
-      if (res.courses.length !== 0) {
+  /**
+   * 내가 신청한 스터디가 있는지 확인
+   */
+
+  const { isLoading } = useQuery(["checkMyApplication"], getMyGroup, {
+    casheTime: 1 * 30 * 1000,
+    onSuccess: (data) => {
+      if (data.courses.length !== 0) {
         setReApply(true);
         setSideCourses(
-          res.courses.map((course) => [
+          data.courses.map((course) => [
             course.name,
             course.code,
             course.prof,
             course.id,
           ])
         );
-        setSideFriends(res.friends.map((friend) => [friend.name, friend.sid]));
+        setSideFriends(data.friends.map((friend) => [friend.name, friend.sid]));
       }
-    });
-  }, []);
+    },
+  });
 
-  const [page, setPage] = useState(1);
-
-  const [sideFriends, setSideFriends] = useState([]);
-
-  const expandCourses = (courses) => {
-    if (courses.length === 1) {
-      return [courses[0], courses[0], courses[0]];
-    } else if (courses.length === 2) {
-      return [courses[0], courses[1], courses[1]];
-    }
-    return courses;
-  };
-
-  const navigate = useNavigate();
   const handleClick = (event) => {
     const ID = event.target.id;
 
@@ -93,7 +109,6 @@ export default function Enroll() {
       navigate("/");
     }
   };
-  const [sideCourses, setSideCourses] = useState([]);
 
   const rankConverter = (sideCourses) => {
     // let i = 1;
@@ -105,38 +120,17 @@ export default function Enroll() {
   };
 
   return (
-    <Box
+    <StyledCustomTableContainer
       component={motion.div}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      sx={{
-        display: "flex",
-        py: reApply ? "0px" : "60px",
-        overflowX: "scroll",
-
-        minHeight: "100vh",
-        justifyContent: "center",
-      }}
+      reApply={reApply}
     >
       {reApply ? (
         <Group setReApply={setReApply} />
       ) : (
         <Box sx={{ display: "flex", gap: "35px", alignItems: "start" }}>
-          <Box
-            sx={{
-              display: {
-                lg: "flex",
-                md: "none",
-                sm: "none",
-                xs: "none",
-              },
-              flexDirection: "column",
-              // position: "absolute",
-              // left: "45px",
-
-              // top: "30px",
-            }}
-          >
+          <ResponsiveSidebarContainer>
             <ProgressBar page={page} setPage={setPage} />
             <GrayBorderBox
               reApply={reApply}
@@ -145,29 +139,9 @@ export default function Enroll() {
               setSideCourses={setSideCourses}
               setSideFriends={setSideFriends}
             />
-          </Box>
-          <Box
-            sx={
-              {
-                // width: "100%",
-                // minWidth: "500px",
-                // ml: {
-                //   lg: "250px",
-                //   md: "0px",
-                // },
-              }
-            }
-          >
-            <Typography
-              sx={{
-                textAlign: "center",
-                mb: "20px",
-                fontSize: "25px",
-                fontWeight: "400",
-              }}
-            >
-              Histudy 신청하기
-            </Typography>
+          </ResponsiveSidebarContainer>
+          <Box>
+            <StyledTitle>Histudy 신청하기</StyledTitle>
 
             {page === 1 && (
               <Box
@@ -175,37 +149,13 @@ export default function Enroll() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
               >
-                <Typography sx={{ textAlign: "center", fontWeight: "400" }}>
-                  스터디를 함께하고 싶은 친구가 있다면 추가하세요!
-                </Typography>
-                <Typography
-                  sx={{
-                    color: "primary.main",
-                    textAlign: "center",
-                    mt: "5px",
-                    mb: "30px",
-                    fontWeight: "600",
-                  }}
-                >
-                  서로 함께 하고 싶은 친구로 신청해야 매칭됩니다! (최대 4명)
-                </Typography>
+                <FriendDescription />
                 <Friends
                   sideFriends={sideFriends}
                   setSideFriends={setSideFriends}
                 />
-                {/* <Typography
-              sx={{ color: "primary.main", textAlign: "center", mt: 4 }}
-            >
-              서로 함께 하고 싶은 친구로 신청해야 매칭됩니다!
-            </Typography> */}
-                <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
-                  <LongButton
-                    name="다음"
-                    onClick={handleClick}
-                    bgColor="primary.main"
-                    fontColor="white"
-                  />
-                </Box>
+
+                <ButtonBox left="다음" right="없음" handleClick={handleClick} />
               </Box>
             )}
 
@@ -215,48 +165,14 @@ export default function Enroll() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
               >
-                <Typography sx={{ textAlign: "center" }}>
-                  스터디를 하고 싶은 희망 과목들을 담아주세요!
-                </Typography>
-                <Typography
-                  sx={{
-                    color: "primary.main",
-                    textAlign: "center",
-                    mt: "5px",
-                    mb: "30px",
-                    fontWeight: "600",
-                  }}
-                >
-                  최소 1과목, 최대 3과목
-                </Typography>
+                <CourseDescription />
 
                 <Courses
                   sideCourses={sideCourses}
                   setSideCourses={setSideCourses}
                 />
-                <Box sx={{ display: "flex", justifyContent: "center" }}>
-                  <Box
-                    sx={{
-                      mt: 5,
-                      display: "flex",
-                      justifyContent: "space-between",
-                      width: "300px",
-                    }}
-                  >
-                    <LongButton
-                      name="이전"
-                      onClick={handleClick}
-                      bgColor="primary.lighter"
-                      fontColor="primary.main"
-                    />
-                    <LongButton
-                      name="다음"
-                      onClick={handleClick}
-                      bgColor="primary.main"
-                      fontColor="white"
-                    />
-                  </Box>
-                </Box>
+
+                <ButtonBox left="이전" right="다음" handleClick={handleClick} />
               </Box>
             )}
             {page === 3 && (
@@ -284,35 +200,12 @@ export default function Enroll() {
                   />
                 </Box>
 
-                <Box sx={{ display: "flex", justifyContent: "center" }}>
-                  <Box
-                    sx={{
-                      mt: 5,
-                      display: "flex",
-                      justifyContent: "space-between",
-                      width: "300px",
-                    }}
-                  >
-                    <LongButton
-                      name="이전"
-                      onClick={handleClick}
-                      bgColor="primary.lighter"
-                      fontColor="primary.main"
-                    />
-
-                    <LongButton
-                      name="제출"
-                      onClick={handleClick}
-                      bgColor="primary.main"
-                      fontColor="white"
-                    />
-                  </Box>
-                </Box>
+                <ButtonBox left="이전" right="제출" handleClick={handleClick} />
               </Box>
             )}
           </Box>
         </Box>
       )}
-    </Box>
+    </StyledCustomTableContainer>
   );
 }

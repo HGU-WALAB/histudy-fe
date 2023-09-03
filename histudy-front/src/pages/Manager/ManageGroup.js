@@ -60,7 +60,6 @@ export default function ManageGroup() {
 
       cacheTime: 5 * 60 * 1000,
       onSuccess: (data) => {
-        console.log("gruop data", data);
         setGroupData(data);
         setGroupAutoCompleteState(groupAutoCompleteConverter(data));
       },
@@ -76,19 +75,6 @@ export default function ManageGroup() {
       },
     },
   ]);
-
-  // useEffect(() => {
-  //   setIsLoading(true);
-  //   readAllGroups().then((data) => {
-  //     setGroupData(data);
-  //     setGroupAutoCompleteState(groupAutoCompleteConverter(data));
-  //     readUngroup().then((data) => {
-  //       console.log(data);
-  //       setUngroupData(data);
-  //       setIsLoading(false);
-  //     });
-  //   });
-  // }, []);
 
   return (
     <StyledLayout>
