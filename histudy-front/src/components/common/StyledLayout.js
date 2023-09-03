@@ -5,5 +5,6 @@ export const StyledColumnAlignLayout = styled(Box)({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  margin: "50px 0px",
+  marginBottom: "100px",
+  marginTop: "50px",
 });

@@ -26,6 +26,8 @@ import { useRecoilState } from "recoil";
 import { isCodeModalState } from "../../store/atom";
 import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import Title from "../../components/common/Title";
+import { StyledColumnAlignLayout } from "../../components/common/StyledLayout";
 
 export default function Post({ children }) {
   const { state } = useLocation();
@@ -77,25 +79,19 @@ export default function Post({ children }) {
   };
 
   return (
-    <Box
+    <StyledColumnAlignLayout
       component={motion.div}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      sx={{ mb: "150px" }}
     >
       {isCodeModal && <CodeModal onClick={() => setIsCodeModal(false)} />}
 
+      <Title text="스터디 모임 보고서 작성" />
       <FormControl
         sx={{
-          display: "flex",
-          flexDirection: "column",
-          width: "70%",
-          mx: "auto",
+          width: "80%",
         }}
       >
-        <Typography variant="h5" sx={{ my: "50px", textAlign: "center" }}>
-          스터디 모임 보고서 작성
-        </Typography>
         <PostBox sx={{ display: "flex", flexDirection: "column" }}>
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <Typography variant="body2" sx={{ mr: "10px" }}>
@@ -192,6 +188,6 @@ export default function Post({ children }) {
           />
         </Box>
       </FormControl>
-    </Box>
+    </StyledColumnAlignLayout>
   );
 }
