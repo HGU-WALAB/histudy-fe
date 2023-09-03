@@ -1,12 +1,12 @@
 import { Box, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import GrayBorderBox from "../../components/GrayBorderBox";
-import LongButton from "../../components/LongButton";
+import GrayBorderBox from "../../components/common/GrayBorderBox";
+import LongButton from "../../components/common/LongButton";
 import { getMyGroup } from "../../apis/study";
 import { Link } from "react-router-dom";
-import NoDataLottie from "../../components/NoDataLottie";
+import NoDataLottie from "../../components/common/NoDataLottie";
 import { getMyTeamUsers } from "../../apis/users";
-import CustomTable from "../../components/CustomTable";
+import CustomTable from "../../components/common/CustomTable";
 import { motion } from "framer-motion";
 
 export default function Group({ setReApply }) {

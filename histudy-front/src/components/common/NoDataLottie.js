@@ -1,5 +1,5 @@
 import { Box, Typography, styled } from "@mui/material";
-import animationData from "../noData.json";
+import animationData from "../../noData.json";
 import Lottie from "lottie-react";
 
 const StyledFlexColumnBox = styled(Box)({

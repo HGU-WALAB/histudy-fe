@@ -1,5 +1,5 @@
 import { Box, InputAdornment, TextField, useTheme } from "@mui/material";
-import CustomTable from "../CustomTable";
+import CustomTable from "../common/CustomTable";
 import SearchIcon from "@mui/icons-material/Search";
 import { useEffect, useState } from "react";
 import { autoCourses } from "../../apis/course";
@@ -29,7 +29,6 @@ export default function Courses({ sideCourses, setSideCourses }) {
 
   useEffect(() => {
     setCourses(courseConverter(allCourses));
-    console.log("checkout", courseConverter(allCourses));
   }, [allCourses, courseInput]);
 
   useEffect(() => {

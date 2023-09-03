@@ -1,6 +1,6 @@
 import { Box, IconButton, Typography } from "@mui/material";
 import { useMatch } from "react-router-dom";
-import DeleteDataIcon from "./Enroll/DeleteDataIcon";
+import DeleteDataIcon from "../Enroll/DeleteDataIcon";
 import { AnimatePresence, motion } from "framer-motion";
 export default function GrayBorderBox({
   reApply,

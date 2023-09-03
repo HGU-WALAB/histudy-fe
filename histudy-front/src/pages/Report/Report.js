@@ -1,12 +1,12 @@
 import { Box, Typography } from "@mui/material";
-import CustomTable from "../../components/CustomTable";
-import LongButton from "../../components/LongButton";
+import CustomTable from "../../components/common/CustomTable";
+import LongButton from "../../components/common/LongButton";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getMyTeamReport, getmyTeamReport } from "../../apis/report";
-import NoDataLottie from "../../components/NoDataLottie";
+import NoDataLottie from "../../components/common/NoDataLottie";
 import { motion } from "framer-motion";
-import LoadingLottie from "../../components/LoadingLottie";
+import LoadingLottie from "../../components/common/LoadingLottie";
 
 export default function Report() {
   // const [data, setData] = useState([]);

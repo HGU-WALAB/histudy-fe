@@ -9,10 +9,10 @@ import {
 import { border, Box } from "@mui/system";
 import { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
-import CustomTable from "../../components/CustomTable";
-import LongButton from "../../components/LongButton";
-import GrayBorderBox from "../../components/GrayBorderBox";
-import ProgressBar from "../../components/ProgressBar";
+import CustomTable from "../../components/common/CustomTable";
+import LongButton from "../../components/common/LongButton";
+import GrayBorderBox from "../../components/common/GrayBorderBox";
+import ProgressBar from "../../components/common/ProgressBar";
 import SideBar from "../../components/Manager/SideBar";
 import YearSelectButton from "../../components/Manager/YearSelectButton";
 import SemesterSelectButton from "../../components/Manager/SemesterSelectButton";

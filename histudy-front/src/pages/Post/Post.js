@@ -8,9 +8,9 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import PostBox from "../../components/PostBox";
-import LongButton from "../../components/LongButton";
-import RoundButton from "../../components/RoundButton";
+import PostBox from "../../components/common/PostBox";
+import LongButton from "../../components/common/LongButton";
+import RoundButton from "../../components/common/RoundButton";
 
 import { useEffect, useState } from "react";
 

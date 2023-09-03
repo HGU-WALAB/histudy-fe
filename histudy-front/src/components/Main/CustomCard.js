@@ -2,7 +2,7 @@ import { Box, Card, CardContent, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import HeaderButton from "../HeaderButton";
+import HeaderButton from "../common/HeaderButton";
 
 export default function CustomCard({ width, title, icon, link }) {
   return (

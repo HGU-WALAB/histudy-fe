@@ -1,5 +1,5 @@
 import { Box, Typography, useTheme } from "@mui/material";
-import ExportCSV from "./scv/ExportCSV";
+import ExportCSV from "../scv/ExportCSV";
 import { useMatch } from "react-router-dom";
 
 export default function Footer() {

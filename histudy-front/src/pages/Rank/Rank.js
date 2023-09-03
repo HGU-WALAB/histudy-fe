@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import GroupsIcon from "@mui/icons-material/Groups";
 import { Box } from "@mui/system";
-import CustomTable from "../../components/CustomTable";
+import CustomTable from "../../components/common/CustomTable";
 import { InfoIcon } from "../../theme/overrides/CustomIcons";
 import { useEffect, useState } from "react";
 import { getAllTeamsForRank } from "../../apis/rank";
@@ -20,7 +20,7 @@ import LooksOneIcon from "@mui/icons-material/LooksOne";
 import HoverBox from "../../components/Rank/HoverBox";
 import { AnimatePresence, motion } from "framer-motion";
 import { Image } from "@mui/icons-material";
-import NoDataLottie from "../../components/NoDataLottie";
+import NoDataLottie from "../../components/common/NoDataLottie";
 
 export default function Rank() {
   const [teams, setTeams] = useState([]);

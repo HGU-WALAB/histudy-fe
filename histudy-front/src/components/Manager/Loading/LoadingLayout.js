@@ -1,4 +1,4 @@
-import LoadingLottie from "../../LoadingLottie";
+import LoadingLottie from "../../common/LoadingLottie";
 
 export default function LoadingLayout({ isLoading, results, children }) {
   return (
