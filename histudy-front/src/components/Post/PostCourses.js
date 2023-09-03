@@ -38,7 +38,10 @@ export default function PostCourses({ setValue, getValues }) {
               onChange={handleCheckboxChange}
             />
           }
-          label={teamMemberCourse.name}
+          label={
+            teamMemberCourse.name +
+            ` ( ${teamMemberCourse.code} , ${teamMemberCourse.prof} )`
+          }
         />
       ))}
     </FormGroup>
