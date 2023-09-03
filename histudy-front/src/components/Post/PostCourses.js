@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { teamCourses } from "../../apis/course";
+import { Controller } from "react-hook-form";
 
-export default function PostCourses({ setValue, getValues }) {
+export default function PostCourses({ control, setValue, getValues }) {
+  const [teamMemberCourses, setTeamMemberCourses] = useState([]);
   useEffect(() => {
     // teamCourses().then((res) => console.log(res));
-    console.log(teamCourses().then((res) => console.log(res)));
+    console.log(teamCourses().then((res) => console.log("dd", res)));
     teamCourses().then((res) => setTeamMemberCourses(res.courses));
   }, []);
-
-  const [teamMemberCourses, setTeamMemberCourses] = useState([]);
 
   const handleCheckboxChange = (event) => {
     let { value, checked } = event.target;
@@ -31,11 +31,20 @@ export default function PostCourses({ setValue, getValues }) {
     <FormGroup>
       {teamMemberCourses?.map((teamMemberCourse, index) => (
         <FormControlLabel
-          key={index}
+          key={teamMemberCourse.id}
           control={
-            <Checkbox
-              value={teamMemberCourse.id}
-              onChange={handleCheckboxChange}
+            <Controller
+              name="courses"
+              control={control}
+              defaultValue={false}
+              render={({ field }) => (
+                <Checkbox
+                  {...field}
+                  value={teamMemberCourse.id.toString()}
+                  checked={field.value.includes(teamMemberCourse.id.toString())}
+                  onChange={handleCheckboxChange}
+                />
+              )}
             />
           }
           label={

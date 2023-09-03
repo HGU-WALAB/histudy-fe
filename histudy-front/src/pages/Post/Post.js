@@ -112,7 +112,11 @@ export default function Post({ children }) {
             스터디를 한 과목을 모두 골라주세요.
           </Typography>
           <FormControl fullWidth>
-            <PostCourses getValues={getValues} setValue={setValue} />
+            <PostCourses
+              control={control}
+              getValues={getValues}
+              setValue={setValue}
+            />
           </FormControl>
         </PostBox>
         <PostBox>
