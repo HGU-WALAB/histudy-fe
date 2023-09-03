@@ -41,8 +41,6 @@ export default function Post({ children }) {
       content: state ? state.content : "",
       participants: state ? state.participants.map((p) => p.sid) : [],
       totalMinutes: state ? state.totalMinutes : "",
-      startTime: getCurrentTime(),
-      endTime: getCurrentTime(),
       images: state ? [...state.images.map((image) => image.url)] : [],
       courses: state ? state.courses : [],
     },
