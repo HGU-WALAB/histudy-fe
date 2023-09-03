@@ -355,12 +355,14 @@ export default function GroupTables({
                                   id: student.id,
                                 };
 
-                                console.log(newData);
-
-                                editUser(newData).then((res) => {
-                                  alert("변경되었습니다!");
-                                  window.location.reload();
-                                });
+                                editUser(newData)
+                                  .then(() => {
+                                    alert("변경되었습니다!");
+                                    window.location.reload();
+                                  })
+                                  .catch((error) => {
+                                    alert("변경에 실패했습니다.");
+                                  });
                               }}
                               label="저장"
                             />{" "}

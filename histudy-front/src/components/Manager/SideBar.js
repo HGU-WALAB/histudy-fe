@@ -38,7 +38,7 @@ export default function SideBar() {
           mb: "15px",
           backgroundColor: "background.sidebar",
           borderColor: "lightGray",
-          display: "flex",
+          display: { md: "flex", sm: "none", xs: "none" },
           flexDirection: "column",
         }}
       >

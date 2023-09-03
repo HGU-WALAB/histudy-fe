@@ -101,11 +101,11 @@ export default function ManageReport() {
     navigate("/reportDetail", { state: index });
   };
   return (
-    <Box sx={{ display: "flex", py: "50px", px: "300px" }}>
-      <Box sx={{ position: "fixed", left: "30px", top: "50px" }}>
+    <Box sx={{ display: "flex", py: "50px", gap: "20px", px: "50px" }}>
+      <Box sx={{}}>
         <SideBar />
       </Box>
-      <Box sx={{ width: "100%", ml: "50px" }}>
+      <Box sx={{ width: "100%" }}>
         <>
           <Box sx={{ display: "flex", mb: "3rem" }}>
             <IconButton onClick={() => moveToBefore()}>
