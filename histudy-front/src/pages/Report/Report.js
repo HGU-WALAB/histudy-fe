@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, styled } from "@mui/material";
 import CustomTable from "../../components/common/CustomTable";
 import LongButton from "../../components/common/LongButton";
 import { Link } from "react-router-dom";
@@ -7,6 +7,22 @@ import { getMyTeamReport, getmyTeamReport } from "../../apis/report";
 import NoDataLottie from "../../components/common/NoDataLottie";
 import { motion } from "framer-motion";
 import LoadingLottie from "../../components/common/LoadingLottie";
+import { StyledColumnAlignLayout } from "../../components/common/StyledLayout";
+import Title from "../../components/common/Title";
+
+const StyledScrollTableSize = styled(Box)({
+  width: "90%",
+  maxWidth: "900px",
+  overflow: "scroll",
+});
+
+const StyleButtonBox = styled(Box)({
+  width: "90%",
+  maxWidth: "900px",
+  display: "flex",
+  justifyContent: "end",
+  marginBottom: "2rem",
+});
 
 export default function Report() {
   // const [data, setData] = useState([]);
@@ -40,41 +56,13 @@ export default function Report() {
 
   return (
     <>
-      <Box
+      <StyledColumnAlignLayout
         component={motion.div}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        sx={{
-          minHeight: "100vh",
-          display: " flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
       >
-        <Box
-          sx={{
-            width: "900px",
-
-            alignItems: "end",
-            my: "50px",
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          <Typography sx={{ fontSize: "30px", fontWeight: "300" }}>
-            제출한 보고서 목록
-          </Typography>
-        </Box>
-
-        <Box
-          sx={{
-            width: "900px",
-            display: "flex",
-            justifyContent: "end",
-
-            mb: "50px",
-          }}
-        >
+        <Title text="제출한 보고서 목록" />
+        <StyleButtonBox>
           <Link to="/add">
             <LongButton
               name="보고서 작성"
@@ -82,8 +70,8 @@ export default function Report() {
               fontColor="white"
             />
           </Link>
-        </Box>
-        <Box sx={{ width: "900px" }}>
+        </StyleButtonBox>
+        <StyledScrollTableSize>
           <CustomTable
             data={convertedReports}
             reportData={reports}
@@ -92,15 +80,12 @@ export default function Report() {
             type="report"
           />
           {reports.length === 0 && (
-            // <Typography variant="h6" sx={{ textAlign: "center", mt: "50px" }}>
-            //   ⚠️ 제출한 보고서가 없습니다.
-            // </Typography>
             <Box sx={{ mt: 5 }}>
               <NoDataLottie />
             </Box>
           )}
-        </Box>
-      </Box>
+        </StyledScrollTableSize>
+      </StyledColumnAlignLayout>
     </>
   );
 }

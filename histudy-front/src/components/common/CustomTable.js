@@ -57,9 +57,7 @@ export default function CustomTable({
         borderColor: "primary.border",
         borderRadius: "45px",
         maxHeight: "400px",
-        minWidth: "800px",
-
-        overflowX: ["auto", "hidden"],
+        minWidth: "900px",
       }}
     >
       <Box
