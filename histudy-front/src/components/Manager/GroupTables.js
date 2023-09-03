@@ -357,10 +357,10 @@ export default function GroupTables({
 
                                 console.log(newData);
 
-                                // editUser(newData).then((res) => {
-                                //   alert("변경되었습니다!");
-                                //   window.location.reload();
-                                // });
+                                editUser(newData).then((res) => {
+                                  alert("변경되었습니다!");
+                                  window.location.reload();
+                                });
                               }}
                               label="저장"
                             />{" "}

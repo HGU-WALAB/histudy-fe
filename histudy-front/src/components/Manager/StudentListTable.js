@@ -11,6 +11,8 @@ import {
 import { useState } from "react";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import { useNavigate } from "react-router-dom";
+import { editUser } from "../../apis/manager";
+import { useForm } from "react-hook-form";
 
 export default function StudentListTable({
   type,
@@ -18,6 +20,14 @@ export default function StudentListTable({
   longWidthColumnNum,
   data,
 }) {
+  const { register, getValues, setValue } = useForm({
+    initialValues: {
+      name: "",
+      sid: "",
+      team: "",
+    },
+  });
+
   const TableHead = {
     student: ["이름", "학번", "그룹", "희망과목"],
   };
@@ -37,8 +47,22 @@ export default function StudentListTable({
     console.info("You clicked the Chip.");
     navigate("/manageReport");
   };
-  const handleSave = (index) => {
-    alert("저장되었습니다!");
+  const handleSave = (id) => {
+    const newData = {
+      name: getValues("name"),
+      sid: getValues("sid"),
+      team: getValues("team"),
+      id: id,
+    };
+
+    editUser(newData)
+      .then(() => {
+        alert("변경되었습니다!");
+        window.location.reload();
+      })
+      .catch((err) => {
+        alert("변경에 실패했습니다.");
+      });
   };
 
   return (
@@ -190,7 +214,14 @@ export default function StudentListTable({
                       }}
                     >
                       <Box sx={{ display: "flex" }}>
-                        <IconButton onClick={() => handleEdit(index)}>
+                        <IconButton
+                          onClick={() => {
+                            handleEdit(index);
+                            setValue("name", row.name);
+                            setValue("sid", row.sid);
+                            setValue("team", row.group);
+                          }}
+                        >
                           <Edit />
                         </IconButton>
                       </Box>
@@ -235,7 +266,8 @@ export default function StudentListTable({
                           height: "10px",
                         },
                       }}
-                      value={row.name}
+                      initialValues={row.name}
+                      {...register("name")}
                     ></TextField>
                   </Box>
 
@@ -259,7 +291,8 @@ export default function StudentListTable({
                           height: "10px",
                         },
                       }}
-                      value={row.sid}
+                      initialValues={row.sid}
+                      {...register("sid")}
                     ></TextField>
                   </Box>
 
@@ -283,7 +316,8 @@ export default function StudentListTable({
                           height: "10px",
                         },
                       }}
-                      value={row.group}
+                      initialValues={row.group}
+                      {...register("team")}
                     ></TextField>
                   </Box>
                   <Box
@@ -344,7 +378,7 @@ export default function StudentListTable({
                             color: "white",
                             backgroundColor: "primary.main",
                           }}
-                          onClick={() => handleSave(index)}
+                          onClick={() => handleSave(row.id)}
                           label="저장"
                         />{" "}
                         <Chip
