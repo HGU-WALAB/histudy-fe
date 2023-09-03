@@ -18,7 +18,7 @@ import PostMember from "../../components/Post/PostMember";
 import { useForm, Controller, set } from "react-hook-form";
 import PostStudyTime from "../../components/Post/PostStudyTime";
 import { ImageUpload } from "../../components/Image/UploadImage";
-import { postReport } from "../../apis/report";
+import { modifyReport, postReport } from "../../apis/report";
 import PostCourses from "../../components/Post/PostCourses";
 import { teamCourses } from "../../apis/course";
 import { CodeModal } from "../../components/Post/CodeModal";
@@ -30,7 +30,7 @@ import { motion } from "framer-motion";
 export default function Post({ children }) {
   const { state } = useLocation();
 
-  console.log(state);
+  console.log("작성", state);
   const [isCodeModal, setIsCodeModal] = useState(false);
 
   const { handleSubmit, watch, setValue, getValues, control } = useForm({
@@ -70,7 +70,7 @@ export default function Post({ children }) {
       courses: formData.courses,
     };
     console.log(newReport);
-    postReport(newReport);
+    state ? modifyReport(state.id, newReport) : postReport(newReport);
 
     alert("보고서 제출이 완료되었습니다.");
     navigate("/");

@@ -59,7 +59,8 @@ export default function ReportDetail() {
     navigate(-1);
   };
 
-  const handleClick = async (event, buttonId) => {
+  const handleClick = async (buttonId) => {
+    console.log(buttonId, "clicked");
     if (buttonId === "modify") {
       navigate(`/report/modify/${state.id}`, { state: state });
     } else if (buttonId === "delete") {
@@ -105,7 +106,9 @@ export default function ReportDetail() {
               <ArrowBackIcon />
             </IconButton>
             <Box sx={{ display: "flex", justifyContent: "center" }}>
-              <Title text="보고서 상세 페이지" />
+              <Typography sx={{ fontSize: "30px", fontWeight: "300", mb: 5 }}>
+                보고서 상세 페이지
+              </Typography>
             </Box>
             <Box
               sx={{
@@ -143,11 +146,8 @@ export default function ReportDetail() {
                       {reportData.title}
                     </Typography>
                     {useUserReportDeatilMatch && (
-                      <IconButton>
-                        <DriveFileRenameOutlineIcon
-                          onClick={() => handleClick("modify")}
-                          color="primary"
-                        />
+                      <IconButton onClick={() => handleClick("modify")}>
+                        <DriveFileRenameOutlineIcon color="primary" />
                       </IconButton>
                     )}
 
@@ -216,6 +216,7 @@ export default function ReportDetail() {
                   <Box
                     sx={{
                       display: "flex",
+
                       width: "100%",
                       my: "1rem",
                     }}
