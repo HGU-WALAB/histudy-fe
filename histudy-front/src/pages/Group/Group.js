@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, styled } from "@mui/material";
 import { useEffect, useState } from "react";
 import GrayBorderBox from "../../components/common/GrayBorderBox";
 import LongButton from "../../components/common/LongButton";
@@ -8,6 +8,14 @@ import NoDataLottie from "../../components/common/NoDataLottie";
 import { getMyTeamUsers } from "../../apis/users";
 import CustomTable from "../../components/common/CustomTable";
 import { motion } from "framer-motion";
+import Title from "../../components/common/Title";
+import { StyledColumnAlignLayout } from "../../components/common/StyledLayout";
+
+const StyledScrollTableSize = styled(Box)({
+  width: "90%",
+  maxWidth: "900px",
+  overflow: "scroll",
+});
 
 export default function Group({ setReApply }) {
   const [teamMembers, setTeamMembers] = useState([]);
@@ -57,23 +65,14 @@ export default function Group({ setReApply }) {
   const [convertedFriends, setConvertedFriends] = useState([]);
 
   return (
-    <Box
+    <StyledColumnAlignLayout
       component={motion.div}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      sx={{
-        minHeight: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        mt: "50px",
-      }}
     >
-      <Typography sx={{ fontSize: "30px", fontWeight: "300" }}>
-        스터디 그룹 정보
-      </Typography>
+      <Title text={"스터디 그룹 정보"} />
       {hasTeam ? (
-        <Box sx={{ mt: 5 }}>
+        <StyledScrollTableSize>
           <CustomTable
             // reportData={convertedTeamMembers}
             data={convertedTeamMembers}
@@ -81,9 +80,9 @@ export default function Group({ setReApply }) {
             longWidthColumnNum={-1}
             type="group"
           />
-        </Box>
+        </StyledScrollTableSize>
       ) : convertedCourses.length === 0 && convertedFriends.length === 0 ? (
-        <Box sx={{ mt: "100px" }}>
+        <Box>
           <NoDataLottie />
         </Box>
       ) : (
@@ -115,6 +114,6 @@ export default function Group({ setReApply }) {
           </Link>
         </>
       )}
-    </Box>
+    </StyledColumnAlignLayout>
   );
 }
