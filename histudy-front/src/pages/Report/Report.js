@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 import LoadingLottie from "../../components/common/LoadingLottie";
 import { StyledColumnAlignLayout } from "../../components/common/StyledLayout";
 import Title from "../../components/common/Title";
+import { useQuery } from "react-query";
 
 const StyledScrollTableSize = styled(Box)({
   width: "90%",
@@ -39,20 +40,20 @@ export default function Report() {
     return formattedDate;
   };
 
-  useEffect(() => {
-    getMyTeamReport().then((res) => {
-      setReports(res.reports);
+  const { isLoading } = useQuery(["courses"], getMyTeamReport, {
+    casheTime: 1 * 30 * 1000,
+    onSuccess: (data) => {
+      setReports(data.reports);
 
       setConvertedReports(
-        res.reports.map((report) => [
+        data.reports.map((report) => [
           report.title,
           report.totalMinutes,
           dateConverter(report.regDate),
-          // new Date(report.regDate).toLocaleDateString("en-US"),
         ])
       );
-    });
-  }, []);
+    },
+  });
 
   return (
     <>
