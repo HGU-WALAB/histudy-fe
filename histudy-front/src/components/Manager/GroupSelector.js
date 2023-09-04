@@ -87,7 +87,7 @@ export default function GroupSelector({ team, setTeam }) {
         // Autocomplete의 onChange는 (event, newValue)를 인자로 받습니다.
         setTeam(newValue?.label?.slice(5));
       }}
-      value={team}
+      value={"Group" + team + ""}
       disablePortal
       id="combo-box-demo"
       options={groupData} // groupAutoComplete 값을 사용하도록 수정했습니다.

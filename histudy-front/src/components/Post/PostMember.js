@@ -8,7 +8,6 @@ export default function PostMember({ control, setValue, getValues }) {
   useEffect(() => {
     getMyTeamUsers().then((res) => {
       setTeamMember(res);
-      console.log("Tmembers", res);
     });
   }, []);
 

@@ -32,8 +32,6 @@ export default function ManageReport() {
   useEffect(() => {
     if (state) {
       readGroupReport(state).then((data) => {
-        console.log("data");
-        console.log(data);
         setReportData(data);
       });
     }
@@ -96,8 +94,6 @@ export default function ManageReport() {
     navigate(-1);
   };
   const clickReport = (index) => {
-    console.log(index);
-
     navigate("/reportDetail", { state: index });
   };
   return (

@@ -103,7 +103,7 @@ export function ImageUpload({ setValue, getValues }) {
         onChange={onImageChange}
       />
       <Box sx={{ display: "flex" }}>
-        <ImageList sx={{ width: "1000px" }} cols={5}>
+        <ImageList sx={{ width: "1000px" }} cols={2}>
           {getValues("images")?.map((imageUrl, index) => (
             <ImageListItem
               sx={{ position: "relative", mt: "20px", mr: "20px" }}

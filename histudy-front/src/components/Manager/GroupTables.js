@@ -49,7 +49,6 @@ export default function GroupTables({
     newGroupEdit[groupId] = !newGroupEdit[groupId];
     setEdit(newGroupEdit);
 
-    console.log(index);
     const newEdit = [...studentEdit];
 
     newEdit[index] = !newEdit[index];
@@ -103,7 +102,7 @@ export default function GroupTables({
             sx={{
               display: "flex",
               justifyContent: "space-between",
-              borderTop: 1,
+              // borderTop: 1,
               borderColor: "primary.main",
               px: "30px",
             }}
@@ -221,7 +220,11 @@ export default function GroupTables({
                           }}
                         >
                           <IconButton
-                            onClick={() => handleEdit(student.id, index)}
+                            onClick={() => {
+                              handleEdit(student.id, index);
+
+                              setTeam(row.group);
+                            }}
                           >
                             <Edit />
                           </IconButton>

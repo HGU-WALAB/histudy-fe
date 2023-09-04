@@ -35,7 +35,6 @@ export default function StudentListTable({
   const [edit, setEdit] = useState([false]);
 
   const handleEdit = (index) => {
-    console.log(index);
     const newEdit = [...edit];
     newEdit[index] = !newEdit[index];
     setEdit(newEdit);
@@ -44,7 +43,6 @@ export default function StudentListTable({
   const navigate = useNavigate();
   const handleDeleteRow = (index) => {};
   const handleClick = () => {
-    console.info("You clicked the Chip.");
     navigate("/manageReport");
   };
   const handleSave = (id) => {

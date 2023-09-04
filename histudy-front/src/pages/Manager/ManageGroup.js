@@ -70,7 +70,6 @@ export default function ManageGroup() {
 
       cacheTime: 5 * 60 * 1000,
       onSuccess: (data) => {
-        console.log("ungroup data", data);
         setUngroupData(data);
       },
     },

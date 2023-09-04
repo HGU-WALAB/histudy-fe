@@ -6,16 +6,12 @@ import { Controller } from "react-hook-form";
 export default function PostCourses({ control, setValue, getValues }) {
   const [teamMemberCourses, setTeamMemberCourses] = useState([]);
   useEffect(() => {
-    // teamCourses().then((res) => console.log(res));
-    console.log(teamCourses().then((res) => console.log("dd", res)));
     teamCourses().then((res) => setTeamMemberCourses(res.courses));
   }, []);
 
   const handleCheckboxChange = (event) => {
     let { value, checked } = event.target;
     // value = value.slice(value.length - 8, value.length);
-
-    console.log(event.target.value);
 
     if (checked) {
       setValue("courses", [...getValues("courses"), value]);
