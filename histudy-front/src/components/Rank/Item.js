@@ -13,6 +13,7 @@ export default function Item({ item, itemsHover, index }) {
           src={`${!item?.thumbnail ? "/img/mainImg2.png" : item?.thumbnail}`}
           alt={item?.title}
           loading="lazy"
+          style={{ objectFit: "cover", height: "300px", width: "300px" }}
         />
       )}
       <ImageListItemBar

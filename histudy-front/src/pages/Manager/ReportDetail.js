@@ -133,13 +133,13 @@ export default function ReportDetail() {
                     sx={{
                       display: "flex",
                       width: "100%",
-                      height: "40px",
+
                       mb: "1rem",
                       position: "relative",
                       alignItems: "center",
                     }}
                   >
-                    <Box sx={{ width: "100px", color: "text.secondary" }}>
+                    <Box sx={{ minWidth: "100px", color: "text.secondary" }}>
                       제목
                     </Box>
                     <Typography
@@ -168,11 +168,11 @@ export default function ReportDetail() {
                     sx={{
                       display: "flex",
                       width: "100%",
-                      height: "40px",
+
                       mb: "1rem",
                     }}
                   >
-                    <Box sx={{ width: "100px", color: "text.secondary" }}>
+                    <Box sx={{ minWidth: "100px", color: "text.secondary" }}>
                       참여 멤버
                     </Box>
                     <Typography sx={{ flex: "10 1 auto", marginLeft: "10px" }}>
@@ -188,11 +188,11 @@ export default function ReportDetail() {
                     sx={{
                       display: "flex",
                       width: "100%",
-                      height: "40px",
+
                       mb: "1rem",
                     }}
                   >
-                    <Box sx={{ width: "100px", color: "text.secondary" }}>
+                    <Box sx={{ minWidth: "100px", color: "text.secondary" }}>
                       스터디 과목
                     </Box>
                     <Typography sx={{ flex: "10 1 auto", marginLeft: "10px" }}>
@@ -208,11 +208,11 @@ export default function ReportDetail() {
                     sx={{
                       display: "flex",
                       width: "100%",
-                      height: "40px",
+
                       mb: "1rem",
                     }}
                   >
-                    <Box sx={{ width: "100px", color: "text.secondary" }}>
+                    <Box sx={{ minWidth: "100px", color: "text.secondary" }}>
                       스터디 시간
                     </Box>
                     <Typography sx={{ flex: "10 1 auto", marginLeft: "10px" }}>
@@ -223,18 +223,18 @@ export default function ReportDetail() {
                     sx={{
                       display: "flex",
                       width: "100%",
-                      height: "40px",
+
                       mb: "1rem",
                     }}
                   >
-                    <Box sx={{ width: "100px", color: "text.secondary" }}>
+                    <Box sx={{ minWidth: "100px", color: "text.secondary" }}>
                       보고서 내용
                     </Box>
                     <Typography sx={{ flex: "10 1 auto", marginLeft: "10px" }}>
                       {reportData.content}
                     </Typography>
                   </Box>
-                  <Box sx={{ width: "100px", color: "text.secondary" }}>
+                  <Box sx={{ minWidth: "100px", color: "text.secondary" }}>
                     인증 사진
                   </Box>
                   <Box
