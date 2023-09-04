@@ -221,7 +221,11 @@ export default function GroupTables({
                           }}
                         >
                           <IconButton
-                            onClick={() => handleEdit(student.id, index)}
+                            onClick={() => {
+                              handleEdit(student.id, index);
+
+                              setTeam(row.group);
+                            }}
                           >
                             <Edit />
                           </IconButton>
@@ -354,6 +358,7 @@ export default function GroupTables({
                                   name: student.name,
                                   id: student.id,
                                 };
+                                console.log(newData);
 
                                 editUser(newData)
                                   .then(() => {

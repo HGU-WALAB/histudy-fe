@@ -182,7 +182,11 @@ export default function UnGroupTable({
                 </Box>
 
                 <Box sx={{ marginRight: "20px", py: "25px" }}>
-                  <IconButton onClick={() => handleEdit(index)}>
+                  <IconButton
+                    onClick={() => {
+                      handleEdit(index);
+                    }}
+                  >
                     <Edit />
                   </IconButton>
 
@@ -310,19 +314,18 @@ export default function UnGroupTable({
                         team: Number(team),
                         sid: !sid ? row.sid : sid,
                         name: row.name,
-                        id: row.sub,
+                        id: row.id,
                       };
+                      console.log(newData);
 
-                      editUser(newData).then((res) => {
-                        alert("변경되었습니다!");
-                        window.location.reload();
-                      });
-
-                      // alert("저장되었습니다!");
-                      // handleEdit(index);
-
-                      // setIsLoading(true);
-                      // window.location.reload();
+                      editUser(newData)
+                        .then((res) => {
+                          alert("변경되었습니다!");
+                          window.location.reload();
+                        })
+                        .catch((err) => {
+                          alert("변경에 실패했습니다!");
+                        });
                     }}
                     label="저장"
                   />{" "}
