@@ -54,8 +54,6 @@ export default function ReportDetail() {
     }
   }, []);
 
-  console.log(state);
-
   const navigate = useNavigate();
 
   const moveToBefore = () => {
@@ -63,7 +61,6 @@ export default function ReportDetail() {
   };
 
   const handleClick = async (buttonId) => {
-    console.log(buttonId, "clicked");
     if (buttonId === "modify") {
       navigate(`/report/modify/${state.id}`, { state: state });
     } else if (buttonId === "delete") {

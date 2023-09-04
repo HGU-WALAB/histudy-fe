@@ -34,8 +34,6 @@ export default function StudyGroupTable({
   const navigate = useNavigate();
 
   const handleClick = (id) => {
-    console.info("You clicked the Chip.");
-    console.log("id: " + id);
     navigate("/manageReport", { state: id });
   };
 

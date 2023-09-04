@@ -1,30 +1,17 @@
-import {
-  Avatar,
-  Chip,
-  Grid,
-  IconButton,
-  ImageList,
-  ImageListItemBar,
-  ListSubheader,
-  Typography,
-  styled,
-} from "@mui/material";
+import { Grid, ImageList, styled } from "@mui/material";
 
 import { Box } from "@mui/system";
-import CustomTable from "../../components/common/CustomTable";
-import { InfoIcon } from "../../theme/overrides/CustomIcons";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { getAllTeamsForRank } from "../../apis/rank";
 
-import LooksOneIcon from "@mui/icons-material/LooksOne";
 import HoverBox from "../../components/Rank/HoverBox";
 import { AnimatePresence, motion } from "framer-motion";
-import { Image } from "@mui/icons-material";
+
 import NoDataLottie from "../../components/common/NoDataLottie";
 import { StyledColumnAlignLayout } from "../../components/common/StyledLayout";
 import Title from "../../components/common/Title";
 import { useQuery } from "react-query";
-import ImageListItem from "../../components/Rank/Item";
+
 import Item from "../../components/Rank/Item";
 
 const StyledScrollBox = styled(Box)({
@@ -47,7 +34,6 @@ export default function Rank() {
     casheTime: 10 * 60 * 1000,
     onSuccess: (data) => {
       setTeams(data.teams);
-      console.log(data.teams);
       setItemsHover(new Array(data.teams.length).fill(false));
     },
   });

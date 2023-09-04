@@ -32,7 +32,6 @@ import { StyledColumnAlignLayout } from "../../components/common/StyledLayout";
 export default function Post({ children }) {
   const { state } = useLocation();
 
-  console.log("작성", state);
   const [isCodeModal, setIsCodeModal] = useState(false);
 
   const { handleSubmit, watch, setValue, getValues, control } = useForm({
@@ -60,7 +59,6 @@ export default function Post({ children }) {
       images: formData.images,
       courses: formData.courses,
     };
-    console.log(newReport);
     state ? modifyReport(state.id, newReport) : postReport(newReport);
 
     alert("보고서 제출이 완료되었습니다.");

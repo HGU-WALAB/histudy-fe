@@ -316,7 +316,6 @@ export default function UnGroupTable({
                         name: row.name,
                         id: row.id,
                       };
-                      console.log(newData);
 
                       editUser(newData)
                         .then((res) => {

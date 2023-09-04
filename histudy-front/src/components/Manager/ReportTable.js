@@ -15,8 +15,6 @@ export default function ReportTable({
 
   const navigate = useNavigate();
   const clickReport = (index) => {
-    console.log(index);
-
     navigate("/reportDetail", { state: index });
   };
   const handleDeleteRow = (index) => {};
