@@ -106,6 +106,7 @@ export default function Enroll() {
       }
       alert("스터디 신청이 완료되었습니다.");
       studyEnroll(data);
+      console.log(data);
       navigate("/");
     }
   };
@@ -192,7 +193,7 @@ export default function Enroll() {
                   }}
                 >
                   <CustomTable
-                    data={rankConverter(sideCourses)}
+                    data={sideCourses}
                     addData={setSideCourses}
                     accentColumnNum={-1}
                     longWidthColumnNum={2}
