@@ -1,169 +1,59 @@
 import axios from "axios";
+import axiosInstance from "./axiosInstance";
 
 export const readAllGroups = async () => {
-  const TOKEN = localStorage.getItem("accessToken");
-
-  const response = await axios.get(
-    `${process.env.REACT_APP_BACK_BASE_URL}/api/admin/manageGroup`,
-    {
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-      },
-      withCredentials: true,
-    }
-  );
-  return response.data;
+  const response = await axiosInstance.get(`/api/admin/manageGroup`);
+  return response;
 };
 
 export const readAllUsers = async () => {
-  const TOKEN = localStorage.getItem("accessToken");
-
-  const response = await axios.get(
-    `${process.env.REACT_APP_BACK_BASE_URL}/api/admin/allUsers`,
-    {
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-      },
-      withCredentials: true,
-    }
-  );
-  return response.data;
+  const response = await axiosInstance.get(`/api/admin/allUsers`);
+  return response;
 };
 
 export const readGroupReport = async (id) => {
-  const TOKEN = localStorage.getItem("accessToken");
-
-  const response = await axios.get(
-    `${process.env.REACT_APP_BACK_BASE_URL}/api/admin/groupReport/${id}`,
-    {
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-      },
-      withCredentials: true,
-    }
-  );
-  return response.data;
+  const response = await axiosInstance.get(`/api/admin/groupReport/${id}`);
+  return response;
 };
 
 export const readApplicants = async () => {
-  const TOKEN = localStorage.getItem("accessToken");
-
-  const response = await axios.get(
-    `${process.env.REACT_APP_BACK_BASE_URL}/api/admin/allUsers`,
-    {
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-      },
-      withCredentials: true,
-    }
-  );
-  return response.data;
+  const response = await axiosInstance.get(`/api/admin/allUsers`);
+  return response;
 };
 
 export const autoCourses = async () => {
-  const TOKEN = localStorage.getItem("accessToken");
-
-  const response = await axios.get(
-    `${process.env.REACT_APP_BACK_BASE_URL}/api/courses`,
-    {
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-      },
-      withCredentials: true,
-    }
-  );
-  return response.data;
+  const response = await axiosInstance.get(`/api/courses`);
+  return response;
 };
 
 export const deleteCourse = async (id) => {
-  const TOKEN = localStorage.getItem("accessToken");
-  console.log(id);
-  const response = await axios.post(
-    `${process.env.REACT_APP_BACK_BASE_URL}/api/courses/delete`,
-    {
-      id: id,
-    },
-    {
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-      },
-      withCredentials: true,
-    }
-  );
-  return response.data;
+  const response = await axiosInstance.post(`/api/courses/delete`, {
+    id: id,
+  });
+  return response;
 };
 
 export const readReportDetail = async (reportId) => {
-  const TOKEN = localStorage.getItem("accessToken");
-
-  const response = await axios.get(
-    `${process.env.REACT_APP_BACK_BASE_URL}/api/team/reports/${reportId}`,
-    {
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-      },
-      withCredentials: true,
-    }
-  );
-  return response.data;
+  const response = await axiosInstance.get(`/api/team/reports/${reportId}`);
+  return response;
 };
 
 export const teamMatch = async () => {
-  const TOKEN = localStorage.getItem("accessToken");
-  const response = await axios.post(
-    `${process.env.REACT_APP_BACK_BASE_URL}/api/admin/team-match`,
-    {},
-    {
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-      },
-      withCredentials: true,
-    }
-  );
-  return response.data;
+  const response = await axiosInstance.post(`/api/admin/team-match`, {});
+  return response;
 };
 
 export const readUngroup = async () => {
-  const TOKEN = localStorage.getItem("accessToken");
-  const response = await axios.get(
-    `${process.env.REACT_APP_BACK_BASE_URL}/api/admin/unmatched-users`,
-    {
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-      },
-      withCredentials: true,
-    }
-  );
-  return response.data;
+  const response = await axiosInstance.get(`/api/admin/unmatched-users`);
+  return response;
 };
 
 export const deleteUserForm = async (sid) => {
-  console.log("sid");
-  console.log(sid);
-  const TOKEN = localStorage.getItem("accessToken");
-  const response = await axios.delete(
-    `${process.env.REACT_APP_BACK_BASE_URL}/api/admin/form?sid=${sid}`,
-    {
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-      },
-      withCredentials: true,
-    }
-  );
-  return response.data;
+  const response = await axiosInstance.delete(`/api/admin/form?sid=${sid}`);
+  return response;
 };
 
 export const editUser = async (data) => {
-  const TOKEN = localStorage.getItem("accessToken");
-  const response = await axios.post(
-    `${process.env.REACT_APP_BACK_BASE_URL}/api/admin/edit-user`,
-    data,
-    {
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-      },
-      withCredentials: true,
-    }
-  );
+  const response = await axiosInstance.post(`/api/admin/edit-user`, data);
   return response;
 };

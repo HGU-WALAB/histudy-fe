@@ -1,32 +1,11 @@
-import axios from "axios";
+import axiosInstance from "./axiosInstance";
 
 export const studyEnroll = async (data) => {
-  const TOKEN = localStorage.getItem("accessToken");
-
-  const response = await axios.post(
-    `${process.env.REACT_APP_BACK_BASE_URL}/api/forms`,
-    data,
-    {
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-      },
-      withCredentials: true,
-    }
-  );
+  const response = await axiosInstance.post(`/api/forms`, data);
   return response;
 };
 
 export const getMyGroup = async () => {
-  const TOKEN = localStorage.getItem("accessToken");
-
-  const response = await axios.get(
-    `${process.env.REACT_APP_BACK_BASE_URL}/api/users/me/forms`,
-    {
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-      },
-      withCredentials: true,
-    }
-  );
-  return response.data;
+  const response = await axiosInstance.get(`/api/users/me/forms`);
+  return response;
 };

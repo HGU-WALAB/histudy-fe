@@ -35,6 +35,7 @@ import { isDelete, reportDeleteState } from "../../store/atom";
 import { StyledColumnAlignLayout } from "../../components/common/StyledLayout";
 import Title from "../../components/common/Title";
 import { motion } from "framer-motion";
+import { StyledLayout } from "./style/StyledLatout";
 
 export default function ReportDetail() {
   const [reportData, setReportData] = useState();
@@ -87,14 +88,12 @@ export default function ReportDetail() {
   return (
     <>
       {reportData && (
-        <StyledColumnAlignLayout
+        <StyledLayout
           component={motion.div}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          <Box sx={{ position: "fixed", left: "30px", top: "50px" }}>
-            {!useUserReportDeatilMatch && <SideBar />}
-          </Box>
+          <Box>{!useUserReportDeatilMatch && <SideBar />}</Box>
           <Box
             sx={{
               display: "flex",
@@ -254,7 +253,7 @@ export default function ReportDetail() {
               </>
             </Box>
           </Box>
-        </StyledColumnAlignLayout>
+        </StyledLayout>
       )}
     </>
   );
