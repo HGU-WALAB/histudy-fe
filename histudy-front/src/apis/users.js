@@ -1,4 +1,5 @@
 import axios from "axios";
+import axiosInstance from "./axiosInstance";
 
 export const postReport = async (data) => {
   const response = await axios.post(
@@ -53,17 +54,24 @@ export const getMyTeamUsers = async () => {
   return response.data;
 };
 
-export const getProfile = async () => {
-  const TOKEN = localStorage.getItem("accessToken");
+// export const getProfile = async () => {
+//   const TOKEN = localStorage.getItem("accessToken");
 
-  const response = await axios.get(
-    `${process.env.REACT_APP_BACK_BASE_URL}/api/users/me`,
-    {
-      headers: {
-        Authorization: `Bearer ${TOKEN}}`,
-      },
-      withCredentials: true,
-    }
-  );
-  return response.data;
+//   const response = await axios.get(
+//     `${process.env.REACT_APP_BACK_BASE_URL}/api/users/me`,
+//     {
+//       headers: {
+//         Authorization: `Bearer ${TOKEN}}`,
+//       },
+//       withCredentials: true,
+//     }
+//   );
+//   return response.data;
+// };
+
+export const getProfile = async () => {
+  // const TOKEN = localStorage.getItem("accessToken");
+
+  const response = await axiosInstance.get(`/api/users/me`);
+  return response;
 };

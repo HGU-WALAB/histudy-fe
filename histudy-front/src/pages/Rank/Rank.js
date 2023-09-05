@@ -1,7 +1,7 @@
 import { Grid, ImageList, styled } from "@mui/material";
 
 import { Box } from "@mui/system";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getAllTeamsForRank } from "../../apis/rank";
 
 import HoverBox from "../../components/Rank/HoverBox";
