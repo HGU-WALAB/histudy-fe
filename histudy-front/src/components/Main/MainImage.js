@@ -24,6 +24,7 @@ const StyledGradient = styled(Box)({
 const StyledImage = styled(Box)({
   zIndex: 0,
   objectFit: "cover",
+  width: "100%",
 });
 
 const StyledTextContainer = styled(Box)({
@@ -38,6 +39,9 @@ const StyledTextContainer = styled(Box)({
 });
 
 const StyledFirstTypo = styled(Typography)({
+  "@media (max-width: 600px)": {
+    fontSize: "60px",
+  },
   fontSize: "80px",
   marginTop: "200px",
   fontWeight: "300",
@@ -45,6 +49,9 @@ const StyledFirstTypo = styled(Typography)({
 });
 
 const StyledSecondTypo = styled(Typography)({
+  "@media (max-width: 600px)": {
+    fontSize: "30px",
+  },
   fontSize: "40px",
   marginTop: "100px",
   fontWeight: "300",

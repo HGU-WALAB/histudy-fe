@@ -32,7 +32,6 @@ export default function CreateGroup() {
     casheTime: 5 * 60 * 1000,
     onSuccess: (data) => {
       setAllData(data);
-      console.log(data);
     },
   });
 

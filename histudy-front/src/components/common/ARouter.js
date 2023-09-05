@@ -21,12 +21,16 @@ import Profile from "../../pages/Profile/Profile";
 import LoadingLottie from "./LoadingLottie";
 import PrivateRoute from "../../auth/PrivateRoute";
 import MainImage from "../Main/MainImage";
+import { Box, styled } from "@mui/material";
 
+const MinWidthLayout = styled(Box)({
+  minWidth: "450px",
+});
 export default function ARouter() {
   const isLoading = useRecoilValue(isLoadingState);
   const [open, setOpen] = useRecoilState(isDelete);
   return (
-    <>
+    <MinWidthLayout>
       <BrowserRouter sx={{ position: "relative" }}>
         <Header />
 
@@ -71,6 +75,6 @@ export default function ARouter() {
         </Routes>
         <Footer />
       </BrowserRouter>
-    </>
+    </MinWidthLayout>
   );
 }
