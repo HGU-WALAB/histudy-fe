@@ -21,9 +21,6 @@ const StyledHeaderContainer = styled(Box)(({ theme, $dataLength }) => ({
   padding: "20px 60px",
   justifyContent: "start",
 }));
-const FieldBox = styled(Box)({
-  minWidth: "180px",
-});
 
 const StyledRowContainer = styled(Box)(({ theme, index }) => ({
   position: "relative",
@@ -41,13 +38,25 @@ const StyledOptionBox = styled(Box)({
 });
 
 const StyledTypo = styled(Typography)(
-  ({ accentColumnNum, idxConverter, idx }) => ({
-    minWidth: "180px",
+  ({ accentColumnNum, idxConverter, idx, longWidthColumnNum }) => ({
+    minWidth: longWidthColumnNum === idxConverter(idx + 1) ? "300px" : "180px",
     color: accentColumnNum === idxConverter(idx + 1) && "primary.main",
     fontWeight: accentColumnNum === idxConverter(idx + 1) && "bold",
   })
 );
 
+const FieldBoxWithProps = styled(Typography)(
+  ({ idx, longWidthColumnNum, idxConverter, type }) => ({
+    minWidth:
+      longWidthColumnNum === idxConverter(type === "third" ? idx : idx + 1)
+        ? "300px"
+        : "180px",
+  })
+);
+
+const FieldBox = styled(Typography)({
+  minWidth: "180px",
+});
 //type에 따라 버튼 다르게 생기게
 export default function CustomTable({
   reportData,
@@ -84,7 +93,15 @@ export default function CustomTable({
     <StyledCustomTableContainer>
       <StyledHeaderContainer $dataLength={data.length}>
         {TableHead[type].map((headElement, index) => (
-          <FieldBox key={index}>{headElement}</FieldBox>
+          <FieldBoxWithProps
+            type={type}
+            idx={index}
+            idxConverter={idxConverter}
+            longWidthColumnNum={longWidthColumnNum}
+            key={index}
+          >
+            {headElement}
+          </FieldBoxWithProps>
         ))}
       </StyledHeaderContainer>
       {data.map((row, index) => (
@@ -97,7 +114,9 @@ export default function CustomTable({
               idx < 3 && (
                 <StyledTypo
                   key={idx}
+                  type={type}
                   accentColumnNum={accentColumnNum}
+                  longWidthColumnNum={longWidthColumnNum}
                   idxConverter={idxConverter}
                   idx={idx}
                 >
