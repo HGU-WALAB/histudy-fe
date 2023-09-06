@@ -5,6 +5,7 @@ import { useRecoilValue } from "recoil";
 import { groupAutoCompleteState } from "../../store/atom";
 
 const groupData = [
+  { label: "미배정" },
   { label: "Group1" },
   { label: "Group2" },
   { label: "Group3" },
@@ -85,9 +86,11 @@ export default function GroupSelector({ team, setTeam }) {
     <Autocomplete
       onChange={(e, newValue) => {
         // Autocomplete의 onChange는 (event, newValue)를 인자로 받습니다.
-        setTeam(newValue?.label?.slice(5));
+        if (newValue?.label === "미배정") {
+          setTeam(undefined);
+        } else setTeam(newValue?.label?.slice(5));
       }}
-      value={"Group" + team + ""}
+      value={team ? "Group" + team + "" : "미배정"}
       disablePortal
       id="combo-box-demo"
       options={groupData} // groupAutoComplete 값을 사용하도록 수정했습니다.

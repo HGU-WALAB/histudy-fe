@@ -59,7 +59,7 @@ export default function GroupTables({
   const [sid, setSid] = useState();
 
   const setIsLoading = useSetRecoilState(isLoadingState);
-
+  console.log(data);
   return (
     <Box>
       <Box
@@ -357,11 +357,10 @@ export default function GroupTables({
                                   name: student.name,
                                   id: student.id,
                                 };
-
                                 editUser(newData)
                                   .then(() => {
                                     alert("변경되었습니다!");
-                                    window.location.reload();
+                                    // window.location.reload();
                                   })
                                   .catch((error) => {
                                     alert("변경에 실패했습니다.");
