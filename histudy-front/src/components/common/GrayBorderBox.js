@@ -2,6 +2,11 @@ import { Box, IconButton, Typography } from "@mui/material";
 import { useMatch } from "react-router-dom";
 import DeleteDataIcon from "../Enroll/DeleteDataIcon";
 import { AnimatePresence, motion } from "framer-motion";
+
+const maskingSid = (sid) => {
+  return sid.slice(0, 3) + "****" + sid.slice(-1);
+};
+
 export default function GrayBorderBox({
   reApply,
   setSideFriends,
@@ -20,7 +25,7 @@ export default function GrayBorderBox({
         border: 2,
         borderRadius: "20px",
         width: "280px",
-        mt: "30px",
+
         mb: "15px",
         backgroundColor: "background.sidebar",
         borderColor: "lightGray",
@@ -54,7 +59,7 @@ export default function GrayBorderBox({
                 variant="body1"
                 sx={{ color: "primary.main" }}
               >
-                {friend[0]}, {friend[1]}
+                {friend[0]}, {maskingSid(friend[1])}
               </Typography>
               {enrollMatch && setSideFriends && (
                 <DeleteDataIcon setData={setSideFriends} compData={friend[1]} />

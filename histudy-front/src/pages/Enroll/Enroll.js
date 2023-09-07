@@ -182,7 +182,9 @@ export default function Enroll() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
               >
-                <Typography sx={{ textAlign: "center", height: "50px" }}>
+                <Typography
+                  sx={{ textAlign: "center", height: "50px", mb: "30px" }}
+                >
                   스터디 희망 과목의 우선 순위를 정해주세요!
                 </Typography>
 
