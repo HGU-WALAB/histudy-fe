@@ -360,7 +360,7 @@ export default function GroupTables({
                                 editUser(newData)
                                   .then(() => {
                                     alert("변경되었습니다!");
-                                    // window.location.reload();
+                                    window.location.reload();
                                   })
                                   .catch((error) => {
                                     alert("변경에 실패했습니다.");
