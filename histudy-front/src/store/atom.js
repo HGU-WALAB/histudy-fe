@@ -9,6 +9,7 @@ const { persistAtom } = recoilPersist({
 export const darkState = atom({
   key: "darkMode",
   default: false,
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const isLoginState = atom({
