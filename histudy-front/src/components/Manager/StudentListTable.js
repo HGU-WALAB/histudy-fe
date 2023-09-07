@@ -20,6 +20,7 @@ export default function StudentListTable({
   longWidthColumnNum,
   data,
 }) {
+  console.log("DD", data);
   const { register, getValues, setValue } = useForm({
     initialValues: {
       name: "",

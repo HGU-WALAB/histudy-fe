@@ -5,8 +5,8 @@ export default function ProgressBar({ page, setPage }) {
     <Box
       sx={{
         //   border: 1,
-
-        mb: "70px",
+        mt: "85px",
+        mb: "40px",
         minWidth: "290px",
         display: "flex",
         flexDirection: "column",
@@ -25,7 +25,7 @@ export default function ProgressBar({ page, setPage }) {
             <Box
               sx={{
                 display: "flex",
-                pt: "3px",
+                // fontWeight: "bold",
                 fontWeight: "500",
                 justifyContent: "center",
                 alignItems: "center",

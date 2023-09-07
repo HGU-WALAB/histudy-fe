@@ -1,14 +1,8 @@
 import { Box, IconButton, Typography } from "@mui/material";
 import { useMatch } from "react-router-dom";
-import DeleteDataIcon from "../Enroll/DeleteDataIcon";
+import DeleteDataIcon from "./Enroll/DeleteDataIcon";
 import { AnimatePresence, motion } from "framer-motion";
-
-const maskingSid = (sid) => {
-  return sid.slice(0, 3) + "****" + sid.slice(-1);
-};
-
 export default function GrayBorderBox({
-  reApply,
   setSideFriends,
   setSideCourses,
   friends,
@@ -20,12 +14,11 @@ export default function GrayBorderBox({
   return (
     <Box
       sx={{
-        zIndex: 20,
         p: "30px",
         border: 2,
         borderRadius: "20px",
         width: "280px",
-
+        mt: "30px",
         mb: "15px",
         backgroundColor: "background.sidebar",
         borderColor: "lightGray",
@@ -59,9 +52,9 @@ export default function GrayBorderBox({
                 variant="body1"
                 sx={{ color: "primary.main" }}
               >
-                {friend[0]}, {maskingSid(friend[1])}
+                {friend[0]}, {friend[1]}
               </Typography>
-              {enrollMatch && setSideFriends && (
+              {enrollMatch && (
                 <DeleteDataIcon setData={setSideFriends} compData={friend[1]} />
               )}
             </Box>
@@ -88,11 +81,11 @@ export default function GrayBorderBox({
               <Typography
                 key={index}
                 variant="body1"
-                sx={{ color: "primary.main", fontSize: "13px" }}
+                sx={{ color: "primary.main" }}
               >
-                {course[0]} , {course[1]} , {course[2]}
+                {course[0]} , {course[1]}
               </Typography>
-              {enrollMatch && setSideCourses && (
+              {enrollMatch && (
                 <DeleteDataIcon setData={setSideCourses} compData={course[1]} />
               )}
             </Box>

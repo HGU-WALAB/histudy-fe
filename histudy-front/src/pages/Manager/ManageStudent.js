@@ -102,7 +102,7 @@ export default function ManageStudent() {
         <Box sx={{ width: "100%" }}>
           <>
             <StyledTitleFlexBox>
-              <Title text={"매칭된 학생 목록"} />
+              <Title text={"스터디 신청자 목록"} />
               <TextField
                 id="search"
                 type="search"
