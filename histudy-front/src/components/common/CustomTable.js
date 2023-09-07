@@ -3,6 +3,19 @@ import { Link } from "react-router-dom";
 import UpDownButton from "./UpDownButton";
 import AddDeleteButton from "./AddDeleteButton";
 
+const maskingData = (type, idx, data) => {
+  if (type === "first") {
+    if (idx === 1) {
+      return data.slice(0, 3) + "****" + data.slice(-1);
+    } else if (idx === 2) {
+      const [localPart, domainPart] = data.split("@");
+      const maskedLocalPart = "*".repeat(localPart.length);
+      return `${maskedLocalPart}@${domainPart}`;
+    }
+  }
+  return data;
+};
+
 const StyledCustomTableContainer = styled(Box)(({ theme }) => ({
   py: "5px",
   backgroundColor: theme.palette.primary.lighter,
@@ -120,7 +133,7 @@ export default function CustomTable({
                   idxConverter={idxConverter}
                   idx={idx}
                 >
-                  {elem}
+                  {maskingData(type, idx, elem)}
                 </StyledTypo>
               )
           )}

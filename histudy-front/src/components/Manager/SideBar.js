@@ -128,7 +128,7 @@ export default function SideBar() {
               >
                 <ListItemText
                   style={{ color: selectedMenu === 5 && "#007AFF" }}
-                  primary="매칭된 학생 정보 조회"
+                  primary="스터디 신청자 정보 조회"
                 />
               </ListItemButton>
             </Link>
