@@ -17,7 +17,7 @@ export const readGroupReport = async (id) => {
 };
 
 export const readApplicants = async () => {
-  const response = await axiosInstance.get(`/api/admin/allUsers`);
+  const response = await axiosInstance.get(`/api/admin/users/unassigned`);
   return response;
 };
 
