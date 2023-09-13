@@ -182,7 +182,9 @@ export default function StudentListTable({
                     >
                       {row.courses.map((subject, index) => (
                         <MenuItem key={index} value={subject.name}>
-                          <Typography>{subject.name}</Typography>
+                          <Typography>
+                            {subject.name} ({subject.prof})
+                          </Typography>
                         </MenuItem>
                       ))}
                     </Select>
