@@ -33,8 +33,23 @@ export default function GroupTables({
   longWidthColumnNum,
   data,
 }) {
+  const fillThree = (num) => {
+    let array = [];
+    for (var i = 0; i < 3 - num; ++i) {
+      array.push("");
+    }
+    return array;
+  };
+
   const TableHead = {
-    group: ["그룹", "멤버", "희망과목", "함께하고 싶은 친구"],
+    group: [
+      "그룹",
+      "멤버",
+      "희망 1과목",
+      "희망 2과목",
+      "희망 3과목",
+      "함께하고 싶은 친구",
+    ],
   };
   const [edit, setEdit] = useState([false]);
   const [studentEdit, setStudentEdit] = useState([false]);
@@ -88,8 +103,7 @@ export default function GroupTables({
               key={index}
               sx={{
                 flexGrow: 1,
-                width: longWidthColumnNum === index + 1 && "30%",
-                minWidth: longWidthColumnNum !== index + 1 && "150px",
+                minWidth: "150px",
               }}
             >
               {headElement}
@@ -133,7 +147,7 @@ export default function GroupTables({
                             color: "text.secondary",
                             display: "flex",
                             flexGrow: 1,
-                            width: "100px",
+                            width: "150px",
                             borderBottom: 1,
                             marginTop: "20px",
                             py: "20px",
@@ -150,7 +164,7 @@ export default function GroupTables({
                             borderBottom: 1,
                             py: "20px",
                             marginTop: "20px",
-                            // width: "10px",
+                            width: "150px",
                             borderColor: "primary.border",
                           }}
                         >
@@ -166,9 +180,11 @@ export default function GroupTables({
                             py: "20px",
                             borderBottom: 1,
                             borderColor: "primary.border",
+                            alignItems: "center",
+                            gap: "20px",
                           }}
                         >
-                          <Select
+                          {/* <Select
                             sx={{ width: "170px", color: "text.secondary" }}
                             value={
                               student.courses.length > 0
@@ -181,7 +197,27 @@ export default function GroupTables({
                                 <Typography>{subject.name}</Typography>
                               </MenuItem>
                             ))}
-                          </Select>
+                          </Select> */}
+                          {student.courses.map((subject, index) => (
+                            <Typography
+                              sx={{
+                                minWidth: "150px",
+                              }}
+                            >
+                              {subject.name} ({subject.prof})
+                            </Typography>
+                          ))}
+                          {fillThree(student.courses.length).map(
+                            (subject, index) => (
+                              <Typography
+                                sx={{
+                                  minWidth: "150px",
+                                }}
+                              >
+                                {subject}
+                              </Typography>
+                            )
+                          )}
                         </Box>
                         <Box
                           sx={{
@@ -290,9 +326,10 @@ export default function GroupTables({
                             py: "20px",
                             borderBottom: 1,
                             borderColor: "primary.border",
+                            alignItems: "center",
                           }}
                         >
-                          <Select
+                          {/* <Select
                             sx={{ color: "text.secondary" }}
                             value={
                               student.courses.length > 0
@@ -305,7 +342,27 @@ export default function GroupTables({
                                 <Typography>{subject.name}</Typography>
                               </MenuItem>
                             ))}
-                          </Select>
+                          </Select> */}
+                          {student.courses.map((subject, index) => (
+                            <Typography
+                              sx={{
+                                minWidth: "150px",
+                              }}
+                            >
+                              {subject.name} ({subject.prof})
+                            </Typography>
+                          ))}
+                          {fillThree(student.courses.length).map(
+                            (subject, index) => (
+                              <Typography
+                                sx={{
+                                  minWidth: "150px",
+                                }}
+                              >
+                                {subject}
+                              </Typography>
+                            )
+                          )}
                         </Box>
                         <Box
                           sx={{

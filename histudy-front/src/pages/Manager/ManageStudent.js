@@ -60,7 +60,9 @@ export default function ManageStudent() {
       Name: student.name,
       Number: student.sid,
       Group: student.group,
-      Courses: student.courses.map((subject) => subject.name).join(", "),
+      Courses: student.courses
+        .map((subject) => subject.name + `(${subject.prof})`)
+        .join(", "),
       Friends: student.friends.map((friend) => friend.name).join(", "),
     }));
   }

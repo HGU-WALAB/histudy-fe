@@ -11,8 +11,22 @@ export default function CreateGroupTable({
   longWidthColumnNum,
   data,
 }) {
+  const fillThree = (num) => {
+    let array = [];
+    for (var i = 0; i < 3 - num; ++i) {
+      array.push("");
+    }
+    return array;
+  };
   const TableHead = {
-    all: ["이름", "학번", "희망과목", "함께하고 싶은 친구"],
+    all: [
+      "이름",
+      "학번",
+      "희망 1과목",
+      "희망 2과목",
+      "희망 3과목",
+      "함께하고 싶은 친구",
+    ],
   };
 
   const setIsLoading = useSetRecoilState(isLoadingState);
@@ -117,9 +131,10 @@ export default function CreateGroupTable({
                   marginLeft: "20px",
                   py: "20px",
                   borderColor: "primary.border",
+                  gap: "30px",
                 }}
               >
-                <Select
+                {/* <Select
                   sx={{ width: "170px", color: "text.secondary" }}
                   value={row.courses.length > 0 ? row.courses[0].name : ""}
                 >
@@ -128,7 +143,25 @@ export default function CreateGroupTable({
                       <Typography>{subject.name}</Typography>
                     </MenuItem>
                   ))}
-                </Select>
+                </Select> */}
+                {row.courses.map((subject, index) => (
+                  <Typography
+                    sx={{
+                      minWidth: "150px",
+                    }}
+                  >
+                    {subject.name} ({subject.prof})
+                  </Typography>
+                ))}
+                {fillThree(row.courses.length).map((subject, index) => (
+                  <Typography
+                    sx={{
+                      minWidth: "150px",
+                    }}
+                  >
+                    {subject}
+                  </Typography>
+                ))}
               </Box>
 
               <Box

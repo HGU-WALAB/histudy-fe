@@ -20,8 +20,22 @@ export default function UnGroupTable({
   longWidthColumnNum,
   data,
 }) {
+  const fillThree = (num) => {
+    let array = [];
+    for (var i = 0; i < 3 - num; ++i) {
+      array.push("");
+    }
+    return array;
+  };
   const TableHead = {
-    group: ["그룹", "이름", "희망과목", "함께하고 싶은 친구"],
+    group: [
+      "그룹",
+      "이름",
+      "희망 1과목",
+      "희망 2과목",
+      "희망 3과목",
+      "함께하고 싶은 친구",
+    ],
   };
 
   const [edit, setEdit] = useState([false]);
@@ -74,9 +88,9 @@ export default function UnGroupTable({
             <Typography
               key={index}
               sx={{
-                flexGrow: 1,
-                width: longWidthColumnNum === index + 1 && "50%",
-                minWidth: longWidthColumnNum !== index + 1 && "150px",
+                // flexGrow: 1,
+                // width: longWidthColumnNum === index + 1 && "50%",
+                minWidth: "150px",
               }}
             >
               {headElement}
@@ -107,7 +121,7 @@ export default function UnGroupTable({
                       color: "text.secondary",
                       display: "flex",
                       flexGrow: 1,
-                      width: "50px",
+                      minWidth: "100px",
                       marginLeft: "50px",
                       textOverflow: "ellipsis",
                       overflowX: "auto",
@@ -123,13 +137,14 @@ export default function UnGroupTable({
                     sx={{
                       color: "text.secondary",
                       display: "flex",
-                      flexGrow: 1,
-                      width: "80px",
+                      // flexGrow: 1,
+                      width: "150px",
                       textOverflow: "ellipsis",
-                      overflowX: "auto",
+                      // overflowX: "auto",
                       whiteSpace: "nowrap",
                       py: "20px",
                       borderColor: "primary.border",
+                      // justifyContent: "center",
                     }}
                   >
                     {row.name},{row.sid}
@@ -143,18 +158,27 @@ export default function UnGroupTable({
                       marginLeft: "20px",
                       py: "20px",
                       borderColor: "primary.border",
+                      gap: "20px",
                     }}
                   >
-                    <Select
-                      sx={{ width: "170px", color: "text.secondary" }}
-                      value={row.courses.length > 0 ? row.courses[0].name : ""}
-                    >
-                      {row.courses.map((subject, index) => (
-                        <MenuItem key={index} value={subject.name}>
-                          <Typography>{subject.name}</Typography>
-                        </MenuItem>
-                      ))}
-                    </Select>
+                    {row.courses.map((subject, index) => (
+                      <Typography
+                        sx={{
+                          minWidth: "150px",
+                        }}
+                      >
+                        {subject.name} ({subject.prof})
+                      </Typography>
+                    ))}
+                    {fillThree(row.courses.length).map((subject, index) => (
+                      <Typography
+                        sx={{
+                          minWidth: "150px",
+                        }}
+                      >
+                        {subject}
+                      </Typography>
+                    ))}
                   </Box>
 
                   <Box
@@ -232,7 +256,9 @@ export default function UnGroupTable({
                       color: "text.secondary",
                       display: "flex",
                       flexGrow: 1,
-                      width: "50px",
+                      width: "120px",
+                      marginLeft: "50px",
+
                       textOverflow: "ellipsis",
                       overflowX: "auto",
                       whiteSpace: "nowrap",
@@ -243,7 +269,7 @@ export default function UnGroupTable({
                     {row.name},
                     <TextField
                       sx={{
-                        width: "50px",
+                        width: "100px",
                         "& input": {
                           height: "10px",
                         },
@@ -260,12 +286,15 @@ export default function UnGroupTable({
                       color: "text.secondary",
                       display: "flex",
                       flexGrow: 1,
-                      marginLeft: "20px",
+                      marginLeft: "40px",
+
                       py: "20px",
+                      // width: "10px",
                       borderColor: "primary.border",
+                      gap: "20px",
                     }}
                   >
-                    <Select
+                    {/* <Select
                       sx={{ width: "170px", color: "text.secondary" }}
                       value={row.courses.length > 0 ? row.courses[0].name : ""}
                     >
@@ -274,7 +303,26 @@ export default function UnGroupTable({
                           <Typography>{subject.name}</Typography>
                         </MenuItem>
                       ))}
-                    </Select>
+                    </Select> */}
+
+                    {row.courses.map((subject, index) => (
+                      <Typography
+                        sx={{
+                          minWidth: "150px",
+                        }}
+                      >
+                        {subject.name} ({subject.prof})
+                      </Typography>
+                    ))}
+                    {fillThree(row.courses.length).map((subject, index) => (
+                      <Typography
+                        sx={{
+                          minWidth: "150px",
+                        }}
+                      >
+                        {subject}
+                      </Typography>
+                    ))}
                   </Box>
 
                   <Box
