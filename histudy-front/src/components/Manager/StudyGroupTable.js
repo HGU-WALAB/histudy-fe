@@ -104,7 +104,7 @@ export default function StudyGroupTable({
                   borderColor: "primary.border",
                 }}
               >
-                {row.group}
+                {row.tag}
               </Box>
 
               <Box
