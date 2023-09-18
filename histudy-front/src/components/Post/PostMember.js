@@ -15,7 +15,7 @@ export default function PostMember({ control, setValue, getValues }) {
     let { value, checked } = event.target;
 
     // value = value.slice(value.length - 8, value.length);
-
+    console.log(",dsad", value);
     if (checked) {
       setValue("participants", [...getValues("participants"), value]);
     } else {
@@ -39,8 +39,8 @@ export default function PostMember({ control, setValue, getValues }) {
               render={({ field }) => (
                 <Checkbox
                   {...field}
-                  value={tm.id}
-                  checked={field.value.includes(tm.id)}
+                  value={tm.id + ""}
+                  checked={field.value.includes(tm.id + "")}
                   onChange={handleCheckboxChange}
                 />
               )}
