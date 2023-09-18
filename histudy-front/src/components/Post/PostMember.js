@@ -15,7 +15,6 @@ export default function PostMember({ control, setValue, getValues }) {
     let { value, checked } = event.target;
 
     // value = value.slice(value.length - 8, value.length);
-    console.log(",dsad", value);
     if (checked) {
       setValue("participants", [...getValues("participants"), value]);
     } else {
