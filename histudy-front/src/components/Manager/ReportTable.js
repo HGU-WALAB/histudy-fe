@@ -47,7 +47,7 @@ export default function ReportTable({
           padding: "0 20px",
         }}
       >
-        <span>Group {data.group}</span>
+        <span>Group {data.tag}</span>
         {"   "}
         <span>
           {data.members.map((member, index) => (
