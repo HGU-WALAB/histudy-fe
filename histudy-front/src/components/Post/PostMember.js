@@ -15,7 +15,6 @@ export default function PostMember({ control, setValue, getValues }) {
     let { value, checked } = event.target;
 
     // value = value.slice(value.length - 8, value.length);
-
     if (checked) {
       setValue("participants", [...getValues("participants"), value]);
     } else {
@@ -30,7 +29,7 @@ export default function PostMember({ control, setValue, getValues }) {
     <FormGroup>
       {teamMember?.map((tm, index) => (
         <FormControlLabel
-          key={tm.sid}
+          key={tm.id}
           control={
             <Controller
               name="participants"
@@ -39,8 +38,8 @@ export default function PostMember({ control, setValue, getValues }) {
               render={({ field }) => (
                 <Checkbox
                   {...field}
-                  value={tm.sid}
-                  checked={field.value.includes(tm.sid)}
+                  value={tm.id + ""}
+                  checked={field.value.includes(tm.id + "")}
                   onChange={handleCheckboxChange}
                 />
               )}
