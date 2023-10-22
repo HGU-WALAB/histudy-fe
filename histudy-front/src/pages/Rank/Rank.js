@@ -68,8 +68,6 @@ export default function Rank() {
     if (myAuthority !== "ADMIN") return;
     if (!imageUrl) {
       setFullImageUrl("/img/mainImg2.png");
-
-      console.log(fullImageUrl);
     } else setFullImageUrl(imageUrl);
     setIsShowFullImage(true);
   };
