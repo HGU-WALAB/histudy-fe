@@ -95,7 +95,7 @@ export default function GroupSelector({ team, setTeam }) {
       id="combo-box-demo"
       options={groupData} // groupAutoComplete 값을 사용하도록 수정했습니다.
       freeSolo
-      sx={{ width: 150 }}
+      sx={{ width: 120 }}
       renderInput={(params) => <TextField {...params} />}
     />
   );
