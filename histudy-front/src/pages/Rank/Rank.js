@@ -13,6 +13,13 @@ import Title from "../../components/common/Title";
 import { useQuery } from "react-query";
 
 import Item from "../../components/Rank/Item";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import {
+  authorityState,
+  fullImageState,
+  isShowFullImageState,
+} from "../../store/atom";
+import FullImage from "../../components/Rank/FullImage";
 
 const StyledScrollBox = styled(Box)({
   maxWidth: "1245px",
@@ -53,50 +60,69 @@ export default function Rank() {
     ]);
   };
 
+  const setIsShowFullImage = useSetRecoilState(isShowFullImageState);
+  const myAuthority = useRecoilValue(authorityState);
+  const [fullImageUrl, setFullImageUrl] = useState(null);
+
+  const handleFullImageOpen = async (imageUrl) => {
+    if (myAuthority !== "ADMIN") return;
+    if (!imageUrl) {
+      setFullImageUrl("/img/mainImg2.png");
+    } else setFullImageUrl(imageUrl);
+    setIsShowFullImage(true);
+  };
+
   return (
-    <StyledColumnAlignLayout
-      component={motion.div}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-    >
-      <Title text="스터디 그룹 랭킹" />
+    <>
+      <FullImage fullImageUrl={fullImageUrl} />
+      <StyledColumnAlignLayout
+        component={motion.div}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+      >
+        <Title text="스터디 그룹 랭킹" />
 
-      {teams.length === 0 ? (
-        <NoDataLottie />
-      ) : (
-        <StyledScrollBox>
-          <ImageList
-            cols={4}
-            gap={15}
-            component={motion.div}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            {teams.map((item, index) => (
-              <Grid item key={index}>
-                <StyledItemSize
-                  onMouseOver={() => handleMouseOver(index)}
-                  onMouseOut={() => handleMouseOut(index)}
+        {teams.length === 0 ? (
+          <NoDataLottie />
+        ) : (
+          <StyledScrollBox>
+            <ImageList
+              cols={4}
+              gap={15}
+              component={motion.div}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+            >
+              {teams.map((item, index) => (
+                <Grid
+                  item
+                  key={index}
+                  onClick={() => handleFullImageOpen(item?.thumbnail)}
                 >
-                  <AnimatePresence>
-                    {itemsHover[index] && (
-                      <HoverBox
-                        members={item.members}
-                        reports={item.reports}
-                        totalMinutes={item.totalMinutes}
-                      />
-                    )}
-                  </AnimatePresence>
+                  <StyledItemSize
+                    onMouseOver={() => handleMouseOver(index)}
+                    onMouseOut={() => handleMouseOut(index)}
+                  >
+                    <AnimatePresence>
+                      {itemsHover[index] && (
+                        <HoverBox
+                          members={item.members}
+                          reports={item.reports}
+                          totalMinutes={item.totalMinutes}
+                        />
+                      )}
+                    </AnimatePresence>
 
-                  <Item index={index} item={item} itemsHover={itemsHover} />
-                </StyledItemSize>
-              </Grid>
-            ))}
-          </ImageList>
-        </StyledScrollBox>
-      )}
+                    <Item index={index} item={item} itemsHover={itemsHover} />
+                  </StyledItemSize>
+                </Grid>
+              ))}
+            </ImageList>
+          </StyledScrollBox>
+        )}
 
-      {/* </Grid> */}
-    </StyledColumnAlignLayout>
+        {/* </Grid> */}
+      </StyledColumnAlignLayout>
+    </>
   );
 }

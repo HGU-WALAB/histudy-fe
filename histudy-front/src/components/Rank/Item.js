@@ -4,7 +4,7 @@ import GroupsIcon from "@mui/icons-material/Groups";
 
 export default function Item({ item, itemsHover, index }) {
   return (
-    <ImageListItem key={item?.img} sx={{ position: "relative" }}>
+    <ImageListItem key={index} sx={{ position: "relative" }}>
       {!itemsHover[index] && (
         <motion.img
           key={index}

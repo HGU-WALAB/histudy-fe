@@ -60,3 +60,8 @@ export const authorityState = atom({
   default: "NONUSER",
   effects_UNSTABLE: [persistAtom],
 });
+
+export const isShowFullImageState = atom({
+  key: "isShowFullImage",
+  default: false,
+});
