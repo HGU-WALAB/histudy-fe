@@ -240,7 +240,6 @@ export default function UnGroupTable({
                       color: "text.secondary",
                       display: "flex",
                       flexGrow: 1,
-                      width: "80px",
                       marginLeft: "20px",
                       textOverflow: "ellipsis",
                       overflowX: "auto",
