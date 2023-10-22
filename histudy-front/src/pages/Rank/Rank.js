@@ -13,6 +13,12 @@ import Title from "../../components/common/Title";
 import { useQuery } from "react-query";
 
 import Item from "../../components/Rank/Item";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import {
+  authorityState,
+  fullImageState,
+  isShowFullImageState,
+} from "../../store/atom";
 
 const StyledScrollBox = styled(Box)({
   maxWidth: "1245px",
@@ -53,6 +59,14 @@ export default function Rank() {
     ]);
   };
 
+  const setIsShowFullImage = useSetRecoilState(isShowFullImageState);
+  const myAuthority = useRecoilValue(authorityState);
+
+  const handleFullImageOpen = () => {
+    if (myAuthority !== "ADMIN") return;
+    setIsShowFullImage(true);
+  };
+
   return (
     <StyledColumnAlignLayout
       component={motion.div}
@@ -73,7 +87,7 @@ export default function Rank() {
             animate={{ opacity: 1, y: 0 }}
           >
             {teams.map((item, index) => (
-              <Grid item key={index}>
+              <Grid item key={index} onClick={handleFullImageOpen}>
                 <StyledItemSize
                   onMouseOver={() => handleMouseOver(index)}
                   onMouseOut={() => handleMouseOut(index)}
