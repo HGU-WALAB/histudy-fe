@@ -1,6 +1,7 @@
 import { Box, Modal, Typography } from "@mui/material";
 import { useRecoilState } from "recoil";
 import { isShowFullImageState } from "../../store/atom";
+import React from "react";
 
 const style = {
   position: "absolute",
@@ -14,7 +15,7 @@ const style = {
   p: 4,
 };
 
-export default function FullImage({ fullImageUrl }) {
+function FullImageComponent({ fullImageUrl }) {
   const [isShowFullImage, setIsShowFullImage] =
     useRecoilState(isShowFullImageState);
 
@@ -38,3 +39,7 @@ export default function FullImage({ fullImageUrl }) {
     </Modal>
   );
 }
+
+const FullImage = React.memo(FullImageComponent);
+
+export default FullImage;
