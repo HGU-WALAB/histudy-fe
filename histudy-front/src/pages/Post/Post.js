@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   FormControl,
   InputLabel,
   MenuItem,
@@ -28,9 +27,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Title from "../../components/common/Title";
 import { StyledColumnAlignLayout } from "../../components/common/StyledLayout";
+import { ImageUploadToServer } from "../../components/Image/UploadImageToServer";
+import { ImageUploadApi } from "../../apis/rank";
 
 export default function Post({ children }) {
   const { state } = useLocation();
+  console.log(state);
 
   const [isCodeModal, setIsCodeModal] = useState(false);
 
@@ -42,21 +44,32 @@ export default function Post({ children }) {
       totalMinutes: state ? state.totalMinutes : "",
       images: state ? [...state.images.map((image) => image.url)] : [],
       courses: state ? state.courses.map((c) => c.id.toString()) : [],
+      previewImages: [],
+      blobImages: [],
     },
   });
 
-  watch(["totalMinutes", "startTime", "endTime", "images"]);
+  watch(["totalMinutes", "startTime", "endTime", "images", "previewImages"]);
 
   const navigate = useNavigate();
 
-  const onValid = (formData) => {
+  const onValid = async (formData) => {
+    for (let i = 0; i < formData.blobImages.length; ++i) {
+      const imageForm = new FormData();
+      imageForm.append("image", formData.blobImages[i]);
+
+      await ImageUploadApi(state ? state.id : null, imageForm).then((res) => {
+        setValue("images", [...getValues("images"), res.data?.imagePath]);
+      });
+    }
+
     // 보고서 생성 api 연결
     const newReport = {
       title: formData.title,
       content: formData.content,
       totalMinutes: Number(formData.totalMinutes),
       participants: formData.participants,
-      images: formData.images,
+      images: getValues("images"),
       courses: formData.courses,
     };
     state ? modifyReport(state.id, newReport) : postReport(newReport);
@@ -91,7 +104,7 @@ export default function Post({ children }) {
               fontColor="white"
             />
           </Box>
-          <ImageUpload setValue={setValue} getValues={getValues} />
+          <ImageUploadToServer setValue={setValue} getValues={getValues} />
         </PostBox>
 
         <PostBox>

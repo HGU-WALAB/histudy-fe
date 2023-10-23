@@ -106,7 +106,13 @@ export function ImageUpload({ setValue, getValues }) {
         <ImageList sx={{ width: "1000px" }} cols={2}>
           {getValues("images")?.map((imageUrl, index) => (
             <ImageListItem
-              sx={{ position: "relative", mt: "20px", mr: "20px" }}
+              sx={{
+                position: "relative",
+                mt: "20px",
+                mr: "20px",
+                maxWidth: "450px",
+                maxHeight: "450px",
+              }}
               key={index}
             >
               <img src={imageUrl} loading="lazy" alt={imageUrl} />
