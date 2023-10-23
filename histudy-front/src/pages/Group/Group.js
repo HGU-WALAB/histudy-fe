@@ -29,6 +29,8 @@ const teamMembersConverter = (teamMembers) => {
 };
 
 export default function Group({ setReApply }) {
+  const [teamNum, setTeamNum] = useState();
+
   const [courses, setCourses] = useState([]);
   const [friends, setFriends] = useState([]);
 
@@ -67,7 +69,7 @@ export default function Group({ setReApply }) {
 
         if (data.length === 0) setHasTeam(false);
         else setHasTeam(true);
-
+        setTeamNum(data[0].tag);
         setConvertedTeamMembers(teamMembersConverter(data));
       },
     },
@@ -79,7 +81,7 @@ export default function Group({ setReApply }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
     >
-      <Title text={"스터디 그룹 정보"} />
+      <Title text={`스터디 그룹 정보 (Group ${teamNum ? teamNum : ""})`} />
       {hasTeam ? (
         <StyledScrollTableSize>
           <CustomTable
