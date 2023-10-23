@@ -21,6 +21,7 @@ export default function CreateGroupTable({
   const TableHead = {
     all: [
       "이름",
+      "이메일",
       "학번",
       "희망 1과목",
       "희망 2과목",
@@ -105,7 +106,6 @@ export default function CreateGroupTable({
               >
                 {row.name}
               </Box>
-
               <Box
                 sx={{
                   color: "text.secondary",
@@ -113,6 +113,22 @@ export default function CreateGroupTable({
                   flexGrow: 1,
                   // width: "50px",
                   marginLeft: "70px",
+                  textOverflow: "ellipsis",
+                  overflowX: "auto",
+                  whiteSpace: "nowrap",
+                  py: "20px",
+                  borderColor: "primary.border",
+                }}
+              >
+                {row.email}
+              </Box>
+              <Box
+                sx={{
+                  color: "text.secondary",
+                  display: "flex",
+                  flexGrow: 1,
+                  // width: "50px",
+                  marginLeft: "20px",
                   textOverflow: "ellipsis",
                   overflowX: "auto",
                   whiteSpace: "nowrap",
@@ -147,7 +163,7 @@ export default function CreateGroupTable({
                 {row.courses.map((subject, index) => (
                   <Typography
                     sx={{
-                      minWidth: "150px",
+                      minWidth: "80px",
                     }}
                   >
                     {subject.name} ({subject.prof})
@@ -156,7 +172,7 @@ export default function CreateGroupTable({
                 {fillThree(row.courses.length).map((subject, index) => (
                   <Typography
                     sx={{
-                      minWidth: "150px",
+                      minWidth: "80px",
                     }}
                   >
                     {subject}
@@ -170,6 +186,7 @@ export default function CreateGroupTable({
                   display: "flex",
                   flexGrow: 1,
                   py: "20px",
+                  ml: "10px",
                   borderColor: "primary.border",
                 }}
               >
