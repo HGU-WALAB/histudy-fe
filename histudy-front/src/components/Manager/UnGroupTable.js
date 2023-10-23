@@ -65,7 +65,9 @@ export default function UnGroupTable({
     <>
       <Box
         sx={{
+          minWidth: "1000px",
           maxHeight: "60vh",
+
           overflow: "scroll",
           py: "5px",
           border: 1,
@@ -83,7 +85,7 @@ export default function UnGroupTable({
             py: "20px",
             borderBottom: 1,
             borderColor: "primary.main",
-            px: "60px",
+            px: "50px",
           }}
         >
           {TableHead[type].map((headElement, index) => (
@@ -109,6 +111,7 @@ export default function UnGroupTable({
                 sx={{
                   display: "flex",
                   px: "50px",
+                  gap: "10px",
                   justifyContent: "space-between",
                   borderTop: index !== 0 && 1,
                   alignItems: "center",
@@ -153,22 +156,18 @@ export default function UnGroupTable({
                   > */}
                 {row.courses.map((subject, index) => (
                   <Box
-                    sx={
-                      {
-                        // minWidth: "150px",
-                      }
-                    }
+                    sx={{
+                      width: "120px",
+                    }}
                   >
                     {subject.name} ({subject.prof})
                   </Box>
                 ))}
                 {fillThree(row.courses.length).map((subject, index) => (
                   <Box
-                    sx={
-                      {
-                        // minWidth: "80px",
-                      }
-                    }
+                    sx={{
+                      width: "120px",
+                    }}
                   >
                     {subject}
                   </Box>
@@ -286,7 +285,7 @@ export default function UnGroupTable({
                     {row.courses.map((subject, index) => (
                       <Typography
                         sx={{
-                          minWidth: "150px",
+                          minWidth: "120px",
                         }}
                       >
                         {subject.name} ({subject.prof})
@@ -295,7 +294,7 @@ export default function UnGroupTable({
                     {fillThree(row.courses.length).map((subject, index) => (
                       <Typography
                         sx={{
-                          minWidth: "150px",
+                          minWidth: "120px",
                         }}
                       >
                         {subject}

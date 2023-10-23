@@ -44,11 +44,12 @@ export default function GroupTables({
   const TableHead = {
     group: [
       "그룹",
-      "멤버",
+      "학생 정보",
       "희망 1과목",
       "희망 2과목",
       "희망 3과목",
       "함께하고 싶은 친구",
+      "수정",
     ],
   };
   const [edit, setEdit] = useState([false]);
@@ -79,9 +80,10 @@ export default function GroupTables({
     <Box>
       <Box
         sx={{
+          minWidth: "1000px",
           maxHeight: "60vh",
           overflow: "scroll",
-          py: "5px",
+          py: "30px",
           border: 1,
           backgroundColor: "primary.default",
           borderColor: "primary.main",
@@ -93,19 +95,14 @@ export default function GroupTables({
           sx={{
             color: "text.secondary",
             display: "flex",
-            py: "20px",
+            justifyContent: "space-between",
+            py: "0px",
             borderColor: "primary.border",
-            px: "30px",
+            px: "50px",
           }}
         >
           {TableHead[type].map((headElement, index) => (
-            <Typography
-              key={index}
-              sx={{
-                flexGrow: 1,
-                minWidth: "150px",
-              }}
-            >
+            <Typography key={index} sx={{}}>
               {headElement}
             </Typography>
           ))}
@@ -138,82 +135,54 @@ export default function GroupTables({
                         sx={{
                           color: "text.secondary",
                           display: "flex",
-                          flexGrow: 4,
+                          alignItems: "center",
+                          justifyContent: "space-between",
+                          gap: "10px",
+                          px: "10px",
+                          borderBottom: 1,
+                          borderColor: "primary.border",
                         }}
                       >
                         <Box
                           key="Group"
                           sx={{
                             color: "text.secondary",
-                            display: "flex",
-                            flexGrow: 1,
-                            width: "150px",
-                            borderBottom: 1,
-                            marginTop: "20px",
+                            width: "50px",
                             py: "20px",
                             borderColor: "primary.border",
                           }}
                         >
                           <Typography>Group{row.tag}</Typography>
                         </Box>
-                        <Box
+                        <Select
                           sx={{
+                            minWidth: "100px",
                             color: "text.secondary",
-                            display: "flex",
-                            flexGrow: 1,
-                            borderBottom: 1,
-                            py: "20px",
-                            marginTop: "20px",
-                            width: "150px",
                             borderColor: "primary.border",
                           }}
+                          defaultValue={10}
                         >
-                          {index > 0 && ", "}
-                          <Typography>{student.name},</Typography>
-                          <Typography>{student.sid}</Typography>
-                        </Box>
+                          <MenuItem value={10}>{student.name}</MenuItem>
+                          <MenuItem value={20}>{student.sid}</MenuItem>
+                          <MenuItem value={30}>{student.email}</MenuItem>
+                        </Select>
                         <Box
                           sx={{
                             color: "text.secondary",
                             display: "flex",
-                            flexGrow: 1,
-                            py: "20px",
-                            borderBottom: 1,
                             borderColor: "primary.border",
                             alignItems: "center",
                             gap: "20px",
                           }}
                         >
-                          {/* <Select
-                            sx={{ width: "170px", color: "text.secondary" }}
-                            value={
-                              student.courses.length > 0
-                                ? student.courses[0].name
-                                : ""
-                            }
-                          >
-                            {student.courses.map((subject, index) => (
-                              <MenuItem key={index} value={subject.name}>
-                                <Typography>{subject.name}</Typography>
-                              </MenuItem>
-                            ))}
-                          </Select> */}
                           {student.courses.map((subject, index) => (
-                            <Typography
-                              sx={{
-                                minWidth: "150px",
-                              }}
-                            >
+                            <Typography sx={{ width: "120px" }}>
                               {subject.name} ({subject.prof})
                             </Typography>
                           ))}
                           {fillThree(student.courses.length).map(
                             (subject, index) => (
-                              <Typography
-                                sx={{
-                                  minWidth: "150px",
-                                }}
-                              >
+                              <Typography sx={{ minWidth: "120px" }}>
                                 {subject}
                               </Typography>
                             )
@@ -223,9 +192,7 @@ export default function GroupTables({
                           sx={{
                             color: "text.secondary",
                             display: "flex",
-                            flexGrow: 1,
                             py: "20px",
-                            borderBottom: 1,
                             borderColor: "primary.border",
                           }}
                         >
@@ -251,7 +218,6 @@ export default function GroupTables({
                             color: "text.secondary",
                             display: "flex",
                             // flexGrow: 1,
-                            borderBottom: 1,
                             borderColor: "primary.border",
                           }}
                         >
