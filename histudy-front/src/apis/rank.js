@@ -7,12 +7,15 @@ export const getAllTeamsForRank = async () => {
 };
 
 export const ImageUploadApi = async (reportIdOr, formData) => {
-  const response = await axiosInstance.post(
-    `/api/team/reports/${reportIdOr}/image`,
+  const response = await axios.post(
+    `${process.env.REACT_APP_BACK_BASE_URL}/api/team/reports${
+      reportIdOr === null ? "" : `/${reportIdOr}`
+    }/image`,
     formData,
     {
       headers: {
         "Content-Type": "multipart/form-data",
+        Authorization: "Bearer " + localStorage.getItem("accessToken"),
       },
     }
   );

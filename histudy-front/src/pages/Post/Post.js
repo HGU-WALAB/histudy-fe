@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   FormControl,
   InputLabel,
   MenuItem,
@@ -54,14 +53,13 @@ export default function Post({ children }) {
 
   const navigate = useNavigate();
 
-  const onValid = (formData) => {
-    console.log(formData);
+  const onValid = async (formData) => {
     for (let i = 0; i < formData.blobImages.length; ++i) {
       const imageForm = new FormData();
       imageForm.append("image", formData.blobImages[i]);
-      ImageUploadApi(state ? state.id : null, imageForm).then((res) => {
-        console.log(res);
-        setValue("images", [...formData.images, res.data.imagePath]);
+
+      await ImageUploadApi(state ? state.id : null, imageForm).then((res) => {
+        setValue("images", [...getValues("images"), res.data?.imagePath]);
       });
     }
 
@@ -71,7 +69,7 @@ export default function Post({ children }) {
       content: formData.content,
       totalMinutes: Number(formData.totalMinutes),
       participants: formData.participants,
-      images: formData.images,
+      images: getValues("images"),
       courses: formData.courses,
     };
     state ? modifyReport(state.id, newReport) : postReport(newReport);
@@ -106,7 +104,6 @@ export default function Post({ children }) {
               fontColor="white"
             />
           </Box>
-          {/* <ImageUpload setValue={setValue} getValues={getValues} /> */}
           <ImageUploadToServer setValue={setValue} getValues={getValues} />
         </PostBox>
 
