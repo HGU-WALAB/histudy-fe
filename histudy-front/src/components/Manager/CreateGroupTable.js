@@ -20,12 +20,12 @@ export default function CreateGroupTable({
   };
   const TableHead = {
     all: [
-      "이름",
-      "학번",
+      "학생 정보",
       "희망 1과목",
       "희망 2과목",
       "희망 3과목",
       "함께하고 싶은 친구",
+      "삭제",
     ],
   };
 
@@ -53,6 +53,7 @@ export default function CreateGroupTable({
           sx={{
             color: "text.secondary",
             display: "flex",
+            justifyContent: "space-between",
             py: "20px",
 
             borderColor: "primary.main",
@@ -62,11 +63,13 @@ export default function CreateGroupTable({
           {TableHead[type].map((headElement, index) => (
             <Typography
               key={index}
-              sx={{
-                flexGrow: 1,
-                width: longWidthColumnNum === index + 1 && "50%",
-                minWidth: longWidthColumnNum !== index + 1 && "150px",
-              }}
+              sx={
+                {
+                  // flexGrow: 1,
+                  // width: longWidthColumnNum === index + 1 && "50%",
+                  // minWidth: longWidthColumnNum !== index + 1 && "150px",
+                }
+              }
             >
               {headElement}
             </Typography>
@@ -77,64 +80,43 @@ export default function CreateGroupTable({
             key={index}
             sx={{
               display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              px: "50px",
               borderTop: index !== 0 && 1,
-              // py: "20px",
               borderColor: "primary.border",
             }}
           >
-            <Box
+            {/* <Box
               sx={{
                 display: "flex",
                 alignItems: "center",
-                flexGrow: 1,
               }}
+            > */}
+            <Select
+              sx={{
+                minWidth: "100px",
+                color: "text.secondary",
+                display: "flex",
+                borderColor: "primary.border",
+              }}
+              defaultValue={10}
             >
-              <Box
-                sx={{
-                  color: "text.secondary",
-                  display: "flex",
-                  flexGrow: 1,
-                  width: "50px",
-                  textOverflow: "ellipsis",
-                  overflowX: "auto",
-                  whiteSpace: "nowrap",
-                  py: "20px",
-                  borderColor: "primary.border",
-                  marginLeft: "55px",
-                }}
-              >
-                {row.name}
-              </Box>
+              <MenuItem value={10}>{row.name}</MenuItem>
+              <MenuItem value={20}>{row.sid}</MenuItem>
+              <MenuItem value={30}>{row.email}</MenuItem>
+            </Select>
 
-              <Box
+            {/* <Box
                 sx={{
                   color: "text.secondary",
                   display: "flex",
-                  flexGrow: 1,
-                  // width: "50px",
-                  marginLeft: "70px",
-                  textOverflow: "ellipsis",
-                  overflowX: "auto",
-                  whiteSpace: "nowrap",
-                  py: "20px",
-                  borderColor: "primary.border",
-                }}
-              >
-                {row.sid}
-              </Box>
-
-              <Box
-                sx={{
-                  color: "text.secondary",
-                  display: "flex",
-                  flexGrow: 1,
-                  marginLeft: "20px",
                   py: "20px",
                   borderColor: "primary.border",
                   gap: "30px",
                 }}
-              >
-                {/* <Select
+              > */}
+            {/* <Select
                   sx={{ width: "170px", color: "text.secondary" }}
                   value={row.courses.length > 0 ? row.courses[0].name : ""}
                 >
@@ -144,55 +126,50 @@ export default function CreateGroupTable({
                     </MenuItem>
                   ))}
                 </Select> */}
-                {row.courses.map((subject, index) => (
-                  <Typography
-                    sx={{
-                      minWidth: "150px",
-                    }}
-                  >
-                    {subject.name} ({subject.prof})
-                  </Typography>
-                ))}
-                {fillThree(row.courses.length).map((subject, index) => (
-                  <Typography
-                    sx={{
-                      minWidth: "150px",
-                    }}
-                  >
-                    {subject}
-                  </Typography>
-                ))}
-              </Box>
-
+            {row.courses.map((subject, index) => (
               <Box
                 sx={{
-                  color: "text.secondary",
-                  display: "flex",
-                  flexGrow: 1,
-                  py: "20px",
-                  borderColor: "primary.border",
+                  minWidth: "80px",
                 }}
               >
-                <Select
-                  sx={{ width: "170px", color: "text.secondary" }}
-                  value={row.friends.length > 0 ? row.friends[0].name : ""}
-                >
-                  {row.friends.map((friend, index) => (
-                    <MenuItem key={index} value={friend.name}>
-                      <Typography>
-                        {friend.name}, {friend.sid}
-                      </Typography>
-                    </MenuItem>
-                  ))}
-                </Select>
+                {subject.name} ({subject.prof})
               </Box>
-            </Box>
-            <IconButton
-              onClick={() => handleDeleteRow(row.sid)}
+            ))}
+            {fillThree(row.courses.length).map((subject, index) => (
+              <Box
+                sx={{
+                  minWidth: "80px",
+                }}
+              >
+                {subject}
+              </Box>
+            ))}
+            {/* </Box> */}
+
+            <Box
               sx={{
-                marginRight: "1rem",
+                color: "text.secondary",
+                display: "flex",
+                py: "20px",
+                ml: "10px",
+                borderColor: "primary.border",
               }}
             >
+              <Select
+                sx={{ width: "150px", color: "text.secondary" }}
+                value={row.friends.length > 0 ? row.friends[0].name : ""}
+              >
+                {row.friends.map((friend, index) => (
+                  <MenuItem key={index} value={friend.name}>
+                    <Typography>
+                      {friend.name}, {friend.sid}
+                    </Typography>
+                  </MenuItem>
+                ))}
+              </Select>
+            </Box>
+            {/* </Box> */}
+            <IconButton onClick={() => handleDeleteRow(row.sid)}>
               <Cancel />
             </IconButton>
           </Box>

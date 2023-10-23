@@ -58,7 +58,8 @@ export default function ManageStudent() {
     sheetData = studentData.map((student) => ({
       ID: student.id,
       Name: student.name,
-      Number: student.sid,
+      StudentId: student.sid,
+      Email: student.email,
       Group: student.group,
       Courses: student.courses
         .map((subject) => subject.name + `(${subject.prof})`)
@@ -135,7 +136,7 @@ export default function ManageStudent() {
               <StudentListTable
                 data={searchResult}
                 accentColumnNum={-1}
-                longWidthColumnNum={-1}
+                longWidthColumnNum={3}
                 type="student"
               />
             )}

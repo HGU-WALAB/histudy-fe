@@ -30,11 +30,12 @@ export default function UnGroupTable({
   const TableHead = {
     group: [
       "그룹",
-      "이름",
+      "학생 정보",
       "희망 1과목",
       "희망 2과목",
       "희망 3과목",
       "함께하고 싶은 친구",
+      "수정",
     ],
   };
 
@@ -64,7 +65,9 @@ export default function UnGroupTable({
     <>
       <Box
         sx={{
+          minWidth: "1000px",
           maxHeight: "60vh",
+
           overflow: "scroll",
           py: "5px",
           border: 1,
@@ -78,20 +81,23 @@ export default function UnGroupTable({
           sx={{
             color: "text.secondary",
             display: "flex",
+            justifyContent: "space-between",
             py: "20px",
             borderBottom: 1,
             borderColor: "primary.main",
-            px: "60px",
+            px: "50px",
           }}
         >
           {TableHead[type].map((headElement, index) => (
             <Typography
               key={index}
-              sx={{
-                // flexGrow: 1,
-                // width: longWidthColumnNum === index + 1 && "50%",
-                minWidth: "150px",
-              }}
+              sx={
+                {
+                  // flexGrow: 1,
+                  // width: longWidthColumnNum === index + 1 && "50%",
+                  // minWidth: "150px",
+                }
+              }
             >
               {headElement}
             </Typography>
@@ -104,108 +110,95 @@ export default function UnGroupTable({
                 key={index}
                 sx={{
                   display: "flex",
+                  px: "50px",
+                  gap: "10px",
+                  justifyContent: "space-between",
                   borderTop: index !== 0 && 1,
-                  // py: "20px",
+                  alignItems: "center",
                   borderColor: "primary.border",
                 }}
               >
                 <Box
                   sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    flexGrow: 1,
+                    color: "text.secondary",
+                    borderColor: "primary.border",
                   }}
                 >
-                  <Box
-                    sx={{
-                      color: "text.secondary",
-                      display: "flex",
-                      flexGrow: 1,
-                      minWidth: "100px",
-                      marginLeft: "50px",
-                      textOverflow: "ellipsis",
-                      overflowX: "auto",
-                      whiteSpace: "nowrap",
-                      // py: "20px",
-                      borderColor: "primary.border",
-                    }}
-                  >
-                    미배정
-                  </Box>
+                  미배정
+                </Box>
 
-                  <Box
+                <Select
+                  sx={{
+                    minWidth: "100px",
+                    color: "text.secondary",
+                    display: "flex",
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
+                    borderColor: "primary.border",
+                  }}
+                  defaultValue={10}
+                >
+                  <MenuItem value={10}>{row.name}</MenuItem>
+                  <MenuItem value={20}>{row.sid}</MenuItem>
+                  <MenuItem value={30}>{row.email}</MenuItem>
+                </Select>
+                {/* <Box
                     sx={{
                       color: "text.secondary",
                       display: "flex",
-                      // flexGrow: 1,
-                      width: "150px",
-                      textOverflow: "ellipsis",
-                      // overflowX: "auto",
-                      whiteSpace: "nowrap",
-                      py: "20px",
-                      borderColor: "primary.border",
-                      // justifyContent: "center",
-                    }}
-                  >
-                    {row.name},{row.sid}
-                  </Box>
-
-                  <Box
-                    sx={{
-                      color: "text.secondary",
-                      display: "flex",
+                      
                       flexGrow: 1,
                       marginLeft: "20px",
                       py: "20px",
                       borderColor: "primary.border",
-                      gap: "20px",
+                      // gap: "20px",
                     }}
-                  >
-                    {row.courses.map((subject, index) => (
-                      <Typography
-                        sx={{
-                          minWidth: "150px",
-                        }}
-                      >
-                        {subject.name} ({subject.prof})
-                      </Typography>
-                    ))}
-                    {fillThree(row.courses.length).map((subject, index) => (
-                      <Typography
-                        sx={{
-                          minWidth: "150px",
-                        }}
-                      >
-                        {subject}
-                      </Typography>
-                    ))}
-                  </Box>
-
+                  > */}
+                {row.courses.map((subject, index) => (
                   <Box
                     sx={{
-                      color: "text.secondary",
-                      display: "flex",
-                      flexGrow: 1,
-                      py: "20px",
-                      borderColor: "primary.border",
+                      width: "120px",
                     }}
                   >
-                    <Select
-                      sx={{ width: "170px", color: "text.secondary" }}
-                      value={row.friends.length > 0 ? row.friends[0].name : ""}
-                    >
-                      {row.friends.map((friend, index) => (
-                        <MenuItem key={index} value={friend.name}>
-                          <Typography>
-                            {friend.name}, {friend.sid}
-                          </Typography>
-                        </MenuItem>
-                      ))}
-                    </Select>
+                    {subject.name} ({subject.prof})
                   </Box>
-                </Box>
+                ))}
+                {fillThree(row.courses.length).map((subject, index) => (
+                  <Box
+                    sx={{
+                      width: "120px",
+                    }}
+                  >
+                    {subject}
+                  </Box>
+                ))}
+                {/* </Box> */}
 
-                <Box sx={{ marginRight: "20px", py: "25px" }}>
+                {/* <Box
+                  sx={{
+                    color: "text.secondary",
+                    display: "flex",
+                    flexGrow: 1,
+                    py: "20px",
+                    borderColor: "primary.border",
+                  }}
+                > */}
+                <Select
+                  sx={{ color: "text.secondary", width: "150px" }}
+                  value={row.friends.length > 0 ? row.friends[0].name : ""}
+                >
+                  {row.friends.map((friend, index) => (
+                    <MenuItem key={index} value={friend.name}>
+                      <Typography>
+                        {friend.name}, {friend.sid}
+                      </Typography>
+                    </MenuItem>
+                  ))}
+                </Select>
+                {/* </Box> */}
+                {/* </Box> */}
+
+                <Box sx={{ py: "25px" }}>
                   <IconButton
                     onClick={() => {
                       handleEdit(index);
@@ -233,6 +226,7 @@ export default function UnGroupTable({
                     display: "flex",
                     alignItems: "center",
                     flexGrow: 1,
+                    px: "30px",
                   }}
                 >
                   <Box
@@ -240,45 +234,28 @@ export default function UnGroupTable({
                       color: "text.secondary",
                       display: "flex",
                       flexGrow: 1,
-                      marginLeft: "20px",
-                      textOverflow: "ellipsis",
-                      overflowX: "auto",
-                      whiteSpace: "nowrap",
                       borderColor: "primary.border",
                     }}
                   >
                     <GroupSelector setTeam={setTeam} />
                   </Box>
 
-                  <Box
+                  <Select
                     sx={{
+                      minWidth: "80px",
                       color: "text.secondary",
                       display: "flex",
-                      flexGrow: 1,
-                      width: "120px",
-                      marginLeft: "50px",
-
                       textOverflow: "ellipsis",
-                      overflowX: "auto",
                       whiteSpace: "nowrap",
-                      // py: "20px",
+
                       borderColor: "primary.border",
                     }}
+                    defaultValue={10}
                   >
-                    {row.name},
-                    <TextField
-                      sx={{
-                        width: "100px",
-                        "& input": {
-                          height: "10px",
-                        },
-                      }}
-                      defaultValue={row.sid}
-                      onChange={(e) => {
-                        setSid(e.target.value);
-                      }}
-                    ></TextField>
-                  </Box>
+                    <MenuItem value={10}>{row.name}</MenuItem>
+                    <MenuItem value={20}>{row.sid}</MenuItem>
+                    <MenuItem value={30}>{row.email}</MenuItem>
+                  </Select>
 
                   <Box
                     sx={{
@@ -307,7 +284,7 @@ export default function UnGroupTable({
                     {row.courses.map((subject, index) => (
                       <Typography
                         sx={{
-                          minWidth: "150px",
+                          width: "120px",
                         }}
                       >
                         {subject.name} ({subject.prof})
@@ -316,7 +293,7 @@ export default function UnGroupTable({
                     {fillThree(row.courses.length).map((subject, index) => (
                       <Typography
                         sx={{
-                          minWidth: "150px",
+                          width: "120px",
                         }}
                       >
                         {subject}
@@ -336,7 +313,7 @@ export default function UnGroupTable({
                     }}
                   >
                     <Select
-                      sx={{ width: "170px", color: "text.secondary" }}
+                      sx={{ width: "140px", color: "text.secondary" }}
                       value={row.friends.length > 0 ? row.friends[0].name : ""}
                     >
                       {row.friends.map((friend, index) => (

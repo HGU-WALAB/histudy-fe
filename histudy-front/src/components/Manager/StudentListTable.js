@@ -20,7 +20,6 @@ export default function StudentListTable({
   longWidthColumnNum,
   data,
 }) {
-  console.log("DD", data);
   const { register, getValues, setValue } = useForm({
     initialValues: {
       name: "",
@@ -30,7 +29,18 @@ export default function StudentListTable({
   });
 
   const TableHead = {
-    student: ["이름", "학번", "그룹", "희망과목"],
+    student: [
+      "그룹",
+      "이름",
+      "학번",
+      "",
+      "이메일",
+      "",
+      "",
+      "희망과목",
+      "",
+      "수정",
+    ],
   };
 
   const [edit, setEdit] = useState([false]);
@@ -68,6 +78,7 @@ export default function StudentListTable({
     <>
       <Box
         sx={{
+          minWidth: "1000px",
           py: "5px",
           border: 1,
           backgroundColor: "primary.default",
@@ -82,7 +93,7 @@ export default function StudentListTable({
             color: "text.secondary",
             display: "flex",
             py: "20px",
-
+            justifyContent: "space-between",
             borderColor: "primary.main",
             px: "60px",
           }}
@@ -90,11 +101,11 @@ export default function StudentListTable({
           {TableHead[type].map((headElement, index) => (
             <Typography
               key={index}
-              sx={{
-                flexGrow: 1,
-                width: longWidthColumnNum === index + 1 && "50%",
-                minWidth: longWidthColumnNum !== index + 1 && "150px",
-              }}
+              sx={
+                {
+                  // minWidth: longWidthColumnNum !== index - 3 && "200px",
+                }
+              }
             >
               {headElement}
             </Typography>
@@ -114,21 +125,28 @@ export default function StudentListTable({
                 <Box
                   sx={{
                     display: "flex",
+                    gap: "30px",
+
+                    justifyContent: "space-between",
+                    width: "100%",
                     alignItems: "center",
-                    flexGrow: 1,
+                    px: "50px",
+                    py: "20px",
                   }}
                 >
                   <Box
                     sx={{
                       color: "text.secondary",
                       display: "flex",
-                      flexGrow: 1,
-                      width: "50px",
-                      textOverflow: "ellipsis",
-                      overflowX: "auto",
-                      whiteSpace: "nowrap",
-                      marginLeft: "3rem",
-                      // py: "20px",
+                    }}
+                  >
+                    Group{row.group}
+                  </Box>
+
+                  <Box
+                    sx={{
+                      color: "text.secondary",
+                      display: "flex",
                       borderColor: "primary.border",
                     }}
                   >
@@ -139,12 +157,6 @@ export default function StudentListTable({
                     sx={{
                       color: "text.secondary",
                       display: "flex",
-                      flexGrow: 1,
-                      width: "50px",
-                      textOverflow: "ellipsis",
-                      overflowX: "auto",
-                      whiteSpace: "nowrap",
-                      marginLeft: "5rem",
                       borderColor: "primary.border",
                     }}
                   >
@@ -154,80 +166,38 @@ export default function StudentListTable({
                   <Box
                     sx={{
                       color: "text.secondary",
-                      display: "flex",
-                      flexGrow: 1,
-                      width: "50px",
-                      textOverflow: "ellipsis",
-                      overflowX: "auto",
-                      whiteSpace: "nowrap",
-                      marginLeft: "4rem",
-                      borderColor: "primary.border",
-                    }}
-                  >
-                    Group{row.group}
-                  </Box>
-                  <Box
-                    sx={{
-                      color: "text.secondary",
-                      display: "flex",
-                      flexGrow: 1,
-                      marginLeft: "20px",
-                      py: "20px",
-                      borderColor: "primary.border",
-                    }}
-                  >
-                    <Select
-                      sx={{ width: "170px", color: "text.secondary" }}
-                      value={row.courses.length > 0 ? row.courses[0].name : ""}
-                    >
-                      {row.courses.map((subject, index) => (
-                        <MenuItem key={index} value={subject.name}>
-                          <Typography>
-                            {subject.name} ({subject.prof})
-                          </Typography>
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </Box>
-                </Box>
 
-                <Box
-                  sx={{
-                    color: "text.secondary",
-                    display: "flex",
-                    borderColor: "primary.border",
-                  }}
-                >
-                  <Box
-                    sx={{
-                      color: "text.secondary",
-                      display: "flex",
-                      flexGrow: 1,
-                      alignItems: "center",
-                      justifyContent: "space-between",
+                      width: "250px",
+                      borderColor: "primary.border",
+                      whiteSpace: "normal",
+                      wordWrap: "break-word",
                     }}
                   >
-                    <Box
-                      sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        marginRight: "20px",
-                      }}
-                    >
-                      <Box sx={{ display: "flex" }}>
-                        <IconButton
-                          onClick={() => {
-                            handleEdit(index);
-                            setValue("name", row.name);
-                            setValue("sid", row.sid);
-                            setValue("team", row.group);
-                          }}
-                        >
-                          <Edit />
-                        </IconButton>
-                      </Box>
-                    </Box>
+                    {row.email}
                   </Box>
+
+                  <Select
+                    sx={{ width: "170px", color: "text.secondary" }}
+                    value={row.courses.length > 0 ? row.courses[0].name : ""}
+                  >
+                    {row.courses.map((subject, index) => (
+                      <MenuItem key={index} value={subject.name}>
+                        <Typography>
+                          {subject.name} ({subject.prof})
+                        </Typography>
+                      </MenuItem>
+                    ))}
+                  </Select>
+                  <IconButton
+                    onClick={() => {
+                      handleEdit(index);
+                      setValue("name", row.name);
+                      setValue("sid", row.sid);
+                      setValue("team", row.group);
+                    }}
+                  >
+                    <Edit />
+                  </IconButton>
                 </Box>
               </Box>
             ) : (
