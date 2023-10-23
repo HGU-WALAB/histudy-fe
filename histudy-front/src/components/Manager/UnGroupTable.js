@@ -226,7 +226,7 @@ export default function UnGroupTable({
                     display: "flex",
                     alignItems: "center",
                     flexGrow: 1,
-                    px: "20px",
+                    px: "30px",
                   }}
                 >
                   <Box
@@ -235,7 +235,6 @@ export default function UnGroupTable({
                       display: "flex",
                       flexGrow: 1,
                       borderColor: "primary.border",
-                      mr: "10px",
                     }}
                   >
                     <GroupSelector setTeam={setTeam} />
@@ -243,7 +242,7 @@ export default function UnGroupTable({
 
                   <Select
                     sx={{
-                      minWidth: "100px",
+                      minWidth: "80px",
                       color: "text.secondary",
                       display: "flex",
                       textOverflow: "ellipsis",
@@ -285,7 +284,7 @@ export default function UnGroupTable({
                     {row.courses.map((subject, index) => (
                       <Typography
                         sx={{
-                          minWidth: "120px",
+                          width: "120px",
                         }}
                       >
                         {subject.name} ({subject.prof})
@@ -294,7 +293,7 @@ export default function UnGroupTable({
                     {fillThree(row.courses.length).map((subject, index) => (
                       <Typography
                         sx={{
-                          minWidth: "120px",
+                          width: "120px",
                         }}
                       >
                         {subject}
@@ -314,7 +313,7 @@ export default function UnGroupTable({
                     }}
                   >
                     <Select
-                      sx={{ width: "170px", color: "text.secondary" }}
+                      sx={{ width: "140px", color: "text.secondary" }}
                       value={row.friends.length > 0 ? row.friends[0].name : ""}
                     >
                       {row.friends.map((friend, index) => (
