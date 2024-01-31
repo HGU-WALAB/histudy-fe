@@ -48,7 +48,8 @@ npm run start
 
 <br />
 
-## 커밋 룰
+## 커밋 컨밴션
+
   
 - Feat: [새로운 기능 구현]
 - Fix: [코드 수정]
@@ -68,4 +69,6 @@ feat: 구현 기능(#이슈번호)
 ex) feat: 로그인 기능 구현 (#105)
 ```
 
+### 컨밴션 관련 이슈 
+https://github.com/HGU-WALAB/histudy-fe/issues/14
 
