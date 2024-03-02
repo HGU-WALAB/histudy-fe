@@ -6,7 +6,7 @@ settings:
 
 dependencies:
   '@emotion/react':
-    specifier: ^11.11.1
+    specifier: ^11.11.4
     version: 11.11.4(react@18.2.0)
   '@emotion/styled':
     specifier: ^11.11.0
@@ -18,7 +18,7 @@ dependencies:
     specifier: ^5.11.16
     version: 5.15.11(@mui/material@5.15.11)(react@18.2.0)
   '@mui/material':
-    specifier: ^5.12.3
+    specifier: ^5.15.11
     version: 5.15.11(@emotion/react@11.11.4)(@emotion/styled@11.11.0)(react-dom@18.2.0)(react@18.2.0)
   '@mui/styled-engine-sc':
     specifier: ^5.14.7
@@ -26,6 +26,9 @@ dependencies:
   '@mui/system':
     specifier: ^5.14.7
     version: 5.15.11(@emotion/react@11.11.4)(@emotion/styled@11.11.0)(react@18.2.0)
+  '@mui/x-data-grid':
+    specifier: ^6.19.5
+    version: 6.19.5(@mui/material@5.15.11)(@mui/system@5.15.11)(react-dom@18.2.0)(react@18.2.0)
   '@react-oauth/google':
     specifier: ^0.11.0
     version: 0.11.1(react-dom@18.2.0)(react@18.2.0)
@@ -3178,6 +3181,28 @@ packages:
       prop-types: 15.8.1
       react: 18.2.0
       react-is: 18.2.0
+    dev: false
+
+  /@mui/x-data-grid@6.19.5(@mui/material@5.15.11)(@mui/system@5.15.11)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-jV1ZqwyFslKqFScSn4t+xc/tNxLHOeJjz3HoeK+Wdf5t3bPM69pg/jLeg8TmOkAUY62JmQKCLVmcGWiR3AqUKQ==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      '@mui/material': ^5.4.1
+      '@mui/system': ^5.4.1
+      react: ^17.0.0 || ^18.0.0
+      react-dom: ^17.0.0 || ^18.0.0
+    dependencies:
+      '@babel/runtime': 7.24.0
+      '@mui/material': 5.15.11(@emotion/react@11.11.4)(@emotion/styled@11.11.0)(react-dom@18.2.0)(react@18.2.0)
+      '@mui/system': 5.15.11(@emotion/react@11.11.4)(@emotion/styled@11.11.0)(react@18.2.0)
+      '@mui/utils': 5.15.11(react@18.2.0)
+      clsx: 2.1.0
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      reselect: 4.1.8
+    transitivePeerDependencies:
+      - '@types/react'
     dev: false
 
   /@nicolo-ribaudo/eslint-scope-5-internals@5.1.1-v1:
@@ -10949,6 +10974,10 @@ packages:
 
   /requires-port@1.0.0:
     resolution: {integrity: sha512-KigOCHcocU3XODJxsu8i/j8T9tzT4adHiecwORRQ0ZZFcp7ahwXuRU1m+yuO90C5ZUyGeGfocHDI14M3L3yDAQ==}
+    dev: false
+
+  /reselect@4.1.8:
+    resolution: {integrity: sha512-ab9EmR80F/zQTMNeneUr4cv+jSwPJgIlvEmVwLerwrWVbpLlBuls9XHzIeTFy4cegU2NHBp3va0LKOzU5qFEYQ==}
     dev: false
 
   /resolve-cwd@3.0.0:

@@ -17,6 +17,8 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { authorityState, isShowFullImageState } from "../../store/atom";
 import FullImage from "../../components/Rank/FullImage";
 
+import ViewToggleButton from "../../components/Rank/ViewToggleButton";
+
 const StyledScrollBox = styled(Box)({
   maxWidth: "1245px",
   width: "100%",
@@ -32,6 +34,7 @@ const StyledItemSize = styled(Box)({
 export default function Rank() {
   const [teams, setTeams] = useState([]);
   const [itemsHover, setItemsHover] = useState([]);
+  const [view, setView] = useState("list");
 
   const { isLoading } = useQuery(["AllTeamRanks"], getAllTeamsForRank, {
     casheTime: 10 * 60 * 1000,
@@ -82,6 +85,8 @@ export default function Rank() {
           <NoDataLottie />
         ) : (
           <StyledScrollBox>
+            <ViewToggleButton view={view} setView={setView} />
+
             <ImageList
               cols={4}
               gap={15}
