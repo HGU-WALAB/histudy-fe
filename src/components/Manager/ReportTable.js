@@ -168,7 +168,6 @@ export default function ReportTable({
                   textOverflow: "ellipsis",
                   overflowX: "auto",
                   whiteSpace: "nowrap",
-                  flexGrow: 0.7,
                   py: "20px",
                   borderColor: "primary.border",
                 }}
