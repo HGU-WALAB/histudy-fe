@@ -2,12 +2,10 @@ import { Box, Typography } from "@mui/material";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import { useEffect, useState } from "react";
-import { Link, useMatch } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { selectState, testState } from "../../store/atom";
+import { selectState } from "../../store/atom";
 
 export default function SideBar() {
   // const [selectedMenu, setSelectedMenu] = useState(null);

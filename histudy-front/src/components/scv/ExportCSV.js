@@ -1,5 +1,6 @@
 import { Button } from "@mui/material";
 import { CSVLink } from "react-csv";
+import * as xlsx from "xlsx";
 
 const headers = [
   { label: "First Name", key: "firstname" },
@@ -14,7 +15,7 @@ const data = [
 ];
 
 // xlsx 모듈 추출
-const xlsx = require("xlsx");
+// const xlsx = require("xlsx");
 
 // const doctors = xlsx.utils.aoa_to_sheet([
 //   ["학과", "직급", "이름", "나이"],

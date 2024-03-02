@@ -1,28 +1,11 @@
-import {
-  Button,
-  IconButton,
-  InputAdornment,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { border, Box } from "@mui/system";
+import { IconButton } from "@mui/material";
+import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
-import SearchIcon from "@mui/icons-material/Search";
-import CustomTable from "../../components/common/CustomTable";
-import LongButton from "../../components/common/LongButton";
-import GrayBorderBox from "../../components/common/GrayBorderBox";
-import ProgressBar from "../../components/common/ProgressBar";
 import SideBar from "../../components/Manager/SideBar";
-import YearSelectButton from "../../components/Manager/YearSelectButton";
-import SemesterSelectButton from "../../components/Manager/SemesterSelectButton";
-import RegisterClassButton from "../../components/Manager/RegisterClassButton";
-import ManagerTable from "../../components/Manager/ManagerTable";
 import ReportTable from "../../components/Manager/ReportTable";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useLocation, useNavigate } from "react-router-dom";
 import { readGroupReport } from "../../apis/manager";
-import { reportDeleteState } from "../../store/atom";
-import { useRecoilState, useRecoilValue } from "recoil";
 
 export default function ManageReport() {
   const { state } = useLocation();

@@ -1,38 +1,16 @@
-import {
-  Button,
-  InputAdornment,
-  TextField,
-  Typography,
-  styled,
-} from "@mui/material";
-import { border, Box } from "@mui/system";
-import { useEffect, useState } from "react";
-import SearchIcon from "@mui/icons-material/Search";
-import CustomTable from "../../components/common/CustomTable";
-import LongButton from "../../components/common/LongButton";
-import GrayBorderBox from "../../components/common/GrayBorderBox";
-import ProgressBar from "../../components/common/ProgressBar";
+import { styled } from "@mui/material";
+import { Box } from "@mui/system";
+import { useState } from "react";
 import SideBar from "../../components/Manager/SideBar";
-import YearSelectButton from "../../components/Manager/YearSelectButton";
-import SemesterSelectButton from "../../components/Manager/SemesterSelectButton";
-import RegisterClassButton from "../../components/Manager/RegisterClassButton";
-import ManagerTable from "../../components/Manager/ManagerTable";
-import GroupTable from "../../components/Manager/GroupTable";
 import UnGroupTable from "../../components/Manager/UnGroupTable";
 import GroupTables from "../../components/Manager/GroupTables";
 import { readAllGroups, readUngroup } from "../../apis/manager";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import {
-  groupAutoCompleteState,
-  isLoadingState,
-  unGroupState,
-} from "../../store/atom";
-import { motion } from "framer-motion";
+import { useSetRecoilState } from "recoil";
+import { groupAutoCompleteState, isLoadingState } from "../../store/atom";
 import Title from "../../components/Manager/Table/Title";
 import { StyledLayout } from "./style/StyledLatout";
 import { StyledTitleFlexBox } from "./style/StyledTitleFlexBox";
-import { useQueries, useQuery } from "react-query";
-import LoadingLottie from "../../components/common/LoadingLottie";
+import { useQueries } from "react-query";
 import LoadingLayout from "../../components/Manager/Loading/LoadingLayout";
 
 const SizedBox = styled(Box)({
@@ -40,8 +18,6 @@ const SizedBox = styled(Box)({
 });
 
 export default function ManageGroup() {
-
- 
   const [groupData, setGroupData] = useState();
   const [ungroupData, setUngroupData] = useState();
   const setGroupAutoCompleteState = useSetRecoilState(groupAutoCompleteState);
@@ -52,8 +28,6 @@ export default function ManageGroup() {
       }),
     ];
   };
-
-  const setIsLoading = useSetRecoilState(isLoadingState);
 
   const results = useQueries([
     {

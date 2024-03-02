@@ -1,10 +1,6 @@
-import { RecoilRoot, useRecoilValue } from "recoil";
-import { darkModeState } from "./store/atom";
 import ARouter from "./components/common/ARouter";
 import ThemeProvider from "./theme";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 const queryClient = new QueryClient({
@@ -18,7 +14,7 @@ const queryClient = new QueryClient({
 function App() {
   return (
     <ThemeProvider>
-      <GoogleOAuthProvider clientId={process.env.REACT_APP_CLIENT_ID}>
+      <GoogleOAuthProvider clientId={import.meta.env.VITE_CLIENT_ID}>
         <QueryClientProvider client={queryClient}>
           <ARouter />
         </QueryClientProvider>
