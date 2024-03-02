@@ -6,13 +6,19 @@ const columns = [
     field: "reportNm",
     headerName: "제출한 레포트 수",
     type: "number",
-    width: 200,
+    width: 300,
   },
   {
     field: "totalMins",
-    headerName: "총 시간",
+    headerName: "총 시간(분)",
     type: "number",
     width: 150,
+  },
+  {
+    field: "members",
+    headerName: "팀원",
+    type: "text",
+    width: 600,
   },
 ];
 
@@ -24,6 +30,7 @@ export default function RankListView({ teams }) {
         groupNm: team.id,
         reportNm: team.reports,
         totalMins: team.totalMinutes,
+        members: team.members.join(", "),
       };
     });
   };

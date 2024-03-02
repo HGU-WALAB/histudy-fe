@@ -1,4 +1,4 @@
-import { Box, Stack, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { Stack, ToggleButton, ToggleButtonGroup } from "@mui/material";
 
 import ViewListIcon from "@mui/icons-material/ViewList";
 import ViewModuleIcon from "@mui/icons-material/ViewModule";
