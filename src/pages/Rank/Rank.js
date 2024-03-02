@@ -14,6 +14,7 @@ import { useQuery } from "react-query";
 import FullImage from "../../components/Rank/FullImage";
 
 import ViewToggleButton from "../../components/Rank/ViewToggleButton";
+import { DataGrid } from "@mui/x-data-grid";
 import RankListView from "../../components/Rank/RankListView";
 import RankGridView from "../../components/Rank/RankGridView";
 

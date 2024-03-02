@@ -23,10 +23,23 @@ const columns = [
 ];
 
 export default function RankListView({ teams }) {
+  const addMedalEmogi = (id) => {
+    switch (id) {
+      case 1:
+        return "🥇";
+      case 2:
+        return "🥈";
+      case 3:
+        return "🥉";
+      default:
+        return id;
+    }
+  };
+
   const convertTeams2List = (teams) => {
     return teams?.map((team, idx) => {
       return {
-        id: idx + 1,
+        id: addMedalEmogi(idx + 1),
         groupNm: team.id,
         reportNm: team.reports,
         totalMins: team.totalMinutes,
