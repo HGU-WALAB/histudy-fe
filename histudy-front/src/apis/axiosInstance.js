@@ -6,7 +6,7 @@ import { tokenRefresh } from "./auth";
 const TOKEN = localStorage.getItem("accessToken");
 // Axios 인스턴스 생성
 const axiosInstance = axios.create({
-  baseURL: process.env.REACT_APP_BACK_BASE_URL, // 실제 API 주소로 교체
+  baseURL: import.meta.env.VITE_BACK_BASE_URL, // 실제 API 주소로 교체
   headers: {
     "Content-Type": "application/json",
   },

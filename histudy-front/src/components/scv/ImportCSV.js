@@ -22,7 +22,7 @@ export default function ImportCSV() {
     // //   const TOKEN = localStorage.getItem("accessToken");
 
     // //   const response = await axios.post(
-    // //     `${process.env.REACT_APP_BACK_BASE_URL}/api/course`,
+    // //     `${import.meta.env.VITE_BACK_BASE_URL}/api/course`,
     // //     formData,
     // //     {
     // //       headers: {

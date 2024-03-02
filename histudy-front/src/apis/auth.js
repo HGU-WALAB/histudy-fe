@@ -6,7 +6,7 @@ export const tokenRefresh = async (refreshToken) => {
     refreshToken: refreshToken,
   };
   const response = await axios.post(
-    `${process.env.REACT_APP_BACK_BASE_URL}/api/auth/token`,
+    `${import.meta.env.VITE_BACK_BASE_URL}/api/auth/token`,
     tokenBody
   );
 

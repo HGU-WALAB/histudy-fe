@@ -1,7 +1,7 @@
 import { Grid, ImageList, styled } from "@mui/material";
 
 import { Box } from "@mui/system";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { getAllTeamsForRank } from "../../apis/rank";
 
 import HoverBox from "../../components/Rank/HoverBox";
@@ -14,11 +14,7 @@ import { useQuery } from "react-query";
 
 import Item from "../../components/Rank/Item";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import {
-  authorityState,
-  fullImageState,
-  isShowFullImageState,
-} from "../../store/atom";
+import { authorityState, isShowFullImageState } from "../../store/atom";
 import FullImage from "../../components/Rank/FullImage";
 
 const StyledScrollBox = styled(Box)({

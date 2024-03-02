@@ -1,38 +1,21 @@
 import {
-  Button,
   IconButton,
   ImageList,
   ImageListItem,
-  InputAdornment,
-  TextField,
   Typography,
 } from "@mui/material";
-import { border, Box } from "@mui/system";
+import { Box } from "@mui/system";
 import { Fragment, useEffect, useState } from "react";
-import SearchIcon from "@mui/icons-material/Search";
-import CustomTable from "../../components/common/CustomTable";
-import LongButton from "../../components/common/LongButton";
-import GrayBorderBox from "../../components/common/GrayBorderBox";
-import ProgressBar from "../../components/common/ProgressBar";
 import SideBar from "../../components/Manager/SideBar";
-import YearSelectButton from "../../components/Manager/YearSelectButton";
-import SemesterSelectButton from "../../components/Manager/SemesterSelectButton";
-import RegisterClassButton from "../../components/Manager/RegisterClassButton";
-import ManagerTable from "../../components/Manager/ManagerTable";
-import GroupTable from "../../components/Manager/GroupTable";
-import UnGroupTable from "../../components/Manager/UnGroupTable";
-import { Image } from "@mui/icons-material";
 import { useLocation, useMatch, useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { readReportDetail } from "../../apis/manager";
 import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { deleteReport, modifyReport } from "../../apis/report";
-import Snackbars from "./Snackbars";
+import { deleteReport } from "../../apis/report";
 import { useRecoilState } from "recoil";
-import { isDelete, reportDeleteState } from "../../store/atom";
+import { isDelete } from "../../store/atom";
 
-import { StyledColumnAlignLayout } from "../../components/common/StyledLayout";
 import Title from "../../components/common/Title";
 import { motion } from "framer-motion";
 import { StyledLayout } from "./style/StyledLatout";

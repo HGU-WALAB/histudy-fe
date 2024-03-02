@@ -140,7 +140,7 @@ export default function StudentListTable({
                       display: "flex",
                     }}
                   >
-                    Group{row.group}
+                    {row.group ? `Group${row.group}` : "미배정"}
                   </Box>
 
                   <Box

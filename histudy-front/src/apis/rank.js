@@ -8,7 +8,7 @@ export const getAllTeamsForRank = async () => {
 
 export const ImageUploadApi = async (reportIdOr, formData) => {
   const response = await axios.post(
-    `${process.env.REACT_APP_BACK_BASE_URL}/api/team/reports${
+    `${import.meta.env.VITE_BACK_BASE_URL}/api/team/reports${
       reportIdOr === null ? "" : `/${reportIdOr}`
     }/image`,
     formData,

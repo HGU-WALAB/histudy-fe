@@ -1,12 +1,11 @@
-import { Box, Typography, styled } from "@mui/material";
+import { Box, styled } from "@mui/material";
 import CustomTable from "../../components/common/CustomTable";
 import LongButton from "../../components/common/LongButton";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { getMyTeamReport, getmyTeamReport } from "../../apis/report";
+import { useState } from "react";
+import { getMyTeamReport } from "../../apis/report";
 import NoDataLottie from "../../components/common/NoDataLottie";
 import { motion } from "framer-motion";
-import LoadingLottie from "../../components/common/LoadingLottie";
 import { StyledColumnAlignLayout } from "../../components/common/StyledLayout";
 import Title from "../../components/common/Title";
 import { useQuery } from "react-query";
