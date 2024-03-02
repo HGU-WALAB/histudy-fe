@@ -9,8 +9,8 @@
 
 <br />
 
-- Node.js 16 이상
-- npm 8 이상
+- Node.js 18 이상 (Vite)
+- pnpm (권장)
 - VS Code
 <br />
 
@@ -34,19 +34,14 @@ git clone https://github.com/HGU-WALAB/histudy-fe.git
 ### 2. 패키지 설치
 
 ```
-npm install
-```
-or
-
-```
-npm install --force
+pnpm install
 ```
 
 
 ### 3. 시작
 
 ```
-npm run start 
+pnpm start
 ```
 
 `http://localhost:3000`로 접속
