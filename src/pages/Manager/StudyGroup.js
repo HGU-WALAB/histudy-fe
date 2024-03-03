@@ -1,31 +1,17 @@
-import {
-  Button,
-  InputAdornment,
-  TextField,
-  Typography,
-  useTheme,
-} from "@mui/material";
-import { border, Box } from "@mui/system";
+import { InputAdornment, TextField, useTheme } from "@mui/material";
+import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
-import CustomTable from "../../components/common/CustomTable";
 import LongButton from "../../components/common/LongButton";
-import GrayBorderBox from "../../components/common/GrayBorderBox";
-import ProgressBar from "../../components/common/ProgressBar";
 import SideBar from "../../components/Manager/SideBar";
-import YearSelectButton from "../../components/Manager/YearSelectButton";
-import SemesterSelectButton from "../../components/Manager/SemesterSelectButton";
-import RegisterClassButton from "../../components/Manager/RegisterClassButton";
-import ManagerTable from "../../components/Manager/ManagerTable";
 import StudyGroupTable from "../../components/Manager/StudyGroupTable";
 import { readAllGroups } from "../../apis/manager";
-import { isLoadingState } from "../../store/atom";
-import { useSetRecoilState } from "recoil";
 import { StyledTitleFlexBox } from "./style/StyledTitleFlexBox";
 import Title from "../../components/Manager/Table/Title";
 import { StyledLayout } from "./style/StyledLatout";
 import { useQuery } from "react-query";
 import LoadingLayout from "../../components/Manager/Loading/LoadingLayout";
+import * as xlsx from "xlsx";
 
 export default function StudyGroup() {
   const [groupData, setGroupData] = useState();
@@ -62,7 +48,7 @@ export default function StudyGroup() {
       }))
     );
   }
-  const xlsx = require("xlsx");
+  // const xlsx = require("xlsx");
 
   const excelDownload = () => {
     if (groupData) {
